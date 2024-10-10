@@ -2603,6 +2603,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "AlienBaseDEX",
     github: ["alienbase-xyz"],
+    treasury: "alienbase.js"
   },
   {
     id: "parent#lybra-finance",
@@ -5544,6 +5545,56 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "OnyxDAO",
     governanceID: ["snapshot:onyx.eth"],
     github: ["Onyx-Protocol"],
+  },
+  {
+    id: "parent#delv",
+    name: "DELV",
+    url: "https://www.delv.tech",
+    description:
+      "DELV (formerly Element Finance) is developing the complete suite of decentralized finance. Our protocols work together to help create the new financial system.",
+    logo: `${baseIconsUrl}/delv.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "delv_tech",
+    github: ["delvtech"],
+  },
+  {
+    id: "parent#trado-finance",
+    name: "Trado Finance",
+    url: "https://perp.trado.one/",
+    description:
+      "Trado Perpetual provides both order book and spot against pool trading models",
+    logo: `${baseIconsUrl}/trado-finance.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "trado_one",
+  },
+  {
+    id: "parent#lisa-finance",
+    name: "LISA Finance",
+    url: "https://www.lisalab.io",
+    description:
+      "The Goddess of Liquid Stacking, Brought to you by ALEX, Ryders Fast Pool, and Xverse Pool.",
+    logo: `${baseIconsUrl}/lisa-finance.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    github: ["lisalab-io"],
+    twitter: "LisaLab_BTC",
+  },
+  {
+    id: "parent#tonstakers",
+    name: "Tonstakers",
+    url: "https://tonstakers.com",
+    description:
+      "The Open Network Liquid Staking protocol empowering TON DeFi ecosystem.",
+    logo: `${baseIconsUrl}/tonstakers.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "tonstakers",
   },
 ];
 

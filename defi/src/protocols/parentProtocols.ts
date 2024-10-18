@@ -5596,6 +5596,31 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "tonstakers",
   },
+  {
+    id: "parent#kelp-dao",
+    name: "Kelp DAO",
+    url: "https://kelpdao.xyz/",
+    description:
+      "The Kelp DAO team is currently building an LRT solution, rsETH, on EigenLayer for Ethereum",
+    logo: `${baseIconsUrl}/kelp-dao.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "KelpDAO",
+    github: ["Kelp-DAO"],
+  },
+  {
+    id: "parent#eddyfinance",
+    name: "EddyFinance",
+    url: "https://www.eddy.finance/",
+    description:
+      "EddyFinance is a dex built on top of ZetaChain",
+    logo: `${baseIconsUrl}/eddyfinance.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "eddy_protocol",
+  },
 ];
 
 export default parentProtocols;

@@ -27553,7 +27553,8 @@ const data4: Protocol[] = [
     name: "Courtyard",
     address: null,
     symbol: "-",
-    url: "https://courtyard.io/",
+    url: "https://courtyard.io/invite/WU2WTK",
+    referralUrl: "https://courtyard.io/invite/WU2WTK",
     description:
       "Courtyard.io is a marketplace and tokenization service that enables anyone to easily own and trade physical collectibles on the blockchain, unlocking transparency, liquidity, and a new form of ownership for collectors.",
     chain: "Polygon",

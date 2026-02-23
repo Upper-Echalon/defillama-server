@@ -12153,7 +12153,6 @@ const data5: Protocol[] = [
     module: "dummy.js",
     twitter: "pumpparty",
     audit_links: ["https://github.com/maketh-labs/floor/blob/master/audit/Floor_v02.pdf"],
-    github: ["maketh-labs"],
     dimensions: {
       fees: "pumpparty",
     },

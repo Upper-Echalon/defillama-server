@@ -12065,5 +12065,27 @@ const data5: Protocol[] = [
     ],
     listedAt: 1771865647,
   },
+  {
+    id: "7450",
+    name: "Lamboo",
+    address: null,
+    symbol: "-",
+    url: "https://lamboo.finance/",
+    description:
+      "Lamboo Finance is the all-in-one trading hub on Aptos — delivering fast swaps, real-time market data, portfolio tools",
+    chain: "Aptos",
+    logo: `${baseIconsUrl}/lamboo.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Aptos"],
+    module: "dummy.js",
+    twitter: "Lamboo_fi",
+    dimensions: {
+      aggregators: "lamboo",
+      fees: "lamboo",
+    },
+  },
 ];
 export default data5;

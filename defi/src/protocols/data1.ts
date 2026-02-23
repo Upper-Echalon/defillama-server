@@ -23004,7 +23004,8 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     address: null,
     symbol: "-",
     assetToken: "JSOL",
-    url: "https://jpool.one",
+    url: "https://app.jpool.one?ref=npkn8nfoja",
+    referralUrl: "https://app.jpool.one?ref=npkn8nfoja",
     description:
       "JPool is a stake pool on the Solana blockchain network enabling safe, secure, high-yield rewards on your staked SOL.",
     chain: "Solana",

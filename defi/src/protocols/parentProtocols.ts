@@ -9076,6 +9076,18 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "worldmarketsinc",
   },
+  {
+    id: "parent#chimpx-ai",
+    name: "ChimpX AI",
+    url: "https://chimpx.ai/",
+    description: "ChimpX AI is a decentralized exchange on MegaETH.",
+    logo: `${baseIconsUrl}/chimpx-ai.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "ChimpxAI",
+    github: ["chimpx-ai"],
+  },
 ];
 
 export default parentProtocols;

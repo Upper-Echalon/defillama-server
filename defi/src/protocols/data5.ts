@@ -12158,5 +12158,27 @@ const data5: Protocol[] = [
       fees: "pumpparty",
     },
   },
+  {
+    id: "7454",
+    name: "ChimpX AI Aggregator",
+    address: null,
+    symbol: "-",
+    url: "https://chimpx.ai/",
+    description:
+      "Chimp Dex is a next-gen DEX which innovates on the ve(3,3) using time based farms. Chimp Dex has stablepools as well as multi token weight pools",
+    chain: "Linea",
+    logo: `${baseIconsUrl}/chimpx-ai-aggregator.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Linea"],
+    module: "dummy.js",
+    twitter: "ChimpxAI",
+    parentProtocol: "parent#chimpx-ai",
+    dimensions: {
+      aggregators: "chimpx",
+    }
+  },
 ];
 export default data5;

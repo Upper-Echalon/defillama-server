@@ -25012,14 +25012,14 @@ const data3_1: Protocol[] = [
   {
     id: "3836",
     // previous Chimp Exchange
-    name: "ChimpX AI",
+    name: "ChimpX AI DEX",
     address: null,
     symbol: "-",
     url: "https://chimpx.ai/",
     description:
       "Chimp Dex is a next-gen DEX which innovates on the ve(3,3) using time based farms. Chimp Dex has stablepools as well as multi token weight pools",
     chain: "Linea",
-    logo: `${baseIconsUrl}/chimpx-ai.jpg`,
+    logo: `${baseIconsUrl}/chimpx-ai-dex.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -25028,8 +25028,8 @@ const data3_1: Protocol[] = [
     forkedFromIds: ["2611"],
     module: "chimpexchange/index.js",
     twitter: "ChimpxAI",
-    github: ["chimpx-ai"],
     listedAt: 1700753279,
+    parentProtocol: "parent#chimpx-ai",
     dimensions: {
       fees: "chimpexchange",
       dexs: "chimpexchange"

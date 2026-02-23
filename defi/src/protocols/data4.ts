@@ -25514,6 +25514,7 @@ const data4: Protocol[] = [
     module: "remora-markets/index.js",
     twitter: "RemoraMarkets",
     listedAt: 1757083183,
+    deadFrom: "2026-02-23",
   },
   {
     id: "6670",

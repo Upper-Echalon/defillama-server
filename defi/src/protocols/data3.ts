@@ -47399,6 +47399,7 @@ const data3_3: Protocol[] = [
     module: "step-finance/index.js",
     twitter: "StepFinance_",
     listedAt: 1719987997,
+    deadFrom: "2026-02-23",
     dimensions: {
       fees: "step-finance"
     }

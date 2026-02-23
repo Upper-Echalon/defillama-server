@@ -12030,5 +12030,37 @@ const data5: Protocol[] = [
       fees: "worldinc-perps",
     },
   },
+  {
+    id: "4420",
+    name: "Zest V2",
+    address: null,
+    symbol: "-",
+    url: "https://www.zestprotocol.com/",
+    description:
+      "Zest Protocol is an open-source, on-chain lending platform built for Bitcoin, allowing users to earn or borrow against their BTC",
+    chain: "Stacks",
+    logo: `${baseIconsUrl}/zest-v2.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Lending",
+    chains: ["Stacks"],
+    module: "zest-v2/index.js",
+    twitter: "ZestProtocol",
+    parentProtocol: "parent#zest",
+    oraclesBreakdown: [
+      {
+        name: "Pyth",
+        type: "Secondary",
+        proof: ["https://docs.zestprotocol.com/start/borrow/zest-protocol-borrow-overview/oracles#zest-protocol-uses-pyth"]
+      },
+      {
+        name: "DIA",
+        type: "Primary",
+        proof: ["https://explorer.hiro.so/txid/SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.alex-oracle-v1-1?chain=mainnet","https://github.com/DefiLlama/defillama-server/pull/10672"]
+      },
+    ],
+    listedAt: 1771865647,
+  },
 ];
 export default data5;

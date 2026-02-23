@@ -38226,14 +38226,14 @@ const data3_2: Protocol[] = [
     deadUrl: true,  },
   {
     id: "4420",
-    name: "Zest",
+    name: "Zest V1",
     address: null,
     symbol: "-",
     url: "https://www.zestprotocol.com/",
     description:
       "Zest Protocol is an open-source, on-chain lending platform built for Bitcoin, allowing users to earn or borrow against their BTC",
     chain: "Stacks",
-    logo: `${baseIconsUrl}/zest.png`,
+    logo: `${baseIconsUrl}/zest-v1.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,

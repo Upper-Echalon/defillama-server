@@ -12140,7 +12140,7 @@ const data5: Protocol[] = [
     name: "Pump Party",
     address: null,
     symbol: "-",
-    url: "www.pumpparty.com",
+    url: "https://www.pumpparty.com/",
     description:
       "Pump Party is a gaming studio which combines industry leading visually evocative gameplay with provably fair gameplay mechanics powered by onchain real-time RNG. Chain multipliers, push your luck, and launch bunnies out cannons at the speed of real-time",
     chain: "MegaETH",

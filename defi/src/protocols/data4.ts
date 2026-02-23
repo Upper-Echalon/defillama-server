@@ -20732,7 +20732,7 @@ const data4: Protocol[] = [
     address: null,
     symbol: "-",
     assetToken: "stHYPE",
-    url: "https://www.stakedhype.fi/",
+    url: "https://app.valantis.xyz/staking",
     description: "The Hyperliquid liquid staking platform.",
     chain: "Hyperliquid L1",
     logo: `${baseIconsUrl}/sthype.jpg`,

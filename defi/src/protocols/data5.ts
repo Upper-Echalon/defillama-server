@@ -10772,6 +10772,9 @@ const data5: Protocol[] = [
     audit_links: ["https://github.com/Assure-DeFi/Audits/blob/main/RIFTS_ADV_10_11_25.pdf"],
     treasury: "rifts.js",
     listedAt: 1770850917,
+    dimensions: {
+      fees: "rifts",
+    },
   },
   {
     id: "7387",
@@ -12031,7 +12034,7 @@ const data5: Protocol[] = [
     },
   },
   {
-    id: "4420",
+    id: "7449",
     name: "Zest V2",
     address: null,
     symbol: "-",

@@ -38241,6 +38241,7 @@ const data3_2: Protocol[] = [
     chains: ["Stacks"],
     module: "zest/index.js",
     twitter: "ZestProtocol",
+    parentProtocol: "parent#zest",
     oraclesBreakdown: [
       {
         name: "Pyth",

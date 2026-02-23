@@ -64,7 +64,8 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     // pumpBTC: '0xf469fbd2abcd6b9de8e169d128226c0fc90a012e',
     HAUST: "0xec3502a9f98f151af52ee6cb423a0afe7bbf5a19", 
     USPD: "0x476ef9ac6d8673e220d0e8bc0a810c2dc6a2aa84", 
-    yTUSD: '0x73a052500105205d34daf004eab301916da8190f'
+    yTUSD: '0x73a052500105205d34daf004eab301916da8190f',
+    DGLD: "0xa9299c296d7830a99414d1e5546f5171fa01e9c8",
   },
   // beam: {
   //   WMC: '0xd51bfa777609213a653a2cd067c9a0132a2d316a'
@@ -339,6 +340,7 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     AETX: "0xfe0c0b15798b8c9107cd4aa556a87eb031263e8b",
     SFUND: "0x633e254585ade6e9d40d2a4b8cc2f3769b94cb48",
     clBTC: "0x8d2757ea27aabf172da4cca4e5474c76016e3dc5", // IS NOT BACKED
+    DGLD: "0xd02f50e1017f493ffffa70c8fcf09e349e11d6c9", // dropped to 0, coingecko mispriced it
   },
   sonic: {
     wstkscUSD: "0x896f4D49916aC5cfC36d7a260a7039ba4Ea317b6",

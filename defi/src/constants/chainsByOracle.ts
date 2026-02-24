@@ -585,6 +585,10 @@ const chainsByOracle: Record<string, Array<string>> = {
     "OP Mainnet",
     "Gnosis",
     "Hyperliquid L1"
+  ],
+  "Orakl": [
+    "Klaytn",
+    "Bitkub",
   ]
 };
 

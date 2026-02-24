@@ -110,6 +110,7 @@ export type _InternalProtocolMetadata = {
   misrepresentedTokens: boolean;
   methodology?: string;
   hallmarks?: Hallmark[];
+  tvlCodePath?: string;
   hasChainSlug: (chainSlug: string) => boolean;
 }
 
@@ -155,7 +156,7 @@ export function setProtocolMetadata(protocol: Protocol) {
 
     _InternalProtocolMetadataMap[protocol.id] = metadata
 
-    const protocolMissingFields = ['methodology', 'misrepresentedTokens', 'deadFrom', 'doublecounted']
+    const protocolMissingFields = ['methodology', 'misrepresentedTokens', 'deadFrom', 'doublecounted', 'tvlCodePath']
 
     protocolMissingFields.forEach((field) => {
       if ((protocol as any)[field] === undefined) {

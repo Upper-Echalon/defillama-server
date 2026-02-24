@@ -48,8 +48,8 @@ export async function craftProtocolV2({
   feMini = false,
   skipFeMiniTransform = false,
 }: CraftProtocolV2Options) {
-  const { misrepresentedTokens = false, tvlCodePath, ...restProtocolData } = protocolData as any
-  const { hallmarks } = _InternalProtocolMetadataMap[protocolData.id] || {};
+  const { misrepresentedTokens = false, ...restProtocolData } = protocolData as any
+  const { tvlCodePath, hallmarks, } = _InternalProtocolMetadataMap[protocolData.id] || {};
 
   // protocol module is set to dummy.js if we are not tracking tvl of a given protocol
   const isDummyProtocol = protocolData.module === "dummy.js";

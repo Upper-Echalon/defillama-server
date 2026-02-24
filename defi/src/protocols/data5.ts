@@ -2523,6 +2523,7 @@ const data5: Protocol[] = [
     module: "gatefun/index.js",
     twitter: "Gate_Fun",
     listedAt: 1763158382,
+    parentProtocol: "parent#gate-products",
     dimensions: {
       dexs: "gatefun",
     },
@@ -3630,6 +3631,7 @@ const data5: Protocol[] = [
     chains: ["GateLayer"],
     module: "dummy.js",
     twitter: "GateDEX",
+    parentProtocol: "parent#gate-products",
     dimensions: {
       derivatives: "gate-perps",
     },
@@ -6077,6 +6079,7 @@ const data5: Protocol[] = [
     chains: ["Solana"],
     module: "dummy.js",
     twitter: "sanctumso",
+    parentProtocol: "parent#gate-products",
     dimensions: {
       fees: "gate-staked-sol",
     },

@@ -9088,6 +9088,17 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "ChimpxAI",
     github: ["chimpx-ai"],
   },
+  {
+    id: "parent#gate-products",
+    name: "Gate Products",
+    url: "https://www.gatedex.com/r/nufLft0L",
+    description: "Gate Products combine",
+    logo: `${baseIconsUrl}/gate-products.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "GateDEX",
+  },
 ];
 
 export default parentProtocols;

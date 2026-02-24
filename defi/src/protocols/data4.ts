@@ -29875,6 +29875,7 @@ const data4: Protocol[] = [
     chains: ["GateLayer"],
     module: "GateSwap/index.js",
     twitter: "Gate_Fun",
+    parentProtocol: "parent#gate-products",
     listedAt: 1760577888,
     dimensions: {
       fees: "gateswap",

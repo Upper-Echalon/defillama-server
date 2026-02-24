@@ -150,7 +150,7 @@ export function setProtocolMetadata(protocol: Protocol) {
       misrepresentedTokens: !!module.misrepresentedTokens,
       methodology: module.methodology,
       hallmarks: module.hallmarks,
-      tvlCodePath: `https://github.com/DefiLlama/DefiLlama-Adapters/${modulePath}`,
+      tvlCodePath: `https://github.com/DefiLlama/DefiLlama-Adapters/blob/main/${modulePath}`,
       hasChainSlug: (_chainSlug: string) => { throw new Error('Need to pull info from cache first') },
     }
 

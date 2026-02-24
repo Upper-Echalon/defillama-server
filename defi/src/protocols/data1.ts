@@ -24472,7 +24472,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     cmcId: "18595",
     tags: ["AMM"],
     chains: ["Oasis"],
-    module: "yuzu.js",
+    module: "yuzuswap.js",
     twitter: "Yuzu_Swap",
     forkedFromIds: ["2197"],
     listedAt: 1641941821,

@@ -3647,7 +3647,7 @@ const data3_0: Protocol[] = [
     tags: ["AMM"],
     chains: ["Arbitrum"],
     forkedFromIds: ["2197"],
-    module: "moonbase.js",
+    module: "moonbase-app.js",
     twitter: "MBaseAlpha",
     audit_links: ["https://www.rdauditors.com/wp-content/uploads/2023/03/Moonbase-Alpha-Security-Audit-Report-1.pdf"],
     listedAt: 1681927556,

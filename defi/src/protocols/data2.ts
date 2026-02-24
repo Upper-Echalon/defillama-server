@@ -7871,7 +7871,7 @@ const data2: Protocol[] = [
     cmcId: "29221",
     category: "Liquid Staking",
     chains: ["Near"],
-    module: "linear.js",
+    module: "linear-near.js",
     twitter: "LinearProtocol",
     audit_links: [
       "https://github.com/linear-protocol/audits/blob/main/BlockSec%20-%20Security%20Audit%20Report%20for%20LiNEAR%20-%20202204.pdf",

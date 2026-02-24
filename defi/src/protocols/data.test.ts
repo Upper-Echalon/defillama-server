@@ -120,7 +120,7 @@ test("governance on parent protocol when it exists", async () => {
 test("Github repo on parent protocol when it exists", async () => {
   const childs = protocols.filter(i => i.github && i.parentProtocol)
   if (childs.length)
-    console.log('Migrate Guthub config for: ', childs.map(i => i.name))
+    console.log('Migrate Github config for: ', childs.map(i => i.name))
   expect(childs.length).toBeLessThanOrEqual(0)
 });
 

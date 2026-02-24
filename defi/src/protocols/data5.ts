@@ -12142,10 +12142,10 @@ const data5: Protocol[] = [
     symbol: "-",
     url: "https://www.pumpparty.com/",
     description:
-      "Pump Party is a gaming studio which combines industry leading visually evocative gameplay with provably fair gameplay mechanics powered by onchain real-time RNG. Chain multipliers, push your luck, and launch bunnies out cannons at the speed of real-time",
+      "Pump Party is a gaming studio which combines industry leading visually evocative gameplay with provably fair gameplay mechanics powered by onchain real-time RNG. Chain multipliers, push your luck, and launch bunnies out of cannons at the speed of real-time",
     chain: "MegaETH",
     logo: `${baseIconsUrl}/pump-party.jpg`,
-    audits: "0",
+    audits: "2",
     gecko_id: null,
     cmcId: null,
     category: "Gaming",
@@ -12164,7 +12164,7 @@ const data5: Protocol[] = [
     symbol: "-",
     url: "https://chimpx.ai/",
     description:
-      "Chimp Dex is a next-gen DEX which innovates on the ve(3,3) using time based farms. Chimp Dex has stablepools as well as multi token weight pools",
+      "ChimpX is a next-gen DEX which innovates on the ve(3,3) using time based farms. ChimpX has stablepools as well as multi token weight pools",
     chain: "Binance",
     logo: `${baseIconsUrl}/chimpx-ai-aggregator.jpg`,
     audits: "0",
@@ -12177,7 +12177,7 @@ const data5: Protocol[] = [
     parentProtocol: "parent#chimpx-ai",
     dimensions: {
       aggregators: "chimpx",
-    }
+    },
   },
 ];
 export default data5;

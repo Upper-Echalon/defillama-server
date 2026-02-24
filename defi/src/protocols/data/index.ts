@@ -131,6 +131,11 @@ export function setProtocolMetadata(protocol: Protocol) {
     if (module.deadFrom && !protocol.deadFrom)
       protocol.deadFrom = module.deadFrom
 
+    let modulePath = protocol.module
+    if (module.meta?.moduleFilePath)
+      modulePath = module.meta.moduleFilePath
+    else 
+      modulePath = `projects/${modulePath}`
 
     const metadata = {
       id: protocol.id,
@@ -144,6 +149,7 @@ export function setProtocolMetadata(protocol: Protocol) {
       misrepresentedTokens: !!module.misrepresentedTokens,
       methodology: module.methodology,
       hallmarks: module.hallmarks,
+      tvlCodePath: `https://github.com/DefiLlama/DefiLlama-Adapters/${modulePath}`,
       hasChainSlug: (_chainSlug: string) => { throw new Error('Need to pull info from cache first') },
     }
 

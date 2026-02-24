@@ -29,7 +29,8 @@ curl \
     "symbol",
     "previousNames",
     "nameVariants",
-    "type"
+    "type",
+    "route"
   ]'
 
 curl \

@@ -14070,6 +14070,11 @@
     }
   },
   "doma": {
+    "0x4200000000000000000000000000000000000006": {
+      "decimals": "18",
+      "symbol": "WETH",
+      "to": "coingecko#ethereum"
+    },
     "0x31eef89d5215c305304a2fa5376a1f1b6c5dc477": {
       "to": "coingecko#usd-coin",
       "decimals": 6,

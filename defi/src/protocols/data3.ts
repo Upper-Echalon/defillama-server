@@ -18563,7 +18563,7 @@ const data3_1: Protocol[] = [
     listedAt: 1695222044,
     dimensions: {
       derivatives: {
-        genuineSpikes: [["2025-01-12", "-"]],
+        genuineSpikes: [["2025-01-12", "-"], ["2026-02-23", "High BTC volumes due to market volatility"]],
         adapter: "panacakeswap-perp"
       }
     }

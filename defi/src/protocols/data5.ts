@@ -9128,6 +9128,11 @@ const data5: Protocol[] = [
     module: "sai/index.js",
     twitter: "SaiDotFun",
     listedAt: 1769297153,
+    dimensions: {
+      derivatives: "sai-perps",
+      fees: "sai-perps",
+      "open-interest": "sai-perps",
+    },
   },
   {
     id: "7307",

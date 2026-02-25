@@ -59,6 +59,7 @@ export default function setRoutes(router: HyperExpress.Router, routerBasePath: s
   router.get("/config/smol/:name", ew(smolConfigHandler));
   router.get("/raises", defaultFileHandler);
   router.get("/hacks", defaultFileHandler);
+  router.get("/token-rights", defaultFileHandler);
   router.get("/oracles", defaultFileHandler);
   router.get("/forks", defaultFileHandler);
   router.get("/rwa/stats", defaultFileHandler);

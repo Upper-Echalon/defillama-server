@@ -10,6 +10,7 @@ import { craftProtocolsResponseInternal as craftAllProtocolResponse } from "../.
 import { craftParentProtocolV2 } from "../utils/craftParentProtocolV2";
 import { getRaisesInternal } from "../routes/getRaises";
 import { getHacksInternal } from "../routes/getHacks";
+import { getTokenRightsInternal } from "../routes/getTokenRights";
 import { dailyTvl, hourlyTvl, hourlyUsdTokensTvl } from "../../utils/getLastRecord";
 import { getHistoricalTvlForAllProtocolsOptionalOptions, storeGetCharts } from "../../storeGetCharts";
 import { getOraclesInternal } from "../routes/getOracles";
@@ -352,6 +353,13 @@ async function run() {
     const data = await getHacksInternal()
     await storeRouteData('hacks', data)
     console.timeEnd('write /hacks')
+  }
+
+  async function writeTokenRights() {
+    console.time('write /token-rights')
+    const data = await getTokenRightsInternal()
+    await storeRouteData('token-rights', data)
+    console.timeEnd('write /token-rights')
   }
 
   async function writeOracles() {

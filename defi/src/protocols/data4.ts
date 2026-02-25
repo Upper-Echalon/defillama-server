@@ -29663,7 +29663,8 @@ const data4: Protocol[] = [
     twitter: "CronosAry",
     github: ["Aryioshin"],
     listedAt: 1760475992,
-    deadUrl: true
+    deadUrl: true,
+    deprecated: true,
   },
   {
     id: "6862",

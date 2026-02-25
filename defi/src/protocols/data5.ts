@@ -12321,5 +12321,25 @@ const data5: Protocol[] = [
       derivatives: "minaraai-perps"
     }
   },
+  {
+    id: "7461",
+    name: "Spectra MetaVaults",
+    address: "base:0x64fcc3a02eeeba05ef701b7eed066c6ebd5d4e51",
+    symbol: "SPECTRA",
+    url: "https://app.spectra.finance/metavaults",
+    description: "Curated vaults for optimized performance and automated rollovers.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/spectra-metavaults.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Onchain Capital Allocator",
+    chains: ["Ethereum"],
+    module: "spectra-metavaults/index.js",
+    twitter: "spectra_finance",
+    parentProtocol: "parent#spectra",
+    listedAt: 1772044022,
+    excludeTvlFromParent: true,
+  },
 ];
 export default data5;

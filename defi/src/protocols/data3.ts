@@ -45867,7 +45867,7 @@ const data3_3: Protocol[] = [
   },
   {
     id: "4770",
-    name: "3jane Options",
+    name: "3Jane Options",
     address: null,
     symbol: "-",
     url: "https://www.3jane.xyz/",

@@ -7998,7 +7998,7 @@ const parentProtocols: IParentProtocol[] = [
   },
   {
     id: "parent#3jane",
-    name: "3jane",
+    name: "3Jane",
     url: "https://www.3jane.xyz/",
     description: "3Jane protocol is a peer-to-pool credit-based money market enabling algorithmic, real-time uncollateralized USDC credit lines for yield farmers, traders, businesses, and/or AI agents",
     logo: `${baseIconsUrl}/3jane.png`,

@@ -25249,7 +25249,7 @@ const data4: Protocol[] = [
   },
   {
     id: "6659",
-    name: "3jane Lending",
+    name: "3Jane Lending",
     address: null,
     symbol: "-",
     url: "https://www.3jane.xyz/",

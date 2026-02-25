@@ -11193,7 +11193,10 @@ const data5: Protocol[] = [
     module: "honeyplay-amm/index.js",
     twitter: "HoneyPlaydotfun",
     parentProtocol: "parent#honeyplay",
-    listedAt: 1771287722
+    listedAt: 1771287722,
+    dimensions: {
+      fees: "honeyplay-amm",
+    },
   },
   {
     id: "7406",
@@ -11213,7 +11216,10 @@ const data5: Protocol[] = [
     module: "honeyplay-liquid-staking/index.js",
     twitter: "HoneyPlaydotfun",
     parentProtocol: "parent#honeyplay",
-    listedAt: 1771287729
+    listedAt: 1771287729,
+    dimensions: {
+      fees: "honeyplay-liquid-staking",
+    },
   },
   {
     id: "7407",
@@ -11821,6 +11827,9 @@ const data5: Protocol[] = [
     twitter: "AlphixFi",
     treasury: "alphix.js",
     listedAt: 1771638872,
+    dimensions: {
+      fees: "alphix",
+    },
   },
   {
     id: "7437",
@@ -12414,6 +12423,27 @@ const data5: Protocol[] = [
     module: "usual-eur0/index.js",
     twitter: "usualmoney",
     listedAt: 1772047388,
+  },
+  {
+    id: "7466",
+    name: "HoneyPlay Marketplace",
+    address: "sui:0x6b829fa0c8676b5d13287751db53d0eca8083d4184fc5c9d0b9796610af09d50",
+    symbol: "HONEY",
+    url: "https://app.honeyplay.fun/collections",
+    description: "Trade, bid, and list NFTs across all HoneyPlay collections.",
+    chain: "Sui",
+    logo: `${baseIconsUrl}/honeyplay-marketplace.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "NFT Marketplace",
+    chains: ["Sui"],
+    module: "dummy.js",
+    twitter: "HoneyPlaydotfun",
+    parentProtocol: "parent#honeyplay",
+    dimensions: {
+      fees: "honeyplay-marketplace",
+    },
   },
 ];
 export default data5;

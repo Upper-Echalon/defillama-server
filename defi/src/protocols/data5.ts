@@ -12278,5 +12278,48 @@ const data5: Protocol[] = [
       "bridge-aggregators": "stableflow",
     },
   },
+  {
+    id: "7459",
+    name: "Arena Perps",
+    address: "avax:0xb8d7710f7d8349a506b75dd184f05777c82dad0c",
+    symbol: "ARENA",
+    url: "https://arena.social/",
+    description: "A Perps trading platform for The Arena ecosystem",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/arena-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Interface",
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "TheArena",
+    parentProtocol: "parent#the-arena",
+    dimensions: {
+      fees: "arena-perps",
+      derivatives: "arena-perps"
+    }
+  },
+  {
+    id: "7460",
+    name: "Minara AI Perps",
+    address: null,
+    symbol: "-",
+    url: "https://minara.ai/home",
+    description: "Your personal AI CFO for digital finance. Ask, analyze and vibe trading crypto & U.S. stocks. Backed by Circle.",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/minara-ai-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Interface",
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "minara",
+    dimensions: {
+      fees: "minaraai-perps",
+      derivatives: "minaraai-perps"
+    }
+  },
 ];
 export default data5;

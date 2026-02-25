@@ -13553,7 +13553,7 @@ const data4: Protocol[] = [
     tags: ["AMM"],
     chains: ["Avalanche"],
     module: "arena-dex/index.js",
-    twitter: "TheArenaApp",
+    twitter: "TheArena",
     forkedFromIds: ["2197"],
     listedAt: 1746742252,
     parentProtocol: "parent#the-arena",
@@ -13578,7 +13578,7 @@ const data4: Protocol[] = [
     category: "Launchpad",
     chains: ["Avalanche"],
     module: "arena-launch/index.js",
-    twitter: "TheArenaApp",
+    twitter: "TheArena",
     listedAt: 1746742259,
     parentProtocol: "parent#the-arena",
     dimensions: {

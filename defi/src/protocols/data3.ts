@@ -19143,7 +19143,7 @@ const data3_1: Protocol[] = [
     category: "SoFi",
     chains: ["Avalanche"],
     module: "starshares/index.js",
-    twitter: "TheArenaApp",
+    twitter: "TheArena",
     forkedFromIds: ["3377"],
     listedAt: 1695774131,
     parentProtocol: "parent#the-arena",

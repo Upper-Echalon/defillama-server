@@ -12230,5 +12230,27 @@ const data5: Protocol[] = [
     twitter: "YieldCoreApp",
     listedAt: 1771962071,
   },
+  {
+    id: "7457",
+    name: "Doma DEX V3",
+    address: null,
+    symbol: "-",
+    url: "https://app.doma.xyz/swap",
+    description: "Doma is a DomainFi protocol enabling fractionalization of web3 domains on the Doma L2 (Chain ID: 97477).",
+    chain: "Doma",
+    logo: `${baseIconsUrl}/doma-dex-v3.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["CLMM"],
+    chains: ["Doma"],
+    module: "doma-dex-v3/index.js",
+    twitter: "domaprotocol",
+    audit_links: ["https://reports.zellic.io/publications/d3-doma"],
+    dimensions: {
+      fees: "doma-dex-v3",
+      dexs: "doma-dex-v3",
+    },
+  },
 ];
 export default data5;

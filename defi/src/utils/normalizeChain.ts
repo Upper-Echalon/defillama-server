@@ -5029,6 +5029,9 @@ export const chainCoingeckoIds = {
     twitter: "ENI__Official",
     url: "https://eni.top/",
     chainId: 173,
+    dimensions: {
+      fees: "eni",
+    },
   },
   "soonBase": {
     geckoId: null,

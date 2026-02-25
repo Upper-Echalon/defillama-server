@@ -16828,6 +16828,13 @@ const data4: Protocol[] = [
         name: "RedStone",
         type: "Primary",
         proof: ["https://docs.seamlessprotocol.com/technical/oracles",],
+        endDate: "2026-02-24"
+      },
+      {
+        name: "Chainlink",
+        type: "Primary",
+        proof: ["https://docs.seamlessprotocol.com/overview/leverage-tokens-lts/ethereum-mainnet-lts/wsteth-eth-25x", "https://docs.seamlessprotocol.com/overview/leverage-tokens-lts/ethereum-mainnet-lts/susds-usdt-25x", "https://docs.seamlessprotocol.com/overview/leverage-tokens-lts/ethereum-mainnet-lts/siusd-usdc-11x", "https://docs.seamlessprotocol.com/overview/leverage-tokens-lts/ethereum-mainnet-lts/rlp-usdc-6.75x"],
+        startDate: "2026-02-25"
       },
     ],
     dimensions: {

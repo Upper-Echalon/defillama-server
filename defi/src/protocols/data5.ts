@@ -12527,11 +12527,10 @@ const data5: Protocol[] = [
     audits: "0",
     gecko_id: null,
     cmcId: null,
-    category: "Cross Chain Bridge",
+    category: "Bridge",
     chains: ["Ethereum"],
     module: "conduit-bridge/index.js",
     twitter: "conduitxyz",
-    audit_links: ["https://welephant.xyz/docs/audit"],
     listedAt: 1772128242,
   },
 ];

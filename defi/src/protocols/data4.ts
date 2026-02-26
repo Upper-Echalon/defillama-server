@@ -16702,14 +16702,14 @@ const data4: Protocol[] = [
   },
   {
     id: "6282",
-    name: "BONK.fun",
+    name: "BONK.fun Launchpad",
     previousNames: ["letsBONK.fun"],
     address: null,
     symbol: "-",
     url: "https://bonk.fun/",
     description: "Meme token launchpad",
     chain: "Solana",
-    logo: `${baseIconsUrl}/bonk.fun.jpg`,
+    logo: `${baseIconsUrl}/bonk.fun-launchpad.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -16717,6 +16717,7 @@ const data4: Protocol[] = [
     chains: ["Solana"],
     module: "dummy.js",
     twitter: "bonkfun",
+    parentProtocol: "parent#bonkfun",
     hallmarks: [
       [
         1749513600,

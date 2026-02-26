@@ -9112,6 +9112,17 @@ const parentProtocols: IParentProtocol[] = [
     stablecoins: ["usual-usd"],
     treasury: "usual.js",
   },
+  {
+    id: "parent#bonkfun",
+    name: "BONK.fun",
+    url: "https://bonk.fun/",
+    description: "Meme token launchpad",
+    logo: `${baseIconsUrl}/bonk.fun.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "bonkfun",
+  },
 ];
 
 export default parentProtocols;

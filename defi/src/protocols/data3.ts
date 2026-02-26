@@ -2696,6 +2696,7 @@ const data3_0: Protocol[] = [
     chains: ["Solana"],
     module: "bonkswap/index.js",
     twitter: "Bonkswap_io",
+    parentProtocol: "parent#bonkfun",
     listedAt: 1681384865,
   },
   {
@@ -34017,6 +34018,7 @@ const data3_2: Protocol[] = [
     chains: ["Solana"],
     module: "dummy.js",
     twitter: "bonkbot_io",
+    parentProtocol: "parent#bonkfun",
     listedAt: 1709494263,
     dimensions: {
       fees: "bonk-bot"
@@ -50818,6 +50820,7 @@ const data3_3: Protocol[] = [
     chains: ["Solana"],
     module: "bonk-sol/index.js",
     twitter: "bonk_inu",
+    parentProtocol: "parent#bonkfun",
     listedAt: 1723798801,
     dimensions: {
       fees: "bonk-staked-sol"

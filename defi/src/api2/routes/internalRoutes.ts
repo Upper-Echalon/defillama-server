@@ -27,7 +27,8 @@ export function setInternalRoutes(router: HyperExpress.Router, routerBasePath: s
     sdk.log('debug-pg', routerPath)
     try {
 
-      if (!req.headers['x-internal-secret'] || req.headers['x-internal-secret'] !== INTERNAL_SECRET_KEY) throw new Error('Unauthorized')
+      if (process.env.API2_SKIP_SUBPATH === 'true')
+        if (!req.headers['x-internal-secret'] || req.headers['x-internal-secret'] !== INTERNAL_SECRET_KEY) throw new Error('Unauthorized')
 
       switch (req.method) {
         case 'GET':

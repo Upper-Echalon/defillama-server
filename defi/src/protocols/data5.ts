@@ -12209,7 +12209,8 @@ const data5: Protocol[] = [
     name: "Prime Vaults",
     address: null,
     symbol: "-",
-    url: "https://primevaults.finance",
+    url: "https://app.primevaults.finance?referral_code=REF0b09139d",
+    referralUrl: "https://app.primevaults.finance?referral_code=REF0b09139d",
     description:
       "An on-chain savings account with principal protection and minimum yield guarantee (higher than Aave V3 supply rate)",
     chain: "Berachain",

@@ -29,6 +29,7 @@ import { getPermitBlackList } from "../../dexAggregators/db/getPermitBlackList";
 import { historicalLiquidity } from "../../getHistoricalLiquidity";
 import { saveEvent } from "../../dexAggregators/db/saveEvent";
 import { reportError } from "../../reportError";
+import { reportError as reportSupport } from "../../reportSupport";
 import { saveBlacklistPemrit } from "../../dexAggregators/db/saveBlacklistPemrit";
 
 export default function setRoutes(router: HyperExpress.Router, routerBasePath: string) {
@@ -194,6 +195,7 @@ export default function setRoutes(router: HyperExpress.Router, routerBasePath: s
   router.get("/userData/:type/:protocolId", ew(getProtocolUsers)) // TODO: ensure that env vars are set
 
   router.post("/reportError", ew(reportErrorHandler)) // TODO: ensure that env vars are set
+  router.post("/reportSupport", ew(reportSupportHandler)) // TODO: ensure that env vars are set
   router.post("/storeAggregatorEvent", ew(storeAggregatorEventHandler)) // TODO: ensure that env vars are set
   router.get("/getSwapDailyVolume", ew(getSwapDailyVolumeHandler)) // TODO: ensure that env vars are set
   router.get("/getSwapTotalVolume", ew(getSwapTotalVolumeHandler)) // TODO: ensure that env vars are set
@@ -811,5 +813,13 @@ async function reportErrorHandler(req: HyperExpress.Request, res: HyperExpress.R
   const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body
 
   await reportError(body);
+  return successResponse(res, { message: "success" }, undefined, { isPost: true })
+}
+
+async function reportSupportHandler(req: HyperExpress.Request, res: HyperExpress.Response) {
+  const body = await req.text()
+  const contentType = req.headers['content-type'] ?? ''
+
+  await reportSupport(body, contentType);
   return successResponse(res, { message: "success" }, undefined, { isPost: true })
 }

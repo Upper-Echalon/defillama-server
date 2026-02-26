@@ -9391,6 +9391,9 @@ const data5: Protocol[] = [
     module: "flock/index.js",
     twitter: "flock_io",
     listedAt: 1769489384,
+    dimensions: {
+      fees: "flock",
+    },
   },
   {
     id: "7320",

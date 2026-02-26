@@ -25780,7 +25780,8 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     parentProtocol: "parent#sundaeswap",
     listedAt: 1642765130,
     dimensions: {
-      dexs: "sundaeswap"
+      dexs: "sundaeswap",
+      fees: "sundaeswap"
     }
   },
   {

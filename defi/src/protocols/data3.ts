@@ -16935,6 +16935,9 @@ const data3_1: Protocol[] = [
     module: "backed/index.js",
     twitter: "BackedFi",
     listedAt: 1693433275,
+    dimensions: {
+      fees: "backedfi",
+    },
   },
   {
     id: "3468",

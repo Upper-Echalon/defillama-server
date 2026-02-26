@@ -28189,7 +28189,12 @@ const data4: Protocol[] = [
     forkedFromIds: ["1599"],
     github: ["ploutusFi"],
     treasury: "ploutos-money.js",
-    listedAt: 1759263458
+    listedAt: 1759263458,
+    deadUrl: true,
+    deadFrom: "2026-02-26",
+    hallmarks: [
+      ["2026-02-26", "Misconfigured oracle exploit"],
+    ],
   },
   {
     id: "6793",

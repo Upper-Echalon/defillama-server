@@ -12489,7 +12489,7 @@ const data5: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     category: "Cross Chain Bridge",
-    chains: ["Binance", "Ethereum", "Base", "Arbitrum", "Optimism", "Unichain", "Polygon", "Avalanche", "Ink", "Bsquared", "Metis", "Blast", "Mantle", "Scroll", "Mode", "xDai", "Hyperliquid L1", "Plasma", "Zora", "Mint", "Celo", "Linea", "Sei", "Sonic", "Swellchain", "Vana"],
+    chains: ["Binance", "Ethereum", "Base", "Arbitrum", "Optimism", "Unichain", "Polygon", "Avalanche", "Ink", "Metis", "Blast", "Mantle", "Scroll", "Mode", "xDai", "Hyperliquid L1", "Plasma", "Zora", "Mint", "Celo", "Linea", "Sei", "Sonic", "Swellchain", "Vana"],
     module: "hyperlane/index.js",
     twitter: "hyperlane",
     listedAt: 1772126783,

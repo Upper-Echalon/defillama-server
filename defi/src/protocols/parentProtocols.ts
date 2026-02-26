@@ -9099,6 +9099,19 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "GateDEX",
   },
+  {
+    id: "parent#usual",
+    name: "Usual",
+    url: "https://usual.money",
+    description: "Usual is a secure and decentralized fiat-backed (RWA) stablecoin issuer that redistributes value and ownership through the $USUAL token.",
+    logo: `${baseIconsUrl}/usual.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "usualmoney",
+    stablecoins: ["usual-usd"],
+    treasury: "usual.js",
+  },
 ];
 
 export default parentProtocols;

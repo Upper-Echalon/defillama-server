@@ -12406,6 +12406,7 @@ const data5: Protocol[] = [
     chains: ["Ethereum"],
     module: "usual-eth0/index.js",
     twitter: "usualmoney",
+    parentProtocol: "parent#usual",
     listedAt: 1772047377,
   },
   {
@@ -12424,6 +12425,7 @@ const data5: Protocol[] = [
     chains: ["Ethereum"],
     module: "usual-eur0/index.js",
     twitter: "usualmoney",
+    parentProtocol: "parent#usual",
     listedAt: 1772047388,
   },
   {

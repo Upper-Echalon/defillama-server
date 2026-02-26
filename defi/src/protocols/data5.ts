@@ -12352,7 +12352,7 @@ const data5: Protocol[] = [
   },
   {
     id: "7462",
-    name: "Defa by InvoiceMate",
+    name: "Defa By InvoiceMate",
     address: null,
     symbol: "-",
     url: "https://imdefa.com/",
@@ -12365,7 +12365,7 @@ const data5: Protocol[] = [
     tags: ["Private Credit"],
     chains: ["Stellar"],
     module: "defa/index.js",
-    twitter: "spectra_finance",
+    twitter: "defaprimitive",
     github: ["defaprimitive"],
     listedAt: 1772047122,
   },

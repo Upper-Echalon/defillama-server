@@ -12445,5 +12445,28 @@ const data5: Protocol[] = [
       fees: "honeyplay-marketplace",
     },
   },
+  {
+    id: "7467",
+    name: "Decibel",
+    address: null,
+    symbol: "-",
+    url: "https://app.decibel.trade/trade",
+    description: "Decibel is a composable, onchain trading engine for spot, perps, and yield opportunities.",
+    chain: "Aptos",
+    logo: `${baseIconsUrl}/decibel.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Aptos"],
+    module: "decibel/index.js",
+    twitter: "DecibelTrade",
+    listedAt: 1772105985,
+    dimensions: {
+      fees: "decibel",
+      derivatives: "decibel",
+     "open-interest": "decibel",
+    },
+  },
 ];
 export default data5;

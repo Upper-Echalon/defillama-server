@@ -617,7 +617,7 @@ export const handler2 = async (options: DimensionRunOptions) => {
     await elastic.addRuntimeLog({ runtime: endTime - startTime, success, metadata, })
 
     if (errorObject) {
-      await elastic.addErrorLog({ error: errorObject, metadata })
+      await elastic.addErrorLog({ errorStringFull: JSON.stringify(errorObject), metadata } as any)
       throw errorObject
     }
   }

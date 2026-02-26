@@ -167,13 +167,13 @@ async function run() {
     } catch (e) {
       console.error("error", e)
       await elastic.addErrorLog({
-        error: e as any,
+        errorStringFull: JSON.stringify(e as any),
         metadata: {
           application: "dimensions",
           type: 'category',
           name: adapterType,
         }
-      })
+      } as any)
     }
 
     console.timeEnd(key)

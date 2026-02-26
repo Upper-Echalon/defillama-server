@@ -7,20 +7,20 @@ import { sluggifyString } from "./utils/sluggify";
 // CREATE TABLE errorReports (time INT, protocol VARCHAR(200), dataType VARCHAR(200), message TEXT, correctSource TEXT, contact TEXT, id serial primary key);
 
 export async function reportError({ message, protocol, dataType, correctSource, contact }: any) {
-  try{
-    const formattedMessage = `Protocol: ${protocol}
+  const formattedMessage = `Protocol: ${protocol}
 Data: ${dataType}
 What's wrong: ${message}
 Correct data: ${correctSource}
 https://defillama.com/protocol/${sluggifyString(protocol)}`
 
+  const formData = new FormData();
+  formData.append('name', `${protocol} (${dataType})`);
+  formData.append('email', !contact || contact === "" ? `anon@defillama.com` : contact);
+  formData.append('body', formattedMessage);
+
+  try{
     await sendMessage(formattedMessage, process.env.ERROR_REPORTS_WEBHOOK, false)
       .catch(e => console.log(`Failed to send a discord message for ${protocol} (${dataType})`, e))
-
-    const formData = new FormData();
-    formData.append('name', `${protocol} (${dataType})`);
-    formData.append('email', !contact || contact === "" ? `anon@defillama.com` : contact);
-    formData.append('body', formattedMessage);
     
     await getErrorDBConnection()`
     insert into errorReports (

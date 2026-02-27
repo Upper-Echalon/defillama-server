@@ -32,12 +32,13 @@ export async function clearProtocolCacheById(protocolId: string) {
       headers: {
         'x-internal-secret': process.env.LLAMA_INTERNAL_ROUTE_KEY ?? process.env.LLAMA_PRO_API2_SECRET_KEY ?? process.env.API2_SUBPATH
       }
-    }).catch(e => console.log(`Failed to clear cache for protocol ${protocolId} at ${url}`, e))
+    }).then(() => console.log(`Cache cleared for protocol ${protocolId}`))
+    .catch(_e => console.log(`Failed to clear cache for protocol ${protocolId}`))
   }
 
   // await deleteFromPGCache(pgCaceId) // clear postgres cache as well
   // add command do it via discord bot
-  return console.log("Protocol cache deleted id: ", protocolId)
+  // return console.log("Protocol cache deleted id: ", protocolId)
 }
 
 

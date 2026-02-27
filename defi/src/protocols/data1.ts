@@ -1532,6 +1532,9 @@ const data: Protocol[] = [
     ],
     governanceID: ["snapshot:badgerdao.eth"],
     github: ["Badger-Finance"],
+    dimensions: {
+      fees: "badger-dao"
+    }
   },
   {
     id: "174",

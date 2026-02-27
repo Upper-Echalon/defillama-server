@@ -55368,7 +55368,10 @@ const data3_3: Protocol[] = [
     twitter: "InfiniteTradePr",
     audit_links: ["https://github.com/0xGuard-com/audit-reports/blob/master/Infinite%20Trading%20Protocol/Infinite%20Trading%20Protocol.pdf"],
     github: ["InfiniteTradingProtocol"],
-    listedAt: 1727970587
+    listedAt: 1727970587,
+    dimensions: {
+      fees: "infinite"
+    }
   },
   {
     id: "5203",

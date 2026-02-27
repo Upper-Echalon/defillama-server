@@ -22947,6 +22947,7 @@ const data4: Protocol[] = [
     module: "dummy.js",
     twitter: "humidifi",
     dimensions: {
+      fees: "humidifi",
       dexs: {
         genuineSpikes: [["2025-08-14", "-"]],
         adapter: "humidifi"

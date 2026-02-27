@@ -2539,31 +2539,31 @@ const data2: Protocol[] = [
   },
   {
     id: "1494",
-    name: "Minswap",
+    name: "Minswap DEX",
     address: "cardano:asset1d9v7aptfvpx7we2la8f25kwprkj2ma5rp6uwzv",
     symbol: "MIN",
     url: "https://minswap.org",
     description:
       "Minswap aims to be the best liquidity provider on the market by integrating the best asset pool models from across the DEX ecosystem into one protocol.",
     chain: "Cardano",
-    logo: `${baseIconsUrl}/minswap.png`,
+    logo: `${baseIconsUrl}/minswap-dex.jpg`,
     audits: "2",
     audit_links: [
       "https://github.com/minswap/minswap-stableswap/tree/main/audit-report",
       "https://github.com/minswap/minswap-dex-v2/tree/main/audit-report",
     ],
-    gecko_id: "minswap",
-    cmcId: "12787",
+    gecko_id: null,
+    cmcId: null,
     tags: ["StableSwap","AMM"],
     chains: ["Cardano"],
     module: "minswap/index.js",
-    treasury: "minswap.js",
     twitter: "MinswapDEX",
     listedAt: 1646175638,
-    github: ["minswap"],
     dimensions: {
-      dexs: "minswap"
-    }
+      dexs: "minswap",
+      fees: "minswap",
+    },
+    parentProtocol: "parent#minswap",
   },
   {
     id: "1495",

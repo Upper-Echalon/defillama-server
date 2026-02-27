@@ -9123,6 +9123,19 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "bonkfun",
   },
+  {
+    id: "parent#minswap",
+    name: "Minswap",
+    url: "https://minswap.org/",
+    description: "Minswap aims to be the best liquidity provider on the market by integrating the best asset pool models from across the DEX ecosystem into one protocol.",
+    logo: `${baseIconsUrl}/minswap.jpg`,
+    gecko_id: "minswap",
+    cmcId: "12787",
+    chains: [],
+    twitter: "MinswapDEX",
+    github: ["minswap"],
+    treasury: "minswap.js",
+  },
 ];
 
 export default parentProtocols;

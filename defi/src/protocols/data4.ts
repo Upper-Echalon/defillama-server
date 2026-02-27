@@ -22516,6 +22516,7 @@ const data4: Protocol[] = [
     audit_links: ["https://docs.gaib.ai/audits"],
     github: ["gaib-ai"],
     listedAt: 1754501739,
+    stablecoins: ["gaib-aid"],
     dimensions: {
       fees: "gaib",
     },

@@ -1940,7 +1940,7 @@
       "decimals": 8,
       "symbol": "sBTC"
     },
-    "stacks:SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx::usdcx-token": {
+    "SP120SBRBQJ00MCWS7TM5R8WJNTTKD5K0HFRC2CNE.usdcx::usdcx-token": {
       "to": "coingecko#usdcx-stacks",
       "decimals": 6,
       "symbol": "USDCx"

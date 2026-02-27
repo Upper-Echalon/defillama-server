@@ -54091,19 +54091,19 @@ const data3_3: Protocol[] = [
   },
   {
     id: "5145",
-    name: "IPOR Fusion",
+    name: "Fusion by IPOR",
     address: null,
     symbol: "-",
-    url: "https://ipor.io",
+    url: "https://app.ipor.io/fusion?f=D0V4X4doim7oC8cTQZzAZXBOkbwaf",
     description:
-      "IPOR Fusion is a meta DeFi aggregation, execution & intelligence engine that introduces a unified liquidity framework for on-chain asset management. Fusion combines various aggregation and routing protocols into a single smart contract layer, automating asset management and maximizing returns across yield sources. Imagine intelligence-driven execution for looping, carry trades, arbitrage, leveraged farming, and passive lending at your fingertips",
-    chain: "Arbitrum",
+      "Fusion (by IPOR) is a meta DeFi aggregation, execution & intelligence engine that introduces a unified liquidity framework for on-chain asset management. Fusion combines various aggregation and routing protocols into a single smart contract layer, automating asset management and maximizing returns across yield sources. Imagine intelligence-driven execution for looping, carry trades, arbitrage, leveraged farming, and passive lending at your fingertips",
+    chain: "Ethereum",
     logo: `${baseIconsUrl}/ipor-fusion.svg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
     category: "Yield Aggregator",
-    chains: ["Arbitrum", "Ethereum", "Base", "Unichain", "TAC", "Ink"],
+    chains: ["Ethereum", "Arbitrum", "Base", "Unichain", "TAC", "Ink", "Plasma", "Avalanche", "Katana"],
     oraclesBreakdown: [
       {
         name: "Chainlink",

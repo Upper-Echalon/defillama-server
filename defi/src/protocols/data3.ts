@@ -54094,10 +54094,10 @@ const data3_3: Protocol[] = [
     name: "Fusion by IPOR",
     address: null,
     symbol: "-",
-    url: "https://app.ipor.io/fusion?f=D0V4X4doim7oC8cTQZzAZXBOkbwaf",
+    url: "https://app.ipor.io/fusion",
     description:
       "Fusion (by IPOR) is a meta DeFi aggregation, execution & intelligence engine that introduces a unified liquidity framework for on-chain asset management. Fusion combines various aggregation and routing protocols into a single smart contract layer, automating asset management and maximizing returns across yield sources. Imagine intelligence-driven execution for looping, carry trades, arbitrage, leveraged farming, and passive lending at your fingertips",
-    chain: "Ethereum",
+    chain: "Arbitrum",
     logo: `${baseIconsUrl}/ipor-fusion.svg`,
     audits: "2",
     gecko_id: null,

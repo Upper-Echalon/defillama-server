@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { deleteProtocolCache } from '../../utils/r2'
 import { getDailyTvlCacheId, } from '../../api2/db'
+import path from 'path'
 
 export async function clearProtocolCache(protocolName: string) {
   const { data: protocols } = await axios.get('https://api.llama.fi/protocols')
@@ -26,7 +27,8 @@ export async function clearProtocolCacheById(protocolId: string) {
 
 
   for (const url of API2_SERVER_URL) {
-    await axios.delete(`${url}_internal/debug-pg/${pgCaceId}`, {
+    let endpoint = path.join(url, '_internal/debug-pg/', pgCaceId)
+    await axios.delete(endpoint, {
       headers: {
         'x-internal-secret': process.env.LLAMA_INTERNAL_ROUTE_KEY ?? process.env.LLAMA_PRO_API2_SECRET_KEY ?? process.env.API2_SUBPATH
       }

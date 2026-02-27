@@ -37,6 +37,7 @@ async function main() {
 
   if (skipSubPath) {  // for local testing purposes
     setTvlRoutes(webserver, '/')
+    setInternalRoutes(webserver, '_internal')
   }
 
   if (process.env.API2_SUBPATH) {

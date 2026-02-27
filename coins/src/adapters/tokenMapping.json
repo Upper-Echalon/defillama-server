@@ -2459,6 +2459,16 @@
       "symbol": "bUSDT",
       "to": "coingecko#tether"
     },
+    "0x038Dbe3D967bB8389190446DACdfE7B95b44F73D": {
+      "decimals": "6",
+      "symbol": "bUSDC",
+      "to": "coingecko#usd-coin"
+    },
+    "0xd211b17Dfe8288D4Fb0dd8EEFF07A6C48fC679D5": {
+      "decimals": "6",
+      "symbol": "bAUSD",
+      "to": "coingecko#agora-dollar"
+    },
     "0xd09ACb80C1E8f2291862c4978A008791c9167003": {
       "decimals": "18",
       "symbol": "tETH",

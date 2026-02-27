@@ -54098,7 +54098,7 @@ const data3_3: Protocol[] = [
     description:
       "Fusion (by IPOR) is a meta DeFi aggregation, execution & intelligence engine that introduces a unified liquidity framework for on-chain asset management. Fusion combines various aggregation and routing protocols into a single smart contract layer, automating asset management and maximizing returns across yield sources. Imagine intelligence-driven execution for looping, carry trades, arbitrage, leveraged farming, and passive lending at your fingertips",
     chain: "Arbitrum",
-    logo: `${baseIconsUrl}/ipor-fusion.svg`,
+    logo: `${baseIconsUrl}/fusion-by-ipor.svg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,

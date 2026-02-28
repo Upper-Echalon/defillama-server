@@ -2806,8 +2806,8 @@ const data4: Protocol[] = [
     parentProtocol: "parent#beethoven-x",
     listedAt: 1738009211,
     dimensions: {
-      fees: "beethoven-x-v3",
-      dexs: "beets-v3"
+      fees: "beets-v3",
+      dexs: "beets-v3",
     }
   },
   {
@@ -4632,7 +4632,7 @@ const data4: Protocol[] = [
     parentProtocol: "parent#hyperliquid",
     listedAt: 1738964061,
     dimensions: {
-      fees: "hyperliquid",
+      fees: "hyperliquid-spot",
       dexs: "hyperliquid-spot"
     }
   },

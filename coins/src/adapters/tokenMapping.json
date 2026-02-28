@@ -4320,6 +4320,11 @@
       "to": "coingecko#superstate-uscc",
       "decimals": 6,
       "symbol": "USCC"
+    },
+    "C5C1w3wJtJB14QgXRTbBe3f6jikVTu9EnMzhTaybTxJi": {
+      "to": "coingecko#usdtb",
+      "decimals": 6,
+      "symbol": "USDtb"
     }
   },
   "ton": {

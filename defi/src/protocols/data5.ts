@@ -9091,6 +9091,10 @@ const data5: Protocol[] = [
     twitter: "SectorOneDEX",
     parentProtocol: "parent#sectorone",
     listedAt: 1769296715,
+    dimensions: {
+      dexs: "sectorone-dlmm-v2",
+      fees: "sectorone-dlmm-v2",
+    },
   },
   {
     id: "7305",
@@ -12649,6 +12653,25 @@ const data5: Protocol[] = [
       fees: "minswap-aggregator",
     },
     parentProtocol: "parent#minswap",
+  },
+  {
+    id: "7477",
+    name: "SimpleDEX",
+    address: null,
+    symbol: "-",
+    url: "https://dex.protonnz.com",
+    description:
+      "SimpleDEX is a decentralized exchange on XPR Network.",
+    chain: "Proton",
+    logo: `${baseIconsUrl}/simpledex.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Order Book"],
+    chains: ["Proton"],
+    module: "dummy.js",
+    twitter: "protonnz",
+    listedAt: 1772243119,
   },
 ];
 export default data5;

@@ -592,7 +592,12 @@ export const cexsData: Array<ICex> = [
   },
   {
     name: "Poloniex",
+    slug: "poloniex",
+    coin: null,
+    walletsLink: null,
+    url: "https://www.poloniex.com/",
     cgId: "poloniex",
+    cgDeriv: "poloniex_futures",
   },
   {
     name: "Upbit",

@@ -12736,5 +12736,24 @@ const data5: Protocol[] = [
       dexs: "kast-card",
     },
   },
+  {
+    id: "7481",
+    name: "Poloniex",
+    address: null,
+    symbol: "-",
+    url: "https://www.poloniex.com/",
+    description:
+      "Poloniex is a centralized cryptocurrency exchange platform where users can deposit, trade, and withdraw a wide range of digital assets with order books, spot trading, derivatives markets, and custodial wallet services provided by the platform operator.",
+    chain: "Bitcoin",
+    logo: `${baseIconsUrl}/poloniex.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "CEX",
+    chains: ["Bitcoin", "Ethereum", "Ripple", "Tron", "Stellar", "Solana", "EthereumClassic", "Polygon", "Optimism", "Arbitrum"],
+    module: "poloniex-cex/index.js",
+    twitter: "Poloniex",
+    listedAt: 1772302711,
+  },
 ];
 export default data5;

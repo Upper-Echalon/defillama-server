@@ -18609,7 +18609,7 @@ const data4: Protocol[] = [
     twitter: "crovegasfun",
     listedAt: 1751045489,
   },
-  {  
+  {
     id: "6364",
     name: "Mineral Vault",
     address: null,
@@ -27443,7 +27443,7 @@ const data4: Protocol[] = [
     symbol: "-",
     url: "https://www.vishwalab.com/",
     description:
-      "Vishwa is the verification layer for autonomous capital. As financial execution becomes agent-driven, capital must prove solvency, authorization, and policy compliance before transactions occur. Vishwa uses zero-knowledge proofs to enforce these constraints before execution — agents must cryptographically prove they are authorized and solvent before funds move. This allows institutions to deploy capital programmatically across execution venues while maintaining enforceable constraints. No proof, no execution.",
+      "Vishwa is agent-native banking infrastructure for autonomous capital, built around a pre-execution control layer that verifies and enforces solvency, authorization, policy, and execution constraints before capital moves across chains and execution venues.",
     chain: "Bitcoin",
     logo: `${baseIconsUrl}/vishwa.jpg`,
     audits: "2",

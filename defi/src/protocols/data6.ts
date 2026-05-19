@@ -3584,5 +3584,23 @@ const data6: Protocol[] = [
     twitter: "BitverseApp",
     listedAt: 1779146405,
   },
+  {
+    id: "7879",
+    name: "Flamix",
+    address: null,
+    symbol: "-",
+    url: "https://app.flamix.trade/",
+    description: "Perpetuals DEX offering high-leverage trading using any token as collateral.",
+    chain: "Flare",
+    logo: `${baseIconsUrl}/flamix.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Flare"],
+    module: "flamix/index.js",
+    twitter: "flamix_trade",
+    listedAt: 1779198096
+  },
 ];
 export default data6;

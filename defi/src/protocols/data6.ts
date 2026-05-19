@@ -3601,5 +3601,64 @@ const data6: Protocol[] = [
     twitter: "flamix_trade",
     listedAt: 1779198096
   },
+  {
+    id: "7880",
+    name: "Sentrix DEX",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://dex.sentrixchain.com
+    description: "Sentrix DEX is a decentralized exchange on Sentrix.",
+    chain: "Sentrix",
+    logo: `${baseIconsUrl}/sentrix-dex.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["AMM"],
+    chains: ["Sentrix"],
+    module: "sentrix-dex/index.js",
+    forkedFromIds: ["2197"],
+    twitter: "sentrixchain",
+    listedAt: 1779208883
+  },
+  {
+    id: "7881",
+    name: "PiggyBank",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://piggybank.fi
+    description: "PiggyBank offers extra yield on tokenized stocks. Earn additional yield on digital assets through systematic strategies, compounded every 48 hours.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/piggybank.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Solana"],
+    module: "piggybank/index.js",
+    twitter: "piggybank_fi",
+    audit_links: ["https://cdn.prod.website-files.com/68e7628180c5b014e78a46cc/6900fa6f3a2659fab4c7b728_piggy_bank.pdf"],
+    github: ["zsociety-io"],
+    listedAt: 1779213389
+  },
+  {
+    id: "7882",
+    name: "Topaz Dex",
+    address: "bsc:0xdf002282C1474C9592780618Adda7EaA99998Abd",
+    symbol: "TOPAZ",
+    url: " ", // pending to add url https://www.topazdex.com
+    description: "ve(3,3) on BNB Chain — where protocols compete for real liquidity and veTOPAZ holders capture the value.",
+    chain: "Binance",
+    logo: `${baseIconsUrl}/topaz-dex.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["ve(3,3)"],
+    chains: ["Binance"],
+    module: "topaz-cl/index.js",
+    forkedFromIds: ["1407"],
+    twitter: "TopazDex",
+    audit_links: ["https://github.com/shieldify-security/audits-portfolio/blob/main/reports/Topaz-Dex-Security-Review.pdf"],
+    listedAt: 1779213624
+  },
 ];
 export default data6;

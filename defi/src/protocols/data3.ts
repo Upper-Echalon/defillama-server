@@ -48383,7 +48383,10 @@ const data3_3: Protocol[] = [
     ],
     listedAt: 1720775830,
     dimensions: {
-      fees: "midas-rwa",
+      fees: {
+        adapter: "midas-rwa",
+        genuineSpikes: [["2025-12-03", "Midas mF-ONE suffered a 2% loss"]],
+      }
     },
   },
   {

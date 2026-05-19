@@ -15177,6 +15177,9 @@ const data5: Protocol[] = [
     module: "rockawayx/index.js",
     twitter: "Rockaway_X",
     listedAt: 1774551409,
+    dimensions: {
+      fees: "rockawayx",
+    },
   },
   {
     id: "7589",

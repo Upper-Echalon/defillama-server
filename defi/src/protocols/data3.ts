@@ -57616,7 +57616,8 @@ const data3_3: Protocol[] = [
     audit_links: ["https://github.com/sui-foundation/security-audits/blob/main/docs/mysten_deepbook_audit_final.pdf"],
     listedAt: 1730284544,
     dimensions: {
-      dexs: "deepbookv3-sui"
+      dexs: "deepbookv3-sui",
+      fees: "deepbook-v3"
     }
   },
   {

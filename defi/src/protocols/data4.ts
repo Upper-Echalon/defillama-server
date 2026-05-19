@@ -5216,6 +5216,9 @@ const data4: Protocol[] = [
     twitter: "doppler_fi",
     github: ["girin-app"],
     listedAt: 1739555054,
+    dimensions: {
+      fees: "doppler-finance"
+    }
   },
   {
     id: "5787",

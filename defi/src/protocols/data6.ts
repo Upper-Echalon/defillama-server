@@ -2138,7 +2138,6 @@ const data6: Protocol[] = [
     module: "hermetica-hbtc/index.js",
     twitter: "HermeticaFi",
     parentProtocol: "parent#hermetica",
-    excludeTvlFromParent: true, // full tvl value is represented under the usdh product
     listedAt: 1778142267
   },
   {

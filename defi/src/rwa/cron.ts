@@ -24,6 +24,22 @@ import { rwaSlug, toFiniteNumberOrZero, smoothHistoricalData, normalizeRwaMetada
 import { parentProtocolsById } from '../protocols/parentProtocols';
 import { protocolsById } from '../protocols/data';
 import { getChainLabelFromKey } from '../utils/normalizeChain';
+import { sendMessage } from '../utils/discord';
+import {
+  formatRwaHistoricalChartGuardReport,
+  formatUsd,
+  getSuspiciousRwaHistoricalChartReport,
+  hasSuspiciousRwaHistoricalChartReport,
+  timestampToDay,
+} from './chartGuards';
+
+const MIN_PG_CACHE_ROWS_FOR_INCREMENTAL_REUSE = Number(process.env.RWA_MIN_PG_CACHE_ROWS_FOR_INCREMENTAL_REUSE ?? 30);
+const RWA_CHART_ALERT_MIN_SINGLE_POINT_MCAP = Number(process.env.RWA_CHART_ALERT_MIN_SINGLE_POINT_MCAP ?? 50_000_000);
+const RWA_CHART_ALERT_MIN_DAY_DELTA = Number(process.env.RWA_CHART_ALERT_MIN_DAY_DELTA ?? 500_000_000);
+const RWA_CHART_ALERT_MIN_DAY_RATIO = Number(process.env.RWA_CHART_ALERT_MIN_DAY_RATIO ?? 0.05);
+const RWA_CHART_ALERT_MAX_ITEMS = Number(process.env.RWA_CHART_ALERT_MAX_ITEMS ?? 12);
+const RWA_CHART_ALERT_LOOKBACK_DAYS = Number(process.env.RWA_CHART_ALERT_LOOKBACK_DAYS ?? 7);
+const RWA_CHART_ALERT_FAIL_ON_SUSPICIOUS = process.env.RWA_CHART_ALERT_FAIL_ON_SUSPICIOUS !== 'false';
 
 interface RWACurrentData {
   id: string;
@@ -73,6 +89,20 @@ function convertChainKeysToLabelsNestedNumber(
 interface RWAMetadata {
   id: string;
   data: any;
+}
+
+async function sendRwaCronAlert(message: string): Promise<void> {
+  const fullMessage = `[RWA cron] ${message}`;
+  if (!process.env.RWA_WEBHOOK) {
+    console.warn(fullMessage);
+    return;
+  }
+
+  try {
+    await sendMessage(fullMessage, process.env.RWA_WEBHOOK, true);
+  } catch (e) {
+    console.error('Failed to send RWA cron Discord alert:', (e as any)?.message);
+  }
 }
 
 async function generateCurrentData(metadata: RWAMetadata[]): Promise<any[]> {
@@ -438,6 +468,46 @@ function processRecordsToPGCache(records: any[]): PGCacheData {
   return data;
 }
 
+type PGCacheRepairEvent = {
+  id: string;
+  reason: string;
+  existingRows: number;
+  rebuiltRows: number;
+  incrementalRows: number;
+  firstTimestamp?: number;
+  lastTimestamp?: number;
+};
+
+function getPGCacheRowCount(cache: PGCacheData | null): number {
+  return cache ? Object.keys(cache).length : 0;
+}
+
+function getRecordRange(records: any[]): { firstTimestamp?: number; lastTimestamp?: number } {
+  const timestamps = records.map((record) => Number(record.timestamp)).filter((timestamp) => Number.isFinite(timestamp));
+  if (!timestamps.length) return {};
+  timestamps.sort((a, b) => a - b);
+  return { firstTimestamp: timestamps[0], lastTimestamp: timestamps[timestamps.length - 1] };
+}
+
+async function alertPGCacheRepairs(events: PGCacheRepairEvent[]): Promise<void> {
+  if (!events.length) return;
+  const lines = events
+    .slice(0, RWA_CHART_ALERT_MAX_ITEMS)
+    .map((event) => {
+      const range = event.firstTimestamp && event.lastTimestamp
+        ? `${timestampToDay(event.firstTimestamp)} -> ${timestampToDay(event.lastTimestamp)}`
+        : 'empty';
+      return `- ${event.id}: ${event.reason}; cache rows ${event.existingRows} -> ${event.rebuiltRows}; incremental rows ${event.incrementalRows}; range ${range}`;
+    });
+  const suffix = events.length > lines.length ? `\n...and ${events.length - lines.length} more IDs` : '';
+  await sendRwaCronAlert(
+    `Rebuilt incomplete RWA pg-cache entries during incremental sync.\n` +
+    `This prevents old DB history from being dropped from /chart/asset and aggregate charts.\n` +
+    lines.join('\n') +
+    suffix
+  );
+}
+
 async function generatePGCache(): Promise<{ updatedIds: number }> {
   console.log('Generating PG cache with chain breakdown...');
   const startTime = Date.now();
@@ -446,9 +516,9 @@ async function generatePGCache(): Promise<{ updatedIds: number }> {
   const lastSyncTimestamp = syncMetadata?.lastSyncTimestamp
     ? new Date(syncMetadata.lastSyncTimestamp)
     : undefined;
-  const timeNow = new Date()
 
   let updatedIds = 0;
+  const repairEvents: PGCacheRepairEvent[] = [];
 
   if (lastSyncTimestamp) {
     // Incremental sync: fetch only updated records
@@ -470,9 +540,26 @@ async function generatePGCache(): Promise<{ updatedIds: number }> {
 
     for (const [id, idRecords] of Object.entries(recordsById)) {
       const existingCache = await readPGCacheForId(id);
-      const newData = processRecordsToPGCache(idRecords);
-      const merged = mergePGCacheData(existingCache, newData);
-      await storePGCacheForId(id, smoothPGCacheData(merged));
+      const existingRows = getPGCacheRowCount(existingCache);
+      const shouldRebuild = !existingCache || existingRows < MIN_PG_CACHE_ROWS_FOR_INCREMENTAL_REUSE;
+
+      if (shouldRebuild) {
+        const fullRecords = await fetchDailyRecordsWithChainsForIdPG(id);
+        const fullData = processRecordsToPGCache(fullRecords);
+        await storePGCacheForId(id, smoothPGCacheData(fullData));
+        repairEvents.push({
+          id,
+          reason: existingCache ? 'suspiciously small existing pg-cache' : 'missing existing pg-cache',
+          existingRows,
+          rebuiltRows: fullRecords.length,
+          incrementalRows: idRecords.length,
+          ...getRecordRange(fullRecords),
+        });
+      } else {
+        const newData = processRecordsToPGCache(idRecords);
+        const merged = mergePGCacheData(existingCache, newData);
+        await storePGCacheForId(id, smoothPGCacheData(merged));
+      }
       updatedIds++;
     }
   } else {
@@ -502,11 +589,14 @@ async function generatePGCache(): Promise<{ updatedIds: number }> {
   
 
   // Update sync metadata
-  setPGSyncMetadata({
-    lastSyncTimestamp: timeNow.toISOString(),
-    lastSyncDate: timeNow.toISOString(),
+  const maxUpdatedAt = await fetchMaxUpdatedAtPG();
+  await setPGSyncMetadata({
+    lastSyncTimestamp: maxUpdatedAt?.toISOString() || lastSyncTimestamp?.toISOString() || null,
+    lastSyncDate: new Date().toISOString(),
     totalIds: updatedIds,
   })
+
+  await alertPGCacheRepairs(repairEvents);
 
   console.log(`Generated PG cache for ${updatedIds} IDs in ${Date.now() - startTime}ms`);
   return { updatedIds };
@@ -903,6 +993,27 @@ interface HistoricalDataPointAssetTypes {
   all: HistoricalBreakdownDataPoint; // base + stablecoin + governance
 }
 
+async function alertSuspiciousRwaHistoricalCharts(
+  allChainAssetBreakdown: HistoricalBreakdownDataPoint | undefined,
+  metadata: RWAMetadata[]
+): Promise<void> {
+  const options = {
+    minSinglePointMcap: RWA_CHART_ALERT_MIN_SINGLE_POINT_MCAP,
+    minDayDelta: RWA_CHART_ALERT_MIN_DAY_DELTA,
+    minDayRatio: RWA_CHART_ALERT_MIN_DAY_RATIO,
+    maxItems: RWA_CHART_ALERT_MAX_ITEMS,
+    lookbackDays: RWA_CHART_ALERT_LOOKBACK_DAYS,
+  };
+  const report = getSuspiciousRwaHistoricalChartReport(allChainAssetBreakdown, metadata, options);
+  if (!hasSuspiciousRwaHistoricalChartReport(report)) return;
+
+  const message = formatRwaHistoricalChartGuardReport(report, metadata, options);
+  await sendRwaCronAlert(message);
+  if (RWA_CHART_ALERT_FAIL_ON_SUSPICIOUS) {
+    throw new Error('Suspicious RWA historical chart shape detected; refusing to publish aggregate historical chart cache');
+  }
+}
+
 async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Promise<void> {
   console.log('Generating aggregated historical charts...');
   const startTime = Date.now();
@@ -1169,6 +1280,8 @@ async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Prom
   warnSlugCollisions('byPlatform', Object.keys(byPlatform), rwaSlug);
   warnSlugCollisions('byAssetGroup', Object.keys(byAssetGroup), rwaSlug);
 
+  await alertSuspiciousRwaHistoricalCharts(byChainTickerBreakdown['all'], metadata);
+
   // Store chain charts (includes "All" and individual chains)
   for (const [chain, timestampMap] of Object.entries(byChain)) {
     const chainLabel = getChainLabelFromKey(chain);
@@ -1291,10 +1404,6 @@ async function main() {
   const totalStartTime = Date.now();
 
   try {
-    // Clear old cache versions
-    console.log('Clearing old cache versions...');
-    await clearOldCacheVersions();
-
     // Initialize database connection
     console.log('Initializing database connection...');
     await initPG();
@@ -1343,6 +1452,10 @@ async function main() {
 
     // Generate aggregated historical charts by chain, category, platform
     await generateAggregatedHistoricalCharts(metadata);
+
+    // Clear old cache versions only after the new cache has been fully generated.
+    console.log('Clearing old cache versions...');
+    await clearOldCacheVersions();
 
     console.log('='.repeat(60));
     console.log(`RWA Cron Job Completed in ${Date.now() - totalStartTime}ms`);

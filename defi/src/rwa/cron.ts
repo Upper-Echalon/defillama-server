@@ -38,7 +38,7 @@ const RWA_CHART_ALERT_MIN_SINGLE_POINT_MCAP = Number(process.env.RWA_CHART_ALERT
 const RWA_CHART_ALERT_MIN_DAY_DELTA = Number(process.env.RWA_CHART_ALERT_MIN_DAY_DELTA ?? 500_000_000);
 const RWA_CHART_ALERT_MIN_DAY_RATIO = Number(process.env.RWA_CHART_ALERT_MIN_DAY_RATIO ?? 0.05);
 const RWA_CHART_ALERT_MAX_ITEMS = Number(process.env.RWA_CHART_ALERT_MAX_ITEMS ?? 12);
-const RWA_CHART_ALERT_LOOKBACK_DAYS = Number(process.env.RWA_CHART_ALERT_LOOKBACK_DAYS ?? 7);
+const RWA_CHART_ALERT_LOOKBACK_DAYS = Number(process.env.RWA_CHART_ALERT_LOOKBACK_DAYS ?? 1);
 const RWA_CHART_ALERT_FAIL_ON_SUSPICIOUS = process.env.RWA_CHART_ALERT_FAIL_ON_SUSPICIOUS !== 'false';
 
 interface RWACurrentData {
@@ -437,21 +437,21 @@ function processRecordsToPGCache(records: any[]): PGCacheData {
     let totalActiveMcap = 0;
     let totalDefiActiveTvl = 0;
 
-    for (const [chainKey, value] of Object.entries(mcapObj)) {
+    for (const [chainKey, value] of Object.entries(toObjectMap(mcapObj))) {
       if (!chains[chainKey]) chains[chainKey] = { onChainMcap: 0, activeMcap: 0, defiActiveTvl: 0 };
       const numValue = Number(value) || 0;
       chains[chainKey].onChainMcap = numValue;
       totalOnChainMcap += numValue;
     }
 
-    for (const [chainKey, value] of Object.entries(activemcapObj)) {
+    for (const [chainKey, value] of Object.entries(toObjectMap(activemcapObj))) {
       if (!chains[chainKey]) chains[chainKey] = { onChainMcap: 0, activeMcap: 0, defiActiveTvl: 0 };
       const numValue = Number(value) || 0;
       chains[chainKey].activeMcap = numValue;
       totalActiveMcap += numValue;
     }
 
-    for (const [chainKey, protocols] of Object.entries(defitvlObj)) {
+    for (const [chainKey, protocols] of Object.entries(toObjectMap(defitvlObj))) {
       if (!chains[chainKey]) chains[chainKey] = { onChainMcap: 0, activeMcap: 0, defiActiveTvl: 0 };
       const numValue = sumObjectValues(protocols);
       chains[chainKey].defiActiveTvl = numValue;
@@ -468,6 +468,10 @@ function processRecordsToPGCache(records: any[]): PGCacheData {
   return data;
 }
 
+function toObjectMap(value: any): Record<string, any> {
+  return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+}
+
 type PGCacheRepairEvent = {
   id: string;
   reason: string;
@@ -476,6 +480,11 @@ type PGCacheRepairEvent = {
   incrementalRows: number;
   firstTimestamp?: number;
   lastTimestamp?: number;
+};
+
+type PGCacheProcessingError = {
+  id: string;
+  message: string;
 };
 
 function getPGCacheRowCount(cache: PGCacheData | null): number {
@@ -508,6 +517,19 @@ async function alertPGCacheRepairs(events: PGCacheRepairEvent[]): Promise<void> 
   );
 }
 
+async function alertPGCacheProcessingErrors(errors: PGCacheProcessingError[]): Promise<void> {
+  if (!errors.length) return;
+  const lines = errors
+    .slice(0, RWA_CHART_ALERT_MAX_ITEMS)
+    .map((error) => `- ${error.id}: ${error.message}`);
+  const suffix = errors.length > lines.length ? `\n...and ${errors.length - lines.length} more IDs` : '';
+  await sendRwaCronAlert(
+    `Failed to generate RWA pg-cache for ${errors.length} IDs; refusing to publish incomplete historical cache.\n` +
+    lines.join('\n') +
+    suffix
+  );
+}
+
 async function generatePGCache(): Promise<{ updatedIds: number }> {
   console.log('Generating PG cache with chain breakdown...');
   const startTime = Date.now();
@@ -519,6 +541,7 @@ async function generatePGCache(): Promise<{ updatedIds: number }> {
 
   let updatedIds = 0;
   const repairEvents: PGCacheRepairEvent[] = [];
+  const processingErrors: PGCacheProcessingError[] = [];
 
   if (lastSyncTimestamp) {
     // Incremental sync: fetch only updated records
@@ -582,11 +605,17 @@ async function generatePGCache(): Promise<{ updatedIds: number }> {
           console.log(`PG cache: processed ${i + 1}/${allIds.length} IDs`);
         }
       } catch (e) {
-        console.error(`Error processing PG cache for ${id}:`, (e as any)?.message);
+        const message = (e as any)?.message || String(e);
+        console.error(`Error processing PG cache for ${id}:`, message);
+        processingErrors.push({ id, message });
       }
     }
   }
   
+  if (processingErrors.length) {
+    await alertPGCacheProcessingErrors(processingErrors);
+    throw new Error(`Failed to generate RWA pg-cache for ${processingErrors.length} IDs`);
+  }
 
   // Update sync metadata
   const maxUpdatedAt = await fetchMaxUpdatedAtPG();

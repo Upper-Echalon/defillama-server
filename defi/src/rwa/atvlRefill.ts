@@ -510,6 +510,24 @@ function getActiveTvls(
   });
 }
 
+// Returns stablecoinsData[cgId] filtered to only the chains that exist
+// in finalData[rwaId].contracts. Without this, the stablecoins-API multi-chain
+// map fans out onto IDs that share a Coingecko ID but don't live on every
+// chain that the canonical cgId asset does (the Ondo USDY phantom bug).
+function filterStablecoinsToContractChains(
+  finalData: any,
+  rwaId: string,
+  stablecoinsChainMap: StablecoinChainMcap
+): StablecoinChainMcap {
+  const contracts = finalData[rwaId]?.contracts ?? {};
+  const allowed = new Set<string>(Object.keys(contracts).map((c) => getChainIdFromDisplayName(c)));
+  const out: StablecoinChainMcap = {};
+  for (const [chain, mcap] of Object.entries(stablecoinsChainMap ?? {})) {
+    if (allowed.has(getChainIdFromDisplayName(chain))) out[chain] = mcap;
+  }
+  return out;
+}
+
 function getOnChainTvlAndActiveMcaps(
   assetPrices: any,
   tokenToProjectMap: any,
@@ -533,13 +551,16 @@ function getOnChainTvlAndActiveMcaps(
   // activeMcap upfront; totalSupply is derived per-chain in the per-token loop
   // below so it stays consistent: mcap = supply × price.
   const stablecoinOverrideRwaIds: { [cgId: string]: string } = {};
+  const stablecoinOverrideChainMcaps: { [cgId: string]: StablecoinChainMcap } = {};
   Object.keys(stablecoinsData).forEach((cgId: string) => {
     const rwaId = getStablecoinOverrideRwaId(cgId, stablecoinsData[cgId], coingeckoIdToRwaIds, finalData);
     if (!rwaId || !finalData[rwaId]) return;
+    const filtered = filterStablecoinsToContractChains(finalData, rwaId, stablecoinsData[cgId].chainMcap);
     stablecoinOverrideRwaIds[cgId] = rwaId;
-    finalData[rwaId][RWA_KEY_MAP.onChain] = { ...stablecoinsData[cgId].chainMcap };
+    stablecoinOverrideChainMcaps[cgId] = filtered;
+    finalData[rwaId][RWA_KEY_MAP.onChain] = filtered;
     if (!finalData[rwaId][RWA_KEY_MAP.activeMcap] && finalData[rwaId][RWA_KEY_MAP.activeMcapChecked])
-      finalData[rwaId][RWA_KEY_MAP.activeMcap] = { ...stablecoinsData[cgId].chainMcap };
+      finalData[rwaId][RWA_KEY_MAP.activeMcap] = { ...filtered };
   });
 
   // An RWA can have multiple token addresses on the same chain; aggregate across
@@ -558,29 +579,33 @@ function getOnChainTvlAndActiveMcaps(
     // from stableMcap / price and skip the on-chain accumulation. If it
     // doesn't cover this chain (chain is in the spreadsheet but not the
     // stablecoins API), fall through to the on-chain path so we don't drop coverage.
+    const stablecoinChainMcap = cgId ? stablecoinOverrideChainMcaps[cgId] : undefined;
+    const stablecoinChainEntry = Object.entries(stablecoinChainMcap ?? {}).find(
+      ([stablecoinChain]) => getChainIdFromDisplayName(stablecoinChain) === chain
+    );
     if (
       cgId &&
-      stablecoinsData[cgId] &&
       stablecoinOverrideRwaIds[cgId] === rwaId &&
-      stablecoinsData[cgId].chainMcap[chainDisplayName] != null
+      stablecoinChainEntry
     ) {
-      finalData[rwaId][RWA_KEY_MAP.onChain] = { ...stablecoinsData[cgId].chainMcap };
+      const [stablecoinChain, stablecoinMcap] = stablecoinChainEntry;
+      finalData[rwaId][RWA_KEY_MAP.onChain] = { ...(stablecoinChainMcap ?? {}) };
       if (!finalData[rwaId][RWA_KEY_MAP.price] && assetPrices[pk]?.price) {
         finalData[rwaId][RWA_KEY_MAP.price] = toFiniteNumberOrNull(assetPrices[pk].price);
       }
       const stablePrice = assetPrices[pk]?.price;
-      const stableMcap = Number(stablecoinsData[cgId].chainMcap[chainDisplayName]);
+      const stableMcap = Number(stablecoinMcap);
       if (stablePrice && Number.isFinite(stableMcap)) {
         finalData[rwaId][RWA_KEY_MAP.totalSupply] = finalData[rwaId][RWA_KEY_MAP.totalSupply] || {};
-        finalData[rwaId][RWA_KEY_MAP.totalSupply][chainDisplayName] = toFixedNumber(stableMcap / stablePrice, 6);
+        finalData[rwaId][RWA_KEY_MAP.totalSupply][stablecoinChain] = toFixedNumber(stableMcap / stablePrice, 6);
       }
       if (finalData[rwaId][RWA_KEY_MAP.activeMcapChecked]) {
         if (!finalData[rwaId][RWA_KEY_MAP.activeMcap])
           finalData[rwaId][RWA_KEY_MAP.activeMcap] = { ...finalData[rwaId][RWA_KEY_MAP.onChain] };
-        const exclusionKey = `${rwaId}:${chainDisplayName}`;
+        const exclusionKey = `${rwaId}:${stablecoinChain}`;
         if (!exclusionApplied.has(exclusionKey)) {
           exclusionApplied.add(exclusionKey);
-          findActiveMcaps(finalData, rwaId, excludedAmounts, assetPrices[pk], chainDisplayName);
+          findActiveMcaps(finalData, rwaId, excludedAmounts, assetPrices[pk], stablecoinChain);
         }
       }
       return;
@@ -647,7 +672,7 @@ function getOnChainTvlAndActiveMcaps(
     }
     if (!price) return;
     finalData[rwaId][RWA_KEY_MAP.totalSupply] = finalData[rwaId][RWA_KEY_MAP.totalSupply] || {};
-    Object.entries(stablecoinsData[cgId].chainMcap).forEach(([chain, mcap]) => {
+    Object.entries(stablecoinOverrideChainMcaps[cgId] ?? {}).forEach(([chain, mcap]) => {
       if (finalData[rwaId][RWA_KEY_MAP.totalSupply][chain] != null) return;
       const mcapNum = Number(mcap);
       if (!Number.isFinite(mcapNum)) return;

@@ -171,8 +171,6 @@
  *     --from-date 2025-11-29
  */
 
-import { coins } from "@defillama/sdk";
-import { runInPromisePool } from "@defillama/sdk/build/generalUtil";
 import * as fs from "fs";
 import * as path from "path";
 import {
@@ -247,25 +245,75 @@ function parseCsv(filePath: string): DaySupply[] {
   });
 }
 
+// Dune's tokens_solana.transfers query returns one row per day with a mint/burn
+// event. Days where supply was unchanged are silently absent. Expand to a dense
+// one-row-per-day series by carrying the most recent supply forward, from the
+// first event day through today (UTC). This is the correct interpretation —
+// "no event today" means "supply same as yesterday", not "supply = 0".
+// Disable with --no-forward-fill if you want raw event-day-only behaviour.
+function expandForwardFill(sparse: DaySupply[]): DaySupply[] {
+  if (sparse.length === 0) return [];
+  const sorted = [...sparse].sort((a, b) => a.dayTs - b.dayTs);
+  const eventByDay = new Map<number, number>(sorted.map((d) => [d.dayTs, d.supply]));
+  const now = new Date();
+  const startOfTodayUtc = Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) / 1000);
+  const endTs = Math.max(sorted[sorted.length - 1].dayTs, startOfTodayUtc);
+  const out: DaySupply[] = [];
+  let cur = sorted[0].supply;
+  for (let t = sorted[0].dayTs; t <= endTs; t += 86400) {
+    if (eventByDay.has(t)) cur = eventByDay.get(t) as number;
+    out.push({ dayTs: t, supply: cur });
+  }
+  return out;
+}
+
+// Fetch prices in bulk via the coins.llama.fi /chart endpoint (returns up to
+// MAX_SPAN daily prices per request). Massively cheaper on the rate limiter
+// than one-coin-one-timestamp /prices calls, which is what refillParallel.ts
+// also does. Falls back to whatever's resolvable — un-resolved timestamps
+// just become "supply-only" writes downstream.
 async function getPriceMap(timestamps: number[]): Promise<Map<number, number>> {
   const out = new Map<number, number>();
   if (FLAT_NAV != null) {
     for (const t of timestamps) out.set(t, FLAT_NAV);
     return out;
   }
-  await runInPromisePool({
-    items: timestamps,
-    concurrency: 5,
-    processor: async (t: number) => {
-      try {
-        const res = await coins.getPrices([COIN_KEY], t);
-        const price = res[COIN_KEY]?.price;
-        if (price != null) out.set(t, Number(price));
-      } catch (e) {
-        console.error(`[backfill] coins.getPrices failed at ts=${t}: ${(e as any)?.message || e}`);
+  if (timestamps.length === 0) return out;
+  const sorted = [...timestamps].sort((a, b) => a - b);
+  const minTs = sorted[0];
+  const maxTs = sorted[sorted.length - 1];
+  const totalSpanDays = Math.ceil((maxTs - minTs) / 86400) + 1;
+  const MAX_SPAN = 500;
+
+  // chart endpoint indexes by approximate ts, not strict UTC day starts — pre-build
+  // a UTC-day lookup so we can map response prices to requested timestamps.
+  const dayToReqTs = new Map<string, number>();
+  for (const t of timestamps) {
+    const d = new Date(t * 1000).toISOString().slice(0, 10);
+    if (!dayToReqTs.has(d)) dayToReqTs.set(d, t);
+  }
+
+  let cursor = minTs;
+  let remaining = totalSpanDays;
+  while (remaining > 0) {
+    const span = Math.min(remaining, MAX_SPAN);
+    const url = `https://coins.llama.fi/chart/${encodeURIComponent(COIN_KEY)}?start=${cursor}&span=${span}&period=1d&searchWidth=4h`;
+    try {
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+      const data: any = await resp.json();
+      const prices: Array<{ timestamp: number; price: number }> = data?.coins?.[COIN_KEY]?.prices ?? [];
+      for (const p of prices) {
+        const day = new Date(p.timestamp * 1000).toISOString().slice(0, 10);
+        const reqTs = dayToReqTs.get(day);
+        if (reqTs != null && Number.isFinite(p.price)) out.set(reqTs, Number(p.price));
       }
-    },
-  });
+    } catch (e) {
+      console.error(`[backfill] /chart failed at cursor=${cursor} span=${span}: ${(e as any)?.message || e}`);
+    }
+    cursor += span * 86400;
+    remaining -= span;
+  }
   return out;
 }
 
@@ -474,6 +522,7 @@ function renderHtml(
   const beforePts = before.map((r) => ({ x: r.timestamp * 1000, y: r.onChainMcap }));
   const afterPts = after.map((r) => ({ x: r.timestamp * 1000, y: r.onChainMcap }));
   const fmtUSD = (n: number) => "$" + (n / 1e6).toFixed(2) + "M";
+  const fmtDate = (ts: number | null) => (ts ? new Date(ts * 1000).toISOString().slice(0, 10) : "n/a");
   const lastBefore = before[before.length - 1];
   const lastAfter = after[after.length - 1];
   const fullCount = writes.filter((w) => w.changed.mcap || w.changed.activeMcap).length;
@@ -505,6 +554,7 @@ function renderHtml(
   <div class="stat"><div class="stat-label">Last point — before</div><div class="stat-value">${lastBefore ? fmtUSD(lastBefore.onChainMcap) : "n/a"}</div></div>
   <div class="stat"><div class="stat-label">Last point — after</div><div class="stat-value">${lastAfter ? fmtUSD(lastAfter.onChainMcap) : "n/a"}</div></div>
   <div class="stat"><div class="stat-label">Series — before / after</div><div class="stat-value">${before.length} / ${after.length}</div></div>
+  <div class="stat"><div class="stat-label">From / cutover</div><div class="stat-value">${fmtDate(fromTs)} / ${fmtDate(cutoverTs)}</div></div>
 </div>
 <div class="chart-wrap"><canvas id="chart"></canvas></div>
 <div class="legend-note">
@@ -555,7 +605,12 @@ async function main() {
   for (const r of existingChains) chainsByTs.set(r.timestamp, r);
   console.log(`[backfill] fetched ${existingAgg.length} existing daily rows for id=${ASSET_ID}`);
 
-  const series = parseCsv(CSV!);
+  const rawSeries = parseCsv(CSV!);
+  const NO_FORWARD_FILL = process.argv.includes("--no-forward-fill");
+  const series = NO_FORWARD_FILL ? rawSeries : expandForwardFill(rawSeries);
+  if (!NO_FORWARD_FILL) {
+    console.log(`[backfill] forward-fill: ${rawSeries.length} event rows → ${series.length} dense daily rows`);
+  }
   const candidates = series.filter((d) => FROM_TS == null || d.dayTs >= FROM_TS);
   console.log(`[backfill] csv rows: ${series.length}; candidates after --from-date: ${candidates.length}`);
 

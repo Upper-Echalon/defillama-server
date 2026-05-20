@@ -8231,6 +8231,7 @@ const data5: Protocol[] = [
     twitter: "elfomo_fi",
     dimensions: {
       dexs: "elfomofi",
+      fees: "elfomofi",
     }
   },
   {
@@ -10593,6 +10594,9 @@ const data5: Protocol[] = [
     twitter: "Glorb_wtf",
     listedAt: 1770658372,
     deadUrl: true,
+    dimensions: {
+      fees: "glorb",
+    },
   },
   {
     id: "7371",

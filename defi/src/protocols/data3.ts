@@ -5575,6 +5575,9 @@ const data3_0: Protocol[] = [
     parentProtocol: "parent#origin-defi",
     twitter: "OriginProtocol",
     listedAt: 1683581147,
+    dimensions: {
+      fees: "origin-ether"
+    }
   },
   {
     id: "2951",
@@ -30942,6 +30945,9 @@ const data3_1: Protocol[] = [
     twitter: "BinaryxPlatform",
     audit_links: ["https://blaize.tech/clients/smart-contract-security-audit-for-binaryx"],
     listedAt: 1706795799,
+    dimensions: {
+      fees: "binaryx-platform"
+    }
   },
   {
     id: "4092",
@@ -57312,6 +57318,9 @@ const data3_3: Protocol[] = [
       Ethereum: ["OETH"],
       Sonic: ["OS"],
     },
+    dimensions: {
+      fees: "origin-arm"
+    }
   },
   {
     id: "5281",

@@ -2967,6 +2967,9 @@ const data4: Protocol[] = [
     parentProtocol: "parent#origin-defi",
     audit_links: ["https://docs.originprotocol.com/security-and-risk/audits"],
     listedAt: 1738147902,
+    dimensions: {
+      fees: "origin-sonic"
+    }
   },
   {
     id: "5689",
@@ -19252,6 +19255,9 @@ const data4: Protocol[] = [
     twitter: "peerxyz",
     github: ["zkp2p"],
     listedAt: 1751554434,
+    dimensions: {
+      dexs: "zkp2p"
+    }
   },
   {
     id: "6391",

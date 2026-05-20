@@ -2479,6 +2479,7 @@ const data6: Protocol[] = [
     twitter: "readycards",
     dimensions: {
       fees: "ready-cards",
+      dexs: "ready-cards",
     },
   },
   {

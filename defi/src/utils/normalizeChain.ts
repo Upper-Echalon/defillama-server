@@ -2230,6 +2230,8 @@ export const chainCoingeckoIds = {
     url: "https://zksync.io/",
     dimensions: {
       fees: "zksync-era",
+      "active-users": "zksync-era",
+      "new-users": "zksync-era",
     },
   },
   "Polygon zkEVM": {
@@ -3181,6 +3183,8 @@ export const chainCoingeckoIds = {
     dimensions: {
       fees: "imx",
       'nft-volume': 'immutablex',
+      "active-users": "immutablex",
+      "new-users": "immutablex",
     },
   },
   "Zora": {
@@ -3568,6 +3572,8 @@ export const chainCoingeckoIds = {
     chainId: 8822,
     dimensions: {
       fees: "iota_evm",
+      "active-users": "iota_evm",
+      "new-users": "iota_evm",
     },
   },
   "Ham": {
@@ -3948,6 +3954,8 @@ export const chainCoingeckoIds = {
     chainId: 480,
     dimensions: {
       fees: "worldchain",
+      "active-users": "worldchain",
+      "new-users": "worldchain",
     },
   },
   "ApeChain": {
@@ -4298,6 +4306,8 @@ export const chainCoingeckoIds = {
     chainId: 41923,
     dimensions: {
       fees: "edu-chain",
+      "active-users": "edu-chain",
+      "new-users": "edu-chain",
     },
   },
   "Fluence": {
@@ -4611,6 +4621,8 @@ export const chainCoingeckoIds = {
     chainId: 177,
     dimensions: {
       fees: "hashkey",
+      "active-users": "hashkey",
+      "new-users": "hashkey",
     },
   },
   "Mind Network": {
@@ -4682,7 +4694,9 @@ export const chainCoingeckoIds = {
     url: "https://plume.org/",
     chainId: 98866,
     dimensions: {
-      fees: "plume"
+      fees: "plume",
+      "active-users": "plume",
+      "new-users": "plume",
     }
   },
   "Perennial": {
@@ -5135,6 +5149,8 @@ export const chainCoingeckoIds = {
     chainId: 291,
     dimensions: {
       fees: "orderly-network",
+      "active-users": "orderly-network",
+      "new-users": "orderly-network",
     },
   },
   "Camp Network": {

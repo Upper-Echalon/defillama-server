@@ -23591,6 +23591,7 @@ const data4: Protocol[] = [
     module: "raga-finance/index.js",
     twitter: "ragafinance",
     listedAt: 1755167300,
+    deprecated: true,
   },
   {
     id: "6581",

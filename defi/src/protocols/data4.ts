@@ -1086,6 +1086,7 @@ const data4: Protocol[] = [
     twitter: "planetmobiusfun",
     github: ["planetmobius"],
     listedAt: 1736387601,
+    deadUrl: true,
   },
   {
     id: "5606",
@@ -2166,7 +2167,8 @@ const data4: Protocol[] = [
     twitter: "VECTORDOTFUN",
     dimensions: {
       fees: "vectorfun"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "5654",
@@ -5226,7 +5228,7 @@ const data4: Protocol[] = [
     address: null,
     symbol: "-",
     assetToken: "stIP",
-    url: "https://www.metapool.app/es/stake/?token=ip",
+    url: "https://main.metapool.app/",
     description: "Liquid staking protocol: Stake IP and receive stIP.",
     chain: "Story",
     logo: `${baseIconsUrl}/meta-pool-stip.png`,
@@ -7229,6 +7231,7 @@ const data4: Protocol[] = [
     module: "unihedge/index.js",
     twitter: "UnihedgeOrg",
     listedAt: 1741358597,
+    deadUrl: true,
   },
   {
     id: "5874",
@@ -11306,7 +11309,8 @@ const data4: Protocol[] = [
     name: "HypurrFi Isolated",
     address: null,
     symbol: "-",
-    url: "https://hypurrfi.com/points?af=defillama",
+    //url: "https://hypurrfi.com/points?af=defillama",
+    url: "https://hypurrfi.com/",
     description: `HypurrFi's isolated lending markets`,
     chain: "Hyperliquid L1",
     logo: `${baseIconsUrl}/hypurrfi-isolated.jpg`,
@@ -12941,6 +12945,7 @@ const data4: Protocol[] = [
       "https://github.com/quasar-finance/babydex/blob/main/Tower_BabyDEX%20_Smart_Contract_Security_Assessment_Report_Halborn.pdf",
     ],
     listedAt: 1746089713,
+    deadUrl: true,
   },
   {
     id: "6124",
@@ -13654,6 +13659,7 @@ const data4: Protocol[] = [
     twitter: "beracana",
     audit_links: ["https://app.beracana.com/beracana-audit.pdf"],
     listedAt: 1746799138,
+    deadUrl: true,
   },
   {
     id: "6159",
@@ -16401,6 +16407,7 @@ const data4: Protocol[] = [
       },
     ],
     listedAt: 1749019047,
+    deadUrl: true,
   },
   {
     id: "6269",
@@ -18358,6 +18365,7 @@ const data4: Protocol[] = [
     module: "ManaSwap/index.js",
     twitter: "manadotwin",
     listedAt: 1750885251,
+    deadUrl: true,
   },
   {
     id: "6352",
@@ -22172,6 +22180,7 @@ const data4: Protocol[] = [
     module: "warpfinance/index.js",
     twitter: "WarpEvm",
     listedAt: 1754325949,
+    deadUrl: true,
   },
   {
     id: "6519",
@@ -29770,7 +29779,8 @@ const data4: Protocol[] = [
     dimensions: {
       fees: "punk.coffee",
       dexs: "punk.coffee"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "6861",

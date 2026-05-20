@@ -9270,6 +9270,7 @@ const data5: Protocol[] = [
     module: "stackfi/index.js",
     twitter: "StackFi_",
     listedAt: 1769460204,
+    deadUrl: true,
   },
   {
     id: "7309",
@@ -9307,6 +9308,7 @@ const data5: Protocol[] = [
     twitter: "LeMONAD_Factory",
     audit_links: ["https://lemonad.gitbook.io/lemonad-docs/security-audit"],
     listedAt: 1769460627,
+    deadUrl: true,
   },
   {
     id: "7311",

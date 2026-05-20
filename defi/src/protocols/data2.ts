@@ -1177,7 +1177,8 @@ const data2: Protocol[] = [
     listedAt: 1645139464,
     dimensions: {
       dexs: "pegasys"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "1433",
@@ -2002,6 +2003,7 @@ const data2: Protocol[] = [
     module: "btn-group.js",
     twitter: "BtnGroup",
     listedAt: 1645820777,
+    deadUrl: true,
   },
   {
     id: "1470",
@@ -3287,6 +3289,7 @@ const data2: Protocol[] = [
     twitter: "BlinDEXio",
     audit_links: ["https://docs.blindex.io/smart-contracts/audits"],
     listedAt: 1646949250,
+    deadUrl: true,
   },
   {
     id: "1529",
@@ -4146,6 +4149,7 @@ const data2: Protocol[] = [
       "https://github.com/peckshield/publications/blob/master/audit_reports/PeckShield-Audit-Report-ERC20-LuckyChip-v1.0.pdf",
     ],
     listedAt: 1647812879,
+    deadUrl: true,
   },
   {
     id: "1568",
@@ -9863,7 +9867,8 @@ const data2: Protocol[] = [
     listedAt: 1655466324,
     dimensions: {
       dexs: "sharkswap"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "1829",
@@ -11897,6 +11902,7 @@ const data2: Protocol[] = [
     module: "onc/index.js",
     twitter: "ordernchaos_fi",
     listedAt: 1658736615,
+    deadUrl: true,
   },
   {
     id: "1921",

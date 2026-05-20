@@ -2244,6 +2244,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "PegasysDAO",
     github: ["pegasys-fi"],
+    deadUrl: true,
   },
   {
     id: "parent#jet",
@@ -2779,6 +2780,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "AstarterDefiHub",
+    deadUrl: true,
   },
   {
     id: "parent#myso",
@@ -3490,6 +3492,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: "11307",
     chains: [],
     twitter: "beta_finance",
+    deadUrl: true,
   },
   {
     id: "parent#buttonwood",
@@ -4094,6 +4097,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "CyberblastDex",
+    deadUrl: true,
   },
   {
     id: "parent#thruster",
@@ -4145,6 +4149,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "moraswap_amm",
     github: ["moraswap"],
+    deadUrl: true,
   },
   {
     id: "parent#arthswap",
@@ -4638,6 +4643,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "SundaeSwap",
     github: ["SundaeSwap-finance"],
+    deadUrl: true,
   },
   {
     id: "parent#flowx-finance",
@@ -5195,6 +5201,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "CrustFinance",
+    deadUrl: true,
   },
   {
     id: "parent#bracket-protocol",
@@ -5614,6 +5621,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "SwaplineDEX",
+    deadUrl: true,
   },
   {
     id: "parent#avalon-labs",

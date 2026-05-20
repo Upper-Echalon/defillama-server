@@ -2705,7 +2705,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: " ", // pending to add url https://faroswap.xyz/
-    description: "FaroSwap is a decentralized exchange on Base that allows users to trade tokens and NFTs with low fees and high liquidity",
+    description: " native AMM&PMM DEX on Pharos, powering RWA-Fi with precision and depth",
     chain: "Pharos",
     logo: `${baseIconsUrl}/faroswap.jpg`,
     audits: "0",

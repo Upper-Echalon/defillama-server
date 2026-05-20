@@ -276,7 +276,8 @@ const data4: Protocol[] = [
       fees: "satoshi-perps",
       derivatives: "satoshi-perps",
       "open-interest": "satoshi-perps"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "5572",
@@ -963,7 +964,7 @@ const data4: Protocol[] = [
     name: "Creator Bid",
     address: null,
     symbol: "-",
-    url: "https://creator.bid/agents",
+    url: "https://creator.bid/",
     description: "Create and tokenize AI agents , AI Launchpad on base",
     chain: "Base",
     logo: `${baseIconsUrl}/creator-bid.jpg`,
@@ -2806,6 +2807,7 @@ const data4: Protocol[] = [
     twitter: "raccoonswap",
     forkedFromIds: ["2197"],
     listedAt: 1738079995,
+    deadUrl: true,
   },
   {
     id: "5682",
@@ -6985,7 +6987,8 @@ const data4: Protocol[] = [
     listedAt: 1741119943,
     dimensions: {
       fees: "hyperyield"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "5863",
@@ -24208,6 +24211,7 @@ const data4: Protocol[] = [
     forkedFromIds: ["2197"],
     twitter: "Onion_Fi",
     listedAt: 1755705197,
+    deadUrl: true,
   },
   {
     id: "6610",

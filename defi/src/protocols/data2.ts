@@ -2878,6 +2878,7 @@ const data2: Protocol[] = [
     module: "solanax.js",
     twitter: "Solanaxorg",
     listedAt: 1646426734,
+    deadUrl: true,
   },
   {
     id: "1510",
@@ -7705,6 +7706,7 @@ const data2: Protocol[] = [
     module: "honkswap/index.js",
     twitter: "World_of_Honk",
     listedAt: 1651751901,
+    deadUrl: true,
   },
   {
     id: "1732",
@@ -9715,6 +9717,7 @@ const data2: Protocol[] = [
     twitter: "AstarFarm",
     audit_links: ["https://app.gitbook.com/s/GcFuzD35Csw8XaIbghDA/information/security-and-audits"],
     listedAt: 1655205337,
+    deadUrl: true,
   },
   {
     id: "1822",
@@ -20976,6 +20979,7 @@ const data2: Protocol[] = [
     twitter: "Lympo_io",
     audit_links: ["https://www.fairyproof.com/report/Sport"],
     listedAt: 1669741639,
+    deadUrl: true,
   },
   {
     id: "2324",
@@ -21374,6 +21378,7 @@ const data2: Protocol[] = [
     audit_links: ["https://paladinsec.co/projects/polycat-finance", "https://www.certik.com/projects/polycatfinance"],
     parentProtocol: "parent#polycat-finance",
     listedAt: 1670499599,
+    deadUrl: true,
   },
   {
     id: "2342",

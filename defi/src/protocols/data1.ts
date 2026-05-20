@@ -8773,7 +8773,8 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     parentProtocol: "parent#polycat-finance",
     dimensions: {
       dexs: "polycat"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "500",
@@ -11357,6 +11358,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "boggedfinance",
     audit_links: ["https://static.bogged.finance/audit.pdf"],
     github: ["BoggedFinance"],
+    deadUrl: true,
   },
   {
     id: "618",
@@ -26580,6 +26582,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "ShiroTokens",
     forkedFromIds: ["2197"],
     listedAt: 1643486991,
+    deadUrl: true,
   },
   {
     id: "1336",

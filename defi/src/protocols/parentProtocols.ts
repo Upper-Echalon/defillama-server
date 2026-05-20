@@ -663,6 +663,7 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "PolycatFinance",
     governanceID: ["snapshot:polycatfi.eth"],
     github: ["polycatfi"],
+    deadUrl: true,
   },
   // {
   //   id: "parent#mstable",
@@ -3542,6 +3543,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "ZebraProtocol",
     github: ["zebra-xyz"],
+    deadUrl: true,
   },
   {
     id: "parent#lynex",
@@ -3654,6 +3656,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "BuildOnLumia",
     github: ["orionprotocol"],
+    deadUrl: true,
   },
   {
     id: "parent#idex",

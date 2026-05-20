@@ -16723,6 +16723,7 @@ const data3_1: Protocol[] = [
     twitter: "RacoonSupply",
     github: ["racoon-supply-rac"],
     listedAt: 1693318939,
+    deadUrl: true,
   },
   {
     id: "3454",
@@ -21536,7 +21537,8 @@ const data3_1: Protocol[] = [
     dimensions: {
       fees: "zebra-v1",
       dexs: "zebra-v1"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "3669",
@@ -23020,6 +23022,7 @@ const data3_1: Protocol[] = [
     twitter: "RumiFinance",
     audit_links: ["https://hacken.io/audits/rumi-finance/"],
     listedAt: 1699008865,
+    deadUrl: true,
   },
   {
     id: "3739",
@@ -25208,6 +25211,7 @@ const data3_1: Protocol[] = [
     module: "ionise-io/index.js",
     twitter: "ionise_protocol",
     listedAt: 1700782122,
+    deadUrl: true,
   },
   {
     id: "3840",
@@ -26523,7 +26527,8 @@ const data3_1: Protocol[] = [
     dimensions: {
       fees: "zebra-v2",
       dexs: "zebra-v2"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "3902",
@@ -36072,6 +36077,7 @@ const data3_2: Protocol[] = [
     module: "bridgem/index.js",
     twitter: "BridgeM_io",
     listedAt: 1710776810,
+    deadUrl: true,
   },
   {
     id: "4315",
@@ -37162,7 +37168,8 @@ const data3_2: Protocol[] = [
     dimensions: {
       fees: "swych",
       derivatives: "swych"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "4366",
@@ -39506,6 +39513,7 @@ const data3_2: Protocol[] = [
     twitter: "Zeepr_labs",
     github: ["Zeeprlabs"],
     listedAt: 1712833829,
+    deadUrl: true,
   },
   {
     id: "4470",
@@ -49518,6 +49526,7 @@ const data3_3: Protocol[] = [
     chains: ["Ethereum"],
     module: "dummy.js",
     twitter: "fasttoken_com",
+    deadUrl: true,
   },
   {
     id: "4924",
@@ -53376,7 +53385,8 @@ const data3_3: Protocol[] = [
     parentProtocol: "parent#orion-protocol",
     dimensions: {
       aggregators: "lumia"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "5099",
@@ -54116,7 +54126,8 @@ const data3_3: Protocol[] = [
     chains: ["Bahamut"],
     module: "vaultWin/index.js",
     twitter: "-",
-    listedAt: 1726068418
+    listedAt: 1726068418,
+    deadUrl: true,
   },
   {
     id: "5135",
@@ -63209,7 +63220,8 @@ const data3_3: Protocol[] = [
     chains: ["Kopi"],
     module: "kopi/index.js",
     twitter: "kopi_money",
-    listedAt: 1735060779
+    listedAt: 1735060779,
+    deadUrl: true,
   },
   {
     id: "5554",

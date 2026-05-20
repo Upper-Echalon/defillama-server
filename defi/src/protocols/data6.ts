@@ -2395,7 +2395,7 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Derivatives",
     chains: ["Solana"],
-    module: "dummy.js",
+    module: "sour/index.js",
     twitter: "SourFinance",
     dimensions: {
       derivatives: "sour",
@@ -2625,7 +2625,7 @@ const data6: Protocol[] = [
     cmcId: "35337",
     category: "Gamified Mining",
     chains: ["Berachain"],
-    module: "dummy.js",
+    module: "yeet/index.js",
     twitter: "eatsleepyeet",
     github: ["yeet-protocol"],
     dimensions: {

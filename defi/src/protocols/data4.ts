@@ -30458,6 +30458,9 @@ const data4: Protocol[] = [
     twitter: "ultrayieldapp",
     parentProtocol: "parent#ultrayield",
     listedAt: 1761083071,
+    dimensions: {
+      fees: "ultrayield-vaults"
+    }
   },
   {
     id: "6891",

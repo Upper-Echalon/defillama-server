@@ -39,6 +39,7 @@ import { RWA_KEY_MAP } from "./metadataConstants";
 import {
   createAirtableHeaderToCanonicalKeyMapper,
   fetchBurnAddresses,
+  formatNumAsNumber,
   normalizeRwaMetadataForApiInPlace,
   sortTokensByChain,
   toFiniteNumberOrNull,
@@ -135,6 +136,7 @@ async function getAggregateRawTvlsForRwaTokens(rwaTokens: { [chain: string]: str
   return aggregateRawTvls;
 }
 
+// Missing keys mean fetch failed; 0 entries are real-zero contracts.
 async function getTotalSupplies(tokensSortedByChain: { [chain: string]: string[] }, timestamp: number) {
   const totalSupplies: { [token: string]: number } = {};
 
@@ -515,11 +517,26 @@ function getOnChainTvlAndActiveMcaps(
   coingeckoIdToRwaIds: { [cgId: string]: string[] },
   stablecoinsData: { [gecko_id: string]: StablecoinMcapData },
   totalSupplies: any,
-  excludedAmounts: any
+  excludedAmounts: any,
+  coingeckoPrices: { [cgKey: string]: { price: number } } = {}
 ) {
+  // Multiple token deployments on the same chain share a price, so supply is summed.
+  const setTotalSupply = (rwaId: string, chainDisplayName: string, supplyDelta: number) => {
+    if (!finalData[rwaId]) return;
+    if (!finalData[rwaId][RWA_KEY_MAP.totalSupply]) finalData[rwaId][RWA_KEY_MAP.totalSupply] = {};
+    const prev = Number(finalData[rwaId][RWA_KEY_MAP.totalSupply][chainDisplayName]) || 0;
+    finalData[rwaId][RWA_KEY_MAP.totalSupply][chainDisplayName] = toFixedNumber(prev + supplyDelta, 6);
+  };
+
+  // Stablecoins-API is the priority source for tracked stablecoins (captures
+  // bridged / wrapped supply that raw totalSupply() can miss). Override mcap +
+  // activeMcap upfront; totalSupply is derived per-chain in the per-token loop
+  // below so it stays consistent: mcap = supply × price.
+  const stablecoinOverrideRwaIds: { [cgId: string]: string } = {};
   Object.keys(stablecoinsData).forEach((cgId: string) => {
     const rwaId = getStablecoinOverrideRwaId(cgId, stablecoinsData[cgId], coingeckoIdToRwaIds, finalData);
     if (!rwaId || !finalData[rwaId]) return;
+    stablecoinOverrideRwaIds[cgId] = rwaId;
     finalData[rwaId][RWA_KEY_MAP.onChain] = { ...stablecoinsData[cgId].chainMcap };
     if (!finalData[rwaId][RWA_KEY_MAP.activeMcap] && finalData[rwaId][RWA_KEY_MAP.activeMcapChecked])
       finalData[rwaId][RWA_KEY_MAP.activeMcap] = { ...stablecoinsData[cgId].chainMcap };
@@ -537,29 +554,36 @@ function getOnChainTvlAndActiveMcaps(
     const chain = pk.substring(0, pk.indexOf(":"));
     const chainDisplayName = getChainDisplayName(chain, true);
 
-    if (cgId && stablecoinsData[cgId]) {
-      const stablecoinOverrideRwaId = getStablecoinOverrideRwaId(
-        cgId,
-        stablecoinsData[cgId],
-        coingeckoIdToRwaIds,
-        finalData
-      );
-      if (stablecoinOverrideRwaId === rwaId) {
-        finalData[rwaId][RWA_KEY_MAP.onChain] = { ...stablecoinsData[cgId].chainMcap };
-        if (!finalData[rwaId][RWA_KEY_MAP.price] && assetPrices[pk]?.price) {
-          finalData[rwaId][RWA_KEY_MAP.price] = toFiniteNumberOrNull(assetPrices[pk].price);
-        }
-        if (finalData[rwaId][RWA_KEY_MAP.activeMcapChecked]) {
-          if (!finalData[rwaId][RWA_KEY_MAP.activeMcap])
-            finalData[rwaId][RWA_KEY_MAP.activeMcap] = { ...finalData[rwaId][RWA_KEY_MAP.onChain] };
-          const exclusionKey = `${rwaId}:${chainDisplayName}`;
-          if (!exclusionApplied.has(exclusionKey)) {
-            exclusionApplied.add(exclusionKey);
-            findActiveMcaps(finalData, rwaId, excludedAmounts, assetPrices[pk], chainDisplayName);
-          }
-        }
-        return;
+    // Stablecoin RWAs: when stablecoinsData covers this chain, derive supply
+    // from stableMcap / price and skip the on-chain accumulation. If it
+    // doesn't cover this chain (chain is in the spreadsheet but not the
+    // stablecoins API), fall through to the on-chain path so we don't drop coverage.
+    if (
+      cgId &&
+      stablecoinsData[cgId] &&
+      stablecoinOverrideRwaIds[cgId] === rwaId &&
+      stablecoinsData[cgId].chainMcap[chainDisplayName] != null
+    ) {
+      finalData[rwaId][RWA_KEY_MAP.onChain] = { ...stablecoinsData[cgId].chainMcap };
+      if (!finalData[rwaId][RWA_KEY_MAP.price] && assetPrices[pk]?.price) {
+        finalData[rwaId][RWA_KEY_MAP.price] = toFiniteNumberOrNull(assetPrices[pk].price);
       }
+      const stablePrice = assetPrices[pk]?.price;
+      const stableMcap = Number(stablecoinsData[cgId].chainMcap[chainDisplayName]);
+      if (stablePrice && Number.isFinite(stableMcap)) {
+        finalData[rwaId][RWA_KEY_MAP.totalSupply] = finalData[rwaId][RWA_KEY_MAP.totalSupply] || {};
+        finalData[rwaId][RWA_KEY_MAP.totalSupply][chainDisplayName] = toFixedNumber(stableMcap / stablePrice, 6);
+      }
+      if (finalData[rwaId][RWA_KEY_MAP.activeMcapChecked]) {
+        if (!finalData[rwaId][RWA_KEY_MAP.activeMcap])
+          finalData[rwaId][RWA_KEY_MAP.activeMcap] = { ...finalData[rwaId][RWA_KEY_MAP.onChain] };
+        const exclusionKey = `${rwaId}:${chainDisplayName}`;
+        if (!exclusionApplied.has(exclusionKey)) {
+          exclusionApplied.add(exclusionKey);
+          findActiveMcaps(finalData, rwaId, excludedAmounts, assetPrices[pk], chainDisplayName);
+        }
+      }
+      return;
     }
 
     const { price, decimals } = assetPrices[pk];
@@ -570,7 +594,10 @@ function getOnChainTvlAndActiveMcaps(
     }
 
     const supply = totalSupplies[pk];
-    if (!supply || !price) {
+    // null = fetch failed → skip (don't fabricate or wipe existing data).
+    // 0 / any number = real reading → fall through; 0 produces an explicit 0
+    // chain entry that overwrites stale stored values.
+    if (supply == null || !price) {
       if (process.env.DEBUG_ENABLED) console.error(`No supply or price for ${pk}`);
       return;
     }
@@ -581,9 +608,11 @@ function getOnChainTvlAndActiveMcaps(
       if (!finalData[rwaId][RWA_KEY_MAP.onChain][chainDisplayName])
         finalData[rwaId][RWA_KEY_MAP.onChain][chainDisplayName] = {};
 
-      const aum = (price * supply) / 10 ** decimals;
+      const supplyAdjusted = supply / 10 ** decimals;
+      const aum = price * supplyAdjusted;
       const prevOnChain = Number(finalData[rwaId][RWA_KEY_MAP.onChain][chainDisplayName]) || 0;
       finalData[rwaId][RWA_KEY_MAP.onChain][chainDisplayName] = toFixedNumber(prevOnChain + aum, 0);
+      setTotalSupply(rwaId, chainDisplayName, supplyAdjusted);
 
       if (!finalData[rwaId][RWA_KEY_MAP.activeMcapChecked]) return;
 
@@ -600,6 +629,32 @@ function getOnChainTvlAndActiveMcaps(
     }
   });
 
+  // Backfill totalSupply for every stablecoin chain. Bridged/wrapped chains exist
+  // in stablecoinsData but not in the spreadsheet, so the per-token loop never
+  // derives their supply — leaving onChainMcap > 0 with no totalSupply entry.
+  Object.keys(stablecoinsData).forEach((cgId: string) => {
+    const rwaId = stablecoinOverrideRwaIds[cgId];
+    if (!rwaId || !finalData[rwaId]) return;
+    let price = Number(finalData[rwaId][RWA_KEY_MAP.price]) || 0;
+    if (!price) {
+      // Fallback: when no spreadsheet contract had a coins-API price, look the
+      // asset up directly by its coingecko id so we can still derive supply.
+      const cgPrice = Number(coingeckoPrices?.[`coingecko:${cgId}`]?.price);
+      if (Number.isFinite(cgPrice) && cgPrice > 0) {
+        price = cgPrice;
+        finalData[rwaId][RWA_KEY_MAP.price] = formatNumAsNumber(price);
+      }
+    }
+    if (!price) return;
+    finalData[rwaId][RWA_KEY_MAP.totalSupply] = finalData[rwaId][RWA_KEY_MAP.totalSupply] || {};
+    Object.entries(stablecoinsData[cgId].chainMcap).forEach(([chain, mcap]) => {
+      if (finalData[rwaId][RWA_KEY_MAP.totalSupply][chain] != null) return;
+      const mcapNum = Number(mcap);
+      if (!Number.isFinite(mcapNum)) return;
+      finalData[rwaId][RWA_KEY_MAP.totalSupply][chain] = toFixedNumber(mcapNum / price, 6);
+    });
+  });
+
   // For xStock/Backed Finance: set onChainMcap = activeMcap
   Object.keys(finalData).forEach((rwaId) => {
     const platform = finalData[rwaId]?.parentPlatform;
@@ -607,6 +662,15 @@ function getOnChainTvlAndActiveMcaps(
     const activeMcap = finalData[rwaId][RWA_KEY_MAP.activeMcap];
     if (!activeMcap) return;
     finalData[rwaId][RWA_KEY_MAP.onChain] = { ...activeMcap };
+    // Re-derive totalSupply from the overridden mcap so mcap = supply * price still holds.
+    const price = Number(finalData[rwaId][RWA_KEY_MAP.price]) || 0;
+    if (!price) return;
+    const supplyByChain: { [chain: string]: number } = {};
+    Object.keys(activeMcap).forEach((chain) => {
+      const mcap = Number(activeMcap[chain]);
+      if (Number.isFinite(mcap)) supplyByChain[chain] = toFixedNumber(mcap / price, 6);
+    });
+    finalData[rwaId][RWA_KEY_MAP.totalSupply] = supplyByChain;
   });
 }
 
@@ -712,14 +776,19 @@ export async function runAtvlForTimestamp(
     console.log(`[timer]   ${label}: ${((performance.now() - s) / 1000).toFixed(1)}s`);
     return result;
   };
-  const [assetPrices, aggregateRawTvls, totalSupplies, stablecoinsData, excludedAmounts] = await Promise.all([
+  // Coingecko-keyed prices used as fallback for stablecoin RWAs whose
+  // spreadsheet contracts have no entry in the coins API (prices are looked
+  // up by `coingecko:<id>` instead of by contract address).
+  const cgKeys = Object.keys(coingeckoIdToRwaIds).map((id) => `coingecko:${id}`);
+  const [assetPrices, aggregateRawTvls, totalSupplies, stablecoinsData, excludedAmounts, coingeckoPrices] = await Promise.all([
     timedFetch("getPrices", () => coins.getPrices(Object.keys(tokenToProjectMap), timestamp == 0 ? "now" : timestamp)),
     timedFetch("getAggregateRawTvlsForRwaTokens", () => getAggregateRawTvlsForRwaTokens(tokensSortedByChain, timestamp)),
     timedFetch("getTotalSupplies", () => getTotalSupplies(tokensSortedByChain, timestamp)),
     timedFetch("fetchStablecoins", () => fetchStablecoins(timestamp, new Set(Object.keys(coingeckoIdToRwaIds)))),
     timedFetch("getExcludedBalances", () => getExcludedBalances(ts, finalData, tokenToProjectMap)),
+    timedFetch("getCoingeckoPrices", () => cgKeys.length > 0 ? coins.getPrices(cgKeys, timestamp == 0 ? "now" : timestamp) : Promise.resolve({})),
   ]);
-  console.log(`[timer] Promise.all (5 fetches): ${((performance.now() - tFetch) / 1000).toFixed(1)}s`);
+  console.log(`[timer] Promise.all (6 fetches): ${((performance.now() - tFetch) / 1000).toFixed(1)}s`);
 
   Object.keys(tokenToProjectMap).forEach((address: string) => {
     if (!assetPrices[address]) {
@@ -737,7 +806,8 @@ export async function runAtvlForTimestamp(
     coingeckoIdToRwaIds,
     stablecoinsData,
     totalSupplies,
-    excludedAmounts
+    excludedAmounts,
+    coingeckoPrices
   );
   console.log(
     `[timer] compute (getActiveTvls + getOnChainTvlAndActiveMcaps): ${((performance.now() - tCompute) / 1000).toFixed(

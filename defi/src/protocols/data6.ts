@@ -2704,7 +2704,7 @@ const data6: Protocol[] = [
     name: "FaroSwap",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://faroswap.xyz/
+    url: "https://faroswap.xyz/",
     description: " native AMM&PMM DEX on Pharos, powering RWA-Fi with precision and depth",
     chain: "Pharos",
     logo: `${baseIconsUrl}/faroswap.jpg`,

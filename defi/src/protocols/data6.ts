@@ -922,6 +922,9 @@ const data6: Protocol[] = [
     twitter: "flyingtulip_",
     listedAt: 1769459609,
     parentProtocol: "parent#flying-tulip",
+    tokensExcludedFromParent: {
+      Sonic: ["FTUSD"], // already counting all backing in flying-tulip-ftusd
+    },
     dimensions: {
       fees: "flying-tulip-lend"
     }
@@ -1116,6 +1119,9 @@ const data6: Protocol[] = [
     twitter: "flyingtulip_",
     listedAt: 1777298400,
     parentProtocol: "parent#flying-tulip",
+    tokensExcludedFromParent: {
+      Sonic: ["FTDNS-USDC"], // backing is counted in flying-tulip-lend
+    },
     dimensions: {
       fees: "flying-tulip-ftusd"
     }

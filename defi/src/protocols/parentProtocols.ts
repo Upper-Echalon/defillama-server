@@ -9727,6 +9727,17 @@ const parentProtocols: IParentProtocol[] = [
     github: ["Aegis-im"],
     stablecoins: ["aegis-yusd"],
   },
+  { 
+    id: "parent#zerion",
+    name: "Zerion",
+    url: "https://zerion.io",
+    description: "A crypto wallet to trade any token on EVM & Solana.",
+    logo: `${baseIconsUrl}/zerion.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "zerion",
+  },
 ];
 
 export default parentProtocols;

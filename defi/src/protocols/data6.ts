@@ -4139,5 +4139,26 @@ const data6: Protocol[] = [
     audit_links: ["https://skynet.certik.com/projects/cross"],
     listedAt: 1779383367,
   },
+  {
+    id: "7906",
+    name: "Zerion Aggregator",
+    address: null,
+    symbol: "-",
+    url: "https://zerion.io",
+    description: "A DEX aggregator by Zerion",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/zerion-aggregator.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Ethereum", "Binance", "Optimism", "Arbitrum", "Base", "Polygon", "Avalanche", "Fantom", "Linea", "Mantle", "Blast", "Celo", "zkSync Era", "Berachain", "MegaETH", "Monad", "Katana", "Scroll", "Soneium", "Unichain", "xDai", "Hyperliquid L1", "Polygon zkEVM"],
+    module: "dummy.js",
+    twitter: "zerion",
+    parentProtocol: "parent#zerion",
+    dimensions: {
+      aggregators: "zerion"
+    }
+  },
 ];
 export default data6;

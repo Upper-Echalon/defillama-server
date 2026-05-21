@@ -12238,18 +12238,13 @@ const data5: Protocol[] = [
     twitter: "ZestProtocol",
     parentProtocol: "parent#zest",
     oraclesBreakdown: [
-      {
-        name: "Pyth",
-        type: "Secondary",
-        proof: ["https://docs.zestprotocol.com/start/borrow/zest-protocol-borrow-overview/oracles#zest-protocol-uses-pyth"]
-      },
-      {
-        name: "DIA",
-        type: "Primary",
-        proof: ["https://explorer.hiro.so/txid/SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.alex-oracle-v1-1?chain=mainnet","https://github.com/DefiLlama/defillama-server/pull/10672"]
-      },
+      {name: "Pyth",type: "Secondary",proof: ["https://docs.zestprotocol.com/start/borrow/zest-protocol-borrow-overview/oracles#zest-protocol-uses-pyth"]},
+      {name: "DIA",type: "Primary",proof: ["https://explorer.hiro.so/txid/SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.alex-oracle-v1-1?chain=mainnet","https://github.com/DefiLlama/defillama-server/pull/10672"]},
     ],
     listedAt: 1771865647,
+    dimensions: {
+      fees: "zest-v2",
+    },
   },
   {
     id: "7450",

@@ -29890,6 +29890,7 @@ const data3_1: Protocol[] = [
     chains: ["Ethereum", "Binance", "Optimism", "Arbitrum", "Base", "Polygon"],
     module: "dummy.js",
     twitter: "zerion",
+    parentProtocol: "parent#zerion",
     dimensions: {
       fees: "zerion-wallet"
     }

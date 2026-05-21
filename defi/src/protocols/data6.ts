@@ -3400,9 +3400,10 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Derivatives",
     chains: ["Arbitrum"],
-    module: "dummy.js",
+    module: "challenge4trading-perp/index.js",
     twitter: "Challenge4Trade",
     github: ["dbehar753"],
+    listedAt: 1779396932,
     dimensions: {
       fees: "challenge4trading-perp",
       derivatives: "challenge4trading-perp",
@@ -4053,9 +4054,10 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Luck Games",
     chains: ["Abstract"],
-    module: "dummy.js",
+    module: "death-fun/index.js",
     twitter: "deathfungame",
     github: ["Death-fun"],
+    listedAt: 1779396952,
     dimensions: {
       dexs: "death-fun",
       fees: "death-fun",

@@ -2,7 +2,7 @@ import protocols from '../../src/protocols/data'
 import treasuries from '../../src/protocols/treasury'
 import entities from '../../src/protocols/entities'
 import { IProtocol } from '../../src/types';
-import { clearAllDimensionsCache, clearProtocolCacheById } from '../../src/cli/utils/clearProtocolCache';
+import { clearAllDimensionsCache, queueProtocolCacheReset } from '../../src/cli/utils/clearProtocolCache';
 import { storeTvl2, storeTvl2Options } from '../../src/storeTvlInterval/getAndStoreTvl';
 import { humanizeNumber } from '@defillama/sdk';
 import evmChainProvidersList from '@defillama/sdk/build/providers.json';
@@ -37,8 +37,8 @@ export async function runTvlAction(ws: any, data: any) {
       await tvlDeleteGetList(ws, protocol, options)
       break;
     case 'clear-cache':
-      await clearProtocolCacheById(protocol.id)
-      console.log('Cache cleared for protocol:', protocol.name);
+      await queueProtocolCacheReset(protocol.id)
+      console.log('Cache reset queued for protocol:', protocol.name);
       break;
     case 'clear-all-dimensions-cache':
       await clearAllDimensionsCache()
@@ -495,10 +495,9 @@ async function _deleteTvlRecords(ws: any, ids?: any) {
   protocolIdList = [...new Set(protocolIdList)]
   for (const protocolId of protocolIdList) {
     try {
-      await clearProtocolCacheById(protocolId)
-      console.log('Cache cleared for protocol:', protocolId);
+      await queueProtocolCacheReset(protocolId)
     } catch (e) {
-      console.error('Error clearing cache for protocol:', protocolId, (e as any)?.message);
+      console.error('Error queuing cache reset for protocol:', protocolId, (e as any)?.message);
     }
   }
 

@@ -458,7 +458,7 @@ export function getDimensionOverviewRoutes(route: 'overview' | 'chart' | 'chart-
     if (Object.keys(DefaultAdapterTypeCategoryMap).includes(adaptorType)) {
       return await returnSubCategoryData();
     }
-    
+
     if (route === 'chart-chain-breakdown') {
       const routeFile = `dimensions/${adaptorType}/${dataType}/chain-total-data-chart`
       return fileResponse(routeFile, res)
@@ -468,9 +468,9 @@ export function getDimensionOverviewRoutes(route: 'overview' | 'chart' | 'chart-
       const routeFile = `dimensions/${routeSubPath}`
 
       const data = await readRouteData(routeFile)
-
+      
       if (!data) return errorResponse(res, 'Internal server error', { statusCode: 500 })
-
+      
       if (route === 'chart-protocol-breakdown') {
         return successResponse(res, data.totalDataChartBreakdown)
       } else {
@@ -494,13 +494,8 @@ export function getDimensionOverviewRoutes(route: 'overview' | 'chart' | 'chart-
       if (route === 'overview') routeFileExt = '';
       else routeFileExt += route;
       const routeSubPath = `${adaptorType}/${dataType}-category/${filterCategory}-${routeFileExt}`;
-      const routeFile = `dimensions/${routeSubPath}`; 
-      
-      const data = await readRouteData(routeFile);
-  
-      if (!data) return errorResponse(res, 'Internal server error', { statusCode: 500 });
-  
-      return successResponse(res, data);
+      const routeFile = `dimensions/${routeSubPath}`;
+      return fileResponse(routeFile, res)
     }
   }
 }
@@ -546,12 +541,7 @@ export function getDimensionChainRoutes(route: 'overview' | 'chart' | 'chart-pro
       else routeFileExt += route;
       const routeSubPath = `${adaptorType}/${dataType}-category/${filterCategory}-chain/${chainKeyFilter}-${routeFileExt}`;
       const routeFile = `dimensions/${routeSubPath}`;
-      
-      const data = await readRouteData(routeFile);
-  
-      if (!data) return errorResponse(res, 'Internal server error', { statusCode: 500 });
-  
-      return successResponse(res, data);
+      return fileResponse(routeFile, res)
     }
   }
 }
@@ -566,13 +556,8 @@ export function getDimensionCategoryRoutes(route: 'overview' | 'chart' | 'chart-
     if (route === 'overview') routeFileExt = '';
     else routeFileExt += route;
     const routeSubPath = `${adaptorType}/${dataType}-category/${category}-${routeFileExt}`;
-    const routeFile = `dimensions/${routeSubPath}`; 
-    
-    const data = await readRouteData(routeFile);
-
-    if (!data) return errorResponse(res, 'Internal server error', { statusCode: 500 });
-
-    return successResponse(res, data);
+    const routeFile = `dimensions/${routeSubPath}`;
+    return fileResponse(routeFile, res)
   }
 }
 
@@ -586,13 +571,8 @@ export function getDimensionCategoryChainRoutes(route: 'overview' | 'chart' | 'c
     if (route === 'overview') routeFileExt = '';
     else routeFileExt += route;
     const routeSubPath = `${adaptorType}/${dataType}-category/${category}-chain/${chainKeyFilter}-${routeFileExt}`;
-    const routeFile = `dimensions/${routeSubPath}`; 
-    
-    const data = await readRouteData(routeFile);
-
-    if (!data) return errorResponse(res, 'Internal server error', { statusCode: 500 });
-
-    return successResponse(res, data);
+    const routeFile = `dimensions/${routeSubPath}`;
+    return fileResponse(routeFile, res)
   }
 }
 
@@ -610,13 +590,7 @@ export function getDimensionProtocolRoutes(route: 'overview' | 'chart' | 'chart-
 
     const routeSubPath = `${adaptorType}/${dataType}-protocol/${protocolSlug}${protocolFileExt}`
     const routeFile = `dimensions/${routeSubPath}`
-    const errorMessage = `${adaptorType[0].toUpperCase()}${adaptorType.slice(1)} for ${protocolName} not found, please visit /overview/${adaptorType} to see available protocols`
-
-    const data = await readRouteData(routeFile)
-    if (!data)
-      return errorResponse(res, errorMessage)
-
-    return successResponse(res, data)
+    return fileResponse(routeFile, res)
   }
 }
 

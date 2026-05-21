@@ -15244,6 +15244,7 @@ const data5: Protocol[] = [
         until: "2026-07-01",
       }
     ],
+    disabled: "not tracking any metrics for this currently since fees and volume were commented out",
   },
   {
     id: "7591",

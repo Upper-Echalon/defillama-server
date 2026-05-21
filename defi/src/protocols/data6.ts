@@ -3988,7 +3988,7 @@ const data6: Protocol[] = [
     audits: "0",
     gecko_id: null,
     cmcId: null,
-    category: "AI Agent",
+    category: "AI Agents",
     chains: ["Off Chain"],
     module: "dummy.js",
     twitter: "BAI_AGI",

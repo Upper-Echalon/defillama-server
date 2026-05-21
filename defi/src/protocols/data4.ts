@@ -368,7 +368,7 @@ const data4: Protocol[] = [
     cmcId: "29420",
     category: "AI Agents",
     chains: ["Base","Solana", "Ethereum"],
-    module: "dummy.js",
+    module: "virtuals-protocol/index.js",
     twitter: "virtuals_io",
     dimensions: {
       fees: "virtual-protocol"

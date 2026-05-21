@@ -4162,5 +4162,24 @@ const data6: Protocol[] = [
       aggregators: "zerion"
     }
   },
+  {
+    id: "7907",
+    name: "Euclid Protocol",
+    address: null,
+    symbol: "-",
+    url: "https://euclidprotocol.io/",
+    description: "Euclid Protocol is a cross-chain settlement infrastructure enabling unified liquidity, token swaps, and optimized routing across DeFi",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/euclid-protocol.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Cross Chain Bridge",
+    chains: ["Ethereum", "Binance", "Optimism", "Arbitrum", "Base", "Polygon", "Monad", "Somnia", "0G", "Hyperliquid L1"],
+    module: "euclidprotocol/index.js",
+    twitter: "EuclidProtocol",
+    github: ["EuclidProtocol"],
+    listedAt: 1779402548,
+  },
 ];
 export default data6;

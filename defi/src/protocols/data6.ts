@@ -3982,7 +3982,7 @@ const data6: Protocol[] = [
     symbol: "-",
     url: "https://b.ai/",
     description:
-      "is a financial infrastructure built for the AI Agent era, designed to address the core challenges agents face in model access, payments, settlement, identity, and coordination.",
+      "BAI is a financial infrastructure built for the AI Agent era, designed to address the core challenges agents face in model access, payments, settlement, identity, and coordination.",
     chain: "Off Chain",
     logo: `${baseIconsUrl}/bai.jpg`,
     audits: "0",
@@ -3993,6 +3993,72 @@ const data6: Protocol[] = [
     module: "dummy.js",
     twitter: "BAI_AGI",
     github: ["BAI-labs"],
+  },
+  {
+    id: "7899",
+    name: "Telemetry",
+    address: null,
+    symbol: "-",
+    url: "https://telemetry.io/",
+    description:
+      "Telemetry is a Solana trading and analytics terminal by BONKbot, offering web and mobile trading, token discovery, wallet tracking, and referral/cashback rewards.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/telemetry.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Trading App",
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "bonkbot_io",
+    parentProtocol: "parent#bonkfun",
+    dimensions: {
+      fees: "telemetry",
+    },
+  },
+  {
+    id: "7900",
+    name: "SwapWizard",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://swapwizard.xyz/
+    description:
+      "DeFi execution layer, swap aggregator and liquidity providing easy zapper.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/swapwizard.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Ethereum", "Binance", "Arbitrum", "Base", "Polygon"],
+    module: "dummy.js",
+    twitter: "SwapWizard",
+    dimensions: {
+      aggregators: "swapwizard"
+    },
+  },
+  {
+    id: "7901",
+    name: "death.fun",
+    address: null,
+    symbol: "-",
+    url: "https://death.fun",
+    description:
+      "Death.fun is an onchain mines game where users wager, advance through tiles for higher multipliers, and cash out before hitting the death tile.",
+    chain: "Abstract",
+    logo: `${baseIconsUrl}/death.fun.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Luck Games",
+    chains: ["Abstract"],
+    module: "dummy.js",
+    twitter: "deathfungame",
+    github: ["Death-fun"],
+    dimensions: {
+      dexs: "death-fun",
+      fees: "death-fun",
+    },
   },
 ];
 export default data6;

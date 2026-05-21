@@ -19081,7 +19081,7 @@ const data4: Protocol[] = [
       aggregators: "rango",
       "bridge-aggregators": {
         adapter: "rango",
-        genuineSpikes: [["2026-02-04", "-"]]
+        genuineSpikes: [["2026-02-04", "-"], ["2026-05-20", "-"]]
       }
     }
   },

@@ -4024,7 +4024,7 @@ const data6: Protocol[] = [
     url: " ", // pending to add url https://swapwizard.xyz/
     description:
       "Multi-chain DEX aggregator and auto zap. Add or remove liquidity in a single transaction, using any token or several as you prefer. SwapWizard handles the proportions, the required swaps along the best available routes, and the residual dust. No manual swaps, no multiple approvals, no leftovers forgotten in your wallet.",
-    chain: "Multi-Chain",
+    chain: "Ethereum",
     logo: `${baseIconsUrl}/swapwizard.png`,
     audits: "2",
     audit_links: ["https://swapwizard.xyz/SwapWizard_Security_Audit_Report.pdf"],

@@ -8613,7 +8613,7 @@ const data5: Protocol[] = [
       fees: "treadfi-perps",
     },
   },
-  {
+  /*{ // not tracking any metrics for this currently since fees were commented out too
     id: "7278",
     name: "StandX DUSD",
     address: null,
@@ -8634,7 +8634,7 @@ const data5: Protocol[] = [
       //fees: "standx-dusd", // it includes only withdrawl fees which misrepresents overall parent adapter stats, so disabling until perp fee stats are available
                              // more info https://github.com/DefiLlama/dimension-adapters/pull/6461 & https://github.com/DefiLlama/dimension-adapters/pull/6477#discussion_r3137067079
     },
-  },
+  },*/
   {
     id: "7279",
     name: "stabble CLMM",

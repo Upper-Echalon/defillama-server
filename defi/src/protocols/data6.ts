@@ -4023,10 +4023,11 @@ const data6: Protocol[] = [
     symbol: "-",
     url: " ", // pending to add url https://swapwizard.xyz/
     description:
-      "DeFi execution layer, swap aggregator and liquidity providing easy zapper.",
-    chain: "Ethereum",
-    logo: `${baseIconsUrl}/swapwizard.jpg`,
-    audits: "0",
+      "Multi-chain DEX aggregator and auto zap. Add or remove liquidity in a single transaction, using any token or several as you prefer. SwapWizard handles the proportions, the required swaps along the best available routes, and the residual dust. No manual swaps, no multiple approvals, no leftovers forgotten in your wallet.",
+    chain: "Multi-Chain",
+    logo: `${baseIconsUrl}/swapwizard.png`,
+    audits: "2",
+    audit_links: ["https://swapwizard.xyz/SwapWizard_Security_Audit_Report.pdf"],
     gecko_id: null,
     cmcId: null,
     category: "DEX Aggregator",

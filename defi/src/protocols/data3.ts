@@ -50583,6 +50583,7 @@ const data3_3: Protocol[] = [
     chains: ["Bitcoin"],
     module: "avalance-btc/index.js",
     twitter: "@avax",
+    deprecated: true,
     //parentProtocol: "",
     listedAt: 1723313207,
   },

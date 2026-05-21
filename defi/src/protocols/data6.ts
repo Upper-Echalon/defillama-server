@@ -3975,5 +3975,24 @@ const data6: Protocol[] = [
     github: ["BTCDLabs"],
     listedAt: 1779337097,
   },
+  {
+    id: "7898",
+    name: "BAI",
+    address: null,
+    symbol: "-",
+    url: "https://b.ai/",
+    description:
+      "is a financial infrastructure built for the AI Agent era, designed to address the core challenges agents face in model access, payments, settlement, identity, and coordination.",
+    chain: "Off Chain",
+    logo: `${baseIconsUrl}/bai.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "AI Agent",
+    chains: ["Off Chain"],
+    module: "dummy.js",
+    twitter: "BAI_AGI",
+    github: ["BAI-labs"],
+  },
 ];
 export default data6;

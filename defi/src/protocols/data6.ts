@@ -3954,5 +3954,26 @@ const data6: Protocol[] = [
     github: ["Figu3"],
     listedAt: 1779310583,
   },
+  {
+    id: "7897",
+    name: "BTCD",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://btcd.fi/
+    description:
+      "BTCD is a 50/50 BTC/USD balanced base token that pairs with sBTCD (its yield-bearing staked counterpart) and FISC (governance) to form a novel DeFi primitive on Ethereum. Yield is generated primarily through productive asset allocation across BTC and USD sleeves, with internal RFQ rebalancing between vaults handling exposure shifts as BTC moves.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/btcd.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Ethereum"],
+    module: "btcd/index.js",
+    twitter: "BTCDofficial",
+    audit_links: ["https://docs.btcd.fi/security-and-audits"],
+    github: ["BTCDLabs"],
+    listedAt: 1779337097,
+  },
 ];
 export default data6;

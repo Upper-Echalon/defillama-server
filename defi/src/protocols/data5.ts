@@ -8217,7 +8217,7 @@ const data5: Protocol[] = [
     name: "ElfomoFi",
     address: null,
     symbol: "-",
-    url: "https://docs.elfomo.fi/",
+    url: "https://elfomo.fi/",
     description:
       "Oracle-based DEX on EVM.",
     chain: "Base",

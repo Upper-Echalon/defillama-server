@@ -8038,7 +8038,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
       { name: "Chaos", type: "Secondary", proof: ["https://docs.benqi.fi/resources/contracts/price-feeds", "https://x.com/BenqiFinance/status/2052625080916558326"],
       endDate: "2026-05-04"},
       { name: "Chainlink", type: "Primary", proof: ["https://docs.benqi.fi/resources/contracts/price-feeds", "https://x.com/BenqiFinance/status/2052625080916558326"],
-      startDate: "2026-05-04}
+      startDate: "2026-05-04"},
     ],
     forkedFromIds: ["114"],
     parentProtocol: "parent#benqi",

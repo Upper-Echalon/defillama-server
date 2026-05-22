@@ -386,7 +386,7 @@ const parentProtocols: IParentProtocol[] = [
     gecko_id: "morpho",
     cmcId: null,
     chains: [],
-    twitter: "MorphoLabs",
+    twitter: "Morpho",
     governanceID: ["snapshot:morpho.eth"],
     treasury: "morpho.js",
     github: ["morpho-org"],

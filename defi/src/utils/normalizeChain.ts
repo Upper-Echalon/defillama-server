@@ -6350,7 +6350,7 @@ const chainLabelMap = {
   "rise": "RISE",
   "aleo": "Aleo",
   "srx": "Sentrix",
-  "dfio_meta_main": "DeFi Oracle Meta",
+  "dfio_meta_main": "Defi Oracle Meta",
 } as { [key: string]: string }
 
 // When we decide to change the display name of a chain, we add the mapping for the new name here

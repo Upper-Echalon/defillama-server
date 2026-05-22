@@ -4186,7 +4186,7 @@ const data6: Protocol[] = [
     name: "lisAster",
     address: "bsc:0xFceB31A79F71AC9CBDCF853519c1b12D379EdC46",
     symbol: "LISTA",
-    url: "https://lista.org/lis-aster",
+    url: "https://lista.org/",
     description:
       "lisAster, Lista DAO's new ASTER yield aggregator on BSC mainnet.",
     chain: "Binance",

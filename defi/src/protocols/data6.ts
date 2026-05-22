@@ -4181,5 +4181,25 @@ const data6: Protocol[] = [
     github: ["EuclidProtocol"],
     listedAt: 1779402548,
   },
+  {
+    id: "7908",
+    name: "lisAster",
+    address: "bsc:0xFceB31A79F71AC9CBDCF853519c1b12D379EdC46",
+    symbol: "LISTA",
+    url: "https://lista.org/lis-aster",
+    description:
+      "lisAster, Lista DAO's new ASTER yield aggregator on BSC mainnet.",
+    chain: "Binance",
+    logo: `${baseIconsUrl}/lisaster.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield Aggregator",
+    chains: ["Binance"],
+    module: "lis-aster/index.js",
+    twitter: "LISTA_DAO",
+    parentProtocol: "parent#lista-dao",
+    listedAt: 1779415531,
+  },
 ];
 export default data6;

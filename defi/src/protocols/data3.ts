@@ -58186,7 +58186,7 @@ const data3_3: Protocol[] = [
     cmcId: null,
     tags: ["AMM"],
     chains: ["Ethereum"],
-    module: "dummy.js",
+    module: "fluid-dex/index.js",
     twitter: "0xfluid",
     parentProtocol: "parent#fluid",
     listedAt: 1730732495,

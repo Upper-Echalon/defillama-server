@@ -3280,8 +3280,9 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Lending",
     chains: ["Binance"],
-    module: "dummy.js",
+    module: "stockfi/index.js",
     twitter: "stock_fi",
+    listedAt: 1779464647,
     dimensions: {
       fees: "stockfi",
     },

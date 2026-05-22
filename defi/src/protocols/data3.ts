@@ -58193,7 +58193,8 @@ const data3_3: Protocol[] = [
     dimensions: {
       fees: "fluid-dex",
       dexs: "fluid-dex"
-    }
+    },
+    excludeTvlFromParent: true // collateral is consolidated across all fluid protocols (total tracked in fluid/index.js)
   },
   {
     id: "5318",

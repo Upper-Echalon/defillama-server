@@ -4220,5 +4220,24 @@ const data6: Protocol[] = [
     twitter: "bond_xyz_",
     listedAt: 1779420889,
   },
+  {
+    id: "7910",
+    name: "Alt Fun",
+    address: null,
+    symbol: "-",
+    url: "https://alt.fun/", 
+    description: `Launch coins backed by Hyperliquid perps`,
+    chain: "Off Chain",
+    logo: `${baseIconsUrl}/alt-fun.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Off Chain"],
+    module: "dummy.js",
+    twitter: "altdotfun",
+    github: ["alt-fun"],
+  },
+
 ];
 export default data6;

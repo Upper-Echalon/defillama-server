@@ -6091,7 +6091,7 @@ export const chainCoingeckoIds = {
     symbol: null,
     cmcId: null,
     twitter: null,
-    url: "https://d-bis.org/",
+    url: "https://info.defi-oracle.io/",
     chainId: 138,
   },
 } as unknown as ChainCoinGekcoIds;

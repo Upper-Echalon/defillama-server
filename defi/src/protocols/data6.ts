@@ -4201,5 +4201,24 @@ const data6: Protocol[] = [
     parentProtocol: "parent#lista-dao",
     listedAt: 1779415531,
   },
+  {
+    id: "7909",
+    name: "Bond",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://bond.xyz/
+    description: `Bond, a Uniswap V3 fork DEX deployed on 0G Mainnet (chainId 16661)`,
+    chain: "0G",
+    logo: `${baseIconsUrl}/bond.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["CLMM"],
+    chains: ["0G"],
+    forkedFrom: ["2198"],
+    module: "bond/index.js",
+    twitter: "bond_xyz_",
+    listedAt: 1779420889,
+  },
 ];
 export default data6;

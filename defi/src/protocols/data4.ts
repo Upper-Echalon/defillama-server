@@ -367,7 +367,7 @@ const data4: Protocol[] = [
     gecko_id: "virtual-protocol",
     cmcId: "29420",
     category: "AI Agents",
-    chains: ["Base","Solana", "Ethereum"],
+    chains: ["Base", "Ethereum"],
     module: "virtuals-protocol/index.js",
     twitter: "virtuals_io",
     dimensions: {

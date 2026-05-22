@@ -3155,6 +3155,7 @@ const data6: Protocol[] = [
     twitter: "synthetix",
     parentProtocol: "parent#synthetix",
     dimensions: {
+      fees: "synthetix-v4",
       derivatives: "synthetix-v4",
       "open-interest": "synthetix-v4"
     }
@@ -4082,6 +4083,9 @@ const data6: Protocol[] = [
     twitter: "predofficial",
     github: ["pred-org"],
     listedAt: 1779382887,
+    dimensions: {
+      dexs: "pred",
+    }
   },
   {
     id: "7903",
@@ -4255,6 +4259,67 @@ const data6: Protocol[] = [
     module: "vara-ethereum-bridge/index.js",
     twitter: "VaraNetwork",
     listedAt: 1779460934,
+  },
+  {
+    id: "7912",
+    name: "Gambit Zone",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://app.gambit.zone
+    description: `Gambit is a decentralised prediction market focused exclusively on predicting asset prices.`,
+    chain: "Arbitrum",
+    logo: `${baseIconsUrl}/gambit-zone.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Prediction Market",
+    chains: ["Arbitrum"],
+    module: "dummy.js",
+    twitter: "Trade_Gambit",
+    treasury: "gambitzone.js",
+  },
+  {
+    id: "7913",
+    name: "Showdown",
+    address: null,
+    symbol: "-",
+    url: "https://www.showdown.game/",
+    description: `Showdown is a Web3 competitive card game on MegaETH that reinvents poker with strategic deckbuilding and real-stakes gameplay, letting players compete in money games and tournaments using USDm.`,
+    chain: "MegaETH",
+    logo: `${baseIconsUrl}/showdown.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Luck Games",
+    chains: ["MegaETH"],
+    module: "dummy.js",
+    twitter: "Showdown_TCG",
+    dimensions: {
+      dexs: "showdown",
+    }
+  },
+  {
+    id: "7914",
+    name: "Likwid",
+    address: null,
+    symbol: "-",
+    url: "https://likwid.fi",
+    description: `Oracle-free decentralized leverage and lending protocol. Unifies swaps, margin trading, and single-sided lending in a shared vault model built on Uniswap V4.`,
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/likwid.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Ethereum", "Base", "Binance"],
+    module: "likwid/index.js",
+    twitter: "likwid_fi",
+    github: ["likwid-fi"],
+    audit_links: [
+      "https://github.com/likwid-fi/likwid-margin/blob/main/audits/2025_11_13_Zenith_Likwid_V2_2_Audit_Report.pdf",
+      "https://github.com/likwid-fi/likwid-margin/blob/main/audits/2026_02_05_Sherlock_Likwid_V2_2_Audit_Report.pdf"
+    ],
+    listedAt: 1779462241,
   },
 ];
 export default data6;

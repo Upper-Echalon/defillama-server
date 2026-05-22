@@ -4291,7 +4291,7 @@ const data6: Protocol[] = [
     audits: "0",
     gecko_id: null,
     cmcId: null,
-    category: "Luck Games",
+    category: "Gaming",
     chains: ["MegaETH"],
     module: "dummy.js",
     twitter: "Showdown_TCG",

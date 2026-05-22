@@ -4238,6 +4238,23 @@ const data6: Protocol[] = [
     twitter: "altdotfun",
     github: ["alt-fun"],
   },
-
+  {
+    id: "7911",
+    name: "Vara Bridge",
+    address: null,
+    symbol: "-",
+    url: "https://vara.network/", 
+    description: `Vara-Ethereum Bridge.`,
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/vara-bridge.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Bridge",
+    chains: ["Ethereum"],
+    module: "vara-ethereum-bridge/index.js",
+    twitter: "VaraNetwork",
+    listedAt: 1779460934,
+  },
 ];
 export default data6;

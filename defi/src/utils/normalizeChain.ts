@@ -6094,6 +6094,13 @@ export const chainCoingeckoIds = {
     url: "https://info.defi-oracle.io/",
     chainId: 138,
   },
+  "Vara": {
+    geckoId: "vara-network",
+    symbol: "VARA",
+    cmcId: "28067",
+    twitter: "VaraNetwork",
+    url: "https://start.vara.network/",
+  },
 } as unknown as ChainCoinGekcoIds;
 
 // We are creating the list here because, later in the code, we include historical chain labels with the same chain metadata, so, chainCoingeckoIds will have duplicate keys

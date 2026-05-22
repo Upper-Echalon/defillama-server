@@ -57821,8 +57821,16 @@ const data3_3: Protocol[] = [
     parentProtocol: "parent#bulbaswap",
     listedAt: 1730321388,
     dimensions: {
-      fees: "bulbaswap-v3",
-      dexs: "bulbaswap-v3"
+      fees: {
+        adapter: "bulbaswap-v3",
+        genuineSpikes: [["2026-05-21", "-"]]
+      },
+      dexs: {
+        adapter: "bulbaswap-v3",
+        genuineSpikes: [
+          ["2026-05-21", "Bitget Wallet swap campaign on Morph ($80K USDC rewards)"] //https://x.com/MorphNetwork/status/2057446924677185906
+        ]
+      }
     }
   },
   {

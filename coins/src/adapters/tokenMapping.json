@@ -13342,17 +13342,17 @@
   },
   "mantra": {
     "uom": {
-      "to": "coingecko#mantra-dao",
+      "to": "coingecko#mantra",
       "decimals": 6,
       "symbol": "uom"
     },
     "0x0000000000000000000000000000000000000000": {
-      "to": "coingecko#mantra-dao",
+      "to": "coingecko#mantra",
       "decimals": 18,
       "symbol": "MANTRA"
     },
     "0xE3047710EF6cB36Bcf1E58145529778eA7Cb5598": {
-      "to": "coingecko#mantra-dao",
+      "to": "coingecko#mantra",
       "decimals": 18,
       "symbol": "wOM"
     },

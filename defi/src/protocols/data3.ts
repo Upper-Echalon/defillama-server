@@ -13979,7 +13979,8 @@ const data3_0: Protocol[] = [
     listedAt: 1690979758,
     dimensions: {
       fees: "kiloex",
-      derivatives: "kiloex"
+      derivatives: "kiloex",
+      "open-interest": "kiloex"
     }
   },
   {

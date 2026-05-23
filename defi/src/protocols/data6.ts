@@ -4242,6 +4242,10 @@ const data6: Protocol[] = [
     module: "dummy.js",
     twitter: "altdotfun",
     github: ["alt-fun"],
+    dimensions: {
+      fees: "alt-fun",
+      dexs: "alt-fun",
+    },
   },
   {
     id: "7911",

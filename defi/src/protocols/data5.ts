@@ -2794,6 +2794,9 @@ const data5: Protocol[] = [
     github: ["piku-co"],
     stablecoins: ["usp"],
     listedAt: 1763513599,
+    dimensions: {
+      fees: "piku",
+    },
   },
   {
     id: "7013",

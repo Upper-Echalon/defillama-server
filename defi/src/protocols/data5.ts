@@ -2422,6 +2422,9 @@ const data5: Protocol[] = [
     ],
     stablecoins: ["yuzu-usd"],
     listedAt: 1763085858,
+    dimensions: {
+      fees: "yuzu-money",
+    },
   },
   {
     id: "6998",

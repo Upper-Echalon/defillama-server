@@ -2920,7 +2920,8 @@ const data5: Protocol[] = [
     dimensions: {
       derivatives: "antarctic",
       fees: "antarctic",
-      "open-interest": "antarctic",
+      "open-interest": "antarctic-oi",
+      "normalized-volume": "antarctic",
     },
   },
   {

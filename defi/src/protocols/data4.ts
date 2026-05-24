@@ -19686,7 +19686,8 @@ const data4: Protocol[] = [
       derivatives: {
         adapter: "carbon",
         genuineSpikes: [["2025-10-10", "-"]]
-      }
+      },
+      "open-interest": "carbon",
     }
   },
   {

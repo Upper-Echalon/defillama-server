@@ -19823,7 +19823,8 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     github: ["GainsNetwork"],
     dimensions: {
       fees: "gains-network",
-      derivatives: "gains-network"
+      derivatives: "gains-network",
+      "open-interest": "gains-network"
     }
   },
   {

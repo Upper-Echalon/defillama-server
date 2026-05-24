@@ -1721,6 +1721,7 @@ const data5: Protocol[] = [
     dimensions: {
        fees: "dipcoin-perps",
        derivatives: "dipcoin-perps",
+       "open-interest": "dipcoin-perps-oi"
     },
   },
   {

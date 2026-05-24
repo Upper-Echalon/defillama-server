@@ -20680,7 +20680,8 @@ const data4: Protocol[] = [
     listedAt: 1752859467,
     dimensions: {
       fees: "bluefin-pro",
-      derivatives: "bluefin-pro"
+      derivatives: "bluefin-pro",
+      "open-interest": "bluefin-pro"
     }
   },
   /* { // unified under coinbase-btc adapter

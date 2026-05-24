@@ -6630,7 +6630,8 @@ const data: Protocol[] = [
     parentProtocol: "parent#tokenlon",
     audit_links: ["https://github.com/consenlabs/tokenlon-contracts/tree/v5/audits"],
     dimensions: {
-      dexs: "tokenlon-dex"
+      dexs: "tokenlon-dex",
+      fees: "tokenlon-dex",
     }
   },
   {

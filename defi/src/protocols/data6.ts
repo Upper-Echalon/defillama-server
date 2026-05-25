@@ -4451,5 +4451,46 @@ const data6: Protocol[] = [
       dexs: "pacifica-spot"
     }
   },
+  {
+    id: "7921",
+    name: "COMDEX Exchange",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://comdex.app
+    description:
+      "Comdex is a decentralized commodity exchange on BNB Chain. Users can trade tokenized Gold, Silver, Platinum, Palladium, Brent Oil, and Copper with real-time Pyth Network oracle pricing. Gold and Silver are physically backed by reserves in DMCC (Dubai) vaults. All trades settle in CUSD, a USD-backed stablecoin.",
+    chain: "Binance",
+    logo: `${baseIconsUrl}/comdex-exchange.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["AMM"],
+    chains: ["Binance"],
+    module: "comdex/index.js",
+    twitter: "Comdexchange",
+    github: ["Comdexapp"],
+    //listedAt: 1779747907,
+  },
+  {
+    id: "7922",
+    name: "Tangent Finance",
+    address: null,
+    symbol: "-",
+    url: "https://tangent.bar",
+    description:
+      "Tangent is a decentralized lending protocol on Ethereum that issues USG, a crypto-backed stablecoin. Users deposit yield-bearing collateral (e.g. Curve/Convex LP positions) to borrow USG, with the peg defended by dynamic interest rates and Curve V2 peg keepers.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/tangent-finance.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Lending",
+    chains: ["Ethereum"],
+    module: "tangent-finance/index.js",
+    oraclesBreakdown: [ { name: "Chainlink", type: "Primary", proof: ["https://docs.tangent.finance/docs/usg/oracle#oracles"] }, { name: "RedStone", type: "Fallback", proof: ["https://docs.tangent.finance/docs/faq/contracts#single-coin-oracles-redstone-fallback"] } ],
+    twitter: "Tangent_fi",
+    audit_links: ["https://docs.tangent.finance/docs/faq/audits"],
+    listedAt: 1779747907,
+  },
 ];
 export default data6;

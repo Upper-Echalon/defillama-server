@@ -4239,7 +4239,7 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Launchpad",
     chains: ["Off Chain"],
-    module: "dummy.js",
+    module: "alt-fun/index.js",
     twitter: "altdotfun",
     github: ["alt-fun"],
     dimensions: {

@@ -2424,7 +2424,12 @@ const data5: Protocol[] = [
     stablecoins: ["yuzu-usd"],
     listedAt: 1763085858,
     dimensions: {
-      fees: "yuzu-money",
+      fees: {
+        adapter: "yuzu-money",
+        genuineSpikes: [
+          ['2026-04-24', 'NAV dropped in junior vault due to the rsEth exploit'], //https://x.com/YuzuMoneyX/status/2047530119380836847 
+        ]
+      },
     },
   },
   {
@@ -2921,7 +2926,12 @@ const data5: Protocol[] = [
     dimensions: {
       derivatives: "antarctic",
       fees: "antarctic",
-      "open-interest": "antarctic-oi",
+      "open-interest": {
+        adapter: "antarctic-oi",
+        genuineSpikes: [
+          ['2026-05-25', '-'], //listing day
+        ]
+      },
       "normalized-volume": "antarctic",
     },
   },

@@ -17618,7 +17618,7 @@ const data5: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     category: "Yield",
-    chains: ["Arbitrum", "Base"],
+    chains: ["Base"],
     module: "armsys/index.js",
     twitter: "armsysxyz",
     github: ["ARMSys26"],

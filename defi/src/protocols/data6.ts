@@ -4476,7 +4476,7 @@ const data6: Protocol[] = [
     name: "Tangent Finance",
     address: null,
     symbol: "-",
-    url: "https://tangent.bar",
+    url: "https://app.tangent.finance/",
     description:
       "Tangent is a decentralized lending protocol on Ethereum that issues USG, a crypto-backed stablecoin. Users deposit yield-bearing collateral (e.g. Curve/Convex LP positions) to borrow USG, with the peg defended by dynamic interest rates and Curve V2 peg keepers.",
     chain: "Ethereum",
@@ -4491,6 +4491,26 @@ const data6: Protocol[] = [
     twitter: "Tangent_fi",
     audit_links: ["https://docs.tangent.finance/docs/faq/audits"],
     listedAt: 1779747909,
+  },
+  {
+    id: "7923",
+    name: "3F",
+    address: null,
+    symbol: "-",
+    url: "https://www.3f.xyz/",
+    description:
+      "3F is a vault protocol built on Morpho that gives you leveraged exposure to tokenized RWAs.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/3f.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "RWA Lending",
+    chains: ["Ethereum"],
+    module: "three-f/index.js",
+    twitter: "3f_xyz",
+    github: ["3FLabs"],
+    listedAt: 1779748015,
   },
 ];
 export default data6;

@@ -4428,12 +4428,12 @@ const data6: Protocol[] = [
     },
   },
   {
-    id: "6682",
+    id: "7920",
     name: "Pacifica Spot",
     address: null,
     symbol: "-",
     url: "https://app.pacifica.fi?referral=defillama",
-    referralUrl: "https://app.pacifica.fi?referral=defillama",
+    referralUrl: "https://app.pacifica.fi?referral=defillama",
     description:
       "Pacifica is a decentralized perpetual futures exchange offering leverage trading through advanced order types and APIs",
     chain: "Solana",

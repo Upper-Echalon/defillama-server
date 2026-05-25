@@ -26147,6 +26147,7 @@ const data3_1: Protocol[] = [
     listedAt: 1701706347,
     dimensions: {
       fees: "stormtrade",
+      "open-interest": "stormtrade-oi",
       derivatives: {
         adapter: "stormtrade",
         genuineSpikes: [["2025-10-25", "-"]],
@@ -33111,6 +33112,10 @@ const data3_2: Protocol[] = [
     github: ["Scopuly"],
     listedAt: 1709034413,
     deadUrl: true,
+    dimensions: {
+      dexs: "Scopuly",
+      fees: "Scopuly"
+    }
   },
   {
     id: "4182",
@@ -46906,6 +46911,10 @@ const data3_3: Protocol[] = [
     twitter: "SoroswapFinance",
     github: ["soroswap"],
     listedAt: 1719170717,
+    dimensions: {
+      fees: "soroswap",
+      dexs: "soroswap"
+    }
   },
   {
     id: "4805",
@@ -61972,7 +61981,8 @@ const data3_3: Protocol[] = [
     listedAt: 1734027989,
     dimensions: {
       fees: "sparkdex-perps",
-      derivatives: "sparkdex-perps"
+      derivatives: "sparkdex-perps",
+      "open-interest": "sparkdex-perps-oi"
     }
   },
   {

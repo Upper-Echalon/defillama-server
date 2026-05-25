@@ -4490,7 +4490,7 @@ const data6: Protocol[] = [
     oraclesBreakdown: [ { name: "Chainlink", type: "Primary", proof: ["https://docs.tangent.finance/docs/usg/oracle#oracles"] }, { name: "RedStone", type: "Fallback", proof: ["https://docs.tangent.finance/docs/faq/contracts#single-coin-oracles-redstone-fallback"] } ],
     twitter: "Tangent_fi",
     audit_links: ["https://docs.tangent.finance/docs/faq/audits"],
-    listedAt: 1779747907,
+    listedAt: 1779747909,
   },
 ];
 export default data6;

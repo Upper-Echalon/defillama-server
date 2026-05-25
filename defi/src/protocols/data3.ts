@@ -57471,37 +57471,28 @@ const data3_3: Protocol[] = [
   },
   {
     id: "5287",
-    name: "Bonzo Finance",
+    name: "Bonzo Lend",
     address: "hedera:0x00000000000000000000000000000000007e545e",
     symbol: "BONZO",
     url: "https://bonzo.finance/",
     description: "The Liquidity Layer of Hedera: An open source, non-custodial lending protocol based on Aave",
     chain: "Hedera",
-    logo: `${baseIconsUrl}/bonzo-finance.png`,
+    logo: `${baseIconsUrl}/bonzo-lend.png`,
     audits: "2",
-    gecko_id: "bonzo-finance",
+    gecko_id: null,
     cmcId: null,
     category: "Lending",
     chains: ["Hedera"],
     oraclesBreakdown: [
-      {
-        name: "Chainlink",
-        type: "Primary",
-        proof: ["https://docs.bonzo.finance/hub/developer/oracles/chainlink", "https://bonzo.finance/blog/bonzo-finance-has-integrated-the-chainlink-standard-for-verifiable-data-on-hedera"]
-      },
-            {
-        name: "Supra",
-        type: "Secondary",
-        proof: ["https://docs.bonzo.finance/hub/developer/oracles/supra"]
-      },
+      {name: "Chainlink",type: "Primary",proof: ["https://docs.bonzo.finance/hub/developer/oracles/chainlink", "https://bonzo.finance/blog/bonzo-finance-has-integrated-the-chainlink-standard-for-verifiable-data-on-hedera"]},
+      {name: "Supra",type: "Secondary",proof: ["https://docs.bonzo.finance/hub/developer/oracles/supra"]},
     ],
     forkedFromIds: ["111"],
     module: "bonzo/index.js",
     twitter: "bonzo_finance",
-    treasury: "bonzo.js",
     audit_links: ["https://docs.bonzo.finance/hub/resources/audits"],
-    github: ["Bonzo-Labs"],
     listedAt: 1730054887,
+    parentProtocol: "parent#bonzo-finance",
     dimensions: {
       fees: "bonzo"
     }

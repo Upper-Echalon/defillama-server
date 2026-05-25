@@ -9738,6 +9738,19 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "zerion",
   },
+  { 
+    id: "parent#bonzo-finance",
+    name: "Bonzo Finance",
+    url: "https://bonzo.finance/",
+    description: "The Liquidity Layer of Hedera: An open source, non-custodial lending protocol based on Aave.",
+    logo: `${baseIconsUrl}/bonzo-finance.jpg`,
+    gecko_id: "bonzo-finance",
+    cmcId: null,
+    chains: [],
+    twitter: "bonzo_finance",
+    github: ["Bonzo-Labs"],
+    treasury: "bonzo.js",
+  },
 ];
 
 export default parentProtocols;

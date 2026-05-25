@@ -4383,5 +4383,73 @@ const data6: Protocol[] = [
     listedAt: 1779745761,
     parentProtocol: "parent#bonzo-finance",
   },
+  {
+    id: "7918",
+    name: "Clutch Anvil AMM",
+    address: "arbitrum:0x05905af7933f89280aB258919F0dFA056CeD8e43",
+    symbol: "CLUTCH",
+    url: "https://anvil.clutch.market",
+    description: "Clutch Anvil AMM is a permissionless NFT AMM. Each market deploys an NFTAMMVault that swaps an ERC20 token (paired 1:N to a specific NFT collection) against NFT inventory. Volume + fees are aggregated across every market deployed by the canonical factory on each chain",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/clutch-anvil-amm.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["AMM"],
+    chains: ["Ethereum","Base","ApeChain"],
+    module: "dummy.js",
+    twitter: "clutchmarkets",
+    parentProtocol: "parent#clutch-markets",
+    dimensions: {
+      dexs: "clutch-anvil",
+      fees: "clutch-anvil",
+    }
+  },
+  {
+    id: "7919",
+    name: "DoubleZero Edge",
+    address: "solana:J6pQQ3FAcJQeWPPGppWRb4nM8jU3wLyYbRrLh7feMfvd",
+    symbol: "2Z",
+    url: "https://doublezero.xyz/dz-edge",
+    description:
+      "DoubleZero Edge is a platform delivering real-time market data to traders and market participants, powered by multicast.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/doublezero-edge.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Developer Tools",
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "doublezero",
+    parentProtocol: "parent#doublezero",
+    dimensions: {
+      fees: "doublezero-edge",
+    },
+  },
+  {
+    id: "6682",
+    name: "Pacifica Spot",
+    address: null,
+    symbol: "-",
+    url: "https://app.pacifica.fi?referral=defillama",
+    referralUrl: "https://app.pacifica.fi?referral=defillama",
+    description:
+      "Pacifica is a decentralized perpetual futures exchange offering leverage trading through advanced order types and APIs",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/pacifica-spot.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Order Book"],
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "pacifica_fi",
+    audit_links: ["https://docs.pacifica.fi/other/audits"],
+    parentProtocol: "parent#pacifica",
+    dimensions: {
+      dexs: "pacifica-spot"
+    }
+  },
 ];
 export default data6;

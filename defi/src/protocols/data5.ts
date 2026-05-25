@@ -16031,6 +16031,7 @@ const data5: Protocol[] = [
     dimensions: {
       derivatives: "bullbit-perp-dex",
       fees: "bullbit-perp-dex",
+      "open-interest": "bullbit-perp-dex-oi",
     }
   },
   {

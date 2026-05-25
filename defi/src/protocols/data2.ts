@@ -13650,7 +13650,8 @@ const data2: Protocol[] = [
     parentProtocol: "parent#demex",
     listedAt: 1661118051,
     dimensions: {
-      derivatives: "demex-demex-perp"
+      derivatives: "demex-demex-perp",
+      "open-interest": "demex-perp"
     }
   },
   {

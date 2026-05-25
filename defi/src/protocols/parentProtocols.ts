@@ -9751,6 +9751,30 @@ const parentProtocols: IParentProtocol[] = [
     github: ["Bonzo-Labs"],
     treasury: "bonzo.js",
   },
+  { 
+    id: "parent#clutch-markets",
+    name: "Clutch Markets",
+    url: "https://pupcup.clutch.market/",
+    description: "Clutch Markets is decentralized onchain markets.",
+    logo: `${baseIconsUrl}/clutch-markets.jpg`,
+    gecko_id: "clutch",
+    cmcId: "35973",
+    chains: [],
+    twitter: "clutchmarkets",
+    github: ["Clutch-Markets"],
+  },
+  { 
+    id: "parent#pacifica",
+    name: "Pacifica",
+    url: "https://app.pacifica.fi?referral=defillama",
+    referralUrl: "https://app.pacifica.fi?referral=defillama",
+    description: "Pacifica is a decentralized perpetual futures exchange offering leverage trading through advanced order types and APIs.",
+    logo: `${baseIconsUrl}/pacifica.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "pacifica_fi",
+  },
 ];
 
 export default parentProtocols;

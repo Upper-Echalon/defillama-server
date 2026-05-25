@@ -10,6 +10,7 @@ export const deadChains = [
   'vision',
   'kinto', // chain is dead,
   'inevm',
+  'soon_base', // dead?
   'fluence',
   'zksync',  // zksync lite, deprecated in favor of zksync era, which is still active
   'sx',  // deprecated in favor of sx rollup?

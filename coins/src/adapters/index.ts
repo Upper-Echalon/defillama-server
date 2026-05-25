@@ -211,4 +211,5 @@ export default {
   dCOMP: require("./other/dCOMP"),
   valos: require("./other/valos"),
   pathUSD: require("./other/pathUSD"),
+  bouncetech: require("./other/bouncetech"),
 };

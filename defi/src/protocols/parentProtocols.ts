@@ -8824,12 +8824,12 @@ const parentProtocols: IParentProtocol[] = [
   },
   {
     id: "parent#nest",
-    name: "NEST",
+    name: "nest",
     url: "https://app.usenest.xyz/",
     description:
       "NEST is built for Hyperliquid. Smart pools and efficient swaps power onchain rewards that compound value back to voters and the ecosystem.",
     logo: `${baseIconsUrl}/nest.jpg`,
-    gecko_id: null,
+    gecko_id: "nest-2",
     cmcId: null,
     chains: [],
     twitter: "NestExchange",

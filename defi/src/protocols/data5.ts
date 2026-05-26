@@ -14103,12 +14103,13 @@ const data5: Protocol[] = [
   },
   {
     id: "7539",
-    name: "Bitway",
+    name: "Bitway Earn",
+    previousNames: ["Bitway"], 
     address: "bsc:0x444045b0ee1ee319a660a5e3d604ca0ffa35acaa",
     symbol: "BTW",
     url: "https://bitway.com/",
     description:
-      "Bitway is a capital gateway connecting on-chain liquidity with global markets.",
+      "Bitway Earn is an asset management product from the Bitway suite that allows users to deploy on-chain capital into global investment opportunities. It functions as a comprehensive gateway for both retail and institutional players seeking to access yield globally.",
     chain: "Binance",
     logo: `${baseIconsUrl}/bitway.jpg`,
     audits: "2",

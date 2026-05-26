@@ -13169,6 +13169,7 @@ const data2: Protocol[] = [
     chains: ["Dogechain"],
     module: "yodeswap/index.js",
     twitter: "Yodeswap",
+    deadUrl: true,
     forkedFromIds: ["2197"],
     listedAt: 1660728749,
     dimensions: {

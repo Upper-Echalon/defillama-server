@@ -13279,6 +13279,7 @@ const data2: Protocol[] = [
     module: "canto-dex/index.js",
     twitter: "CantoPublic",
     listedAt: 1660767766,
+    deadUrl: true,
     dimensions: {
       dexs: "canto-dex"
     }
@@ -13301,6 +13302,7 @@ const data2: Protocol[] = [
     twitter: "CantoPublic",
     forkedFromIds: ["114"],
     listedAt: 1660767769,
+    deadUrl: true,
     dimensions: {
       fees: "canto-lending"
     }

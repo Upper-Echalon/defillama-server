@@ -1791,6 +1791,7 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Cosmos"],
     twitter: "CantoPublic",
     url: "https://canto.io/",
+    deadUrl: true,
     dimensions: {
       fees: "canto",
     },

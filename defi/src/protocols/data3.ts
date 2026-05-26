@@ -594,6 +594,7 @@ const data3_0: Protocol[] = [
     chains: ["Canto"],
     module: "dummy.js",
     twitter: "CantoPublic",
+    deadUrl: true,
   },
   {
     id: "2727",

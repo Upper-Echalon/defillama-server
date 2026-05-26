@@ -1488,7 +1488,10 @@ const data6: Protocol[] = [
     chains: ["Fluent","Ethereum"],
     module: "nerona-usd/index.js",
     twitter: "Neronaxyz",
-    listedAt: 1777660684
+    listedAt: 1777660684,
+    dimensions: {
+      fees: "nerona",
+    },
   },
   {
     id: "7777",

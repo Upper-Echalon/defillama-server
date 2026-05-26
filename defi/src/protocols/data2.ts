@@ -6283,6 +6283,9 @@ const data2: Protocol[] = [
     audit_links: ["https://github.com/LlamaPay/llamapay/blob/master/audits/PeckShield-Audit-Report-LlamaPay-v1.0.pdf"],
     listedAt: 1650367042,
     github: ["LlamaPay"],
+    dimensions: {
+      dexs: "llamapay",
+    },
   },
   {
     id: "1665",

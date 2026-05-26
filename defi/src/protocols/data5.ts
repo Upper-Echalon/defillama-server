@@ -17613,7 +17613,7 @@ const data5: Protocol[] = [
     url: " ", // pending to add url https://armsys.xyz
     description:
       "Oracle-free LVR protection for Uniswap v4 LPs using volatility detection and Aave V3 yield routing",
-    chain: "Arbitrum",
+    chain: "Base",
     logo: `${baseIconsUrl}/armsys.jpg`,
     audits: "0",
     gecko_id: null,

@@ -16032,7 +16032,8 @@ const data5: Protocol[] = [
       derivatives: "bullbit-perp-dex",
       fees: "bullbit-perp-dex",
       "open-interest": "bullbit-perp-dex-oi",
-    }
+    },
+    treasury: "bullbit-ai.js",
   },
   {
     id: "7626",

@@ -39066,6 +39066,9 @@ const data3_2: Protocol[] = [
     ],
     github: ["superform-xyz"],
     listedAt: 1712365922,
+    dimensions: {
+      fees: "superform",
+    },
   },
   {
     id: "4449",

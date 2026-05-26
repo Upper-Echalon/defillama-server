@@ -3248,6 +3248,9 @@ const data6: Protocol[] = [
     twitter: "Euphoria_fi",
     audit_links: ["https://docs.euphoria.finance/euphoria/smart-contract-audit"],
     listedAt: 1778866523,
+    dimensions: {
+      derivatives: "euphoria-fi",
+    },
   },
   {
     id: "7862",
@@ -4531,6 +4534,27 @@ const data6: Protocol[] = [
     twitter: "AquaFluxPro",
     parentProtocol: "parent#aquaflux",
     listedAt: 1779749605,
+  },
+  {
+    id: "7925",
+    name: "Doppi Finance",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://doppi.finance
+    description: `Doppi Finance is a decentralized protocol on the BNB Chain that automates dual asset investment strategy combining features of options trading with yield generation. The protocol bridges the gap between traditional derivative strategies and decentralized finance (DeFi) by offering automated "Buy Low" and "Sell High" opportunities.`,
+    chain: "Binance",
+    logo: `${baseIconsUrl}/doppi-finance.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Options",
+    chains: ["Binance"],
+    module: "doppifinance/index.js",
+    twitter: "DoppiFinance",
+    audit_links: ["https://doppi-finance.gitbook.io/docs/resources/security-and-audit/audit-report-v1"],
+    oraclesBreakdown: [ { name: "Chainlink", type: "Primary", proof: ["https://github.com/DefiLlama/DefiLlama-Adapters/pull/19391"] } ],
+    github: ["doppifinance"],
+    listedAt: 1779814461,
   },
 ];
 export default data6;

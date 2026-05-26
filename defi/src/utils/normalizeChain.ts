@@ -5282,6 +5282,9 @@ export const chainCoingeckoIds = {
     url: "https://gatechain.io/gatelayer",
     github: ["gatechain"],
     chainId: 10088,
+    dimensions: {
+      fees: "gatelayer",
+    },
   },
   "Xone Chain": {
     geckoId: "xoc",

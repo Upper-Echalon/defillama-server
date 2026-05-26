@@ -2501,7 +2501,8 @@ const data4: Protocol[] = [
     module: "dummy.js",
     twitter: "SuperSwapINK",
     dimensions: {
-      aggregators: "superswap"
+      aggregators: "superswap",
+      fees: "superswap",
     }
   },
   {

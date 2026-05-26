@@ -1076,6 +1076,16 @@
     }
   },
   "ethereum": {
+    "0xdA36Ab65d5Af53763CAcD63AE7D441932032326f": {
+      "decimals": "18",
+      "symbol": "morpho-frxUSD/sUSDS",
+      "to": "asset#ethereum:0x81a2612f6dea269a6dd1f6deab45c5424ee2c4b7"
+    },
+    "0x5E1DACDBEF6bcEba53600d0BcE33FD30EE09fA82": {
+      "decimals": "18",
+      "symbol": "stakedao-frxUSD/sUSDS",
+      "to": "asset#ethereum:0x81a2612f6dea269a6dd1f6deab45c5424ee2c4b7"
+    },
     "0x4fdb3cb3DBD6D24B64276645c1ADCb85cbB39dC6": {
       "decimals": "18",
       "symbol": "sd-FrxMsUSD-vault",

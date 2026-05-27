@@ -19916,7 +19916,7 @@ const data4: Protocol[] = [
     audits: "0",
     gecko_id: null,
     cmcId: null,
-    category: "Derivatives",
+    category: "Interface",
     chains: ["Base", "Coti"],
     module: "dummy.js",
     twitter: "PriveX_Official",

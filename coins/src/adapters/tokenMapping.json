@@ -17154,6 +17154,31 @@
       "to": "coingecko#kaspa",
       "decimals": 18,
       "symbol": "WiKAS"
+    },
+    "0x46346F49b4fe8c640c5FCdbed2d6741056FEB959": {
+      "to": "coingecko#tether",
+      "decimals": 6,
+      "symbol": "USDT"
+    },
+    "0xA5b8BF902b2844dA17d4506cc827F7F1681735E7": {
+      "to": "coingecko#usdc",
+      "decimals": 6,
+      "symbol": "USDC"
+    },
+    "0xF2B48b6e560af8834622203a8EEff6960d6172De": {
+      "to": "coingecko#coinbase-wrapped-btc",
+      "decimals": 8,
+      "symbol": "cbBTC"
+    },
+    "0x69790024D44504F05973E127197E6df17e283859": {
+      "to": "coingecko#ethereum",
+      "decimals": 18,
+      "symbol": "WETH"
+    },
+    "0xB9EC76392f7d48F6B266431951cb7c645bd711e2": {
+      "to": "coingecko#solana",
+      "decimals": 9,
+      "symbol": "SOL"
     }
   },
   "strato": {

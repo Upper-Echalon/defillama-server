@@ -788,7 +788,7 @@ const data5: Protocol[] = [
     audits: "2",
     gecko_id: "juris-protocol",
     cmcId: null,
-    category: "Yield",
+    category: "Lending",
     chains: ["Terra"],
     module: "jurisprotocol/index.js",
     audit_links: ["https://app.solidproof.io/projects/juris-protocol?audit=963e1452-fcff-4a08-9618-72cf949c9419"],

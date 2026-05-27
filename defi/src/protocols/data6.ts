@@ -4786,5 +4786,24 @@ const data6: Protocol[] = [
     github: ["NeuroDreamStudio"],
     listedAt: 1779908599
   },
+  {
+    id: "7937",
+    name: "Hibachi Bridge",
+    address: null,
+    symbol: "-",
+    url: "https://hibachi.xyz/",
+    description:
+      `The canonical bridge for Hibachi.`,
+    chain: "Arbitrum",
+    logo: `${baseIconsUrl}/hibachi-bridge.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Canonical Bridge",
+    chains: ["Arbitrum"],
+    module: "hibachi-bridge/index.js",
+    twitter: "hibachi_xyz",
+    listedAt: 1779922089
+  },
 ];
 export default data6;

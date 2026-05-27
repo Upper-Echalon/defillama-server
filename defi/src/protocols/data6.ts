@@ -3132,7 +3132,7 @@ const data6: Protocol[] = [
     audits: "2",
     gecko_id: null,
     cmcId: null,
-    category: "Yield",
+    category: "Lending",
     chains: ["Monad"],
     module: "covenant/index.js",
     twitter: "covenantFi",

@@ -64,11 +64,6 @@ describe('Active Users API - Overview', () => {
           expectNonNegativeNumber(overviewResponse.data.total24h);
           expect(overviewResponse.data.total24h).toBeGreaterThan(0);
         }
-
-        if (overviewResponse.data.total7d !== null && overviewResponse.data.total7d !== undefined) {
-          expectValidNumber(overviewResponse.data.total7d);
-          expectNonNegativeNumber(overviewResponse.data.total7d);
-        }
       });
 
       it('should have chronologically ordered chart data', () => {

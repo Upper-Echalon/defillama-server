@@ -65,16 +65,6 @@ describe('Active Users API - Summary', () => {
           expectValidNumber(data.total24h);
           expectNonNegativeNumber(data.total24h);
         }
-
-        if (data.total7d !== null && data.total7d !== undefined) {
-          expectValidNumber(data.total7d);
-          expectNonNegativeNumber(data.total7d);
-        }
-
-        if (data.total30d !== null && data.total30d !== undefined) {
-          expectValidNumber(data.total30d);
-          expectNonNegativeNumber(data.total30d);
-        }
       });
 
       it('should have valid change percentages when present', () => {

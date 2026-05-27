@@ -4661,5 +4661,27 @@ const data6: Protocol[] = [
     github: ["00labs"],
     listedAt: 1779853635,
   },
+  {  
+    id: "7931",
+    name: "OnixSwap",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://swap.onix.finance
+    description:
+      "OnixSwap: swap + liquidity across Raydium, Orca & Meteora.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/onixswap.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Solana"],
+    module: "dummy.js",
+    treasury: "onixswap.js",
+    twitter: "Onix_Finance",
+    dimensions: {
+      fees: "onixswap",
+    },
+  },
 ];
 export default data6;

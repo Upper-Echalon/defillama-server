@@ -4719,7 +4719,7 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Launchpad",
     chains: ["Binance"],
-    module: "dummy.js",
+    module: "hodl-dance/index.js",
     twitter: "hodl4meme",
     github: ["hodldance"],
     dimensions: {

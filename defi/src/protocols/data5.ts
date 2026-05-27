@@ -7168,6 +7168,8 @@ const data5: Protocol[] = [
     dimensions: {
       fees: "nest",
       dexs: "nest",
+      "new-users": "nest",
+      "active-users": "nest",
     },
     parentProtocol: "parent#nest",
     listedAt: 1768416291

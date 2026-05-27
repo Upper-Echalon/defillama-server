@@ -26079,6 +26079,7 @@ const data4: Protocol[] = [
     module: "dummy.js",
     twitter: "Kalshi",
     dimensions: {
+      fees: "kalshi",
       dexs: "kalshi",
       "open-interest": "kalshi"
     }

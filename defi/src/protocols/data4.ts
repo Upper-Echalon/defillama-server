@@ -25916,7 +25916,12 @@ const data4: Protocol[] = [
     parentProtocol: "parent#pacifica",
     listedAt: 1757349667,
     dimensions: {
-      derivatives: "pacifica",
+      derivatives: {
+        adapter: "pacifica",
+        genuineSpikes: [
+          ['2026-05-25', '-'], ['2026-05-26', '-']
+        ]
+      },
       "open-interest": "pacifica-oi",
       "normalized-volume": "pacifica"
     }

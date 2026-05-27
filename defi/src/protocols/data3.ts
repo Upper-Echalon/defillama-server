@@ -46812,7 +46812,13 @@ const data3_3: Protocol[] = [
     listedAt: 1718906602,
     dimensions: {
       fees: "termmax",
-    }
+    },
+    warningBanners: [
+      {
+        message: "This protocol includes unproductive positions that may contribute to inflated metrics. Be safe.",
+        level: "alert",
+      }
+    ]
   },
   {
     id: "4800",

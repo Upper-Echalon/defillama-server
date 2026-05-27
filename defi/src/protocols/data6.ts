@@ -4599,6 +4599,7 @@ const data6: Protocol[] = [
     parentProtocol: "parent#edgex",
     dimensions: {
       derivatives: "edgeX-v2",
+      fees: "edgeX-v2",
     }
   },
   {
@@ -4681,6 +4682,48 @@ const data6: Protocol[] = [
     twitter: "Onix_Finance",
     dimensions: {
       fees: "onixswap",
+    },
+  },
+  {
+    id: "7932",
+    name: "Hotstuff Spot",
+    address: null,
+    symbol: "-",
+    url: "https://app.hotstuff.trade/",
+    description: "Hotstuff is a purpose-built DeFi Layer 1 with a mission to enable Confidential Integrated Finance.",
+    chain: "Hotstuff",
+    logo: `${baseIconsUrl}/hotstuff-spot.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Order Book"],
+    chains: ["Hotstuff"],
+    module: "dummy.js",
+    twitter: "tradehotstuff",
+    parentProtocol: "parent#hotstuff",
+    dimensions: {
+      dexs: "hotstuff-spot",
+    },
+  },
+  {
+    id: "7933",
+    name: "hodl.dance",
+    address: "bsc:0x197fb6855E0D6a237a7AB6228e3a0B8168fe5dEc",
+    symbol: "HODL4",
+    url: " ", // pending to add url https://hodl.dance
+    description: "BSC memecoin launchpad with bonding curves. Creators earn continuously throughout the entire life of their project.",
+    chain: "Binance",
+    logo: `${baseIconsUrl}/hodl.dance.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Binance"],
+    module: "dummy.js",
+    twitter: "hodl4meme",
+    github: ["hodldance"],
+    dimensions: {
+      fees: "hodl-dance",
     },
   },
 ];

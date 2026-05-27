@@ -9787,6 +9787,17 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "AquaFluxPro",
     github: ["AquafluxPro"],
   },
+  { 
+    id: "parent#hotstuff",
+    name: "Hotstuff",
+    url: "https://app.hotstuff.trade/",
+    description: "Hotstuff is a purpose-built DeFi Layer 1 with a mission to enable Confidential Integrated Finance.",
+    logo: `${baseIconsUrl}/hotstuff.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "tradehotstuff",
+  },
 ];
 
 export default parentProtocols;

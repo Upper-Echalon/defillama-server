@@ -13347,7 +13347,11 @@ const data5: Protocol[] = [
     chains: ["W Chain"],
     module: "wswap/index.js",
     twitter: "WChainNetwork",
-    listedAt: 1772731701
+    listedAt: 1772731701,
+    dimensions: {
+      fees: "wswap",
+      dexs: "wswap",
+    },
   },
   {
     id: "7502",
@@ -15577,13 +15581,13 @@ const data5: Protocol[] = [
   },
   {
     id: "7605",
-    name: "Hotstuff",
+    name: "Hotstuff Perps",
     address: null,
     symbol: "-",
     url: "https://app.hotstuff.trade/",
     description: "Hotstuff is a purpose-built DeFi Layer 1 with a mission to enable Confidential Integrated Finance.",
     chain: "Hotstuff",
-    logo: `${baseIconsUrl}/hotstuff.jpg`,
+    logo: `${baseIconsUrl}/hotstuff-perps.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -15592,6 +15596,7 @@ const data5: Protocol[] = [
     module: "dummy.js",
     twitter: "tradehotstuff",
     listedAt: 1775000619,
+    parentProtocol: "parent#hotstuff",
     dimensions: {
       derivatives: "hotstuff",
       "open-interest": "hotstuff-oi"

@@ -16256,7 +16256,8 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     listedAt: 1637185638,
     github: ["multiversx"],
     dimensions: {
-      dexs: "xexchange"
+      dexs: "xexchange",
+      fees: "xexchange",
     }
   },
   {

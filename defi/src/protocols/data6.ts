@@ -4640,5 +4640,26 @@ const data6: Protocol[] = [
     github: ["templ-fun"],
     listedAt: 1779830023,
   },
+  {  
+    id: "7930",
+    name: "Huma Finance V2",
+    address: null,
+    symbol: "-",
+    url: "https://huma.finance",
+    description:
+      "Permissionless DeFi yield, powered by real-world payment flows.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/huma-finance-v2.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Solana"],
+    module: "huma-v2/index.js",
+    twitter: "humafinance",
+    audit_links: ["https://docs.huma.finance/ecosystem-resources/security-audits"],
+    github: ["00labs"],
+    listedAt: 1779853635,
+  },
 ];
 export default data6;

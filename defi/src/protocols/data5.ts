@@ -52,7 +52,7 @@ const data5: Protocol[] = [
     audits: "0",
     gecko_id: null,
     cmcId: null,
-    category: "Derivatives",
+    category: "Interest Rate Derivatives",
     chains: ["Ethereum"],
     module: "rho-x/index.js",
     twitter: "Rho_Labs",

@@ -2458,15 +2458,15 @@ const parentProtocols: IParentProtocol[] = [
   },
   {
     id: "parent#trufin-protocol",
-    name: "TruFin Protocol",
-    url: "https://www.trufin.io/",
+    name: "TruYields",
+    url: "https://truyields.com",
     description:
-      "TruFin provides institutional-grade Web3 primitives, such as liquid staking, that can be used as the foundational building blocks for digital asset strategies to reduce risk, generate rewards, securely on-chain.",
-    logo: `${baseIconsUrl}/trufin-protocol.jpg`,
+      "TruYields, a yield infrastructure layer that helps regulated financial institutions, asset managers, and digital asset treasuries access onchain yield with institutional controls.",
+    logo: `${baseIconsUrl}/truyields.jpg`,
     gecko_id: null,
     cmcId: null,
     chains: [],
-    twitter: "TruFinProtocol",
+    twitter: "TruYields",
   },
   {
     id: "parent#jewelswap",

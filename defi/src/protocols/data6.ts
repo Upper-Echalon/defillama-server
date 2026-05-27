@@ -4722,9 +4722,69 @@ const data6: Protocol[] = [
     module: "hodl-dance/index.js",
     twitter: "hodl4meme",
     github: ["hodldance"],
+    listedAt: 1779904482,
     dimensions: {
       fees: "hodl-dance",
     },
+  },
+  {
+    id: "7934",
+    name: "TruCore",
+    address: null,
+    symbol: "-",
+    url: "https://app.truyields.com", 
+    description:
+      `USD and tokenised RWA onchain yield solutions, delivered through permissioned issuance and redemption workflows.`,
+    chain: "Solana",
+    logo: `${baseIconsUrl}/trucore.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Treasury Bills"],
+    chains: ["Solana"],
+    module: "trufin-trucore/index.js",
+    twitter: "TruYields",
+    parentProtocol: "parent#trufin-protocol",
+    listedAt: 1779908019
+  },
+  {
+    id: "7935",
+    name: "basedbid",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://www.based.bid/
+    description:
+      `A permissionless multi-chain launchpad with bonding curves, Flash Tokens, and white-label Boards. Boards let anyone run a branded launchpad and earn from every launch under their name. Fee routing is programmable via the Fee Builder, split to holders, buybacks, liquidity, or any wallet.`,
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/basedbid.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Ethereum", "Base", "Binance", "MegaETH"],
+    module: "basedbid/index.js",
+    twitter: "basedbidx",
+    listedAt: 1779908513
+  },
+  {
+    id: "7936",
+    name: "NeuroIsland",
+    address: "cronos:0xcfe223d06b86568c24ffd17e8ac748dbac096b3b",
+    symbol: "NEURO",
+    url: " ", // pending to add url https://neuroisland.xyz
+    description:
+      `NeuroIsland is a Cronos-based rewards protocol using an on-chain RewardVault for user-claimed CRO/CRC-20 distributions.`,
+    chain: "Cronos",
+    logo: `${baseIconsUrl}/neuroisland.jpg`,
+    audits: "0",
+    gecko_id: "neuroticat",
+    cmcId: null,
+    category: "Yield",
+    chains: ["Cronos"],
+    module: "neuroisland/index.js",
+    twitter: "neuroticatcro",
+    github: ["NeuroDreamStudio"],
+    listedAt: 1779908599
   },
 ];
 export default data6;

@@ -2129,7 +2129,11 @@ const data6: Protocol[] = [
         adapter: "risex-perps",
         genuineSpikes: [["2026-05-07", "-"]]
       },
-      "normalized-volume": "risex"
+      "normalized-volume": {
+        adapter: "risex",
+        genuineSpikes: [["2026-05-27", "-"],
+                       ["2026-05-28]", "-"]]
+      }
     },
   },
   {

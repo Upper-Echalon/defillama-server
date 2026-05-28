@@ -6105,6 +6105,15 @@ export const chainCoingeckoIds = {
     twitter: "VaraNetwork",
     url: "https://start.vara.network/",
   },
+  "MyRx": {
+    geckoId: null,
+    symbol: "MRT",
+    cmcId: null,
+    twitter: "myrxwallet",
+    url: "https://myrxwallet.io/",
+    chainId: 8472,
+    github: ["myrxwallet"],
+  },
 } as unknown as ChainCoinGekcoIds;
 
 // We are creating the list here because, later in the code, we include historical chain labels with the same chain metadata, so, chainCoingeckoIds will have duplicate keys
@@ -6291,6 +6300,7 @@ const chainLabelMap = {
   "mtt_network": "MTT Network",
   "hsk": "HashKey Chain",
   "wchain": "W Chain",
+  "mrt": "MyRx",
   //"hashkey": "HashKey Chain", not possible to have two different chains with the same name
   "fhe": "Mind Network",
   "ao": "AO",

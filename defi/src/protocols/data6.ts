@@ -3826,6 +3826,9 @@ const data6: Protocol[] = [
     twitter: "flexmeow",
     github: ["flexmeow"],
     listedAt: 1779301261,
+    dimensions: {
+      fees: "flex",
+    },
   },
   {
     id: "7890",
@@ -5015,6 +5018,45 @@ const data6: Protocol[] = [
     module: "xora/index.js",
     twitter: "xora_finance",
     listedAt: 1779989121,
+  },
+  {
+    id: "7947",
+    name: "Lode Markets",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://lode.markets/
+    description:
+      "Lode is a Uniswap v4 LP protocol that captures top-of-block MEV through sealed-bid auctions and streams the proceeds back to LPs via per-pool rebate vaults",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/lode-markets.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Liquidity Manager",
+    chains: ["Ethereum"],
+    module: "lode/index.js",
+    twitter: "Lodemarkets",
+    listedAt: 1780003129,
+  },
+  {
+    id: "7948",
+    name: "MyrxSwap",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://myrxwallet.io
+    description:
+      "Uniswap V2-style AMM DEX on MyrxWallet Network (Chain 8472) — a healthcare-focused EVM chain",
+    chain: "MyRx",
+    logo: `${baseIconsUrl}/myrxswap.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["AMM"],
+    chains: ["MyRx"],
+    module: "myrxswap/index.js",
+    forkedFromIds: ["2197"],
+    twitter: "myrxwallet",
+    listedAt: 1780003812,
   },
 ];
 export default data6;

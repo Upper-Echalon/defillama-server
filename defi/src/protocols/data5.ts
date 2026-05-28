@@ -210,6 +210,9 @@ const data5: Protocol[] = [
       "https://github.com/SHIFT-NebulaLabs/shift-contracts/blob/main/audits/shift-sbsecurity-audit-2025.pdf",
     ],
     listedAt: 1761171899,
+    dimensions: {
+      fees: "shift-protocol",
+    },
   },
   {
     id: "6902",
@@ -12771,6 +12774,9 @@ const data5: Protocol[] = [
       },
     ],
     listedAt: 1772205522,
+    dimensions: {
+      fees: "purrlend",
+    },
     deadUrl: true,
   },
   {
@@ -14995,7 +15001,10 @@ const data5: Protocol[] = [
     github: ["Edel-Finance"],
     forkedFromIds: ["1599"],
     oraclesBreakdown: [ { name: "Chainlink", type: "Primary", proof: ["https://docs.edel.finance/concepts/oracles"] } ],
-    listedAt: 1774462905
+    listedAt: 1774462905,
+    dimensions: {
+      fees: "edel",
+    }
   },
   {
     id: "7579",

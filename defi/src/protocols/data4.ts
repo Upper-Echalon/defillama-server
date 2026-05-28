@@ -21718,6 +21718,7 @@ const data4: Protocol[] = [
     listedAt: 1753803222,
     dimensions: {
       derivatives: "evedex",
+      fees: "evedex",
       "open-interest": "evedex",
       "normalized-volume": "evedex"
     }

@@ -3848,6 +3848,9 @@ const data6: Protocol[] = [
     audit_links: ["https://docs.zona.finance/resources/smart-contract-audit"],
     oraclesBreakdown: [{name: "Chainlink", type: "Primary", proof: ["https://docs.pharos.xyz/tooling-and-infrastructure/oracles/chainlink-pe"]}],
     listedAt: 1779302065,
+    dimensions: {
+      fees: "zona",
+    }
   },
   {
     id: "7891",
@@ -4829,7 +4832,10 @@ const data6: Protocol[] = [
     twitter: "AppKaskad",
     audit_links: ["https://github.com/Kaskad-Lending/kaskad-public-docs/blob/Audits/2026.04.30%20-%20Final%20-%20Kaskad%20Collaborative%20Audit%20Report%201%20by%20Sherlock.pdf"],
     github: ["Kaskad-Lending"],
-    listedAt: 1779922095
+    listedAt: 1779922095,
+    dimensions: {
+      fees: "kaskad",
+    }
   },
   {
     id: "7939",
@@ -4850,7 +4856,11 @@ const data6: Protocol[] = [
     forkedFromIds: ["2198"],
     twitter: "KublerxOfficial",
     github: ["kublerxofficial"],
-    listedAt: 1779922099
+    listedAt: 1779922099,
+    dimensions: {
+      fees: "kublerx-v3",
+      dexs: "kublerx-v3",
+    }
   },
   {
     id: "7940",

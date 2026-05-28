@@ -26070,7 +26070,7 @@ const data4: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://kalshi.com/r/defillama",
-    referralUrl: "https://kalshi.com/r/defillama",
+   referralUrl: "https://kalshi.com/r/defillama",
     description: "Kalshi is a CFTC-regulated event derivatives exchange where users trade binary contracts (yes/no) on real-world outcomes",
     chain: "Off Chain",
     logo: `${baseIconsUrl}/kalshi.jpg`,

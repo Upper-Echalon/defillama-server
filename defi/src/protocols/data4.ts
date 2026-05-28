@@ -1331,16 +1331,15 @@ const data4: Protocol[] = [
     twitter: "republicnote",
     listedAt: 1736775042,
   },
-  /*
-  { new id id: "7940",
+  {
     id: "5617",
-    name: "Aurum",
+    name: "Aurum old",
     address: "avax:0x7F144F8691CbA3d2EfD8e5bcf042f9303EE31a46",
     symbol: "AUR",
     url: "https://aurumfi.io/",
     description: `Aurum: Unlocking seamless DeFi lending with innovative yield strategies and community-driven rewards.`,
     chain: "Sonic",
-    logo: `${baseIconsUrl}/aurum.png`,
+    logo: `${baseIconsUrl}/aurum-old.png`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -1353,9 +1352,7 @@ const data4: Protocol[] = [
     audit_links: ["https://github.com/aave/aave-v3-core/tree/master/audits"],
     github: ["aurum-protocol"],
     listedAt: 1736775047,
-    deadUrl: true
   },
-  */
   {
     id: "5618",
     name: "LFJ Aggregator",

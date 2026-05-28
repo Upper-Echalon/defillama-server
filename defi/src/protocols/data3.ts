@@ -42303,17 +42303,16 @@ const data3_2: Protocol[] = [
     listedAt: 1715625938,
     deadUrl: true,
   },
-  /*
-  { new listing on      id: "7941", name: "Untangled RWA",
+  {
     id: "4595",
-    name: "Untangled RWA",
+    name: "Untangled old",
     address: null,
     symbol: "-",
     url: "https://untangled.finance/",
     description:
       "Untangled is an institutional-grade RWA credit protocol for fintechs around the world. The protocol has pioneered the first RWA credit oracle infrastructure, enabling dynamic pricing of RWAs with AI-driven risk models and zero-knowledge proof",
     chain: "Celo",
-    logo: `${baseIconsUrl}/untangled.png`,
+    logo: `${baseIconsUrl}/untangled-old.png`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -42327,7 +42326,6 @@ const data3_2: Protocol[] = [
     parentProtocol: "parent#untangled",
     listedAt: 1715628381,
   },
-  */
   {
     id: "4596",
     name: "Mitosis",

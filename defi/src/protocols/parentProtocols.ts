@@ -9799,6 +9799,18 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "tradehotstuff",
   },
+  { 
+    id: "parent#hubra",
+    name: "Hubra",
+    url: "https://hubra.app",
+    description: "Hubra is a Solana-based DeFi protocol providing institutional-grade, non-custodial yield products, including liquid staking (raSOL) and automated yield vaults (raUSDC, raUSDT, raUSDS, raUSDG, raUSD1). It is designed to make professional yield strategies accessible to everyone.",
+    logo: `${baseIconsUrl}/hubra.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "HubraApp",
+    github: ["Hubra-labs"],
+  },
 ];
 
 export default parentProtocols;

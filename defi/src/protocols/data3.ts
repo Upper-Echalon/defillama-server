@@ -58666,7 +58666,7 @@ const data3_3: Protocol[] = [
     address: null,
     symbol: "-",
     assetToken: "hubSOL",
-    url: "https://www.solanahub.app/",
+    url: "https://www.hubra.app",
     description:
       "SolanaHub is your all-in-one solution, designed for everyday utility. We prioritize composability and safety and encourage exploration of the Solana ecosystem",
     chain: "Solana",
@@ -58680,7 +58680,7 @@ const data3_3: Protocol[] = [
     twitter: "SolanaHubApp",
     audit_links: ["https://docs.solanahub.app/platform/audits"],
     listedAt: 1731263252,
-    deadUrl: true,
+    parentProtocol: "parent#hubra",
   },
   {
     id: "5339",

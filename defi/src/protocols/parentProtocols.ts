@@ -9811,6 +9811,17 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "HubraApp",
     github: ["Hubra-labs"],
   },
+  { 
+    id: "parent#hyperdrive-hl",
+    name: "Hyperdrive HL",
+    url: "https://hyperdrive.fi/",
+    description: "Hyperdrive HL is a high-performance lending protocol on Hyperliquid EVM, built for capital efficiency. It offers real-time leverage, dynamic rates, and deep liquidity",
+    logo: `${baseIconsUrl}/hyperdrive-hl.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "hyperdrivedefi",
+  },
 ];
 
 export default parentProtocols;

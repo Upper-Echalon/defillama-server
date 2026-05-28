@@ -17114,14 +17114,14 @@ const data4: Protocol[] = [
   },
   {
     id: "6298",
-    name: "Hyperdrive HL",
+    name: "Hyperdrive HL Lending",
     address: null,
     symbol: "-",
     url: "https://hyperdrive.fi/",
     description:
       "The premier stablecoin money market on Hyperliquid, and the foundational layer for making everything on HyperCore liquid",
     chain: "Hyperliquid L1",
-    logo: `${baseIconsUrl}/hyperdrive-hl.jpg`,
+    logo: `${baseIconsUrl}/hyperdrive-hl-lending.jpg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -17129,17 +17129,12 @@ const data4: Protocol[] = [
     chains: ["Hyperliquid L1"],
     module: "hyperdrive-hl/index.js",
     twitter: "hyperdrivedefi",
+    parentProtocol: "parent#hyperdrive-hl",
     oraclesBreakdown: [
-      {
-        name: "RedStone",
-        type: "Primary",
-        proof: ["https://hyperdrive-2.gitbook.io/hyperdrive/borrowing/oracles"],
+      {name: "RedStone",type: "Primary",proof: ["https://hyperdrive-2.gitbook.io/hyperdrive/borrowing/oracles"],
         endDate: "2025-11-08"
       },
-      {
-        name: "Chainlink",
-        type: "Primary",
-        proof: ["https://hyperdrive-2.gitbook.io/hyperdrive/borrowing/oracles"],
+      {name: "Chainlink",type: "Primary",proof: ["https://hyperdrive-2.gitbook.io/hyperdrive/borrowing/oracles"],
         startDate: "2025-11-08"
       },
     ],

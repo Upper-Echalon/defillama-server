@@ -4907,5 +4907,26 @@ const data6: Protocol[] = [
     parentProtocol: "parent#untangled",
     listedAt: 1779964244
   },
+  {
+    id: "7942",
+    name: "Hyperdrive HL Earn",
+    address: null,
+    symbol: "-",
+    url: "https://hyperdrive.fi/",
+    description:
+      "The premier stablecoin money market on Hyperliquid, and the foundational layer for making everything on HyperCore liquid",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/hyperdrive-hl-earn.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Hyperliquid L1"],
+    module: "hyperdrive-hl-earn/index.js",
+    twitter: "hyperdrivedefi",
+    parentProtocol: "parent#hyperdrive-hl",
+    audit_links: ["https://github.com/ambitlabsxyz/hyperdrive-audits"],
+    listedAt: 1779986289,
+  },
 ];
 export default data6;

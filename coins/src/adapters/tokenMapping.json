@@ -17166,7 +17166,7 @@
       "symbol": "USDT"
     },
     "0xA5b8BF902b2844dA17d4506cc827F7F1681735E7": {
-      "to": "coingecko#usdc",
+      "to": "coingecko#usd-coin",
       "decimals": 6,
       "symbol": "USDC"
     },

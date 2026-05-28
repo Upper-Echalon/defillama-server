@@ -1331,7 +1331,8 @@ const data4: Protocol[] = [
     twitter: "republicnote",
     listedAt: 1736775042,
   },
-  {
+  /*
+  { new id id: "7940",
     id: "5617",
     name: "Aurum",
     address: "avax:0x7F144F8691CbA3d2EfD8e5bcf042f9303EE31a46",
@@ -1354,6 +1355,7 @@ const data4: Protocol[] = [
     listedAt: 1736775047,
     deadUrl: true
   },
+  */
   {
     id: "5618",
     name: "LFJ Aggregator",

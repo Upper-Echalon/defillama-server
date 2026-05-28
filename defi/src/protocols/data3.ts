@@ -42303,7 +42303,8 @@ const data3_2: Protocol[] = [
     listedAt: 1715625938,
     deadUrl: true,
   },
-  {
+  /*
+  { new listing on      id: "7941", name: "Untangled RWA",
     id: "4595",
     name: "Untangled RWA",
     address: null,
@@ -42326,6 +42327,7 @@ const data3_2: Protocol[] = [
     parentProtocol: "parent#untangled",
     listedAt: 1715628381,
   },
+  */
   {
     id: "4596",
     name: "Mitosis",

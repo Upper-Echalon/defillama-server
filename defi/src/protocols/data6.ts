@@ -4852,5 +4852,50 @@ const data6: Protocol[] = [
     github: ["kublerxofficial"],
     listedAt: 1779922099
   },
+  {
+    id: "7940",
+    name: "AurumSwap",
+    address: "avax:0x7F144F8691CbA3d2EfD8e5bcf042f9303EE31a46",
+    symbol: "AUR",
+    url: "https://aurumfi.io/",
+    description: `Aurum: Unlocking seamless DeFi lending with innovative yield strategies and community-driven rewards.`,
+    chain: "Sonic",
+    logo: `${baseIconsUrl}/aurumswap.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Lending",
+    chains: ["Sonic"],
+    oraclesBreakdown: [{ name: "Api3", type: "Primary", proof: [] }], // https://aurum-finance.gitbook.io/docs
+    module: "aurumswap/index.js",
+    twitter: "AurumFi_Sonic",
+    forkedFromIds: ["1599"],
+    audit_links: ["https://github.com/aave/aave-v3-core/tree/master/audits"],
+    github: ["aurum-protocol"],
+    listedAt: 1779963983,
+  },
+  {
+    id: "7941",
+    name: "Untangled RWA",
+    address: null,
+    symbol: "-",
+    url: "https://untangled.finance/",
+    description:
+      "Untangled is an institutional-grade RWA credit protocol for fintechs around the world. The protocol has pioneered the first RWA credit oracle infrastructure, enabling dynamic pricing of RWAs with AI-driven risk models and zero-knowledge proof",
+    chain: "Celo",
+    logo: `${baseIconsUrl}/untangled-rwa.png`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Private Credit"],
+    chains: ["Celo"],
+    audit_links: [
+      "https://github.com/Verilog-Solutions/.github/blob/main/Audit/Untangle_Protocol_Audit/Untangled_FInance_Audit_Report.pdf",
+    ],
+    module: "untangled-curator/index.js",
+    twitter: "UntangledFi",
+    parentProtocol: "parent#untangled",
+    listedAt: 1779964244
+  },
 ];
 export default data6;

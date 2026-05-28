@@ -12135,7 +12135,7 @@ const data4: Protocol[] = [
     audits: "2",
     gecko_id: "zyfi",
     cmcId: "32933",
-    category: "Yield",
+    category: "AI Agents",
     chains: ["Sonic"],
     module: "zyfai/index.js",
     twitter: "ZyfAI_",

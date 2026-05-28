@@ -27977,7 +27977,10 @@ const data2: Protocol[] = [
     governanceID: ["snapshot:cow.eth"],
     deadUrl: true,
     dimensions: {
-      fees: "cow-protocol",
+      fees: {
+        adapter: "cow-protocol",
+        genuineSpikes: [["2025-11-04", "Significant settlement due to MEV Blocker sale"]],
+      },
       aggregators: {
         genuineSpikes: [["2024-08-05", "-"]],
         adapter: "cowswap"

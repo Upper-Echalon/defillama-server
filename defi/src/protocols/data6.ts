@@ -4805,5 +4805,48 @@ const data6: Protocol[] = [
     twitter: "hibachi_xyz",
     listedAt: 1779922089
   },
+  {
+    id: "7938",
+    name: "Kaskad",
+    address: "igra:0x16d92794F5B81d2CdEd0F0958779A410401e6435",
+    symbol: "KSKD",
+    url: "https://kaskad.app",
+    description:
+      `Kaskad is a non-custodial lending protocol on Igra, an EVM-compatible Layer 2 anchored to Kaspa.`,
+    chain: "Igra",
+    logo: `${baseIconsUrl}/kaskad.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Lending",
+    chains: ["Igra"],
+    module: "kaskad/index.js",
+    forkedFromIds: ["1599"],
+    twitter: "AppKaskad",
+    audit_links: ["https://github.com/Kaskad-Lending/kaskad-public-docs/blob/Audits/2026.04.30%20-%20Final%20-%20Kaskad%20Collaborative%20Audit%20Report%201%20by%20Sherlock.pdf"],
+    github: ["Kaskad-Lending"],
+    listedAt: 1779922095
+  },
+  {
+    id: "7939",
+    name: "Kublerx",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://kublerx.com
+    description:
+      `Kublerx is a DEX on KUB.`,
+    chain: "Bitkub",
+    logo: `${baseIconsUrl}/kublerx.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["CLMM"],
+    chains: ["Bitkub"],
+    module: "kublerx-v3/index.js",
+    forkedFromIds: ["2198"],
+    twitter: "KublerxOfficial",
+    github: ["kublerxofficial"],
+    listedAt: 1779922099
+  },
 ];
 export default data6;

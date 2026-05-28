@@ -6521,6 +6521,7 @@ const data2: Protocol[] = [
     twitter: "CENNZnet",
     listedAt: 1650586534,
     github: ["cennznet"],
+    deadUrl: true,
   },
   {
     id: "1676",
@@ -25815,6 +25816,7 @@ const data2: Protocol[] = [
     chains: ["Ethereum"],
     module: "dummy.js",
     twitter: "NFTEarth_L2",
+    deadUrl: true,
     dimensions: {
       fees: "nftearth"
     }

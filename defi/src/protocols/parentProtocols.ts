@@ -473,6 +473,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "OmniDex1",
     github: ["OmniDexFinance"],
+    deadUrl: true,
   },
   {
     id: "parent#amulet",

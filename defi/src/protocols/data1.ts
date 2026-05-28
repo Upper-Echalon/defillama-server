@@ -5526,6 +5526,7 @@ const data: Protocol[] = [
     twitter: "dopplefi",
     audit_links: ["https://dopple.gitbook.io/dopple-finance/certik-audit"],
     github: ["DoppleFinance"],
+    deadUrl: true,
   },
   /*
   {
@@ -9971,6 +9972,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     ],
     audit_links: ["https://www.certik.org/projects/annex"],
     github: ["annexfinance"],
+    deadUrl: true,
   },
   {
     id: "554",
@@ -13399,6 +13401,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "ysl_io",
     audit_links: ["https://docs.ysl.io/overview-1/audits"],
     listedAt: 1635107834,
+    deadUrl: true,
   },
   {
     id: "707",
@@ -25571,6 +25574,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     forkedFromIds: ["2197"],
     parentProtocol: "parent#omnidex",
     listedAt: 1642579561,
+    deadUrl: true,
   },
   {
     id: "1287",

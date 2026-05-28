@@ -16151,6 +16151,7 @@ const data4: Protocol[] = [
     chains: ["Ethereum", "Bitcoin"],
     module: "dummy.js",
     twitter: "permute_finance",
+    deadUrl: true,
     dimensions: {
       fees: "bitcoin-bridge",
       dexs: "bitcoin-bridge"
@@ -26957,7 +26958,8 @@ const data4: Protocol[] = [
     chains: ["Eteria"],
     module: "eteria/index.js",
     twitter: "eteriaio",
-    listedAt: 1757961371
+    listedAt: 1757961371,
+    deadUrl: true,
   },
   {
     id: "6731",

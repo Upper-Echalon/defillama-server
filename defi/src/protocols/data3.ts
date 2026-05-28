@@ -2530,6 +2530,7 @@ const data3_0: Protocol[] = [
     twitter: "spacedexF",
     audit_links: ["https://skynet.certik.com/projects/space-dex"],
     listedAt: 1681240573,
+    deadUrl: true,
     dimensions: {
       dexs: "spacedex-swap",
       derivatives: "spacedex-derivatives"
@@ -2601,6 +2602,7 @@ const data3_0: Protocol[] = [
     module: "agilitylsd/index.js",
     twitter: "agility_lsd",
     listedAt: 1681309758,
+    deadUrl: true,
   },
   {
     id: "2818",
@@ -4499,6 +4501,7 @@ const data3_0: Protocol[] = [
     module: "swaprum/index.js",
     twitter: "Swaprum",
     listedAt: 1682586609,
+    deadUrl: true,
     warningBanners: [
       {
         message: "Swaprum has some red flags and multiple users have reported concerns. Be careful.",
@@ -6727,6 +6730,7 @@ const data3_0: Protocol[] = [
     twitter: "OmniDex1",
     parentProtocol: "parent#omnidex",
     listedAt: 1684751164,
+    deadUrl: true,
   },
   {
     id: "3004",
@@ -39849,6 +39853,7 @@ const data3_2: Protocol[] = [
     twitter: "volcano_big",
     audit_links: ["https://volcanofinance.io/Volcano_preliminary-audit-report.pdf"],
     listedAt: 1713279069,
+    deadUrl: true,
   },
   {
     id: "4484",
@@ -45393,6 +45398,7 @@ const data3_3: Protocol[] = [
     module: "doubleup/index.js",
     twitter: "doubleup_app",
     listedAt: 1717724531,
+    deadUrl: true,
     dimensions: {
       fees: "pumpup"
     }
@@ -53834,6 +53840,7 @@ const data3_3: Protocol[] = [
     module: "pixel-swap/index.js",
     twitter: "pixelswap_io",
     listedAt: 1725887067,
+    deadUrl: true,
     dimensions: {
       dexs: "pixelswap"
     }
@@ -58670,7 +58677,8 @@ const data3_3: Protocol[] = [
     module: "solanahub-sol/index.js",
     twitter: "SolanaHubApp",
     audit_links: ["https://docs.solanahub.app/platform/audits"],
-    listedAt: 1731263252
+    listedAt: 1731263252,
+    deadUrl: true,
   },
   {
     id: "5339",
@@ -61617,6 +61625,7 @@ const data3_3: Protocol[] = [
     chains: ["Ethereum","Solana","Binance","Polygon","Base","Arbitrum","zkSync Era"],
     module: "dummy.js",
     twitter: "swing_xyz",
+    deadUrl: true,
     dimensions: {
       fees: "swing",
       aggregators: "swing",

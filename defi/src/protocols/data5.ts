@@ -1680,8 +1680,8 @@ const data5: Protocol[] = [
     name: "TurboFlow",
     address: null,
     symbol: "-",
-    url: "https://www.turboflow.xyz/trade/",
-    description: "The most retail-friendly PerpDEX, where retail trades like pros.",
+    url: "https://www.turboflow.xyz/",
+    description: "TurboFlow is an on-chain trading ecosystem focusing on the convergence of Perpetual Contracts and Prediction Markets. Everyone gets a seat at TurboFlow.",
     chain: "Binance",
     logo: `${baseIconsUrl}/turboflow.jpg`,
     audits: "0",
@@ -1692,6 +1692,7 @@ const data5: Protocol[] = [
     module: "turboflow/index.js",
     twitter: "TurboFlow_xyz",
     listedAt: 1762370757,
+    audit_links: ["https://beosin.com/audits/Turboflow_202510271213.pdf"],
     deprecated: false
   },
   {

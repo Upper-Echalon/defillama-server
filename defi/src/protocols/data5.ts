@@ -7924,10 +7924,34 @@ const data5: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     category: "Yield",
-    chains: ["Ethereum"],
+    chains: ["Ethereum", "MegaETH"],
     forkedFromIds: ["3344"],
     module: "harborfi/index.js",
     twitter: "0xHarborFi",
+    github: ["baofinance"],
+    oraclesBreakdown: [
+      {
+        name: "Harbor",
+        type: "Primary",
+        proof: [
+          "https://github.com/baofinance/harbor-price-aggregators",
+          "https://github.com/baofinance/harbor-price-aggregators/tree/main/deployments",
+        ],
+        chains: [
+          { chain: "Ethereum", startDate: "2025-12-19" },
+          { chain: "MegaETH", startDate: "2026-04-29" },
+        ],
+      },
+      {
+        name: "Chainlink",
+        type: "Secondary",
+        proof: ["https://github.com/baofinance/harbor-price-aggregators#overview"],
+      },
+    ],
+    hallmarks: [
+      [1766102400, "Deployed on Mainnet"],
+      [1777420800, "Deployed on MegaETH"],
+    ],
     audit_links: ["https://www.harborfinance.io/2025_10_21_Final_Harbor_Collaborative_Audit_Report_1761050317.pdf"],
     listedAt: 1768245639,
   },

@@ -678,6 +678,7 @@ const data5: Protocol[] = [
     twitter: "tryfomo",
     dimensions: {
       fees: "fomo",
+      dexs: "fomo",
     },
   },
   {

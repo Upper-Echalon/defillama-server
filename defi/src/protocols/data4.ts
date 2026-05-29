@@ -11238,7 +11238,8 @@ const data4: Protocol[] = [
     twitter: "AxiomExchange",
     parentProtocol: "parent#axiom",
     dimensions: {
-      fees: "axiom"
+      fees: "axiom",
+      dexs: "axiom",
     }
   },
   {

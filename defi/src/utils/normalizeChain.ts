@@ -1524,7 +1524,8 @@ export const chainCoingeckoIds = {
     cmcId: "1831",
     url: "https://bch.info/en/",
     dimensions: {
-      'active-users': 'bch' 
+      'active-users': 'bch',
+      fees: "bitcoin-cash",
     }
   },
   "Litecoin": {
@@ -2814,6 +2815,9 @@ export const chainCoingeckoIds = {
     cmcId: "131",
     twitter: "dashpay",
     url: "https://www.dash.org/",
+    dimensions: {
+      fees: "dash",
+    },
   },
   "Bostrom": {
     geckoId: "bostrom",

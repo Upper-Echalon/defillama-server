@@ -2710,6 +2710,9 @@ const data3_0: Protocol[] = [
     twitter: "Bonkswap_io",
     parentProtocol: "parent#bonkfun",
     listedAt: 1681384865,
+    dimensions: {
+      fees: "bonkswap",
+    },
   },
   {
     id: "2823",
@@ -45255,6 +45258,10 @@ const data3_3: Protocol[] = [
     twitter: "Lynx_Protocol",
     oraclesBreakdown: [ { name: "Pyth", type: "Primary", proof: [] } ], // https://lynx-finance.gitbook.io/lynx-finance/for-users/traders#pricing / https://github.com/DefiLlama/defillama-server/pull/7359
     listedAt: 1717630515,
+    dimensions: {
+      derivatives: "lynx",
+      fees: "lynx",
+    },
   },
   {
     id: "4730",

@@ -9821,6 +9821,17 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "hyperdrivedefi",
   },
+  { 
+    id: "parent#topaz",
+    name: "Topaz",
+    url: "https://www.topazdex.com",
+    description: "ve(3,3) on BNB Chain — where protocols compete for real liquidity and veTOPAZ holders capture the value",
+    logo: `${baseIconsUrl}/topaz.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "TopazDex",
+  },
 ];
 
 export default parentProtocols;

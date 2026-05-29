@@ -3668,13 +3668,13 @@ const data6: Protocol[] = [
   },
   {
     id: "7882",
-    name: "Topaz Dex",
+    name: "Topaz CL",
     address: "bsc:0xdf002282C1474C9592780618Adda7EaA99998Abd",
     symbol: "TOPAZ",
-    url: " ", // pending to add url https://www.topazdex.com
+    url: "https://www.topazdex.com",
     description: "ve(3,3) on BNB Chain — where protocols compete for real liquidity and veTOPAZ holders capture the value.",
     chain: "Binance",
-    logo: `${baseIconsUrl}/topaz-dex.jpg`,
+    logo: `${baseIconsUrl}/topaz-cl.jpg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -3684,7 +3684,12 @@ const data6: Protocol[] = [
     forkedFromIds: ["1407"],
     twitter: "TopazDex",
     audit_links: ["https://github.com/shieldify-security/audits-portfolio/blob/main/reports/Topaz-Dex-Security-Review.pdf"],
-    listedAt: 1779213624
+    parentProtocol: "parent#topaz",
+    listedAt: 1779213624,
+    dimensions: {
+      fees: "topaz-cl",
+      dexs: "topaz-cl",
+    },
   },
   {
     id: "7883",
@@ -5182,6 +5187,30 @@ const data6: Protocol[] = [
     module: "gami-labs/index.js",
     twitter: "GamiLabs",
     listedAt: 1780082008,
+  },
+  {
+    id: "7955",
+    name: "Topaz Dex",
+    address: "bsc:0xdf002282C1474C9592780618Adda7EaA99998Abd",
+    symbol: "TOPAZ",
+    url: "https://www.topazdex.com",
+    description: "ve(3,3) on BNB Chain — where protocols compete for real liquidity and veTOPAZ holders capture the value.",
+    chain: "Binance",
+    logo: `${baseIconsUrl}/topaz-dex.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["ve(3,3)"],
+    chains: ["Binance"],
+    module: "dummy.js",
+    forkedFromIds: ["1407"],
+    twitter: "TopazDex",
+    audit_links: ["https://github.com/shieldify-security/audits-portfolio/blob/main/reports/Topaz-Dex-Security-Review.pdf"],
+    parentProtocol: "parent#topaz",
+    dimensions: {
+      fees: "topaz",
+      dexs: "topaz",
+    },
   },
 ];
 export default data6;

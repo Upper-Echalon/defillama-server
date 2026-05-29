@@ -1002,10 +1002,12 @@ async function _storeAppMetadata() {
     }
 
     delete finalChains["off-chain"];
+    if (finalChains["litecoin"]) finalChains["litecoin"].dexs = false;
 
     Object.keys(finalChains).forEach((chain) => {
       finalChains[chain].dimAgg = dimensionsChainAggData[getChainKeyFromLabel(chain)] ?? {};
     });
+    if (finalChains["litecoin"]?.dimAgg) delete finalChains["litecoin"].dimAgg.dexs;
 
     const sortedChainData = Object.keys(finalChains)
       .sort()

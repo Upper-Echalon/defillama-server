@@ -607,7 +607,14 @@ async function buildTokenSymbolMapping(params: {
 
 
         if (rawRecordTokens.length === 0) continue;
-        const symbols = await sdk.api2.abi.multiCall({ calls: rawRecordTokens as any, abi: 'erc20:symbol', chain, permitFailure: true })
+        let symbols
+        try {
+          symbols = await sdk.api2.abi.multiCall({ calls: rawRecordTokens as any, abi: 'erc20:symbol', chain, permitFailure: true, block: undefined })
+        } catch (e) {
+          console.error('Error fetching token symbols for chain:', chain, 'skipping symbol mapping for this chain', e);
+          continue;
+        }
+        if (!symbols || symbols.length === 0) continue;
 
         rawRecordTokens.forEach((addr, idx) => {
           let tokenSymbol = symbols[idx] as any

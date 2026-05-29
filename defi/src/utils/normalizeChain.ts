@@ -6132,6 +6132,15 @@ export const chainCoingeckoIds = {
       fees: "monero",
     },
   },
+  "INRI": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    twitter: "inrichain",
+    url: "https://inri.life",
+    chainId: 3777,
+  },
 } as unknown as ChainCoinGekcoIds;
 
 // We are creating the list here because, later in the code, we include historical chain labels with the same chain metadata, so, chainCoingeckoIds will have duplicate keys
@@ -6390,6 +6399,7 @@ const chainLabelMap = {
   "aleo": "Aleo",
   "srx": "Sentrix",
   "dfio_meta_main": "Defi Oracle Meta",
+  "inri": "INRI",
 } as { [key: string]: string }
 
 // When we decide to change the display name of a chain, we add the mapping for the new name here

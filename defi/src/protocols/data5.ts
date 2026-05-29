@@ -3438,7 +3438,7 @@ const data5: Protocol[] = [
     chains: ["Ethereum"],
     module: "cypher-v4/index.js",
     twitter: "cypher_ethereum",
-    forkedFromIds: ["2198"],
+    forkedFromIds: ["3710"],
     listedAt: 1764006177,
     parentProtocol: "parent#cypher",
     dimensions: {

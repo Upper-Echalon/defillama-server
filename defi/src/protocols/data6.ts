@@ -3357,11 +3357,11 @@ const data6: Protocol[] = [
   {
     id: "7867",
     name: "Tradoor Perps Aggregator",
-    address: "bsc:0x9123400446a56176eb1b6be9ee5cf703e409f492",
-    symbol: "TRADOOR",
+    address: null,
+    symbol: "-",
     url: "https://tradoor0.xyz",
     description:
-      "An automated market-making aggregator for perpetual futures on Hyperliquid and connected venues.",
+      "An automated market-making aggregator for perpetual futures on Hyperliquid and connected venues. Users run maker bots across Hyperliquid, Kinetiq HIP-3, Trade.xyz, Nado and Extended from a single web UI, with volume attributed to a shared builder code.",
     chain: "Hyperliquid L1",
     logo: `${baseIconsUrl}/tradoor-perps-aggregator.jpg`,
     audits: "0",
@@ -3370,7 +3370,7 @@ const data6: Protocol[] = [
     tags: ["Hyperliquid Builder"],
     chains: ["Hyperliquid L1"],
     module: "dummy.js",
-    twitter: "tradoor_io",
+    twitter: "tradoor0",
     parentProtocol: "parent#tradoor",
     dimensions: {
       derivatives: "tradoor-perps",

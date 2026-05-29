@@ -8879,7 +8879,7 @@ const parentProtocols: IParentProtocol[] = [
     id: "parent#sectorone",
     name: "SectorOne",
     url: "https://sectorone.xyz",
-    description: "SectorOne is the native DLMM DEX on MegaETH, offering the most efficient liquidity layer for traders & liquidity providers.",
+    description: "SectorOne is a DLMM (Dynamic Liquidity Market Maker) liquidity layer & DEX designed for active liquidity. Built for traders, LPs, and vault curators to deploy, manage, and optimize liquidity through strategies, vaults, and dynamic fees across chains.",
     logo: `${baseIconsUrl}/sectorone.jpg`,
     gecko_id: null,
     cmcId: null,

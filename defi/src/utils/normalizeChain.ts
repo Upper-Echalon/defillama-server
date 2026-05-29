@@ -6089,6 +6089,7 @@ export const chainCoingeckoIds = {
     geckoId: null,
     symbol: "SRX",
     cmcId: null,
+    categories: ["EVM"],
     twitter: "sentrixchain",
     url: "https://sentrixchain.com/",
     github: ["sentrix-labs"],
@@ -6098,6 +6099,7 @@ export const chainCoingeckoIds = {
     geckoId: null,
     symbol: null,
     cmcId: null,
+    categories: ["EVM"],
     twitter: null,
     url: "https://info.defi-oracle.io/",
     chainId: 138,
@@ -6113,10 +6115,22 @@ export const chainCoingeckoIds = {
     geckoId: null,
     symbol: "MRT",
     cmcId: null,
+    categories: ["EVM"],
     twitter: "myrxwallet",
     url: "https://myrxwallet.io/",
     chainId: 8472,
     github: ["myrxwallet"],
+  },
+  "Monero": {
+    geckoId: "monero",
+    symbol: "XMR",
+    cmcId: "328",
+    twitter: "monero",
+    url: "https://www.getmonero.org/",
+    github: ["monero-project"],
+    dimensions: {
+      fees: "monero",
+    },
   },
 } as unknown as ChainCoinGekcoIds;
 

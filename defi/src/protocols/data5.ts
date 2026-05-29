@@ -1692,7 +1692,7 @@ const data5: Protocol[] = [
     module: "turboflow/index.js",
     twitter: "TurboFlow_xyz",
     listedAt: 1762370757,
-    deprecated: true
+    deprecated: false
   },
   {
     id: "6967",

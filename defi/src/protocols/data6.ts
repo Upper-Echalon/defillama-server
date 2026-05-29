@@ -5108,7 +5108,7 @@ const data6: Protocol[] = [
     symbol: "-",
     url: "https://sclite.io/",
     description:
-      "SCLiTE is a centralized cryptocurrency exchange offering trading services across multiple blockchain networks including Ethereum, BSC, Polygon, BCHyper, and Tron .",
+      "SCLiTE is a centralized cryptocurrency exchange offering trading services across multiple blockchain networks including Ethereum, BSC, Polygon, BCHyper, and Tron.",
     chain: "Ethereum",
     logo: `${baseIconsUrl}/sclite.jpg`,
     audits: "0",
@@ -5120,6 +5120,68 @@ const data6: Protocol[] = [
     forkedFromIds: ["2197"],
     twitter: "SCLiTE_Ex",
     listedAt: 1780015192,
+  },
+  {
+    id: "7952",
+    name: "Blink Perps",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://blink.lat
+    description:
+      "Social-first Hyperliquid perps frontend using builder codes.",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/blink-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Hyperliquid Builder"],
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "blinkdotxyz",
+    dimensions: {
+      fees: "blink-perps",
+      derivatives: "blink-perps",
+    },
+  },
+  {
+    id: "7953",
+    name: "WheelX.fi",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://wheelx.fi/
+    description:
+      "An AI-powered Bridge & Swap aggregator, enabling cross-chain swaps across 50+ networks for Payments, Stablecoins, RWAs, Stocks, and Prediction markets.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/wheelx.fi.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Bridge Aggregators",
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "WheelX_fi",
+    dimensions: {
+      "bridge-aggregators": "wheelx",
+    },
+  },
+  {
+    id: "7954",
+    name: "Gami Labs",
+    address: null,
+    symbol: "-",
+    url: "https://gamilabs.io/",
+    description:
+      "Gami provides on-chain asset management infrastructure with active curation & dynamic risk management.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/gami-labs.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Risk Curators",
+    chains: ["Ethereum", "Base", "Flare", "Hemi", "Avalanche"],
+    module: "gami-labs/index.js",
+    twitter: "GamiLabs",
+    listedAt: 1780082008,
   },
 ];
 export default data6;

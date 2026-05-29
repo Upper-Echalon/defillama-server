@@ -7930,23 +7930,13 @@ const data5: Protocol[] = [
     twitter: "0xHarborFi",
     github: ["baofinance"],
     oraclesBreakdown: [
-      {
-        name: "Harbor",
-        type: "Primary",
-        proof: [
-          "https://github.com/baofinance/harbor-price-aggregators",
-          "https://github.com/baofinance/harbor-price-aggregators/tree/main/deployments",
-        ],
+      {name: "Harbor",type: "Primary",proof: ["https://github.com/baofinance/harbor-price-aggregators","https://github.com/baofinance/harbor-price-aggregators/tree/main/deployments",],
         chains: [
           { chain: "Ethereum", startDate: "2025-12-19" },
           { chain: "MegaETH", startDate: "2026-04-29" },
         ],
       },
-      {
-        name: "Chainlink",
-        type: "Secondary",
-        proof: ["https://github.com/baofinance/harbor-price-aggregators#overview"],
-      },
+      {name: "Chainlink",type: "Secondary",proof: ["https://github.com/baofinance/harbor-price-aggregators#overview"],},
     ],
     hallmarks: [
       [1766102400, "Deployed on Mainnet"],

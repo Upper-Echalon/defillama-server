@@ -35,6 +35,7 @@ export async function runTvlAction(ws: any, data: any) {
   switch (action) {
     case 'tvl-delete-get-list':
       await tvlDeleteGetList(ws, protocol, options)
+      await queueProtocolCacheReset(protocol.id)
       break;
     case 'clear-cache':
       await queueProtocolCacheReset(protocol.id)
@@ -70,7 +71,7 @@ async function fillLast(ws: any, protocol: IProtocol, _options: any) {
 
 
 async function fillOld(ws: any, protocol: IProtocol, options: any) {
-  let { chains, skipBlockFetch, dateFrom, dateTo, parallelCount, maxRetries = 3, breakIfTvlIsZero = false, removeTokenTvl = false, removeTokenTvlSymbols = '', skipMissingChains= false } = options;
+  let { chains, skipBlockFetch, dateFrom, dateTo, parallelCount, maxRetries = 3, breakIfTvlIsZero = false, removeTokenTvl = false, removeTokenTvlSymbols = '', skipMissingChains = false } = options;
 
 
   // if (removeTokenTvl) chains = ''
@@ -86,10 +87,10 @@ async function fillOld(ws: any, protocol: IProtocol, options: any) {
   const aggTvlData: any = {} // overall protocol tvl with chain breakdown
   let refillWithCachedData = chains?.length || removeTokenTvl
   const skipSKs: Set<number> = new Set()
-    const timeFilter = {
-      timestampTo: options.dateTo + 86400 * 2,
-      timestampFrom: options.dateFrom - 86400 * 2,
-    }
+  const timeFilter = {
+    timestampTo: options.dateTo + 86400 * 2,
+    timestampFrom: options.dateFrom - 86400 * 2,
+  }
 
 
   // fetch the final data for comparison
@@ -104,7 +105,7 @@ async function fillOld(ws: any, protocol: IProtocol, options: any) {
   }
 
   if (refillWithCachedData) {
-    chains = chains?.split(',')
+    chains = chains?.split(',').filter((c: string) => c.trim()) || []
     const rawTokenTvlRecords = await getProtocolItems(dailyRawTokensTvl, protocol.id, timeFilter)
     const tokenUsdRecordsFromDB = await getProtocolItems(dailyUsdTokensTvl, protocol.id, timeFilter)
     const tokenSymbolRecordsFromDB = await getProtocolItems(dailyTokensTvl, protocol.id, timeFilter)
@@ -316,6 +317,7 @@ export async function tvlStoreAllWaitingRecords(ws: any) {
   const allRecords = Object.entries(recordItems)
   // randomize the order of the records
   allRecords.sort(() => Math.random() - 0.5)
+  const updateProtocolSet = new Set<string>()
 
   const { errors } = await PromisePool
     .withConcurrency(11)
@@ -324,6 +326,7 @@ export async function tvlStoreAllWaitingRecords(ws: any) {
       // if (recordItems[id]) delete recordItems[id]  // sometimes users double click or the can trigger this multiple times
       const { storeFn } = record as any
       await storeFn()
+      updateProtocolSet.add(record.protocol.id)
       delete recordItems[id]
     })
 
@@ -333,6 +336,9 @@ export async function tvlStoreAllWaitingRecords(ws: any) {
   }
   console.log('all tvl records are stored');
   sendTvlStoreWaitingRecords(ws)
+
+  // Reset protocol cache for updated protocols
+  await queueProtocolCacheReset(Array.from(updateProtocolSet))
 }
 
 export function sendTvlStoreWaitingRecords(ws: any) {
@@ -549,7 +555,7 @@ async function buildTokenSymbolMapping(params: {
   chains?: string[],
 }) {
   const { usdTvlRecords, rawRecords, symbolsToRemove, addressesToRemove, chains = [] } = params
-  const filterByChains =  chains.length > 0
+  const filterByChains = chains.length > 0
   const chainsSet = new Set(chains)
 
   const symbolsToRemoveSet: Set<string> = new Set(symbolsToRemove.map(s => s.toLowerCase()))
@@ -557,12 +563,18 @@ async function buildTokenSymbolMapping(params: {
   const chainSymbolMapping: any = {}
 
   for (const [sk, usdTokenRecord] of Object.entries(usdTvlRecords)) {
+
+
     const rawRecord = rawRecords[sk]
-    if (!rawRecord) continue;
+    if (!rawRecord) {
+      console.log('No raw record found for timestamp:', new Date(sk * 1000), 'skipping symbol mapping for this timestamp');
+      continue;
+    }
 
     for (const key of Object.keys(usdTokenRecord)) {
       if (['tvl', 'pool2', 'staking', 'SK'].includes(key) || key.includes('-')) continue;  // we are looking for chains
       const chain = key
+
       if (filterByChains && !chainsSet.has(chain)) continue;
       const chainData = usdTokenRecord[chain]
       if (!chainSymbolMapping[chain]) chainSymbolMapping[chain] = {}

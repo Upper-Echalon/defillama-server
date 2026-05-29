@@ -36,7 +36,7 @@ export async function clearProtocolCacheById(protocolId: string) {
         'x-internal-secret': process.env.LLAMA_INTERNAL_ROUTE_KEY ?? process.env.LLAMA_PRO_API2_SECRET_KEY ?? process.env.API2_SUBPATH
       }
     }).then(() => console.log(`Cache cleared for protocol ${protocolId}`))
-    .catch(_e => console.log(`Failed to clear cache for protocol ${protocolId}`))
+      .catch(_e => console.log(`Failed to clear cache for protocol ${protocolId}`))
   }
 
   // await deleteFromPGCache(pgCaceId) // clear postgres cache as well
@@ -45,16 +45,21 @@ export async function clearProtocolCacheById(protocolId: string) {
 }
 
 
-export async function queueProtocolCacheReset(protocolId: string) {
+export async function queueProtocolCacheReset(protocolId: string | string[]) {
+  if (typeof protocolId === 'string')
+    protocolId = [protocolId]
+
   let current: Record<string, number> = {}
   try {
     current = (await getR2JSONString(TVL_CACHE_RESET_R2_KEY)) ?? {}
   } catch (e) {
     console.log(`No existing ${TVL_CACHE_RESET_R2_KEY} on R2, starting fresh`)
   }
-  current[protocolId] = Math.floor(Date.now() / 1000)
+  for (const id of protocolId)
+    current[id] = Math.floor(Date.now() / 1000)
+
   await storeR2JSONString(TVL_CACHE_RESET_R2_KEY, JSON.stringify(current))
-  console.log(`Queued protocol ${protocolId} for cache reset (${Object.keys(current).length} entries)`)
+  console.log(`Queued protocols ${protocolId.join(', ')} for cache reset (${Object.keys(current).length} entries)`)
 }
 
 export async function processQueuedProtocolCacheResets() {

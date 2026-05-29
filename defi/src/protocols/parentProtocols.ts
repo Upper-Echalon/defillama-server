@@ -4450,7 +4450,7 @@ const parentProtocols: IParentProtocol[] = [
     id: "parent#hyperliquid",
     name: "Hyperliquid",
     url: "https://app.hyperliquid.xyz",
-    referralUrl: "https://app.hyperliquid.xyz/join/DEFILLAMAO",
+    referralUrl: "https://app.hyperliquid.xyz/join/DEFILLAMAS",
     description:
       "Hyperliquid is a Layer 1 blockchain best known for perpetual futures and spot trading. Beyond its flagship decentralized exchange (DEX), the ecosystem supports borrowing, lending, RWAs, and a full-fledged EVM.",
     logo: `${baseIconsUrl}/hyperliquid.png`,

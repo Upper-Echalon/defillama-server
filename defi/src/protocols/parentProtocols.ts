@@ -4197,7 +4197,7 @@ const parentProtocols: IParentProtocol[] = [
   {
     id: "parent#pharaoh-exchange",
     name: "Pharaoh Exchange",
-    url: "https://pharaoh.exchange",
+    url: "https://www.phar.gg/",
     description:
       "Pharaoh is a next-generation AMM designed to serve as Avalanche's central liquidity hub, combining the secure and battle-tested superiority of Uniswap v3 with a custom incentive engine, vote-lock governance model, and streamlined user experience.",
     logo: `${baseIconsUrl}/pharaoh-exchange.png`,

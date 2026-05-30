@@ -2484,14 +2484,14 @@ const data4: Protocol[] = [
   },
   {
     id: "5668",
-    name: "SuperSwap Ink",
+    name: "SuperSwap Ink DEX Aggregator",
     address: null,
     symbol: "-",
     url: "https://superswap.ink/",
     description:
       "SuperSwap is the gateway and trading layer for tokenized markets, unifying access to tokenized stocks, commodities, ETFs, currencies, bonds, and crypto across chains, issuers, and liquidity sources. Users can discover and trade assets through a single self-custodial interface with cross-chain execution, 24/7 markets, instant settlement, and permissionless global access. SuperSwap abstracts routing, bridging, issuer discovery, and onchain/offchain liquidity into one seamless trading experience",
     chain: "Ink",
-    logo: `${baseIconsUrl}/superswap-ink.png`,
+    logo: `${baseIconsUrl}/superswap-ink-dex-aggregator.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -2499,6 +2499,7 @@ const data4: Protocol[] = [
     chains: ["Ink"],
     module: "dummy.js",
     twitter: "SuperSwapINK",
+    parentProtocol: "parent#superswap-ink",
     dimensions: {
       aggregators: "superswap",
       fees: "superswap",

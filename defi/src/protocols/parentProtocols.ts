@@ -9832,6 +9832,28 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "TopazDex",
   },
+  { 
+    id: "parent#wheelx",
+    name: "WheelX.fi",
+    url: " ", // pending to add url https://wheelx.fi/
+    description: "An AI-powered Bridge & Swap aggregator, enabling cross-chain swaps across 50+ networks for Payments, Stablecoins, RWAs, Stocks, and Prediction markets.",
+    logo: `${baseIconsUrl}/wheelx.fi.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "WheelX_fi",
+  },
+  {
+    id: "parent#superswap-ink",
+    name: "SuperSwap Ink",
+    url: "https://superswap.ink/",
+    description: "SuperSwap is the gateway and trading layer for tokenized markets, unifying access to tokenized stocks, commodities, ETFs, currencies, bonds, and crypto across chains, issuers, and liquidity sources. Users can discover and trade assets through a single self-custodial interface with cross-chain execution, 24/7 markets, instant settlement, and permissionless global access. SuperSwap abstracts routing, bridging, issuer discovery, and onchain/offchain liquidity into one seamless trading experience.",
+    logo: `${baseIconsUrl}/superswap-ink.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "SuperSwapINK",
+  },
 ];
 
 export default parentProtocols;

@@ -5257,5 +5257,48 @@ const data6: Protocol[] = [
       aggregators: "wheelx",
     },
   },
+  {
+    id: "7958",
+    name: "America.Fun",
+    address: null,
+    symbol: "-",
+    url: "https://america.fun/",
+    description:
+      "Solana DEX using Meteora DBC (Dynamic Bonding Curve) and DAMM v2 liquidity pools.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/america.fun.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "americadotfun",
+    dimensions: {
+      fees: "americafun",
+    },
+  },
+  {
+    id: "7959",
+    name: "SuperSwap Ink Bridge Aggregator",
+    address: null,
+    symbol: "-",
+    url: "https://superswap.ink/",
+    description:
+      "SuperSwap is the gateway and trading layer for tokenized markets, unifying access to tokenized stocks, commodities, ETFs, currencies, bonds, and crypto across chains, issuers, and liquidity sources. Users can discover and trade assets through a single self-custodial interface with cross-chain execution, 24/7 markets, instant settlement, and permissionless global access. SuperSwap abstracts routing, bridging, issuer discovery, and onchain/offchain liquidity into one seamless trading experience",
+    chain: "Ink",
+    logo: `${baseIconsUrl}/superswap-ink-bridge-aggregator.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Bridge Aggregators",
+    chains: ["Ink", "Ethereum", "Base", "Optimism", "Arbitrum", "Binance", "Linea", "Lisk", "Mode", "Monad", "Plasma", "Polygon", "Scroll", "Soneium", "Unichain", "World Chain", "Zora", "Blast"],
+    module: "dummy.js",
+    twitter: "SuperSwapINK",
+    parentProtocol: "parent#superswap-ink",
+    dimensions: {
+      "bridge-aggregators": "superswap",
+    }
+  },
 ];
 export default data6;

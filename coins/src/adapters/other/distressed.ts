@@ -342,6 +342,7 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     USDa: "usda-2",
     USDa_OLD: "usda", // legacy id still referenced by tokenMapping.json
     //solvBTCBBN: "solv-protocol-solvbtc-bbn",
+    HBTC: "huobi-btc", // unverified backing
   },
   bittorrent: {
     WBTT: "0x8d193c6efa90bcff940a98785d1ce9d093d3dc8a",

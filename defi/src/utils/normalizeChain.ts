@@ -1526,6 +1526,7 @@ export const chainCoingeckoIds = {
     dimensions: {
       'active-users': 'bch',
       fees: "bitcoin-cash",
+      incentives: "bitcoin-cash",
     }
   },
   "Litecoin": {
@@ -1548,6 +1549,7 @@ export const chainCoingeckoIds = {
     url: "https://dogecoin.com/",
     dimensions: {
       fees: "doge",
+      incentives: "doge",
     },
   },
   "Obyte": {

@@ -4536,6 +4536,9 @@ const data6: Protocol[] = [
     twitter: "3f_xyz",
     github: ["3FLabs"],
     listedAt: 1779748015,
+    dimensions: {
+      fees: "3f",
+    },
   },
   {
     id: "7924",
@@ -5131,7 +5134,7 @@ const data6: Protocol[] = [
     name: "Blink Perps",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://blink.lat
+    url: " ", // pending to add url https://blinkperps.xyz
     description:
       "Social-first Hyperliquid perps frontend using builder codes.",
     chain: "Hyperliquid L1",
@@ -5150,14 +5153,14 @@ const data6: Protocol[] = [
   },
   {
     id: "7953",
-    name: "WheelX.fi",
+    name: "WheelX.fi Bridge Aggregator",
     address: null,
     symbol: "-",
     url: " ", // pending to add url https://wheelx.fi/
     description:
       "An AI-powered Bridge & Swap aggregator, enabling cross-chain swaps across 50+ networks for Payments, Stablecoins, RWAs, Stocks, and Prediction markets.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/wheelx.fi.jpg`,
+    logo: `${baseIconsUrl}/wheelx.fi-bridge-aggregator.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -5165,6 +5168,7 @@ const data6: Protocol[] = [
     chains: ["Ethereum"],
     module: "dummy.js",
     twitter: "WheelX_fi",
+    parentProtocol: "parent#wheelx",
     dimensions: {
       "bridge-aggregators": "wheelx",
     },
@@ -5230,6 +5234,28 @@ const data6: Protocol[] = [
     forkedFromIds: ["2197"],
     twitter: "inrichain",
     listedAt: 1780094587,
+  },
+  {
+    id: "7957",
+    name: "WheelX.fi DEX Aggregator",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://wheelx.fi/
+    description:
+      "An AI-powered Bridge & Swap aggregator, enabling cross-chain swaps across 50+ networks for Payments, Stablecoins, RWAs, Stocks, and Prediction markets.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/wheelx.fi-dex-aggregator.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "WheelX_fi",
+    parentProtocol: "parent#wheelx",
+    dimensions: {
+      aggregators: "wheelx",
+    },
   },
 ];
 export default data6;

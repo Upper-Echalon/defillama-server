@@ -1166,7 +1166,7 @@ async function alertSuspiciousRwaHistoricalCharts(
   }
 }
 
-async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Promise<void> {
+export async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Promise<void> {
   console.log('Generating aggregated historical charts...');
   const startTime = Date.now();
 
@@ -1282,6 +1282,7 @@ async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Prom
 
     const categories = Array.isArray(m.data.category) ? m.data.category.filter(Boolean) : [];
     const primaryCategory = categories[0];
+    const categoryAssetBreakdownCategories = new Set(categories);
     const platform = m.data.parentPlatform;
     const assetGroup = typeof m.data.assetGroup === "string" && m.data.assetGroup.trim() ? m.data.assetGroup.trim() : null;
 
@@ -1324,7 +1325,7 @@ async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Prom
       allDpa.activeMcap[timestamp][canonicalMarketId] += totalActiveMcap;
       allDpa.defiActiveTvl[timestamp][canonicalMarketId] += totalTvl;
 
-      // Aggregate by category using only the primary category to avoid double-counting.
+      // Aggregate category totals using only the primary category to avoid double-counting.
       const categoryItems: Record<string, any> = {};
       if (primaryCategory) {
         const dp = ensureDataPoint(byCategory, primaryCategory, timestamp);
@@ -1332,16 +1333,20 @@ async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Prom
         dp.activeMcap += totalActiveMcap;
         dp.defiActiveTvl += totalTvl;
 
-        const dpa = ensureBreakdownDataPoint(byCategoryTickerBreakdown, primaryCategory, timestamp, canonicalMarketId);
-        dpa.onChainMcap[timestamp][canonicalMarketId] += totalOnChainMcap;
-        dpa.activeMcap[timestamp][canonicalMarketId] += totalActiveMcap;
-        dpa.defiActiveTvl[timestamp][canonicalMarketId] += totalTvl;
-
         categoryItems[primaryCategory] = {
           onChainMcap: totalOnChainMcap,
           activeMcap: totalActiveMcap,
           defiActiveTvl: totalTvl,
         };
+      }
+
+      // Category asset-breakdown files power category detail charts, so include
+      // every asset category rather than only the primary aggregate bucket.
+      for (const category of categoryAssetBreakdownCategories) {
+        const dpa = ensureBreakdownDataPoint(byCategoryTickerBreakdown, category, timestamp, canonicalMarketId);
+        dpa.onChainMcap[timestamp][canonicalMarketId] += totalOnChainMcap;
+        dpa.activeMcap[timestamp][canonicalMarketId] += totalActiveMcap;
+        dpa.defiActiveTvl[timestamp][canonicalMarketId] += totalTvl;
       }
 
       // Aggregate by platform
@@ -1429,6 +1434,7 @@ async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]): Prom
   const chainSlug = (k: string) => rwaSlug(getChainLabelFromKey(k));
   warnSlugCollisions('byChain', Object.keys(byChain), chainSlug);
   warnSlugCollisions('byCategory', Object.keys(byCategory), rwaSlug);
+  warnSlugCollisions('byCategoryTickerBreakdown', Object.keys(byCategoryTickerBreakdown), rwaSlug);
   warnSlugCollisions('byPlatform', Object.keys(byPlatform), rwaSlug);
   warnSlugCollisions('byAssetGroup', Object.keys(byAssetGroup), rwaSlug);
 

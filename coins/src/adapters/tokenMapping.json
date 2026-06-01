@@ -16067,11 +16067,6 @@
       "decimals": 18,
       "symbol": "USDai"
     },
-    "0x0B2b2B2076d95dda7817e785989fE353fe955ef9": {
-      "to": "coingecko#susdai",
-      "decimals": 18,
-      "symbol": "sUSDai"
-    },
     "0x58538e6A46E07434d7E7375Bc268D3cb839C0133": {
       "to": "coingecko#ethena",
       "decimals": 18,

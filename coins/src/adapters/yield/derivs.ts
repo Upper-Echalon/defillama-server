@@ -931,6 +931,23 @@ const configs: { [adapter: string]: Config } = {
     underlying: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // USDC
     address: "0x6aD038cA6C04e885630851278ca0a856Ad9a66Cc",
   },
+  sUSDai: {
+    // totalAssets() on this vault reports the assets backing every chain
+    // deployment, not just Arbitrum, so the standard 4626 path
+    // (totalAssets/totalSupply) over-states the rate. convertToAssets gives
+    // the correct per-chain share->asset rate.
+    rate: async ({ api }) => {
+      const rate = await api.call({
+        abi: "function convertToAssets(uint256) external view returns (uint256)",
+        target: "0x0B2b2B2076d95dda7817e785989fE353fe955ef9",
+        params: [1e10],
+      });
+      return rate / 1e10;
+    },
+    chain: "arbitrum",
+    underlying: "0x0A1a1A107E45b7Ced86833863f482BC5f4ed82EF", // USDai
+    address: "0x0B2b2B2076d95dda7817e785989fE353fe955ef9",
+  },
   sUSDnr: {
     rate: async ({ api }) => {
       const [assets, supply] = await Promise.all([

@@ -448,6 +448,18 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
   btr: {
     SolvBTCm: '0xe04d21d999FaEDf1e72AdE6629e20A11a1ed14FA', // minted bridge token withou backing assets
   },
+  gravity: {
+    // bridge hacked, bridged tokens are unbacked/worthless
+    WETH: "0xf6f832466Cd6C21967E0D954109403f36Bc8ceaA",
+    "USDC.e": "0xfbda5f676cb37624f28265a144a48b0d6e87d3b6",
+    USDT: "0x816e810f9f787d669fb71932deabf6c83781cd48",
+  },
+  aleph_zero: {
+    // bridge hacked, bridged tokens are unbacked/worthless
+    WETH: "0xB3f0eE446723f4258862D949B4c9688e7e7d35d3",
+    "USDC.e": "0x18d25B4e18165c97e1285212e5d1f80eDD6d3Aa7",
+    USDT: "0xD648529D4803d3467bA8850577BEd4e4b8Ae583C",
+  },
 };
 
 export const distressedAssets = Object.fromEntries(

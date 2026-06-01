@@ -11541,6 +11541,9 @@ const data4: Protocol[] = [
     audit_links: ["https://github.com/sablier-labs/audits"],
     parentProtocol: "parent#sablier-finance",
     listedAt: 1744905685,
+    dimensions: {
+      dexs: "sablier-flow"
+    }
   },
   {
     id: "6061",

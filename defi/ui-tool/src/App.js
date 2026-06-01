@@ -1753,6 +1753,37 @@ const App = () => {
     setSpikesSelectedRowKeys([]);
   }
 
+  function refillSpike(record) {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return;
+    const start = record.event?.startTimestamp;
+    if (!start) return;
+    const end = record.event?.endTimestamp || start;
+    wsRef.current.send(JSON.stringify({
+      type: 'tvl-runCommand',
+      data: {
+        action: 'refill',
+        protocolName: record.protocolName,
+        dateFrom: start - 86400,
+        dateTo: end,
+        parallelCount: 1,
+        maxRetries: 3,
+        chains: record.event?.chain || '',
+        skipBlockFetch: false,
+        breakIfTvlIsZero: false,
+        removeTokenTvl: false,
+        removeTokenTvlSymbols: '',
+        skipMissingChains: false,
+      },
+    }));
+  }
+
+  function bulkRefillSpikes() {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) return;
+    const selectedRecords = spikesData.filter(r => spikesSelectedRowKeys.includes(r._id));
+    for (const r of selectedRecords) refillSpike(r);
+    setSpikesSelectedRowKeys([]);
+  }
+
   function fmtNum(n) {
     if (n == null || isNaN(n)) return '-';
     const sign = n < 0 ? '-' : '';
@@ -2165,6 +2196,9 @@ const App = () => {
             </Button>
             <Button size="small" onClick={() => bulkUpdateSpikes({ resolved: false })}>
               Mark Unresolved
+            </Button>
+            <Button size="small" type="primary" icon={<ReloadOutlined />} onClick={bulkRefillSpikes}>
+              Refill
             </Button>
             <Button size="small" danger onClick={() => setSpikesSelectedRowKeys([])}>
               Clear Selection

@@ -22093,6 +22093,10 @@ const data3_1: Protocol[] = [
     forkedFromIds: ["2197"],
     twitter: null,
     listedAt: 1698272175,
+    dimensions: {
+      fees: "everdex",
+      dexs: "everdex"
+    }
   },
   {
     id: "3695",

@@ -5417,5 +5417,25 @@ const data6: Protocol[] = [
     twitter: null,
     listedAt: 1780363947,
   },
+  {
+    id: "7966",
+    name: "Render Network BME",
+    address: null,
+    symbol: "-",
+    url: "https://rendernetwork.com/",
+    description: "Render Network is a decentralized GPU compute network where users pay for rendering jobs and node operators supply compute, with fees tracked from onchain RENDER burns under the BME model.",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/render-network-bme.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DePIN",
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "rendernetwork",
+    dimensions: {
+      fees: "render-network",
+    },
+  },
 ];
 export default data6;

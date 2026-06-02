@@ -5672,7 +5672,7 @@ const parentProtocols: IParentProtocol[] = [
     name: "Superstate",
     url: "https://superstate.com/",
     description:
-      "Superstate is the leading financial technology firm modernizing public capital markets. Superstate connects financial assets with crypto capital markets to expand access, improve liquidity, and advance capital formation through onchain public investment products. Our offerings include Opening Bell, a platform for compliant onchain equity issuance and tokenization; USTB, a tokenized fund backed by US Treasuries; and USCC, a tokenized fund optimized for crypto basis exposure.",
+      "Superstate's tokenization infrastructure connects securities with crypto capital markets, for global 24/7 access and DeFi use-cases. This include Opening Bell, a platform for compliant onchain equity issuance and tokenization; and FundOS, a turnkey platform to bring private funds, mutual funds, and ETFs onchain.",
     logo: `${baseIconsUrl}/superstate.jpg`,
     gecko_id: null,
     cmcId: null,

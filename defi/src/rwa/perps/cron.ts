@@ -4,7 +4,6 @@ import {
     storeRouteData,
     clearOldCacheVersions,
     getCacheVersion,
-    getSyncMetadata,
     setSyncMetadata,
     storeHistoricalDataForId,
     readHistoricalDataForId,
@@ -201,14 +200,18 @@ function appendPerpsChartTip(dailyChart: PerpsChartPoint[], tip: PerpsChartTipRo
     return dailyChart;
 }
 
-async function generateHistoricalCharts(): Promise<void> {
+export async function generateHistoricalCharts(): Promise<void> {
     console.log('Generating historical charts...');
     const startTime = Date.now();
 
-    const syncMeta = await getSyncMetadata();
-    const lastSync = syncMeta?.lastSyncTimestamp ? new Date(syncMeta.lastSyncTimestamp) : undefined;
-
-    const allRecords = await fetchAllDailyRecordsPG(lastSync);
+    // Rebuild each chart's daily backbone from the FULL set of daily rows every run.
+    // Do NOT gate this fetch on an updated_at high-water-mark: a mass updated_at
+    // rewrite (deploy-time migration, backfill, etc.) can push the watermark past
+    // not-yet-merged days, which permanently freezes every chart's daily backbone
+    // while only the live tip keeps moving (the 2026-05-26 incident, PR #12118).
+    // Daily rows are the source of truth and the table is small, so the full
+    // rebuild is cheap; generateAggregateHistoricalCharts already does the same.
+    const allRecords = await fetchAllDailyRecordsPG();
     // Latest HOURLY row per id provides a live tip appended after merging the
     // (daily-aligned) records, so chart files refresh every cron tick even if
     // an id had no daily update this run.
@@ -246,7 +249,9 @@ async function generateHistoricalCharts(): Promise<void> {
         processedCount++;
     }
 
-    // Update sync metadata
+    // Sync metadata is now informational only (lastSyncTimestamp is no longer used
+    // to gate the daily-backbone fetch above — see the comment there). Kept for
+    // dashboards / diagnostics.
     const maxUpdatedAt = await fetchMaxUpdatedAtPG();
     await setSyncMetadata({
         lastSyncTimestamp: maxUpdatedAt?.toISOString() || null,
@@ -349,12 +354,18 @@ async function cron(): Promise<void> {
     console.log(`[rwa-perps-cron] Complete in ${elapsed}s`);
 }
 
-cron()
-    .then(() => {
-        console.log("[rwa-perps-cron] Done.");
-        process.exit(0);
-    })
-    .catch((e) => {
-        console.error("[rwa-perps-cron] Fatal error:", e);
-        process.exit(1);
-    });
+// Only run the cron when invoked directly (e.g. `ts-node cron.ts`). Guarding on
+// require.main keeps the module import-safe so tests can exercise individual
+// stages (e.g. generateHistoricalCharts) without triggering runPipeline()'s
+// DB writes.
+if (require.main === module) {
+    cron()
+        .then(() => {
+            console.log("[rwa-perps-cron] Done.");
+            process.exit(0);
+        })
+        .catch((e) => {
+            console.error("[rwa-perps-cron] Fatal error:", e);
+            process.exit(1);
+        });
+}

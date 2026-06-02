@@ -17096,6 +17096,16 @@
       "decimals": "18",
       "symbol": "ifBILL",
       "to": "asset#ethereum:0x4b57e1e3fd684d3bb82a0652c77fd7412df6a2a5"
+    },
+    "Amulet": {
+      "decimals": 18,
+      "symbol": "CC",
+      "to": "coingecko#canton-network"
+    },
+    "USDCx": {
+      "decimals": 6,
+      "symbol": "USDCx",
+      "to": "coingecko#usd-coin"
     }
   },
   "blockdag": {

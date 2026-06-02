@@ -5672,7 +5672,7 @@ const parentProtocols: IParentProtocol[] = [
     name: "Superstate",
     url: "https://superstate.com/",
     description:
-      "The Superstate Crypto Carry Fund (the “Fund”) offers Qualified Purchasers access to crypto basis (differential between the spot and future price) strategies. The Fund optimizes the yield and risk of crypto cash-and-carry trades across the Bitcoin basis, Ether basis (including staking Ether), and U.S. Treasury securities. ",
+      "Superstate is the leading financial technology firm modernizing public capital markets. Superstate connects financial assets with crypto capital markets to expand access, improve liquidity, and advance capital formation through onchain public investment products. Our offerings include Opening Bell, a platform for compliant onchain equity issuance and tokenization; USTB, a tokenized fund backed by US Treasuries; and USCC, a tokenized fund optimized for crypto basis exposure.",
     logo: `${baseIconsUrl}/superstate.jpg`,
     gecko_id: null,
     cmcId: null,

@@ -27394,13 +27394,7 @@ const data4: Protocol[] = [
     cmcId: null,
     category: "Derivatives",
     chains: ["zkLighter"],
-    oraclesBreakdown: [
-      {
-        name: "Stork",
-        type: "Primary",
-        proof: ["https://docs.lighter.xyz/perpetual-futures/fair-price-marking"],
-      },
-    ],
+    oraclesBreakdown: [{name: "Stork",type: "Primary",proof: ["https://docs.lighter.xyz/perpetual-futures/fair-price-marking"],},],
     module: "dummy.js",
     twitter: "Lighter_xyz",
     parentProtocol: "parent#lighter",
@@ -27408,7 +27402,9 @@ const data4: Protocol[] = [
       derivatives: "lighterv2",
       "open-interest": "lighter-v2",
       fees: "lighterv2",
-      "normalized-volume": "lighter"
+      "normalized-volume": "lighter",
+      "active-users": "lighter",
+      "new-users": "lighter"
     }
   },
   {

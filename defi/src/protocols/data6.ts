@@ -1322,7 +1322,8 @@ const data6: Protocol[] = [
     twitter: "Pumpfun",
     parentProtocol: "parent#pump",
     dimensions: {
-      fees: "trading-terminal"
+      fees: "trading-terminal",
+      dexs: "trading-terminal",
     }
   },
   {

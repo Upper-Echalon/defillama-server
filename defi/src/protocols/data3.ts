@@ -35656,7 +35656,8 @@ const data3_2: Protocol[] = [
     module: "dummy.js",
     twitter: "TrojanOnSolana",
     dimensions: {
-      fees: "primordium"
+      fees: "primordium",
+      dexs: "trojan",
     }
   },
   {
@@ -38455,18 +38456,13 @@ const data3_2: Protocol[] = [
     twitter: "ZestProtocol",
     parentProtocol: "parent#zest",
     oraclesBreakdown: [
-      {
-        name: "Pyth",
-        type: "Secondary",
-        proof: ["https://docs.zestprotocol.com/start/borrow/zest-protocol-borrow-overview/oracles#zest-protocol-uses-pyth"]
-      },
-      {
-        name: "DIA",
-        type: "Primary",
-        proof: ["https://explorer.hiro.so/txid/SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.alex-oracle-v1-1?chain=mainnet","https://github.com/DefiLlama/defillama-server/pull/10672"]
-      },
+      {name: "Pyth",type: "Secondary",proof: ["https://docs.zestprotocol.com/start/borrow/zest-protocol-borrow-overview/oracles#zest-protocol-uses-pyth"]},
+      {name: "DIA",type: "Primary",proof: ["https://explorer.hiro.so/txid/SP2VCQJGH7PHP2DJK7Z0V48AGBHQAW3R3ZW1QF4N.alex-oracle-v1-1?chain=mainnet","https://github.com/DefiLlama/defillama-server/pull/10672"]},
     ],
     listedAt: 1712075269,
+    dimensions: {
+      fees: "zest-v1"
+    },
   },
   {
     id: "4421",
@@ -49278,7 +49274,8 @@ const data3_3: Protocol[] = [
     module: "dummy.js",
     twitter: "SolTradingBot",
     dimensions: {
-      fees: "sol-trading-bot"
+      fees: "sol-trading-bot",
+      dexs: "sol-trading-bot",
     }
   },
   {

@@ -51975,7 +51975,7 @@ const data3_3: Protocol[] = [
     tags: ["AMM"],
     chains: ["Stellar"],
     module: "aqua-network/index.js",
-    twitter: "aqua_token",
+    twitter: "AquariusDeFi",
     audit_links: ["https://www.coinfabrik.com/blog/aquarius-audit-report"],
     github: ["AquaToken"],
     listedAt: 1724320620,

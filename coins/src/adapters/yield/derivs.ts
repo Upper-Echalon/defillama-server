@@ -792,7 +792,10 @@ export const configs: { [adapter: string]: Config } = {
         abi: "function shareValue() view returns (uint256 value, uint256 timestamp)",
         target: "0x04E5a6f7eE9977D38f57945c31B72178c9Cf1c06",
       });
-      if (rate.timestamp < api.timestamp - 3 * 60 * 60)
+      // OALS2T's shareValue() NAV updates ~daily, not intraday. A 3h window
+      // rejected it ~21h/day and left onChainMcap blank. 27h matches the
+      // house default (DEFAULT_MAX_ORACLE_AGE_SECONDS) and tolerates the cadence.
+      if (rate.timestamp < api.timestamp - 27 * 60 * 60)
         throw new Error(`OALS2T stale rate`);
       return rate.value / 1e18;
     },

@@ -10,9 +10,10 @@ import PromisePool from '@supercharge/promise-pool';
 import { deleteProtocolItems, getProtocolItems, initializeTVLCacheDB } from '../../src/api2/db';
 import dynamodb from '../../src/utils/shared/dynamodb';
 import { dailyTokensTvl, dailyTvl, dailyUsdTokensTvl, dailyRawTokensTvl, } from '../../src/utils/getLastRecord';
-import { importAdapterDynamic } from '../../src/utils/imports/importAdapter';
+import { importAdapter, importAdapterDynamic } from '../../src/utils/imports/importAdapter';
 import * as sdk from '@defillama/sdk';
 import { getUnixTimeNow } from '../../src/api2/utils/time';
+import { sluggifyString } from '../../src/utils/sluggify';
 import BigNumber from 'bignumber.js';
 
 const chainFailedCallsSets: any = {}
@@ -24,6 +25,59 @@ allItems.forEach((protocol: any) => tvlNameMap[protocol.name] = protocol)
 export const tvlProtocolList = allItems
   // .filter(i => i.module !== 'dummy.js')
   .map(i => i.name)
+
+export type TvlProtocolRefillability = {
+  refillableBySpikeTool: boolean,
+  chains: string[],
+}
+
+function getAdapterFunctionChains(adapter: any) {
+  return Object.entries(adapter || {})
+    .filter(([, value]) => {
+      if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+      return Object.values(value).some((v) => v === '_f' || typeof v === 'function')
+    })
+    .map(([chain]) => chain)
+}
+
+function getProtocolRefillability(protocol: IProtocol): TvlProtocolRefillability {
+  const adapter = importAdapter(protocol as any)
+  let refillable = true
+  const chains = getAdapterFunctionChains(adapter)
+  const nonEvmChains = chains.filter(chain => !(evmChainProvidersList as any)[chain])
+
+
+  if (!adapter || !Object.keys(adapter).length || adapter.timetravel === false || adapter.fetch || nonEvmChains.length) {
+    refillable = false
+  }
+
+  return {
+    refillableBySpikeTool: refillable,
+    chains,
+  }
+}
+
+function buildTvlProtocolRefillability() {
+  const refillability: Record<string, TvlProtocolRefillability> = {}
+  allItems.forEach((protocol: any) => {
+    const info = getProtocolRefillability(protocol)
+    const keys = [
+      protocol.id,
+      protocol.name,
+      protocol.slug,
+      protocol.name?.toLowerCase(),
+      protocol.slug?.toLowerCase(),
+      protocol.name ? sluggifyString(protocol.name) : '',
+    ]
+      .filter(Boolean)
+    keys.forEach((key: string) => {
+      refillability[String(key)] = info
+    })
+  })
+  return refillability
+}
+
+export const tvlProtocolRefillability = buildTvlProtocolRefillability()
 
 
 export async function runTvlAction(ws: any, data: any) {

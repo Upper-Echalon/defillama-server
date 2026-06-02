@@ -5031,6 +5031,7 @@ const data2: Protocol[] = [
     twitter: "kagla_fi",
     listedAt: 1649072470,
     github: ["kagla-finance"],
+    deprecated: true,
   },
   {
     id: "1609",
@@ -7821,6 +7822,7 @@ const data2: Protocol[] = [
     twitter: "muuu_fi",
     listedAt: 1651792802,
     github: ["muuu-finance"],
+    deprecated: true,
   },
   {
     id: "1737",

@@ -49631,7 +49631,8 @@ const data3_3: Protocol[] = [
     module: "dummy.js",
     twitter: "akka_finance",
     dimensions: {
-      aggregators: "akka"
+      aggregators: "akka",
+      fees: "akka",
     }
   },
   {

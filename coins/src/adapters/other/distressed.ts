@@ -460,6 +460,13 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     "USDC.e": "0x18d25B4e18165c97e1285212e5d1f80eDD6d3Aa7",
     USDT: "0xD648529D4803d3467bA8850577BEd4e4b8Ae583C",
   },
+  astar: {
+    // starlay is insolvent
+    lUSDT: '0x430d50963d9635bbef5a2ff27bd0bddc26ed691f',
+    lUSDC: '0xc404e12d3466accb625c67dbab2e1a8a457def3c',
+    lDAI: '0x4dd9c468a44f3fef662c35c1e9a6108b70415c2c',
+    lBUSD: '0xb7ab962c42a8bb443e0362f58a5a43814c573ffb',
+  }
 };
 
 export const distressedAssets = Object.fromEntries(

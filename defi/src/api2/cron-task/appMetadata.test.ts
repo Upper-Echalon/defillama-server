@@ -50,6 +50,28 @@ describe("app metadata chain visibility", () => {
     expect(visibleChains).toEqual(["Arbitrum", "Ethereum"]);
   });
 
+  test("keeps protocol-backed and dimension-configured chains while excluding metadata-only chains", () => {
+    const visibleChains = getVisibleChainsForAppMetadata(
+      [
+        {
+          category: "Dexs",
+          chains: ["Ethereum"],
+          chainTvls: {
+            Ethereum: { tvl: 100 },
+          },
+        },
+      ],
+      {
+        hyperevm: {},
+      },
+      ["Ethereum", "Quai"],
+      ["Akash", "Arweave"]
+    );
+
+    expect(visibleChains).toEqual(["Ethereum", "Akash", "Arweave", "Quai"]);
+    expect(visibleChains).not.toContain("HyperEVM");
+  });
+
   test("removes metadata-only chains that are absent from the filtered chain list", () => {
     const finalChains = {
       ethereum: { name: "Ethereum", id: "Ethereum" },

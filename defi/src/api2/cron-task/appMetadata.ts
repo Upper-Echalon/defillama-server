@@ -9,6 +9,7 @@ import * as sdk from "@defillama/sdk";
 import { genTokenConfig } from "./generateToken";
 
 import { chainNameToIdMap, extraSections, getChainKeyFromLabel } from "../../utils/normalizeChain";
+import { getDimensionConfiguredChainLabels } from "../../utils/visibleChains";
 import protocols from "../../protocols/data";
 import parentProtocols from "../../protocols/parentProtocols";
 import { IChainMetadata, IProtocolMetadata } from "./types";
@@ -210,7 +211,12 @@ async function _storeAppMetadata() {
 
   async function _storeMetadataFile() {
     const yieldProjects = new Set(yieldsData.map((pool: any) => pool.project));
-    const visibleChains = getVisibleChainsForAppMetadata(tvlData.protocols, dimensionsChainAggData);
+    const visibleChains = getVisibleChainsForAppMetadata(
+      tvlData.protocols,
+      dimensionsChainAggData,
+      tvlData.chains ?? [],
+      getDimensionConfiguredChainLabels()
+    );
     const visibleChainSlugs = new Set<string>();
 
     for (const chain of visibleChains) {

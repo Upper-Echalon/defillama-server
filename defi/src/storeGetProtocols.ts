@@ -9,9 +9,14 @@ import fetch from "node-fetch";
 import { excludeProtocolInCharts, hiddenCategoriesFromUISet } from "./utils/excludeProtocols";
 import protocols from "./protocols/data";
 import { readRouteData } from "./api2/cache/file-cache";
-import { addAdjustedChainTvls, getVisibleChainLabels, hasDimensionsChainVisibility } from "./utils/visibleChains";
+import {
+  addAdjustedChainTvls,
+  getDimensionConfiguredChainLabels,
+  getVisibleChainLabels,
+  hasDimensionsChainVisibility,
+} from "./utils/visibleChains";
 
-export { getVisibleChainLabels, hasDimensionsChainVisibility };
+export { getDimensionConfiguredChainLabels, getVisibleChainLabels, hasDimensionsChainVisibility };
 
 function hasDimensionsChainAggData(dimensionsChainAggData: any = {}) {
   if (typeof dimensionsChainAggData !== "object" || dimensionsChainAggData === null) return false;
@@ -101,14 +106,16 @@ export async function storeGetProtocols({
   const protocolChainLabelsSet = new Set<string>();
   const protocolCategoriesSet: Set<string> = new Set();
 
-  trimmedResponse.forEach((p) => {
-    for (const chain of p.chains) {
+  for (const protocol of response) {
+    for (const chain of protocol.chains ?? []) {
       if (protocolChainLabelsSet.has(chain)) continue;
 
       protocolChainLabelsSet.add(chain);
       protocolChainLabels.push(chain);
     }
+  }
 
+  trimmedResponse.forEach((p) => {
     if (!p.category) return;
 
     protocolCategoriesSet.add(p.category);
@@ -193,7 +200,8 @@ export async function storeGetProtocols({
   const chainsOutput = getVisibleChainLabels(
     chains,
     dimensionsChainAggData ?? {},
-    fallbackChainLabels.concat(protocolChainLabels)
+    fallbackChainLabels.concat(protocolChainLabels),
+    getDimensionConfiguredChainLabels()
   );
 
   const protocols2Data = {

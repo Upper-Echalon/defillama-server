@@ -10,7 +10,9 @@ type MetadataProtocol = {
 
 export function getVisibleChainsForAppMetadata(
   protocols: MetadataProtocol[],
-  dimensionsChainAggData: any = {}
+  dimensionsChainAggData: any = {},
+  protocolChainLabels: string[] = [],
+  dimensionConfiguredChainLabels: string[] = []
 ) {
   const protocolChainTvls: Record<string, number> = {};
   for (const protocol of protocols) {
@@ -19,7 +21,12 @@ export function getVisibleChainsForAppMetadata(
     addAdjustedChainTvls(protocolChainTvls, protocol.chainTvls ?? {}, protocol.chains ?? []);
   }
 
-  return getVisibleChainLabels(protocolChainTvls, dimensionsChainAggData);
+  return getVisibleChainLabels(
+    protocolChainTvls,
+    dimensionsChainAggData,
+    protocolChainLabels,
+    dimensionConfiguredChainLabels
+  );
 }
 
 const slug = (chain: string) => chain.toLowerCase().split(" ").join("-").split("'").join("");

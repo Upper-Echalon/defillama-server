@@ -1,4 +1,4 @@
-import { chainCoingeckoIds, getChainDisplayName, getChainKeyFromLabel } from "./normalizeChain";
+import { chainCoingeckoIds, currentChainLabelsList, getChainDisplayName, getChainKeyFromLabel } from "./normalizeChain";
 
 type ChainTvls = Record<string, { tvl?: number | null }>;
 
@@ -48,7 +48,8 @@ export function addAdjustedChainTvls(
 export function getVisibleChainLabels(
   protocolChainTvls: { [chain: string]: number },
   dimensionsChainAggData: any = {},
-  fallbackChainLabels: string[] = []
+  fallbackChainLabels: string[] = [],
+  dimensionConfiguredChainLabels: string[] = []
 ) {
   const normalizedProtocolChainTvls = new Map<string, number>();
   for (const chain in protocolChainTvls) {
@@ -82,6 +83,15 @@ export function getVisibleChainLabels(
   }
   dimensionBackedChains.sort((a, b) => a.localeCompare(b));
 
+  const dimensionConfiguredChains: string[] = [];
+  for (const chain of dimensionConfiguredChainLabels) {
+    const chainLabel = getVisibleChainLabel(chain);
+    if (!chainLabel || visibleChains.has(chainLabel)) continue;
+
+    visibleChains.add(chainLabel);
+    dimensionConfiguredChains.push(chainLabel);
+  }
+
   const fallbackChains: string[] = [];
   for (const chain of fallbackChainLabels) {
     const chainLabel = getVisibleChainLabel(chain);
@@ -91,5 +101,14 @@ export function getVisibleChainLabels(
     fallbackChains.push(chainLabel);
   }
 
-  return protocolBackedChains.concat(dimensionBackedChains, fallbackChains);
+  return protocolBackedChains.concat(dimensionBackedChains, dimensionConfiguredChains, fallbackChains);
+}
+
+export function getDimensionConfiguredChainLabels() {
+  const chains: string[] = [];
+  for (const chain of currentChainLabelsList) {
+    if (chainCoingeckoIds[chain]?.dimensions) chains.push(chain);
+  }
+
+  return chains;
 }

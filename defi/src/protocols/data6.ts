@@ -5437,5 +5437,22 @@ const data6: Protocol[] = [
       fees: "render-network",
     },
   },
+  {
+    id: "7967",
+    name: "Brix",
+    address: null,
+    symbol: "-",
+    url: "https://brix.money/",
+    description: "Emerging markets yield onchain.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/brix.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Money Market Funds"],
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "brix_money",
+  },
 ];
 export default data6;

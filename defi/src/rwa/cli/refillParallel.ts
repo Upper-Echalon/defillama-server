@@ -17,7 +17,7 @@ import * as sdk from "@defillama/sdk";
 const { runInPromisePool } = sdk.util;
 import { prepareAtvlContext, runAtvlForTimestamp } from "../atvlRefill";
 import { getTimestampAtStartOfDay } from "../../utils/date";
-import { initPG, fetchMetadataPG, DAILY_RWA_DATA } from "../db";
+import { initPG, fetchMetadataPG, DAILY_RWA_DATA, BACKUP_RWA_DATA } from "../db";
 import { getChainIdFromDisplayName } from "../../utils/normalizeChain";
 import { Op, QueryTypes } from "sequelize";
 
@@ -33,9 +33,19 @@ import { Op, QueryTypes } from "sequelize";
 //   - Phase 2: DELETE rows flagged as spikes (the $0 row at Aug 31)
 //   - Phase 3: UPDATE rows where mcap < expected × 0.7 (price-dip recovery)
 // Both Phase 2/3 scoped to id=644 only.
-const DRY_RUN = false;
-const START_DATE = "2024-01-01";
-const END_DATE = "2026-05-12";
+const DRY_RUN = true;
+// --merge-write enables a Phase 1.5/1.6 merge-preserve write against existing
+// DB rows, run BEFORE Phases 2-3. Chains absent from the new compute are
+// preserved from the existing row, chains present in the new compute overwrite
+// (only when non-zero).
+// Use this when an RWA has on-chain contracts on a chain whose SDK adapter
+// throws on historical timestamps (stellar/aptos/solana/sui/starknet/osmosis/
+// provenance) AND you've already backfilled that chain separately — the merge
+// preserves your backfill values for those chains while filling in fresh data
+// from the new pipeline (peggedassets, EVM archive fetches, etc.).
+const MERGE_WRITE = process.argv.includes("--merge-write");
+const START_DATE = "2021-06-09";
+const END_DATE = "2026-05-22";
 const BACKFILL_CONCURRENCY = 5;
 const ID_CONCURRENCY = 10;
 const PRICE_FETCH_CONCURRENCY = 8;
@@ -147,7 +157,7 @@ function convertAtvlResult(
   const rows: any[] = [];
   for (const id of ids) {
     if (!data[id]) continue;
-    const { onChainMcap, activeMcap } = data[id];
+    const { onChainMcap, activeMcap, totalSupply } = data[id];
 
     const mcap: Record<string, number> = {};
     let aggregatemcap = 0;
@@ -163,6 +173,15 @@ function convertAtvlResult(
       const slug = getChainIdFromDisplayName(chain);
       activemcap[slug] = Number(val) || 0;
       aggregatedactivemcap += activemcap[slug];
+    }
+
+    // Capture per-chain totalSupply (atvlRefill writes it as `totalSupply` keyed
+    // by display name). Needed for the merge-preserve write to mirror the supply
+    // changes alongside the mcap/activemcap changes.
+    const totalsupply: Record<string, number> = {};
+    for (const [chain, val] of Object.entries(totalSupply ?? {})) {
+      const slug = getChainIdFromDisplayName(chain);
+      totalsupply[slug] = Number(val) || 0;
     }
 
     rows.push({
@@ -775,9 +794,152 @@ export async function preflightHistoricalIncompatibleChains(ids: string[]): Prom
     console.log(`        run first: ${scripts}`);
   }
   console.log("");
+  if (!MERGE_WRITE) {
+    console.log(`  ⚠️  --merge-write is OFF. Phase 3 will overwrite mcap on dip-rows,`);
+    console.log(`     dropping any previously-backfilled values for these chains.`);
+    console.log(`     Pass --merge-write to preserve per-chain values from existing rows.`);
+  } else {
+    console.log(`  ✓ --merge-write is ON. Merge-preserve write will preserve existing per-chain`);
+    console.log(`    values the new compute doesn't produce (e.g. stellar from your backfill).`);
+  }
+  console.log("");
   console.log(`  This warning is informational — refillParallel will continue.`);
   console.log(`  Use a per-chain backfill script BEFORE or AFTER this run to fill the gap.`);
   console.log("");
+}
+
+// ── Phase 1.5/1.6: Merge-preserve write ──────────────────────────────
+// For each row produced by Phase 1, fetch the existing DB row and merge per
+// chain: chains the new compute has (with non-zero values) overwrite, chains
+// it doesn't have (or has at 0) are preserved from the existing row. Then
+// recompute aggregates from the merged chain map and write. Runs BEFORE
+// Phases 2-3 so spike-removal and price-fix mutations survive in the DB.
+//
+// This is the per-chain analog of the `isMissing` guard used by the
+// backfillXxxRwaMcap.ts scripts, hoisted into the refillParallel pipeline so
+// you can safely re-run refillParallel on an RWA whose Stellar/Aptos/Solana
+// legs have been backfilled separately — those chains' values survive the
+// rewrite instead of getting silently dropped.
+//
+// Does NOT touch: defiactivetvl, aggregatedefiactivetvl (not in
+// updateOnDuplicate, so untouched on existing rows; remain null on rows that
+// don't exist yet).
+function sumChainMap(m: { [k: string]: any }): number {
+  let s = 0;
+  for (const v of Object.values(m)) {
+    const n = Number(v);
+    if (Number.isFinite(n)) s += n;
+  }
+  return s;
+}
+
+// Merge two per-chain maps: for each chain present in `newMap` with a
+// non-zero value, that value wins; otherwise the existing value is preserved.
+function mergePerChain(
+  newMap: { [k: string]: any },
+  existingMap: { [k: string]: any },
+): { [k: string]: any } {
+  const merged = { ...existingMap };
+  for (const [chain, val] of Object.entries(newMap)) {
+    const n = Number(val);
+    if (Number.isFinite(n) && n > 0) merged[chain] = val;
+  }
+  return merged;
+}
+
+// Compute the merged per-chain rows from Phase 1's collected output and the
+// existing DB rows. Returns rows in the same shape as Phase 1's `convertAtvlResult`
+// output (so downstream Phase 2-3 + Phase 5 HTML preview see the merged
+// chart shape, not Phase 1's chain-dropped shape). Does NOT write to DB.
+async function computeMergedCollectedRows(collectedRows: any[]): Promise<any[]> {
+  const byId = new Map<string, any[]>();
+  for (const r of collectedRows) {
+    const arr = byId.get(r.id) ?? [];
+    arr.push(r);
+    byId.set(r.id, arr);
+  }
+
+  const merged: any[] = [];
+  for (const [id, rows] of byId) {
+    const timestamps = rows.map((r) => Number(r.timestamp));
+    const existingRows = await DAILY_RWA_DATA.findAll({
+      where: { id, timestamp: { [Op.in]: timestamps } },
+      raw: true,
+    }) as any[];
+    const existingByTs = new Map<number, any>();
+    for (const e of existingRows) existingByTs.set(Number(e.timestamp), e);
+
+    // Diagnostic counters
+    let preservedChainsByName: Record<string, number> = {};
+
+    for (const r of rows) {
+      const ts = Number(r.timestamp);
+      const newMcap = parseJson(r.mcap);
+      const newActiveMcap = parseJson(r.activemcap);
+      const newTotalSupply = parseJson(r.totalsupply);
+
+      const existing = existingByTs.get(ts);
+      const existingMcap = existing ? parseJson(existing.mcap) : {};
+      const existingActiveMcap = existing ? parseJson(existing.activemcap) : {};
+      const existingTotalSupply = existing ? parseJson(existing.totalsupply) : {};
+
+      const mergedMcap = mergePerChain(newMcap, existingMcap);
+      const mergedActiveMcap = mergePerChain(newActiveMcap, existingActiveMcap);
+      const mergedTotalSupply = mergePerChain(newTotalSupply, existingTotalSupply);
+
+      // Track which chains we preserved (existing-only, not in new)
+      for (const chain of Object.keys(existingMcap)) {
+        if (!(chain in newMcap) || Number(newMcap[chain]) === 0) {
+          if (Number(existingMcap[chain]) > 0) {
+            preservedChainsByName[chain] = (preservedChainsByName[chain] ?? 0) + 1;
+          }
+        }
+      }
+
+      merged.push({
+        timestamp: ts,
+        id,
+        mcap: JSON.stringify(mergedMcap),
+        activemcap: JSON.stringify(mergedActiveMcap),
+        totalsupply: JSON.stringify(mergedTotalSupply),
+        aggregatemcap: sumChainMap(mergedMcap),
+        aggregatedactivemcap: sumChainMap(mergedActiveMcap),
+      });
+    }
+
+    const preservedSummary = Object.entries(preservedChainsByName)
+      .sort((a, b) => b[1] - a[1])
+      .map(([c, n]) => `${c}=${n}`)
+      .join(", ");
+    console.log(
+      `  [${id}] merge: ${rows.length} rows` +
+      (preservedSummary ? `  preserved chains from existing rows: [${preservedSummary}]` : "  no existing chains needed preservation")
+    );
+  }
+  return merged;
+}
+
+// Write the merged rows to daily_rwa_data + backup_rwa_data. Only called when
+// !DRY_RUN.
+async function writeMergedRows(mergedCollectedRows: any[]): Promise<void> {
+  if (mergedCollectedRows.length === 0) return;
+  const now = new Date();
+  const dailyInserts = mergedCollectedRows.map((r) => ({
+    timestamp: Number(r.timestamp),
+    timestamp_actual: Number(r.timestamp),
+    id: r.id,
+    mcap: r.mcap,
+    activemcap: r.activemcap,
+    totalsupply: r.totalsupply,
+    aggregatemcap: r.aggregatemcap,
+    aggregatedactivemcap: r.aggregatedactivemcap,
+    created_at: now,
+    updated_at: now,
+  }));
+  const backupInserts = dailyInserts.map(({ timestamp_actual, ...rest }) => rest);
+  const upd = ["mcap", "activemcap", "totalsupply", "aggregatemcap", "aggregatedactivemcap", "updated_at"];
+  await DAILY_RWA_DATA.bulkCreate(dailyInserts as any[], { updateOnDuplicate: upd });
+  await BACKUP_RWA_DATA.bulkCreate(backupInserts as any[], { updateOnDuplicate: upd });
 }
 
 // ── Main ─────────────────────────────────────────────────────────────
@@ -797,7 +959,28 @@ async function main() {
 
   // Phase 1: Backfill
   process.env.RWA_DRY_RUN = "false";
-  const collectedRows = await runBackfill(START_DATE, END_DATE, IDS);
+  let collectedRows = await runBackfill(START_DATE, END_DATE, IDS);
+
+  // Phase 1.5 (when --merge-write): compute merged rows in memory so Phases 2-3
+  // and the HTML preview reflect the post-merge chart shape. Without this, the
+  // preview would show Phase 1's chain-dropped output (e.g. ~$52M for BRZ
+  // because Stellar throws on historical and gets dropped), which is misleading.
+  // The merged rows are persisted to DB here (before Phases 2-3) when !DRY_RUN,
+  // so Phases 2-3 then read/mutate the already-merged DB state — Phase 2 spike
+  // deletions and Phase 3 price-fix UPDATEs survive instead of being clobbered
+  // by a post-cleanup re-write.
+  if (MERGE_WRITE && collectedRows.length > 0) {
+    console.log(`\n── Phase 1.5: Compute merged rows (DRY_RUN=${DRY_RUN}) ──`);
+    collectedRows = await computeMergedCollectedRows(collectedRows);
+
+    if (!DRY_RUN) {
+      console.log(`── Phase 1.6: Write merged rows to DB ──`);
+      await writeMergedRows(collectedRows);
+      console.log(`  Wrote ${collectedRows.length} merged rows to daily_rwa_data + backup_rwa_data`);
+    } else {
+      console.log(`  (merge-write): DRY_RUN — skipped persistence (preview reflects merged shape)`);
+    }
+  }
 
   // Group collected rows by ID (only used in DRY_RUN)
   const collectedById = new Map<string, any[]>();
@@ -830,7 +1013,7 @@ async function main() {
   const idOrder = new Map(IDS.map((id, i) => [id, i]));
   results.sort((a, b) => (idOrder.get(a.id) ?? 0) - (idOrder.get(b.id) ?? 0));
 
-  // Phase 4: Generate HTML preview
+  // Phase 5: Generate HTML preview
   if (results.length > 0) {
     const html = generateHtml(results);
     const outPath = path.join(__dirname, "refill-preview.html");

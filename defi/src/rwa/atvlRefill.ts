@@ -284,8 +284,22 @@ function getFxRateMap(): Promise<FxRateMap> {
   return _fxRateMapPromise;
 }
 
+// Most stablecoin peg types use the literal ISO 4217 currency code after the
+// "pegged" prefix (peggedEUR → EUR, peggedJPY → JPY, …) which matches the FX
+// rate map's keys. The Brazilian Real is the odd one out — its peg type is
+// "peggedREAL" but the ISO code is "BRL", and the FX map has zero "REAL" keys.
+// Without this mapping every historical BRZ refill silently drops the
+// peggedassets-API override (no FX rate → fetchHistoricalStablecoins returns
+// early), so on-chain readings end up being the only mcap source and any
+// chain whose airtable contract has near-zero supply shows ~$0 even when
+// peggedassets tracks billions of tokens there.
+const PEG_TYPE_TO_ISO_CURRENCY: Record<string, string> = {
+  peggedREAL: "BRL",
+};
+
 function pegTypeToCurrency(pegType: string): string | null {
   if (typeof pegType !== "string" || !pegType.startsWith("pegged")) return null;
+  if (PEG_TYPE_TO_ISO_CURRENCY[pegType]) return PEG_TYPE_TO_ISO_CURRENCY[pegType];
   return pegType.slice("pegged".length) || null;
 }
 
@@ -577,7 +591,18 @@ function getOnChainTvlAndActiveMcaps(
       stablecoinChainEntry
     ) {
       const [stablecoinChain, stablecoinMcap] = stablecoinChainEntry;
-      finalData[rwaId][RWA_KEY_MAP.onChain] = { ...(stablecoinChainMcap ?? {}) };
+      // Merge (don't replace): per-pk iteration order means an earlier pk on a
+      // chain NOT covered by peggedassets (e.g. Stellar BRZ) writes its mcap
+      // into onChainMcap via the on-chain path below. A subsequent pk on a
+      // chain covered by peggedassets (e.g. Gnosis BRZ) lands here and used to
+      // OVERWRITE onChainMcap with the peggedassets-only map, wiping the
+      // Stellar leg added moments earlier. Spread existing first to preserve
+      // those non-peggedassets chains, then overlay peggedassets values for
+      // the chains it covers.
+      finalData[rwaId][RWA_KEY_MAP.onChain] = {
+        ...(finalData[rwaId][RWA_KEY_MAP.onChain] ?? {}),
+        ...(stablecoinChainMcap ?? {}),
+      };
       if (!finalData[rwaId][RWA_KEY_MAP.price] && assetPrices[pk]?.price) {
         finalData[rwaId][RWA_KEY_MAP.price] = toFiniteNumberOrNull(assetPrices[pk].price);
       }

@@ -48,6 +48,10 @@ export async function getProtocolTvl(
 
   const { category, isLiquidStaking, isDoublecounted } = pMetadata;
 
+  if (protocol.module === "dummy.js") {
+    return { tvl, tvlPrevDay, tvlPrevWeek, tvlPrevMonth, chainTvls };
+  }
+
   try {
     const [
       lastRecord,

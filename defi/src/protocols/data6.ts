@@ -5264,7 +5264,7 @@ const data6: Protocol[] = [
     symbol: "-",
     url: "https://america.fun/",
     description:
-      "Solana DEX using Meteora DBC (Dynamic Bonding Curve) and DAMM v2 liquidity pools.",
+      "Crypto launchpad for USD1 coins. Launch, trade and earn the highest creator fees on Solana.",
     chain: "Solana",
     logo: `${baseIconsUrl}/america.fun.jpg`,
     audits: "0",

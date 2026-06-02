@@ -5900,6 +5900,9 @@ export const chainCoingeckoIds = {
     github: ["IgraLabs"],
     twitter: "IgraNetwork",
     url: "https://igralabs.com",
+    dimensions: {
+      fees: "igra",
+    },
   },
   /*"BlockDAG": {
     geckoId: "blockdag",

@@ -28342,7 +28342,7 @@ const data4: Protocol[] = [
     url: "https://mezo.org/explore/pools",
     description: "Tigris is Mezo's native ve(3,3) DEX and incentive management system featuring stable/volatile AMM pools, vote-escrow tokenomics, and fee distribution to voters",
     chain: "Mezo",
-    logo: `${baseIconsUrl}/tigris-mezo.jpg`,
+    logo: `${baseIconsUrl}/tigris-mezo-v2.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,

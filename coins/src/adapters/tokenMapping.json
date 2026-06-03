@@ -16605,6 +16605,16 @@
       "decimals": 6,
       "symbol": "EURW",
       "to": "coingecko#newrails-euro"
+    },
+    "0x866A2BF4E572CbcF37D5071A7a58503Bfb36be1b": {
+      "decimals": 6,
+      "symbol": "M",
+      "to": "asset#ethereum:0x866a2bf4e572cbcf37d5071a7a58503bfb36be1b"
+    },
+    "0xacA92E438df0B2401fF60dA7E4337B687a2435DA": {
+      "decimals": 6,
+      "symbol": "mUSD",
+      "to": "coingecko#metamask-usd"
     }
   },
   "stable": {

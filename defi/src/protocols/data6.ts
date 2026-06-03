@@ -3869,14 +3869,14 @@ const data6: Protocol[] = [
   },
   {
     id: "7891",
-    name: "Venice VVV Staking",
+    name: "Venice",
     address: "base:0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
     symbol: "VVV",
     url: "https://venice.ai/",
     description:
-      "VVV staking is the core utility of Venice AI's native token ($VVV on Base). It lets holders earn yield while gaining ongoing access to the platform's AI inference capacity",
+      "Private, Uncensored AI ",
     chain: "Base",
-    logo: `${baseIconsUrl}/venice-vvv-staking.jpg`,
+    logo: `${baseIconsUrl}/venice.jpg`,
     audits: "2",
     gecko_id: "venice-token",
     cmcId: "35509",
@@ -3885,6 +3885,9 @@ const data6: Protocol[] = [
     module: "venice-protocol/index.js",
     twitter: "AskVenice",
     listedAt: 1779302143,
+    dimensions: {
+      fees: "venice",
+    },
   },
   {
     id: "7892",
@@ -5477,6 +5480,10 @@ const data6: Protocol[] = [
     module: "turbo/index.js",
     twitter: "Turbo_HL",
     listedAt: 1780429365,
+    dimensions: {
+      dexs: "turbo",
+      fees: "turbo",
+    },
   },
   {
     id: "7969",

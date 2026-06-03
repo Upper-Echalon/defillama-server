@@ -14670,7 +14670,10 @@ const data5: Protocol[] = [
     //treasury: "callput.js", counted as tvl
     twitter: "CallPutApp",
     github: ["alanxxzero"],
-    listedAt: 1774291703
+    listedAt: 1774291703,
+    dimensions: {
+      options: "callput",
+    },
   },
   {
     id: "7563",

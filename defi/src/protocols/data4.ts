@@ -5691,7 +5691,8 @@ const data4: Protocol[] = [
     twitter: "BloomTradingBot",
     listedAt: 1739891207,
     dimensions: {
-      fees: "bloom"
+      fees: "bloom",
+      dexs: "bloom"
     }
   },
   {

@@ -3335,6 +3335,8 @@ export const chainCoingeckoIds = {
     url: "https://hyperliquid.xyz/",
     dimensions: {
       fees: "hyperevm",
+      "active-users": "hyperevm",
+      "new-users": "hyperevm",
     },
   },
   "Nibiru": {

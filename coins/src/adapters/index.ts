@@ -136,6 +136,7 @@ export default {
   etherfi: require("./yield/etherfi"),
   wcgUSD: require("./other/wcgUSD"),
   usdrif: require("./other/usdrif"),
+  monolith: require("./other/monolith"),
   xailocker: require("./liquidStaking/xailocker"),
   sbtc: require("./other/sbtc"),
   aries: require("./moneyMarkets/aries"),

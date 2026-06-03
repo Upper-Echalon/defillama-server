@@ -24,6 +24,13 @@ const tokemakConfig: { [chain: string]: string } = {
   linea: "0xf25f616CCc086ddA1129323381EfA1edC8d5F42c",
 };
 
+// Monolith Market - factory deploys (lender, coin, vault) per market
+const monolithConfig: { [chain: string]: { factory: string; fromBlock: number } } = {
+  ethereum: {
+    factory: "0x6D961c9DCF1AD73566822BA4B087892e3839B849",
+    fromBlock: 24949282,
+  },
+};
 const fluidConfig: string[] = ['ethereum', 'arbitrum', 'base', 'polygon', 'plasma', 'bsc']
 
 export async function misc4626(timestamp: number = 0) {
@@ -33,12 +40,16 @@ export async function misc4626(timestamp: number = 0) {
   const tokemakPools = Object.keys(tokemakConfig).map((c) =>
     getTokemakVaults(c, timestamp),
   );
+
+  const monolithVaults = Object.keys(monolithConfig).map((c) =>
+    getMonolithVaults(c, timestamp),
+  );
   const fluidVaults = fluidConfig.map((c) => getFluidVaults(c, timestamp));
   const calls = Object.keys(tokens).map((c) => getTokenPrices(c, timestamp));
   const callsQiDAO = Object.keys(tokensQiDAO).map((c) =>
     getQiDAOTokenPrices(c, timestamp),
   );
-  return Promise.all([calls, callsQiDAO, metaMorphos, tokemakPools, fluidVaults].flat());
+  return Promise.all([calls, callsQiDAO, metaMorphos, tokemakPools, monolithVaults, fluidVaults].flat());
 }
 
 async function getTokemakVaults(chain: string, timestamp: number) {
@@ -81,6 +92,23 @@ async function getMetaMorphos(chain: string, timestamp: number) {
   const tokens = logs.map((l: any) => l.metaMorpho);
   return (
     await calculate4626Prices(chain, timestamp, tokens, "meta-morphos")
+  ).filter((r) => isFinite(r.price ?? 0));
+}
+
+async function getMonolithVaults(chain: string, timestamp: number) {
+  const { factory, fromBlock } = monolithConfig[chain];
+  const api = await getApi(chain, timestamp);
+  const logs = await getLogs({
+    api,
+    target: factory,
+    fromBlock,
+    eventAbi:
+      "event Deployed(address indexed lender, address indexed coin, address indexed vault)",
+    onlyArgs: true,
+  });
+  const vaults = logs.map((l: any) => l.vault);
+  return (
+    await calculate4626Prices(chain, timestamp, vaults, "monolith")
   ).filter((r) => isFinite(r.price ?? 0));
 }
 

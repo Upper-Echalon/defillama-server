@@ -4245,7 +4245,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: " ", // pending to add url https://bond.xyz/
-    description: `Bond, a Uniswap V3 fork DEX deployed on 0G Mainnet (chainId 16661)`,
+    description: `Bond is an all-in-one EVM superapp built for the next generation of on-chain finance`,
     chain: "0G",
     logo: `${baseIconsUrl}/bond.jpg`,
     audits: "0",
@@ -4255,7 +4255,7 @@ const data6: Protocol[] = [
     chains: ["0G"],
     forkedFrom: ["2198"],
     module: "bond/index.js",
-    twitter: "bond_xyz_",
+    twitter: "BondSuperApp_",
     listedAt: 1779420889,
   },
   {

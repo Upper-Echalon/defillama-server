@@ -34204,7 +34204,8 @@ const data3_2: Protocol[] = [
     parentProtocol: "parent#bonkfun",
     listedAt: 1709494263,
     dimensions: {
-      fees: "bonk-bot"
+      fees: "bonk-bot",
+      dexs: "bonkbot"
     }
   },
   {

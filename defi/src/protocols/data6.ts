@@ -4066,6 +4066,7 @@ const data6: Protocol[] = [
     chains: ["Ethereum", "Binance", "Arbitrum", "Base", "Polygon"],
     module: "dummy.js",
     twitter: "SwapWizard",
+    github: ["DeFiRe-business"],
     dimensions: {
       aggregators: "swapwizard"
     },

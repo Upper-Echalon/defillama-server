@@ -49622,7 +49622,7 @@ const data3_3: Protocol[] = [
     description:
       "Akka is an execution engine for DeFi — powering intelligent trade routing across chains and an AI-driven quant vault on Hyperliquid",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/akka.png`,
+    logo: `${baseIconsUrl}/akka.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,

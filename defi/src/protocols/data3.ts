@@ -48327,7 +48327,7 @@ const data3_3: Protocol[] = [
     cmcId: null,
     category: "Bridge",
     chains: ["Ethereum"],
-    module: "dummy.js",
+    module: "layer-zero/index.js",
     twitter: "LayerZero_Core",
     parentProtocol: "parent#layerzero",
     dimensions: {

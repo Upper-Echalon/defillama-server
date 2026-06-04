@@ -9703,16 +9703,16 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "BullpenFi",
   },
-  { 
+  {
     id: "parent#tradoor",
     name: "Tradoor",
     url: "https://tradoor0.xyz",
-    description: "An automated market-making aggregator for perpetual futures on Hyperliquid and connected venues. Users run maker bots across Hyperliquid, Kinetiq HIP-3, Trade.xyz, Nado and Extended from a single web UI, with volume attributed to a shared builder code.",
-    logo: `${baseIconsUrl}/tradoor.jpg`,
+    description: "Tradoor is an automated market-making aggregator for perpetual futures on Hyperliquid and connected venues. Users run maker bots across Hyperliquid, Kinetiq HIP-3, Trade.xyz, Nado and Extended from a single web UI, with volume attributed to a shared builder code.",
+    logo: `${baseIconsUrl}/tradoor-perps-aggregator.jpg`,
     gecko_id: null,
     cmcId: null,
-    chains: [],
-    twitter: "tradoor_io",
+    chains: ["Hyperliquid L1"],
+    twitter: "tradoor0",
   },
   { 
     id: "parent#aegis",

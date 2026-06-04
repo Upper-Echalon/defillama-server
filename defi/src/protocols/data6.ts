@@ -5306,7 +5306,7 @@ const data6: Protocol[] = [
     twitter: "SuperSwapINK",
     parentProtocol: "parent#superswap-ink",
     dimensions: {
-      "bridge-aggregators": "superswap",
+      "bridge-aggregators": "superswap-bridge",
     }
   },
   {

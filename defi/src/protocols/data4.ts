@@ -17935,7 +17935,7 @@ const data4: Protocol[] = [
     symbol: "-",
     url: "https://kgen.io/",
     description:
-      "VeriFi: The Proof of Human model scaling partners with verified users.",
+      "The proof of human model providing verified human infrastructure to the world's leading AI systems.",
     chain: "Aptos",
     logo: `${baseIconsUrl}/kgen.jpg`,
     audits: "0",

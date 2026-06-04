@@ -3375,7 +3375,7 @@ const data6: Protocol[] = [
     chains: ["Hyperliquid L1"],
     module: "dummy.js",
     twitter: "tradoor0",
-    parentProtocol: "parent#tradoor",
+    //parentProtocol: "parent#tradoor",
     dimensions: {
       derivatives: "tradoor-perps",
       fees: "tradoor-perps",

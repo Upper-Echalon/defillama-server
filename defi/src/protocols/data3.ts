@@ -45448,7 +45448,7 @@ const data3_3: Protocol[] = [
     chain: "TON",
     logo: `${baseIconsUrl}/tradoor-ton.jpg`,
     audits: "2",
-    gecko_id: null,
+    gecko_id: "tradoor",
     cmcId: null,
     category: "Derivatives",
     chains: ["TON"],

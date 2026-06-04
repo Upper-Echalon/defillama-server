@@ -22,6 +22,7 @@ export interface PerpsContractMetadata {
     description: string | null;
     accessModel: string | null;
     rwaClassification: string | null;
+    link: string | null;
     makerFeeRate: number;
     takerFeeRate: number;
     deployerFeeShare: number;
@@ -45,6 +46,7 @@ export const PERPS_STRING_OR_NULL_FIELDS = new Set<string>([
     "description",
     "accessModel",
     "rwaClassification",
+    "link",
 ]);
 
 const CONTRACT_METADATA: { [contractId: string]: PerpsContractMetadata } = {};
@@ -79,6 +81,7 @@ const PERPS_METADATA_KEY_MAP = {
     description: "Description",
     accessModel: "Access Model",
     rwaClassification: "RWA Classification",
+    link: "Ref Links",
     makerFeeRate: "Maker Fee Rate",
     takerFeeRate: "Taker Fee Rate",
     deployerFeeShare: "Deployer Fee Share",
@@ -312,6 +315,7 @@ export async function loadContractMetadataFromAirtable(): Promise<number> {
             description: toStringOrNull(mapped.description),
             accessModel: toStringOrNull(mapped.accessModel),
             rwaClassification: toStringOrNull(mapped.rwaClassification),
+            link: toStringOrNull(mapped.link),
             makerFeeRate: toNum(mapped.makerFeeRate, HYPERLIQUID_MAKER_FEE),
             takerFeeRate: toNum(mapped.takerFeeRate, HYPERLIQUID_TAKER_FEE),
             deployerFeeShare: toNum(mapped.deployerFeeShare, HYPERLIQUID_DEPLOYER_SHARE),

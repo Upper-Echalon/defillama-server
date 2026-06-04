@@ -5665,5 +5665,26 @@ const data6: Protocol[] = [
       derivatives: "defi-saver-perps",
     }
   },
+  {
+    id: "7978",
+    name: "Propr",
+    address: null,
+    symbol: "-",
+    url: "https://www.propr.xyz/",
+    description:
+      "Propr is a transparent prop firm built on Hyperliquid L1.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/propr.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Trading App",
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "ProprXYZ",
+    dimensions: {
+      fees: "propr",
+    }
+  },
 ];
 export default data6;

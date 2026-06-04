@@ -1599,14 +1599,14 @@ const data: Protocol[] = [
   },
   {
     id: "177",
-    name: "Defi Saver",
+    name: "Defi Saver Asset Management",
     address: null,
     symbol: "-",
     url: "https://defisaver.com/",
     description:
       "DeFi Saver is a one-stop management solution for decentralized finance with advanced leverage management tools and unique automated management features.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/defi-saver.jpg`,
+    logo: `${baseIconsUrl}/defi-saver-asset-management.jpg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -1615,7 +1615,7 @@ const data: Protocol[] = [
     module: "defisaver.js",
     twitter: "DefiSaver",
     audit_links: ["https://consensys.net/diligence/audits/2021/03/defi-saver/"],
-    github: ["defisaver"],
+    parentProtocol: "parent#defi-saver",
     dimensions: {
       fees: "defi-saver"
     }

@@ -5642,5 +5642,28 @@ const data6: Protocol[] = [
     twitter: "ada_harvest",
     listedAt: 1780539891,
   },
+  {
+    id: "7977",
+    name: "Defi Saver Perps",
+    address: null,
+    symbol: "-",
+    url: "https://defisaver.com/",
+    description:
+      "Defi Saver Perps is a Hyperliquid Builder that allows users to trade perps on Hyperliquid L1.",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/defi-saver-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Hyperliquid Builder"],
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "DefiSaver",
+    parentProtocol: "parent#defi-saver",
+    dimensions: {
+      fees: "defi-saver-perps",
+      derivatives: "defi-saver-perps",
+    }
+  },
 ];
 export default data6;

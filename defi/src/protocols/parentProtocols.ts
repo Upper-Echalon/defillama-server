@@ -9854,6 +9854,18 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "SuperSwapINK",
   },
+  {
+    id: "parent#defi-saver",
+    name: "Defi Saver",
+    url: "https://defisaver.com/",
+    description: "DeFi Saver is a one-stop management solution for decentralized finance with advanced leverage management tools and unique automated management features.",
+    logo: `${baseIconsUrl}/defi-saver.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "DefiSaver",
+    github: ["defisaver"],
+  },
 ];
 
 export default parentProtocols;

@@ -60257,7 +60257,8 @@ const data3_3: Protocol[] = [
     module: "dummy.js",
     twitter: "bullx_io",
     dimensions: {
-      fees: "bullx"
+      fees: "bullx",
+      dexs: "bullx"
     }
   },
   {
@@ -60279,7 +60280,8 @@ const data3_3: Protocol[] = [
     module: "dummy.js",
     twitter: "gmgnai",
     dimensions: {
-      fees: "gmgnai"
+      fees: "gmgnai",
+      dexs: "gmgnai"
     }
   },
   {

@@ -2437,7 +2437,7 @@ const data6: Protocol[] = [
     name: "Hashlock Markets",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://hashlock.markets
+    url: "https://hashlock.markets",
     description: "Hashlock Markets is an RFQ-based DEX where users create swap intents, market makers submit sealed bids, and winning quotes settle non-custodially through HTLC atomic swaps",
     chain: "Ethereum",
     logo: `${baseIconsUrl}/hashlock-markets.jpg`,

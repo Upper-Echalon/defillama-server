@@ -204,6 +204,13 @@ export function hasContractMetadata(contract: string): boolean {
     return resolveContractKey(contract) !== undefined;
 }
 
+/** Number of contracts with loaded metadata. 0 means the Airtable sheet hasn't
+ * been loaded (e.g. preview CLI) — adapters use this to fall back to emitting
+ * all markets rather than filtering against an empty store. */
+export function getContractMetadataCount(): number {
+    return Object.keys(CONTRACT_METADATA).length;
+}
+
 export function resetContractMetadataStore(): void {
     for (const key of Object.keys(CONTRACT_METADATA)) delete CONTRACT_METADATA[key];
     for (const key of Object.keys(CONTRACT_ALIAS)) delete CONTRACT_ALIAS[key];

@@ -5616,6 +5616,18 @@
       "symbol": "KKUB"
     }
   },
+  "arc": {
+    "0x0000000000000000000000000000000000000000": {
+      "decimals": "18",
+      "symbol": "USDC",
+      "to": "coingecko#usd-coin"
+    },
+    "0x3600000000000000000000000000000000000000": {
+      "decimals": "6",
+      "symbol": "USDC",
+      "to": "coingecko#usd-coin"
+    }
+  },
   "sanko": {
     "0x0000000000000000000000000000000000000000": {
       "name": "Dream Machine Token",

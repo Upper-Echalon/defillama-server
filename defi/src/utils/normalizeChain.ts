@@ -6139,6 +6139,14 @@ export const chainCoingeckoIds = {
     url: "https://inri.life",
     chainId: 3777,
   },
+  "Arc": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    categories: ["EVM"],
+    twitter: "arc",
+    url: "https://www.arc.io/",
+  },
 } as unknown as ChainCoinGekcoIds;
 
 // We are creating the list here because, later in the code, we include historical chain labels with the same chain metadata, so, chainCoingeckoIds will have duplicate keys

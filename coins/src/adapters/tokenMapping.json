@@ -5622,6 +5622,16 @@
       "symbol": "USDC",
       "to": "coingecko#usd-coin"
     },
+    "0xbEf5f6d51CB62b58e6A8f77868681825C6fe21c1": {
+      "to": "coingecko#euro-coin",
+      "decimals": 6,
+      "symbol": "EURC"
+    },
+    "0xe9185F0c5F296Ed1797AaE4238D26CCaBEadb86C": {
+      "to": "coingecko#hashnote-usyc",
+      "decimals": 6,
+      "symbol": "USYC"
+    },
     "0x3600000000000000000000000000000000000000": {
       "decimals": "6",
       "symbol": "USDC",

@@ -4675,7 +4675,8 @@ const data6: Protocol[] = [
     name: "Huma Finance V2",
     address: null,
     symbol: "-",
-    url: "https://huma.finance",
+    url: "https://app.huma.finance?ref=McN5Bz",
+    referralUrl: "https://app.huma.finance?ref=McN5Bz",
     description:
       "Permissionless DeFi yield, powered by real-world payment flows.",
     chain: "Solana",

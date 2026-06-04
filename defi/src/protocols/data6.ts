@@ -5623,5 +5623,23 @@ const data6: Protocol[] = [
     github: ["Leroiduxd"],
     listedAt: 1780536621,
   },
+  {
+    id: "7976",
+    name: "Ada Harvest",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://ada-harvest.com
+    description: "ADA Harvest is a Cardano yield aggregator that deposits ADA into a vault and automatically reallocates across external DeFi protocols to optimize returns.",
+    chain: "Cardano",
+    logo: `${baseIconsUrl}/ada-harvest.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield Aggregator",
+    chains: ["Cardano"],
+    module: "ada-harvest/index.js",
+    twitter: "ada_harvest",
+    listedAt: 1780539891,
+  },
 ];
 export default data6;

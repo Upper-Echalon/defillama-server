@@ -4049,6 +4049,7 @@ const data6: Protocol[] = [
     parentProtocol: "parent#bonkfun",
     dimensions: {
       fees: "telemetry",
+      dexs: "telemetry",
     },
   },
   {

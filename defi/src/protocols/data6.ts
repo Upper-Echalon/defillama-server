@@ -5707,7 +5707,7 @@ const data6: Protocol[] = [
     module: "dummy.js",
     twitter: null, // prop amm no twitter
     dimensions: {
-      fees: "fermiswap",
+      dexs: "fermiswap",
     }
   },
   {

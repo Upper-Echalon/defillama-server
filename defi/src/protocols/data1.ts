@@ -8354,6 +8354,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "SonicSwapIO",
     forkedFromIds: ["2197"],
     github: ["SonicSwap"],
+    deadUrl: true,
   },
   {
     id: "482",
@@ -16327,6 +16328,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "tezaliensfarm",
     forkedFromIds: ["513"],
     listedAt: 1637268641,
+    deadUrl: true
   },
   {
     id: "858",
@@ -19445,6 +19447,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "GizaDao",
     forkedFromIds: ["340"],
     listedAt: 1639100829,
+    deadUrl: true,
   },
   {
     id: "1002",
@@ -20338,6 +20341,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     listedAt: 1639805654,
     wrongLiquidity: true,
     github: ["Solanafarm"],
+    deadUrl: true,
   },
   {
     id: "1043",
@@ -24940,6 +24944,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "Delta_Token",
     listedAt: 1642141415,
     github: ["Delta-Financial"],
+    deadUrl: true,
   },
   {
     id: "1257",

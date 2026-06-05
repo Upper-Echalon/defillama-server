@@ -2818,6 +2818,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: "23431",
     chains: [],
     twitter: "MorphexFTM",
+    deadUrl: true,
   },
   {
     id: "parent#empmoney",
@@ -4822,6 +4823,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "LineDefiHub",
     github: ["linedefi"],
+    deadUrl: true,
   },
   {
     id: "parent#native",

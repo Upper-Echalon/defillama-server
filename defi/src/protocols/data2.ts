@@ -23492,6 +23492,7 @@ const data2: Protocol[] = [
     module: "zeniq-swap/index.js",
     twitter: "Zeniq_corp",
     listedAt: 1673786256,
+    deadUrl: true,
   },
   {
     id: "2439",
@@ -24876,6 +24877,7 @@ const data2: Protocol[] = [
     treasury: "pleasrdao.js",
     twitter: "PleasrDAO",
     github: ["PleasrDAO"],
+    deadUrl: true,
   },
   {
     id: "2504",
@@ -28394,6 +28396,7 @@ const data2: Protocol[] = [
     twitter: "MorphexFTM",
     parentProtocol: "parent#morphex",
     listedAt: 1678706137,
+    deadUrl: true,
     dimensions: {
       fees: "morphex",
       derivatives: "morphex-derivatives"

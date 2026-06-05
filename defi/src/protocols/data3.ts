@@ -502,6 +502,7 @@ const data3_0: Protocol[] = [
     twitter: "FlairDefi",
     listedAt: 1679658222,
     github: ["flair-defi"],
+    deadUrl: true
   },
   {
     id: "2722",
@@ -8663,7 +8664,8 @@ const data3_0: Protocol[] = [
     listedAt: 1686243248,
     dimensions: {
       dexs: "miaswap"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "3091",
@@ -17399,7 +17401,8 @@ const data3_1: Protocol[] = [
     dimensions: {
       fees: "morphex-old",
       derivatives: "morphex-old-derivatives"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "3484",
@@ -24620,6 +24623,7 @@ const data3_1: Protocol[] = [
     module: "alephium-bridge/index.js",
     twitter: "alephium",
     listedAt: 1700489950,
+    deadUrl: true,
   },
   {
     id: "3814",
@@ -43745,6 +43749,7 @@ const data3_2: Protocol[] = [
     forkedFromIds: ["2197"],
     parentProtocol: "parent#linehub",
     listedAt: 1716426592,
+    deadUrl: true,
     dimensions: {
       fees: "linehub-v2",
       dexs: "linehub-v2"
@@ -43769,6 +43774,7 @@ const data3_2: Protocol[] = [
     forkedFromIds: ["2198"],
     parentProtocol: "parent#linehub",
     listedAt: 1716426597,
+    deadUrl: true,
     dimensions: {
       fees: "linehub-v3",
       dexs: "linehub-v3"
@@ -47811,6 +47817,7 @@ const data3_3: Protocol[] = [
     twitter: "LineDefiHub",
     parentProtocol: "parent#linehub",
     listedAt: 1720041593,
+    deadUrl: true,
     dimensions: {
       fees: "linehub-perps",
       derivatives: "linehub-perps"
@@ -50725,6 +50732,7 @@ const data3_3: Protocol[] = [
     module: "firoza-finance/index.js",
     twitter: "LibFi_io",
     listedAt: 1723489129,
+    deadUrl: true,
   },
   {
     id: "4977",
@@ -53800,7 +53808,8 @@ const data3_3: Protocol[] = [
     parentProtocol: "parent#morphex",
     dimensions: {
       dexs: "morphex-swap"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "5117",
@@ -54001,7 +54010,8 @@ const data3_3: Protocol[] = [
     parentProtocol: "parent#morphex",
     dimensions: {
       dexs: "morphex-old-swap"
-    }
+    },
+    deadUrl: true,
   },
   {
     id: "5126",

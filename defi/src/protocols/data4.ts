@@ -1645,7 +1645,8 @@ const data4: Protocol[] = [
     twitter: "OoiaTon",
     dimensions: {
       aggregators: "ooia"
-    }
+    },
+    deadUrl: true,
   },
   /*{
     id: "5631",
@@ -16574,6 +16575,7 @@ const data4: Protocol[] = [
     module: "luckystake/index.js",
     twitter: "LuckyStakeApp",
     listedAt: 1749156591,
+    deadUrl: true,
   },
   {
     id: "6275",
@@ -25174,6 +25176,7 @@ const data4: Protocol[] = [
     module: "dummy.js",
     twitter: "standarddotim",
     parentProtocol: "parent#standard-protocol",
+    deadUrl: true,
     dimensions: {
       fees: "standard-spot",
       dexs: "standard-spot"
@@ -25948,6 +25951,7 @@ const data4: Protocol[] = [
     twitter: "standarddotim",
     audit_links: ["https://github.com/standarddotim/standard3.0-contracts/tree/main/audits"],
     parentProtocol: "parent#standard-protocol",
+    deadUrl: true,
     listedAt: 1757349881,
   },
   {

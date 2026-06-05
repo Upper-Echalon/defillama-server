@@ -2114,6 +2114,7 @@ const data5: Protocol[] = [
       fees: "luna-fun",
       dexs: "luna-fun",
     },
+    deadUrl: true,
   },
   {
     id: "6984",
@@ -12766,6 +12767,7 @@ const data5: Protocol[] = [
     twitter: "RushSports_xyz",
     github: ["gfenney"],
     listedAt: 1772205515,
+    deadUrl: true,
   },
   {
     id: "7473",

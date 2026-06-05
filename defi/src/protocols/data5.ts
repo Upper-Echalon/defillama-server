@@ -13555,7 +13555,7 @@ const data5: Protocol[] = [
     url: "https://alphafi.xyz/",
     description: "AlphaLend is a DeFi protocol on the Sui blockchain that enables permissionless lending and borrowing of digital assets. By depositing assets into the protocol, users can earn interest or use their holdings as collateral to access liquidity. Designed with security and composability in mind, AlphaLend provides essential financial primitives for building and interacting with decentralized applications.",
     chain: "Sui",
-    logo: `${baseIconsUrl}/alphafi-lending.jpg`,
+    logo: `${baseIconsUrl}/lending-by-alphafi.jpg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,

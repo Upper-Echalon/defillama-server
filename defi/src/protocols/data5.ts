@@ -11737,8 +11737,8 @@ const data5: Protocol[] = [
   {
     id: "7423",
     name: "MineBTC",
-    address: "solana:BwMCF5LSHPvrR8pLVvcsa4k1AMg4VWVnMWUiNEXMtLkE",
-    symbol: "dogeBTC",
+    address: "solana:CtAu3kc8cQ1jcDMmRTBsDHoPuE3sswCagQ3BuqFDC6dt",
+    symbol: "dBTC",
     url: "https://minebtc.fun",
     description: "A speculative entertainment and betting experiment building a fully AI-driven reserve currency on Solana. Players compete in 60-second faction warfare rounds to mine $dogeBTC — a deflationary Token-2022 with self-adjusting emissions that respond to market conditions. Features evolvable AI-generated Doge NFTs that power lore, gaming, and an AI content engine.",
     chain: "Solana",

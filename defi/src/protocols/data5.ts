@@ -14877,6 +14877,9 @@ const data5: Protocol[] = [
     chains: ["Ethereum"],
     module: "dummy.js",
     twitter: "worldlibertyfi",
+    dimensions: {
+      fees: "world-liberty-financial"
+    }
   },
   {
     id: "7572",

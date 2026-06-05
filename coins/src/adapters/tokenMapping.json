@@ -572,6 +572,11 @@
     }
   },
   "tron": {
+    "tcfcgjekyqmdyt1yxfum5v5sdtay6tuwik": {
+      "decimals": "6",
+      "symbol": "CNHT",
+      "to": "asset#ethereum:0x6e109e9dd7fa1a58bc3eff667e8e41fc3cc07aef"
+    },
     "tthzxnrlrw2brp9dctqu8i4wd9udcwedz3": {
       "decimals": "18",
       "symbol": "stUSDT",
@@ -4941,6 +4946,11 @@
     }
   },
   "base": {
+    "0xd993935e13851dd7517af10687ec7e5022127228": {
+      "decimals": "18",
+      "symbol": "apxUSD",
+      "to": "asset#ethereum:0x98a878b1cd98131b271883b390f68d2c90674665"
+    },
     "0xF5cA55f3ea5Bcd180aEa6dF9E05a0E63A66f5608": {
       "decimals": "18",
       "symbol": "efixDI",

@@ -101,6 +101,17 @@ const ignoredChainSet = new Set([
   'kasplex-2', 'pundi-aifx-omnilayer', 'zama-gateway-mainnet', 'grx-chain',
 ]);
 
+// CoinGecko ids we deliberately do NOT price at all — no coingecko#id price record and no asset#
+// redirects on ANY chain. CG prices a coin as a single id across every platform, so its (mis)price would
+// override a better on-chain source everywhere; we drop the id and price each platform on-chain instead.
+// (CG only leaves an asset# slot alone when the stored confidence is > 0.99, so a 0.95 curve write can't
+// hold it while CG keeps re-creating the redirect — hence dropping the whole id rather than one slot.)
+const cgIdDenylist = new Set<string>([
+  // apxUSD (off-peg RWA; ethereum + base). Priced on-chain instead: ethereum via the deep Curve
+  // apxUSD/USDC pool; base redirected to the ethereum record via adapters/tokenMapping.json.
+  'apxusd',
+]);
+
 async function getAndStoreCoins(coins: Coin[], rejected: Coin[]) {
   const coinData = await fetchCgPriceData(coins.map((c) => c.id));
   await storeCGCoinMetadatas(coinData);
@@ -417,6 +428,7 @@ async function triggerFetchCoingeckoData(hourly: boolean, coinType?: string) {
 
     setTimer();
     let coins: any = await retryCoingeckoRequest('coins/list?include_platform=true', 5)
+    coins = coins.filter((coin: any) => !cgIdDenylist.has(coin.id)); // drop denylisted ids entirely (no price record, no redirects, any chain)
     // coins = coins.filter((coin) => coin.id == 'euro-coin');
     // if (!coins.length) process.exit(0)
 

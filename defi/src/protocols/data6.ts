@@ -5686,5 +5686,26 @@ const data6: Protocol[] = [
       fees: "propr",
     }
   },
+  {
+    id: "7979",
+    name: "FermiSwap",
+    address: null,
+    symbol: "-",
+    url: " ", // no website
+    description:
+      "FermiSwap is a prop AMM on Ethereum.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/fermiswap.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Prop AMM"],
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: null, // prop amm no twitter
+    dimensions: {
+      fees: "fermiswap",
+    }
+  },
 ];
 export default data6;

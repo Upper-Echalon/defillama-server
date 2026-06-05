@@ -5707,5 +5707,27 @@ const data6: Protocol[] = [
       fees: "fermiswap",
     }
   },
+  {
+    id: "7980",
+    name: "WStaking",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://wstaking.net
+    description:
+      "WStaking is a multi-chain staking platform that allows users to stake supported stablecoins across BSC, X Layer, and Base.",
+    chain: "Binance",
+    logo: `${baseIconsUrl}/wstaking.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Binance", "X Layer", "Base"],
+    module: "dummy.js",
+    treasury: "wstaking.js",
+    twitter: "WStaking_net",
+    audit_links: ["https://github.com/Credshields/audit-reports/blob/master/Whale_Venture_-_WStaking_Final_Audit_Report.pdf"],
+    github: ["WhaleStrategy"],
+    listedAt: 1780620709,
+  },
 ];
 export default data6;

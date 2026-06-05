@@ -14428,6 +14428,7 @@ const data4: Protocol[] = [
         adapter: "usdai",
         genuineSpikes: [
           ["2026-04-28", "PYUSD yields harvested"], //https://arbiscan.io/tx/0xcb01527d233d11bfe52ce21c7e3aec5d875829421962966a45fb91946233a1c6
+          ["2026-06-04", "$3M origination fee from Duos Edge AI's debt financing"], //https://x.com/USDai_Official/status/2062668807735578682 https://arbiscan.io/tx/0x7891318e2e804cd7912842db341e23363b69a3bdbf4a6462625a1aba7cfbd6be
         ]
       },
     }

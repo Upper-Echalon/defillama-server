@@ -11212,7 +11212,7 @@ const data5: Protocol[] = [
     dimensions: {
       dexs: {
         adapter: "egas-swap",
-        genuineSpikes: [["2026-05-09", "-"]]
+        genuineSpikes: [["2026-05-09", "-"], ["2026-06-05", "-"]],
       },
     },
   },

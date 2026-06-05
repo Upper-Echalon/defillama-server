@@ -20687,7 +20687,10 @@ const data2: Protocol[] = [
     wrongLiquidity: true,
     github: ["IndigoProtocol"],
     dimensions: {
-      fees: "indigo"
+      fees: {
+        adapter: "indigo",
+        genuineSpikes: [["2026-06-05", "Large liquidation fee due to $ADA and global crypto market crash"]],
+      }
     }
   },
   {

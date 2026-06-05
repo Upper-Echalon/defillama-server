@@ -5407,6 +5407,9 @@ const data6: Protocol[] = [
     twitter: "silentswap",
     github: ["SilentSwapV2"],
     listedAt: 1780333474,
+    dimensions: {
+      "bridge-aggregators": "silentswap",
+    },
   },
   {
     id: "7965",

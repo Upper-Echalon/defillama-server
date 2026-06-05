@@ -5732,5 +5732,26 @@ const data6: Protocol[] = [
     github: ["WhaleStrategy"],
     listedAt: 1780620709,
   },
+  {
+    id: "7981",
+    name: "Afi Swap",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://swap.afi.run/
+    description:
+      "Afi Swap is a DEX aggregator that allows users to swap tokens across multiple chains.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/afi-swap.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Ethereum", "Base", "Arbitrum", "Binance", "Unichain"],
+    module: "dummy.js",
+    twitter: null,
+    dimensions: {
+      aggregators: "afi-swap",
+    },
+  },
 ];
 export default data6;

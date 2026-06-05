@@ -55403,7 +55403,8 @@ const data3_3: Protocol[] = [
     twitter: "moonshot",
     parentProtocol: "parent#moonshot",
     dimensions: {
-      fees: "moonshot-money"
+      fees: "moonshot-money",
+      dexs: "moonshot-money"
     }
   },
   {

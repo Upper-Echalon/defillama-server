@@ -2657,6 +2657,8 @@ export const chainCoingeckoIds = {
     url: "https://manta.network/",
     dimensions: {
       fees: "manta",
+      "active-users": "manta",
+      "new-users": "manta",
     },
   },
   "ShimmerEVM": {
@@ -4042,6 +4044,11 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Cosmos"],
     twitter: "ShidoNetwork",
     url: "https://shido.io/",
+    dimensions: {
+      fees: "shido",
+      "active-users": "shido",
+      "new-users": "shido",
+    },
   },
   "Redbelly": {
     geckoId: "redbelly-network-token",

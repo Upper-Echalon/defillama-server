@@ -2032,6 +2032,7 @@ const data4: Protocol[] = [
       "https://storage.googleapis.com/ktx-data/data/Verichains%20Public%20Report%20-%20Sailor%20Finance.pdf",
     ],
     listedAt: 1737379699,
+    deadUrl: true,
     dimensions: {
       fees: "sailor-finance",
       dexs: "sailor-finance"
@@ -18395,6 +18396,7 @@ const data4: Protocol[] = [
     module: "tapp-exchange/index.js",
     twitter: "TappExchange",
     listedAt: 1750885257,
+    deadUrl: true,
     dimensions: {
       fees: "tapp-exchange",
       dexs: "tapp-exchange"

@@ -188,6 +188,7 @@ const data5: Protocol[] = [
     twitter: "phi_xyz",
     audit_links: ["https://docs.phi.box/explore-phi/others/audit"],
     listedAt: 1761171731,
+    deadUrl: true
   },
   {
     id: "6901",

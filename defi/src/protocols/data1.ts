@@ -5481,6 +5481,7 @@ const data: Protocol[] = [
     twitter: "InsurAce_io",
     audit_links: ["https://docs.insurace.io/landing-page/documentation/security-1"],
     github: ["InsurAce-Protocol"],
+    deadUrl: true,
   },
   {
     id: "355",
@@ -10798,6 +10799,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     ],
     twitter: "MultichainOrg",
     github: ["anyswap"],
+    deadUrl: true,
     warningBanners: [
       {
         message: "Please avoid using Multichain. The Multichain team doesn't control the keys and your money will get stuck/lost.",
@@ -18970,6 +18972,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "ChefGrandpa",
     forkedFromIds: ["2197"],
     listedAt: 1638681578,
+    deadUrl: true,
   },
   {
     id: "979",

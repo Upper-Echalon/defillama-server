@@ -8842,6 +8842,7 @@ const data3_0: Protocol[] = [
     module: "onus-usdo/index.js",
     twitter: "USDOcoin",
     listedAt: 1686358004,
+    deadUrl: true,
     dimensions: {
       fees: "usdo"
     }
@@ -16987,6 +16988,7 @@ const data3_1: Protocol[] = [
     twitter: "KinetixFi",
     parentProtocol: "parent#kinetix",
     listedAt: 1693433723,
+    deadUrl: true,
     dimensions: {
       fees: "kinetix-v1",
       dexs: "kinetix-derivative"
@@ -18531,6 +18533,7 @@ const data3_1: Protocol[] = [
     twitter: "KinetixFi",
     parentProtocol: "parent#kinetix",
     listedAt: 1695101307,
+    deadUrl: true,
     dimensions: {
       fees: "kinetix-v2",
       dexs: "kinetix-v2"
@@ -18555,6 +18558,7 @@ const data3_1: Protocol[] = [
     twitter: "KinetixFi",
     parentProtocol: "parent#kinetix",
     listedAt: 1695105662,
+    deadUrl: true,
     dimensions: {
       fees: "kinetix-v3",
       dexs: "kinetix-v3"
@@ -31444,6 +31448,7 @@ const data3_1: Protocol[] = [
     twitter: "KinetixFi",
     parentProtocol: "parent#kinetix",
     listedAt: 1707231637,
+    deadUrl: true,
     dimensions: {
       fees: "kinetix-derivatives-v2",
       derivatives: "kinetix-derivatives-v2"
@@ -33303,6 +33308,7 @@ const data3_2: Protocol[] = [
     module: "kaleidoswap/index.js",
     twitter: "kaleidocube_xyz",
     listedAt: 1709130785,
+    deadUrl: true
   },
   {
     id: "4190",
@@ -51214,7 +51220,7 @@ const data3_3: Protocol[] = [
     name: "Clave",
     address: null,
     symbol: "-",
-    url: "https://getclave.io",
+    url: "https://www.getclave.com/",
     description:
       "Clave is an easy-to-use, non-custodial smart wallet powered by Account Abstraction and the hardware-level security elements (e.g., Secure Enclave, Android Trustzone, etc.) to simplify the onchain experience for the next billions. By empowering users with a user-friendly and secure bridge to seamlessly integrate their assets into everyday life, Clave delivers a comprehensive fintech solution, ensuring a holistic financial experience for all",
     chain: "zkSync Era",
@@ -52024,7 +52030,8 @@ const data3_3: Protocol[] = [
     chains: ["Wax"],
     module: "neftyblocks/index.js",
     twitter: "neftyblocks",
-    listedAt: 1724412437
+    listedAt: 1724412437,
+    deadUrl: true
   },
   {
     id: "5038",
@@ -61689,7 +61696,8 @@ const data3_3: Protocol[] = [
     module: "gud-tech/index.js",
     twitter: "gudtech_ai",
     audit_links: ["https://docs.gud.tech/audits"],
-    listedAt: 1733597319
+    listedAt: 1733597319,
+    deadUrl: true,
   },
   /*
   {

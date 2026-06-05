@@ -16730,6 +16730,7 @@ const data2: Protocol[] = [
     twitter: "DeFi_Franc",
     listedAt: 1664485760,
     stablecoins: ["defi-franc"],
+    deadUrl: true,
   },
   {
     id: "2138",
@@ -23762,6 +23763,7 @@ const data2: Protocol[] = [
     module: "quadrat/index.js",
     twitter: "0xQuadrat",
     listedAt: 1674041475,
+    deadUrl: true,
   },
   {
     id: "2452",
@@ -27621,6 +27623,7 @@ const data2: Protocol[] = [
     treasury: "cat-in-a-box.js",
     twitter: "catinaboxfi",
     listedAt: 1677778463,
+    deadUrl: true,
   },
   {
     id: "2628",

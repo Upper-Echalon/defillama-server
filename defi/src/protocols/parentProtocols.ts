@@ -2905,6 +2905,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "KinetixFi",
+    deadUrl: true,
   },
   {
     id: "parent#tangible",

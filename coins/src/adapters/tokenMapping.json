@@ -5646,6 +5646,16 @@
       "decimals": "6",
       "symbol": "USDC",
       "to": "coingecko#usd-coin"
+    },
+    "0x128cC466B61f542da60c70e3aA11c10e19B84EDB": {
+      "decimals": "18",
+      "symbol": "WETH",
+      "to": "coingecko#ethereum"
+    },
+    "0x171A4217b86A807A64eB94757Db6849fb4bDbAA0": {
+      "decimals": "8",
+      "symbol": "cirBTC",
+      "to": "coingecko#bitcoin"
     }
   },
   "sanko": {

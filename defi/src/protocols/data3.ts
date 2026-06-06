@@ -1175,7 +1175,7 @@ const data3_0: Protocol[] = [
   {
     id: "2753",
     name: "Velocore V1",
-    address: null,
+    address: "era:0x85D84c774CF8e9fF85342684b0E795Df72A24908",
     symbol: "VC",
     url: "https://velocore.xyz",
     description:
@@ -14000,7 +14000,7 @@ const data3_0: Protocol[] = [
   {
     id: "3330",
     name: "Velocore V2",
-    address: null,
+    address: "era:0x85D84c774CF8e9fF85342684b0E795Df72A24908",
     symbol: "VC",
     url: "https://velocore.xyz",
     description:
@@ -33540,8 +33540,8 @@ const data3_2: Protocol[] = [
   {
     id: "4199",
     name: "Thruster V3",
-    address: null,
-    symbol: "-",
+    address: "blast:0xe36072dd051ce26261bf50cd966311cab62c596e",
+    symbol: "THRUST",
     url: "https://app.thruster.finance",
     description: "Uni v3 fork on blast",
     chain: "Blast",
@@ -33736,8 +33736,8 @@ const data3_2: Protocol[] = [
   {
     id: "4207",
     name: "Thruster V2",
-    address: null,
-    symbol: "-",
+    address: "blast:0xe36072dd051ce26261bf50cd966311cab62c596e",
+    symbol: "THRUST",
     url: "https://app.thruster.finance",
     description: "Uniswap V2 fork on Blast",
     chain: "Blast",
@@ -41470,7 +41470,7 @@ const data3_2: Protocol[] = [
   {
     id: "4556",
     name: "ZetaChain",
-    address: null,
+    address: "ethereum:0xf091867ec603a6628ed83d274e835539d82e9cc8",
     symbol: "ZETA",
     url: "https://www.zetachain.com/",
     description:
@@ -42833,7 +42833,7 @@ const data3_2: Protocol[] = [
   {
     id: "4618",
     name: "Internet Computer",
-    address: null,
+    address: "icp:ryjl3-tyaaa-aaaaa-aaaba-cai",
     symbol: "ICP",
     url: "https://internetcomputer.org/",
     description: "Compute on blockchain.",
@@ -43328,7 +43328,7 @@ const data3_2: Protocol[] = [
   {
     id: "4641",
     name: "AltLayer",
-    address: null,
+    address: "ethereum:0x8457ca5040ad67fdebbcc8edce889a335bc0fbfb",
     symbol: "ALT",
     url: "https://www.altlayer.io/",
     description:
@@ -43390,7 +43390,7 @@ const data3_2: Protocol[] = [
   {
     id: "4644",
     name: "Big Time",
-    address: null,
+    address: "ethereum:0x64bc2ca1be492be7185faa2c8835d9b824c8a194",
     symbol: "BIGTIME",
     url: "https://bigtime.gg/",
     description: "Onchain gaming.",
@@ -45519,8 +45519,8 @@ const data3_3: Protocol[] = [
     // previous Summer.fi
     name: "Summer.fi Pro",
     // previousNames: ["Summer.fi"], this was causing problems, since it was using the name that we attribute to the parentProtocol
-    address: null,
-    symbol: "-",
+    address: "base:0x194f360d130f2393a5e9f3117a6a1b78abea1624",
+    symbol: "SUMR",
     url: "https://summer.fi/earn?referralCode=2001317",
     description:
       "Borrow, Multiply and Earn on the assets you hold across multiple protocols. Take advantage of powerful automation strategies and simple UX.",
@@ -46738,7 +46738,7 @@ const data3_3: Protocol[] = [
   {
     id: "4796",
     name: "Sanko Bridge",
-    address: null,
+    address: "arbitrum:0x8b0e6f19ee57089f7649a455d89d7bc6314d04e8",
     symbol: "DMT",
     url: "https://sanko.xyz/",
     description:
@@ -46757,7 +46757,7 @@ const data3_3: Protocol[] = [
   {
     id: "4797",
     name: "XAI Bridge",
-    address: null,
+    address: "arbitrum:0x4cb9a7ae498cedcbb5eae9f25736ae7d428c9d66",
     symbol: "XAI",
     url: "https://xai.games/",
     description:
@@ -48136,7 +48136,7 @@ const data3_3: Protocol[] = [
   {
     id: "4858",
     name: "Mind Network",
-    address: null,
+    address: "ethereum:0xd55c9fb62e176a8eb6968f32958fefdd0962727e",
     symbol: "FHE",
     url: "https://www.mindnetwork.xyz",
     description: "Mind Network is a pioneer FHE (Fully Homomorphic Encryption) infrastructure for a Fully Encrypted Web by enabling quantum-resistant, fully encrypted data and AI computation. It co-builds a Zero Trust Internet Protocol (HTTPZ) with industry leaders to enable trusted AI and onchain data computation as a new Web3 standard.",
@@ -59524,7 +59524,7 @@ const data3_3: Protocol[] = [
   {
     id: "5375",
     name: "Zircuit",
-    address: null,
+    address: "ethereum:0xfd418e42783382e86ae91e445406600ba144d162",
     symbol: "ZRC",
     url: "https://www.zircuit.com/",
     description: "Experience the safest chain for DeFi and staking. Developers get powerful features; users get peace of mind.",
@@ -61650,7 +61650,7 @@ const data3_3: Protocol[] = [
   {
     id: "5474",
     name: "Swing",
-    address: null,
+    address: "ethereum:0xd8dd38ca016f3e0b3bc545d33cce72af274ce075",
     symbol: "$SWING",
     url: "https://swing.xyz/",
     description: "Swing is a digital asset API platform offering liquidity routing services for web2 & web3 businesses",

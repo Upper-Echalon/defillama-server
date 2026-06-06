@@ -4169,8 +4169,8 @@ const data4: Protocol[] = [
   {
     id: "5743",
     name: "Kodiak V2",
-    address: null,
-    symbol: "-",
+    address: "berachain:0xc0d1ac00a30fa4e30e44afc7313d6312c87e21df",
+    symbol: "KDK",
     url: "https://app.kodiak.finance",
     description: "Uniswap V2 fork on Berachain",
     chain: "Berachain",
@@ -4194,8 +4194,8 @@ const data4: Protocol[] = [
   {
     id: "5744",
     name: "Kodiak V3",
-    address: null,
-    symbol: "-",
+    address: "berachain:0xc0d1ac00a30fa4e30e44afc7313d6312c87e21df",
+    symbol: "KDK",
     url: "https://app.kodiak.finance",
     description: "Uniswap V3 fork on Berachain",
     chain: "Berachain",
@@ -11088,8 +11088,8 @@ const data4: Protocol[] = [
     id: "6042",
     name: "Lighter Bridge",
     previousNames: ["Lighter V2"],
-    address: null,
-    symbol: "-",
+    address: "ethereum:0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2",
+    symbol: "LIT",
     url: "https://app.lighter.xyz/trade/ETH?referral=FHT1N8AYKHP4",
     referralUrl: "https://app.lighter.xyz/trade/ETH?referral=FHT1N8AYKHP4",
     description:
@@ -20152,7 +20152,7 @@ const data4: Protocol[] = [
   {
     id: "6430",
     name: "Blackhole AMM",
-    address: null,
+    address: "avax:0xcd94a87696fac69edae3a70fe5725307ae1c43f6",
     symbol: "BLACK",
     url: "https://blackhole.xyz/",
     description: "Blackhole is a next-generation decentralized exchange (DEX) built on the Avalanche blockchain.",
@@ -20176,7 +20176,7 @@ const data4: Protocol[] = [
   {
     id: "6431",
     name: "Blackhole CLMM",
-    address: null,
+    address: "avax:0xcd94a87696fac69edae3a70fe5725307ae1c43f6",
     symbol: "BLACK",
     url: "https://blackhole.xyz/",
     description: "Blackhole is a next-generation decentralized exchange (DEX) built on the Avalanche blockchain.",
@@ -21800,8 +21800,8 @@ const data4: Protocol[] = [
   {
     id: "6501",
     name: "Etherex Legacy",
-    address: null,
-    symbol: "-",
+    address: "linea:0xefd81eec32b9a8222d1842ec3d99c7532c31e348",
+    symbol: "REX",
     url: "https://etherex.finance/",
     description:
       "Etherex is a concentrated liquidity layer and exchange built on the Linea network, powered by the latest metaDEX x(3,3) methodology—a more fluid and accessible version of the popular ve(3,3) model",
@@ -21826,8 +21826,8 @@ const data4: Protocol[] = [
   {
     id: "6502",
     name: "Etherex CL",
-    address: null,
-    symbol: "-",
+    address: "linea:0xefd81eec32b9a8222d1842ec3d99c7532c31e348",
+    symbol: "REX",
     url: "https://etherex.finance/",
     description:
       "Etherex is a concentrated liquidity layer and exchange built on the Linea network, powered by the latest metaDEX x(3,3) methodology—a more fluid and accessible version of the popular ve(3,3) model",
@@ -27389,8 +27389,8 @@ const data4: Protocol[] = [
   {
     id: "6751",
     name: "Lighter Perps",
-    address: null,
-    symbol: "-",
+    address: "ethereum:0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2",
+    symbol: "LIT",
     url: "https://app.lighter.xyz/trade/ETH?referral=FHT1N8AYKHP4",
     referralUrl: "https://app.lighter.xyz/trade/ETH?referral=FHT1N8AYKHP4",
     description:
@@ -30188,7 +30188,7 @@ const data4: Protocol[] = [
   {
     id: "6877",
     name: "ZealousSwap",
-    address: null,
+    address: "kasplex:ZEAL",
     symbol: "ZEAL",
     url: "https://app.zealousswap.com/swap",
     description: `The first AMM-based DEX on the Kaspa ecosystem`,

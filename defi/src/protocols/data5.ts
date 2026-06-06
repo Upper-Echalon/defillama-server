@@ -2480,8 +2480,8 @@ const data5: Protocol[] = [
   {
     id: "7000",
     name: "Kodiak Perps",
-    address: null,
-    symbol: "-",
+    address: "berachain:0xc0d1ac00a30fa4e30e44afc7313d6312c87e21df",
+    symbol: "KDK",
     url: "https://perps.kodiak.finance/",
     description: "Kodiak's Perps DEX",
     chain: "Orderly",
@@ -4774,8 +4774,8 @@ const data5: Protocol[] = [
   {
     id: "7096",
     name: "Kodiak Islands",
-    address: null,
-    symbol: "-",
+    address: "berachain:0xc0d1ac00a30fa4e30e44afc7313d6312c87e21df",
+    symbol: "KDK",
     url: "https://app.kodiak.finance",
     description: "Liquidity Manager for Kodiak DEX",
     chain: "Berachain",
@@ -5157,7 +5157,7 @@ const data5: Protocol[] = [
   {
     id: "7114",
     name: "Everclear",
-    address: null,
+    address: "ethereum:0x58b9cb810a68a7f3e1e4f8cb45d1b9b3c79705e8",
     symbol: "CLEAR",
     url: "https://www.everclear.org/",
     description: "The Crosschain Clearing and Settlement Protocol.",
@@ -5723,8 +5723,8 @@ const data5: Protocol[] = [
   {
     id: "7141",
     name: "Lighter Spot",
-    address: null,
-    symbol: "-",
+    address: "ethereum:0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2",
+    symbol: "LIT",
     url: "https://app.lighter.xyz/trade/ETH?referral=FHT1N8AYKHP4",
     referralUrl: "https://app.lighter.xyz/trade/ETH?referral=FHT1N8AYKHP4",
     description:
@@ -11862,8 +11862,8 @@ const data5: Protocol[] = [
   {
     id: "7429",
     name: "Murasaki",
-    address: null,
-    symbol: "-",
+    address: "bsc:0x166295ebd6a938c7aaf61350eb5161a9939ab2b7",
+    symbol: "MURA",
     url: "https://murasaki.club/",
     description:
       "Murasaki is the first metaverse ACG virtual idol and decentralized IP ecological community. It aims to create the most valuable virtual idol created and owned.",
@@ -16343,7 +16343,7 @@ const data5: Protocol[] = [
   {
     id: "7638",
     name: "Redbelly Network",
-    address: null,
+    address: "ethereum:0xb45ffb51984d626ee758b336c61cf20990c6bf13",
     symbol: "RBNT",
     url: "https://redbelly.network/",
     description: "Enabling asset issuers to tokenise and trade compliant onchain structured products",

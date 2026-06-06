@@ -9869,6 +9869,17 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "DefiSaver",
     github: ["defisaver"],
   },
+  {
+    id: "parent#bebop",
+    name: "Bebop",
+    url: "https://bebop.xyz/",
+    description: "Buy or sell, we'll execute it. Seamless and efficient crypto trading for everyone.",
+    logo: `${baseIconsUrl}/bebop.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "bebop_dex",
+  },
 ];
 
 export default parentProtocols;

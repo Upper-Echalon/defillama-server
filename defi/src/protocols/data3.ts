@@ -27145,13 +27145,13 @@ const data3_1: Protocol[] = [
   },
   {
     id: "3927",
-    name: "Bebop",
+    name: "Bebop Aggregator",
     address: null,
     symbol: "-",
     url: "https://bebop.xyz/",
     description: "Buy or sell, we'll execute it. Seamless and efficient crypto trading for everyone",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/bebop.png`,
+    logo: `${baseIconsUrl}/bebop-aggregator.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -27161,6 +27161,7 @@ const data3_1: Protocol[] = [
     treasury: null,
     twitter: "bebop_dex",
     listedAt: 1702771200,
+    parentProtocol: "parent#bebop",
     dimensions: {
       aggregators: "bebop"
     }

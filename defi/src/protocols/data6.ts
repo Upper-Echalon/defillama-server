@@ -5754,5 +5754,67 @@ const data6: Protocol[] = [
       aggregators: "afi-swap",
     },
   },
+  {
+    id: "7982",
+    name: "bopAMM",
+    address: null,
+    symbol: "-",
+    url: "https://bebop.xyz/",
+    description: "bopAMM is a proprietary AMM on Ethereum",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/bopamm.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Prop AMM"],
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "Bebop_dex",
+    parentProtocol: "parent#bebop",
+    dimensions: {
+      dexs: "bebop",
+    }
+  },
+  {
+    id: "7983",
+    name: "Mycelia Signal",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://myceliasignal.com
+    description: "Sovereign HTTP oracle serving Ed25519-signed market data via x402 (USDC on Base, pay-per-call). 131 endpoints covering crypto prices, FX, commodities, US/EU macro indicators, volatility surfaces, and structured products. No API keys, no token, no subscriptions — every response is independently verifiable against a published public key",
+    chain: "Base",
+    logo: `${baseIconsUrl}/mycelia-signal.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Oracle",
+    chains: ["Base"],
+    module: "dummy.js",
+    twitter: "jbulkeley",
+    github: ["jonathanbulkeley"],
+    dimensions: {
+      fees: "mycelia-signal",
+    }
+  },
+  {
+    id: "7984",
+    name: "Kipseli",
+    address: null,
+    symbol: "-",
+    url: "", // proprietary amm no website
+    description: "Kipseli is a proprietary AMM on Ethereum",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/kipseli.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Prop AMM"],
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: null, // prop amm no twitter
+    dimensions: {
+      dexs: "kipseli",
+    }
+  },
 ];
 export default data6;

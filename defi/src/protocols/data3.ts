@@ -7811,7 +7811,10 @@ const data3_0: Protocol[] = [
     twitter: "FluxBeamDEX",
     listedAt: 1685612658,
     dimensions: {
-      dexs: "fluxbeam",
+      dexs: {
+        adapter: "fluxbeam",
+        genuineSpikes: [["2026-06-05", "-"]],
+      },
       fees: "fluxbeam"
     }
   },

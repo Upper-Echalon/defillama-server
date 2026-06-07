@@ -16746,7 +16746,7 @@ const data5: Protocol[] = [
     twitter: "Polymarket",
     parentProtocol: "parent#polymarket",
     dimensions: {
-      fees: "polymarket-us",
+      //fees: "polymarket-us", similar to kalshi, no transparency
       "open-interest": "polymarket-us-oi",
       dexs: "polymarket-us",
     }

@@ -51,4 +51,33 @@ describe("computeFlowSeries", () => {
     expect(out[1].netFlowUsd).toBeCloseTo(10, 6);          // only ethereum valued
     expect(out[1].missingChains).toContain("base");
   });
+
+  // --- bad-supply-read guard (implied price = mcap/supply jumps wildly) ---
+  it("skips a supply read that collapses to dust (implied price explodes) — rUSDY/USDY case", () => {
+    // supply 1.36B -> 12.77M while mcap holds 1.35B => implied price $1 -> $106.
+    // Without the guard this is a ~-142B fake flow; with it, excluded.
+    const rows: FlowRow[] = [
+      { timestamp: 1, mcap: { ethereum: 1.355e9 }, totalsupply: { ethereum: 1.356e9 } },
+      { timestamp: 2, mcap: { ethereum: 1.354e9 }, totalsupply: { ethereum: 12.77e6 } },
+    ];
+    expect(computeFlowSeries(rows)[1].netFlowUsd).toBeNull(); // only chain skipped -> gap, not -142B
+  });
+
+  it("skips a supply read that over-reads then corrects (PROSPER case)", () => {
+    // supply 47.3M -> 947K, mcap flat ~906K => implied price $0.019 -> $0.957 (50x).
+    const rows: FlowRow[] = [
+      { timestamp: 1, mcap: { bsc: 912_000 }, totalsupply: { bsc: 47.31e6 } },
+      { timestamp: 2, mcap: { bsc: 906_300 }, totalsupply: { bsc: 947_200 } },
+    ];
+    expect(computeFlowSeries(rows)[1].netFlowUsd).toBeNull();
+  });
+
+  it("does NOT skip a real redemption (supply AND mcap move together, price stable)", () => {
+    // 30% of supply redeemed at ~$1: supply 100M->70M, mcap 100M->70M. price stays $1.
+    const rows: FlowRow[] = [
+      { timestamp: 1, mcap: { ethereum: 100e6 }, totalsupply: { ethereum: 100e6 } },
+      { timestamp: 2, mcap: { ethereum: 70e6 }, totalsupply: { ethereum: 70e6 } },
+    ];
+    expect(computeFlowSeries(rows)[1].netFlowUsd).toBeCloseTo(-30e6, 0); // real $30M outflow preserved
+  });
 });

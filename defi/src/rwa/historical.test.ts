@@ -11,6 +11,7 @@ jest.mock('./db', () => ({
   storeHistoricalPG: jest.fn(async () => {}),
   storeMetadataPG: jest.fn(async () => {}),
   fetchLatestRwaRowsForIds: jest.fn(async () => ({})),
+  fetchLastPositiveDailyRowsForIds: jest.fn(async () => ({})),
 }));
 
 jest.mock('./alerting', () => ({
@@ -18,7 +19,7 @@ jest.mock('./alerting', () => ({
 }));
 
 import { storeHistorical } from './historical';
-import { fetchLatestRwaRowsForIds, storeHistoricalPG } from './db';
+import { fetchLatestRwaRowsForIds, fetchLastPositiveDailyRowsForIds, storeHistoricalPG } from './db';
 import { sendThrottledRwaAlert } from './alerting';
 
 function makeStorePayload() {
@@ -47,6 +48,7 @@ describe('rwa historical store guard integration', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     (fetchLatestRwaRowsForIds as jest.Mock).mockResolvedValue({});
+    (fetchLastPositiveDailyRowsForIds as jest.Mock).mockResolvedValue({});
     (storeHistoricalPG as jest.Mock).mockResolvedValue(undefined);
     (sendThrottledRwaAlert as jest.Mock).mockResolvedValue({ status: 'sent' });
     delete process.env.RWA_ASSET_MOVE_GUARD_ENABLED;
@@ -109,5 +111,74 @@ describe('rwa historical store guard integration', () => {
     expect((sendThrottledRwaAlert as jest.Mock).mock.calls[0][0].message).toContain(
       'historical DB writes skipped'
     );
+  });
+
+  // The daily-backbone last-good fixture both scenarios below fall back to.
+  const TBILL_DAILY_BASELINE = {
+    '90': {
+      id: '90',
+      aggregatemcap: 68_100_000,
+      aggregatedactivemcap: 68_100_000,
+      mcap: { xrpl: 39_700_000, ethereum: 28_100_000 },
+      activemcap: { xrpl: 39_700_000, ethereum: 28_100_000 },
+    },
+  };
+
+  function makeAllChainsZeroPayload() {
+    return {
+      timestamp: 1_777_000_000,
+      data: {
+        '90': {
+          ticker: 'TBILL',
+          governance: false,
+          defiActiveTvl: {},
+          onChainMcap: { Ethereum: '0', XRPL: '0' },
+          activeMcap: { Ethereum: '0', XRPL: '0' },
+        },
+      },
+    };
+  }
+
+  it('blocks a drop to zero using the daily baseline when the hourly tip was evicted', async () => {
+    // Multi-day outage: the guard kept blocking, so no fresh hourly row exists
+    // and the last-good hourly row has aged out of the 2-day window.
+    (fetchLatestRwaRowsForIds as jest.Mock).mockResolvedValue({});
+    (fetchLastPositiveDailyRowsForIds as jest.Mock).mockResolvedValue(TBILL_DAILY_BASELINE);
+
+    await storeHistorical(makeAllChainsZeroPayload() as any);
+
+    expect(fetchLastPositiveDailyRowsForIds).toHaveBeenCalledWith(['90']);
+    expect(storeHistoricalPG).not.toHaveBeenCalled();
+    const guardAlert = (sendThrottledRwaAlert as jest.Mock).mock.calls.find((call) =>
+      String(call[0].alertKey).startsWith('assetMoveGuard:90')
+    );
+    expect(guardAlert).toBeTruthy();
+    expect(guardAlert![0].message).toContain('WRITE BLOCKED');
+  });
+
+  it('blocks a drop to zero using the daily baseline when the hourly tip is already zeroed', async () => {
+    // Absorbing-state entry point: a 0 already landed in hourly (e.g. via a
+    // guard-skipped refill), so prev<=0 would otherwise disable the guard.
+    (fetchLatestRwaRowsForIds as jest.Mock).mockResolvedValue({
+      '90': { id: '90', aggregatemcap: 0, aggregatedactivemcap: 0, mcap: {}, activemcap: {} },
+    });
+    (fetchLastPositiveDailyRowsForIds as jest.Mock).mockResolvedValue(TBILL_DAILY_BASELINE);
+
+    await storeHistorical(makeAllChainsZeroPayload() as any);
+
+    expect(fetchLastPositiveDailyRowsForIds).toHaveBeenCalledWith(['90']);
+    expect(storeHistoricalPG).not.toHaveBeenCalled();
+  });
+
+  it('does not query the daily backbone when the hourly tip is healthy', async () => {
+    (fetchLatestRwaRowsForIds as jest.Mock).mockResolvedValue({
+      '90': { id: '90', aggregatemcap: 68_000_000, aggregatedactivemcap: 68_000_000, mcap: { ethereum: 68_000_000 }, activemcap: { ethereum: 68_000_000 } },
+    });
+
+    await storeHistorical(makeAllChainsZeroPayload() as any);
+
+    // Fast path: positive hourly baseline is used directly, no fallback query.
+    expect(fetchLastPositiveDailyRowsForIds).not.toHaveBeenCalled();
+    expect(storeHistoricalPG).not.toHaveBeenCalled();
   });
 });

@@ -435,7 +435,7 @@ export async function fetchLatestRwaRowsForIds(ids: string[]): Promise<{ [id: st
 
     const rows = await HOURLY_RWA_DATA.sequelize!.query(
         `SELECT DISTINCT ON (id)
-            id, timestamp, mcap, activemcap, aggregatedefiactivetvl, aggregatemcap, aggregatedactivemcap
+            id, timestamp, mcap, activemcap, totalsupply, aggregatedefiactivetvl, aggregatemcap, aggregatedactivemcap
          FROM "${HOURLY_RWA_DATA.getTableName()}"
          WHERE id IN (:ids)
          ORDER BY id, timestamp DESC`,
@@ -448,6 +448,38 @@ export async function fetchLatestRwaRowsForIds(ids: string[]): Promise<{ [id: st
             ...row,
             mcap: parseJsonSafe(row.mcap),
             activemcap: parseJsonSafe(row.activemcap),
+            totalsupply: parseJsonSafe(row.totalsupply),
+        };
+    }
+    return byId;
+}
+
+// Durable move-guard baseline. Unlike hourly_rwa_data (trimmed to 2 days by
+// storeHistoricalPG), the daily backbone is never evicted, so it survives a
+// prolonged outage during which the guard keeps blocking and no fresh hourly
+// row is written. Returns the most recent daily row per id that still carried a
+// positive mcap, used as the guard's fallback baseline when the hourly tip is
+// missing or already zeroed.
+export async function fetchLastPositiveDailyRowsForIds(ids: string[]): Promise<{ [id: string]: any }> {
+    const uniqueIds = [...new Set(ids.map((id) => String(id)).filter(Boolean))];
+    if (!uniqueIds.length) return {};
+
+    const rows = await DAILY_RWA_DATA.sequelize!.query(
+        `SELECT DISTINCT ON (id)
+            id, timestamp, timestamp_actual, mcap, activemcap, totalsupply, aggregatedefiactivetvl, aggregatemcap, aggregatedactivemcap
+         FROM "${DAILY_RWA_DATA.getTableName()}"
+         WHERE id IN (:ids) AND (aggregatemcap > 0 OR aggregatedactivemcap > 0)
+         ORDER BY id, timestamp DESC`,
+        { replacements: { ids: uniqueIds }, type: QueryTypes.SELECT }
+    ) as any[];
+
+    const byId: { [id: string]: any } = {};
+    for (const row of rows) {
+        byId[row.id] = {
+            ...row,
+            mcap: parseJsonSafe(row.mcap),
+            activemcap: parseJsonSafe(row.activemcap),
+            totalsupply: parseJsonSafe(row.totalsupply),
         };
     }
     return byId;
@@ -568,9 +600,18 @@ export interface FlowPoint {
     missingChains?: string[];
 }
 
+// A chain's implied price (mcap/supply) jumping by more than this factor in one
+// day signals a bad on-chain supply read (stale contract after a migration,
+// decimals, double-count), not a real economic flow. No RWA's price moves this
+// much daily, so this never trips on genuine mint/redeem (where supply AND mcap
+// move together, leaving the implied price ~unchanged).
+const MAX_PRICE_JUMP = 5;
+
 // netFlow_t per chain = (supply_t - supply_{t-1}) * (mcap_t / supply_t).
 // Chains missing supply on either side are skipped and listed in missingChains.
-// netFlowUsd is null only when nothing was computable (incl. the first row).
+// Chains with no mcap (unpriced) are excluded; so are chains whose implied price
+// jumps >MAX_PRICE_JUMP day-over-day (bad supply read). netFlowUsd is null only
+// when nothing was computable (incl. the first row).
 export function computeFlowSeries(rows: FlowRow[], chainLabelFn: (slug: string) => string = (s) => s): FlowPoint[] {
     if (rows.length === 0) return [];
     const allChains = new Set<string>();
@@ -604,6 +645,15 @@ export function computeFlowSeries(rows: FlowRow[], chainLabelFn: (slug: string) 
             const supplyPrev = Number(prev.totalsupply[chainKey]) || 0;
             const supplyT = Number(row.totalsupply[chainKey]) || 0;
             const priceT = supplyT > 0 ? mcapT / supplyT : 0;
+            // Bad-supply-read guard: if the implied price jumped wildly vs the
+            // prior day, the supply read glitched (mcap stayed put) — skip rather
+            // than emit a catastrophic fake flow.
+            const mcapPrev = Number(prev.mcap?.[chainKey]) || 0;
+            const pricePrev = supplyPrev > 0 ? mcapPrev / supplyPrev : 0;
+            if (priceT > 0 && pricePrev > 0) {
+                const jump = priceT / pricePrev;
+                if (jump > MAX_PRICE_JUMP || jump < 1 / MAX_PRICE_JUMP) continue;
+            }
             const flow = (supplyT - supplyPrev) * priceT;
             if (flow !== 0) byChain[chainLabelFn(chainKey)] = flow;
             netFlowUsd += flow;

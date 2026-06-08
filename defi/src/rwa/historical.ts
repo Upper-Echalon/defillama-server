@@ -1,5 +1,5 @@
 import { getChainIdFromDisplayName } from "../utils/normalizeChain";
-import { initPG, storeHistoricalPG, storeMetadataPG, fetchLatestRwaRowsForIds } from "./db";
+import { initPG, storeHistoricalPG, storeMetadataPG, fetchLatestRwaRowsForIds, fetchLastPositiveDailyRowsForIds } from "./db";
 import { protocolIdMap } from "./constants";
 import { RWA_KEY_MAP } from "./metadataConstants";
 import { sendThrottledRwaAlert } from "./alerting";
@@ -106,6 +106,35 @@ function getErrorMessage(error: any): string {
   return error?.stack || error?.message || String(error);
 }
 
+function hasPositiveAggregate(row: any): boolean {
+  if (!row) return false;
+  return Number(row.aggregatemcap) > 0 || Number(row.aggregatedactivemcap) > 0;
+}
+
+// Resolve the per-asset baseline the move guard compares each incoming row
+// against. The baseline must outlive both the 2-day hourly eviction in
+// storeHistoricalPG and the prev<=0 "absorbing state": while the guard keeps
+// blocking a broken asset, no fresh hourly row is written for it, so its
+// last-good hourly row eventually ages out and the guard loses its only
+// baseline (findRwaAssetMoveTrips skips ids with no previous), silently letting
+// the next 0 through. Fast path = latest hourly when still positive (unchanged
+// behaviour); otherwise fall back to the most recent positive daily row, which
+// the backbone never evicts.
+async function resolveGuardBaselines(ids: string[]): Promise<{ [id: string]: any }> {
+  const latestHourly = await fetchLatestRwaRowsForIds(ids);
+  const needFallback = ids.filter((id) => !hasPositiveAggregate(latestHourly[id]));
+  const lastGoodDaily = needFallback.length
+    ? await fetchLastPositiveDailyRowsForIds(needFallback)
+    : {};
+
+  const baselines: { [id: string]: any } = {};
+  for (const id of ids) {
+    const hourly = latestHourly[id];
+    baselines[id] = hasPositiveAggregate(hourly) ? hourly : (lastGoodDaily[id] ?? hourly);
+  }
+  return baselines;
+}
+
 // Store historical data
 export async function storeHistorical(
   res: { data: { [id: string]: AtvlPerIdData }, timestamp: number },
@@ -146,7 +175,7 @@ export async function storeHistorical(
   if (!options.skipAssetMoveGuard && guardOptions.enabled) {
     try {
       const guardedInserts = inserts.filter((insert) => shouldRunAssetMoveGuard(data[insert.id]));
-      const previousById = await fetchLatestRwaRowsForIds(guardedInserts.map((insert) => insert.id));
+      const previousById = await resolveGuardBaselines(guardedInserts.map((insert) => insert.id));
       const labelsById: { [id: string]: string } = {};
       for (const id of Object.keys(data)) labelsById[id] = getRwaLabel(data[id], id);
       const guardResult = await filterRwaAssetMoveGuardInserts({

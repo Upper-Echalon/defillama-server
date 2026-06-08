@@ -12,6 +12,7 @@ const baseOptions: RwaAssetMoveGuardOptions = {
   minRatio: 0.10,
   maxContributors: 3,
   minIntervalMs: 4 * 60 * 60 * 1000,
+  maxPriceDrift: 2,
 };
 
 describe('rwa asset move guard', () => {
@@ -114,6 +115,62 @@ describe('rwa asset move guard', () => {
 
     expect(result.blockedIds.size).toBe(0);
     expect(result.allowedInserts.map((insert) => insert.id)).toEqual(['89']);
+  });
+
+  it('does NOT trip a real redemption: mcap and supply drop together at a stable price (rUSDY case)', () => {
+    // rUSDY: $1.36B -> ~$12M because supply unwrapped 1.36B -> 12M tokens; price stays ~$1.
+    const trips = findRwaAssetMoveTrips(
+      [{
+        id: '385',
+        aggregatemcap: 12_000_000,
+        aggregatedactivemcap: 12_000_000,
+        totalsupply: { ethereum: 12_000_000 },
+      }],
+      {
+        '385': {
+          id: '385',
+          aggregatemcap: 1_356_000_000,
+          aggregatedactivemcap: 1_356_000_000,
+          totalsupply: { ethereum: 1_356_000_000 },
+        },
+      },
+      { '385': 'rUSDY' },
+      baseOptions
+    );
+    expect(trips).toHaveLength(0); // supply corroborates the move -> not a glitch
+  });
+
+  it('STILL trips when mcap drops but supply does not (the desync/glitch signature)', () => {
+    // mcap frozen-vs-collapse without a matching supply move => implied price jumps => block.
+    const trips = findRwaAssetMoveTrips(
+      [{
+        id: '385',
+        aggregatemcap: 12_000_000,
+        aggregatedactivemcap: 12_000_000,
+        totalsupply: { ethereum: 1_356_000_000 }, // supply unchanged while mcap collapsed
+      }],
+      {
+        '385': {
+          id: '385',
+          aggregatemcap: 1_356_000_000,
+          aggregatedactivemcap: 1_356_000_000,
+          totalsupply: { ethereum: 1_356_000_000 },
+        },
+      },
+      { '385': 'rUSDY' },
+      baseOptions
+    );
+    expect(trips.length).toBeGreaterThan(0);
+  });
+
+  it('falls back to normal blocking when supply data is absent (no corroboration possible)', () => {
+    const trips = findRwaAssetMoveTrips(
+      [{ id: '89', aggregatemcap: 80_000_000, aggregatedactivemcap: 80_000_000 }],
+      { '89': { id: '89', aggregatemcap: 100_000_000, aggregatedactivemcap: 100_000_000 } },
+      { '89': 'USDY' },
+      baseOptions
+    );
+    expect(trips.length).toBeGreaterThan(0); // unchanged behaviour without supply
   });
 
   it('formats a concise message with thresholds and contributors', () => {

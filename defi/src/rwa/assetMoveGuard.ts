@@ -21,6 +21,12 @@ export type RwaAssetMoveGuardOptions = {
   minRatio: number;
   maxContributors: number;
   minIntervalMs: number;
+  // An mcap move is treated as a REAL mint/redeem (not a glitch) when total
+  // supply moved with it at a stable implied price — i.e. the per-token price
+  // (mcap/supply) drifts by less than this factor. Such moves are NOT blocked,
+  // which stops the guard from freezing mcap during a genuine large redemption
+  // (e.g. rUSDY's ~$1.34B unwrap) and desyncing it from supply.
+  maxPriceDrift: number;
 };
 
 export type RwaAssetMoveGuardInsert = {
@@ -30,6 +36,7 @@ export type RwaAssetMoveGuardInsert = {
   aggregatedactivemcap: number;
   mcap?: any;
   activemcap?: any;
+  totalsupply?: any;
 };
 
 export type RwaAssetMoveGuardPreviousRow = {
@@ -39,6 +46,7 @@ export type RwaAssetMoveGuardPreviousRow = {
   aggregatedactivemcap: number | string;
   mcap?: any;
   activemcap?: any;
+  totalsupply?: any;
 };
 
 export type RwaAssetMoveTripContributor = {
@@ -75,6 +83,7 @@ export function getRwaAssetMoveGuardOptionsFromEnv(): RwaAssetMoveGuardOptions {
   const minDelta = Number(process.env.RWA_ASSET_MOVE_GUARD_MIN_DELTA ?? 5_000_000);
   const minRatio = Number(process.env.RWA_ASSET_MOVE_GUARD_MIN_RATIO ?? 0.10);
   const maxContributors = Number(process.env.RWA_ASSET_MOVE_GUARD_MAX_CONTRIBUTORS ?? 5);
+  const maxPriceDrift = Number(process.env.RWA_ASSET_MOVE_GUARD_MAX_PRICE_DRIFT ?? 2);
 
   return {
     enabled: process.env.RWA_ASSET_MOVE_GUARD_ENABLED !== 'false',
@@ -83,6 +92,7 @@ export function getRwaAssetMoveGuardOptionsFromEnv(): RwaAssetMoveGuardOptions {
     minRatio: Number.isFinite(minRatio) && minRatio >= 0 ? minRatio : 0.10,
     maxContributors: Number.isFinite(maxContributors) && maxContributors >= 0 ? maxContributors : 5,
     minIntervalMs: (Number.isFinite(minIntervalHours) && minIntervalHours >= 0 ? minIntervalHours : 4) * 60 * 60 * 1000,
+    maxPriceDrift: Number.isFinite(maxPriceDrift) && maxPriceDrift > 1 ? maxPriceDrift : 2,
   };
 }
 
@@ -127,6 +137,37 @@ function buildContributors(
     .slice(0, Math.max(0, maxContributors));
 }
 
+function sumMap(value: any): number {
+  const map = parseMap(value);
+  let total = 0;
+  for (const v of Object.values(map)) total += v;
+  return total;
+}
+
+// A large onChainMcap move is a REAL mint/redeem (not a glitch) when total supply
+// moved with it at a roughly stable implied price (mcap/supply). Returns true in
+// that case so the guard does NOT block it — which prevents freezing mcap during a
+// genuine large redemption while supply correctly updates (the rUSDY desync bug).
+// Returns false (→ evaluate normally) when supply can't corroborate: missing on
+// either side, or the implied price drifted beyond maxPriceDrift (mcap moved
+// without a matching supply move = the glitch signature).
+export function isSupplyCorroboratedMove(
+  previous: RwaAssetMoveGuardPreviousRow,
+  insert: RwaAssetMoveGuardInsert,
+  options: RwaAssetMoveGuardOptions
+): boolean {
+  const prevMcap = toFiniteNumber(previous.aggregatemcap);
+  const curMcap = toFiniteNumber(insert.aggregatemcap);
+  const prevSupply = sumMap(previous.totalsupply);
+  const curSupply = sumMap(insert.totalsupply);
+  if (prevMcap <= 0 || curMcap <= 0 || prevSupply <= 0 || curSupply <= 0) return false;
+  const pricePrev = prevMcap / prevSupply;
+  const priceCur = curMcap / curSupply;
+  if (pricePrev <= 0 || priceCur <= 0) return false;
+  const drift = priceCur / pricePrev;
+  return drift <= options.maxPriceDrift && drift >= 1 / options.maxPriceDrift;
+}
+
 export function findRwaAssetMoveTrips<T extends RwaAssetMoveGuardInsert>(
   inserts: T[],
   previousById: { [id: string]: RwaAssetMoveGuardPreviousRow | undefined },
@@ -139,6 +180,8 @@ export function findRwaAssetMoveTrips<T extends RwaAssetMoveGuardInsert>(
   for (const insert of inserts) {
     const previous = previousById[insert.id];
     if (!previous) continue;
+    // Real mint/redeem (supply moved with mcap at a stable price) → never a glitch.
+    if (isSupplyCorroboratedMove(previous, insert, options)) continue;
 
     for (const metric of METRICS) {
       const prev = toFiniteNumber(previous[metric.aggregateField]);

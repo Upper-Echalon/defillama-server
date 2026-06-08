@@ -7,6 +7,11 @@ const webserver = new HyperExpress.Server();
 const port = +(process.env.RWA_PORT ?? 5002);
 const RWA_SUBPATH = process.env.RWA_SUBPATH;
 
+// RWA ids hidden from /flows/:id because their flow series is junk from bad
+// upstream mcap (e.g. BRZ#609 — phantom Gnosis/Stellar mcap yields ~1e17 spikes).
+// Serving-layer hide only; remove an id once its upstream mcap is fixed.
+const FLOWS_HIDDEN_IDS = new Set<string>(['609']);
+
 if (!RWA_SUBPATH) {
     throw new Error('Missing required environment variable: RWA_SUBPATH');
 }
@@ -297,6 +302,11 @@ function setRoutes(router: HyperExpress.Router): void {
         errorWrapper(async (req, res) => {
             const { id } = req.params;
             if (!id) return errorResponse(res, 'Missing id parameter', 400);
+            // Hidden ids (bad upstream mcap) have no valid flow series -> 404,
+            // regardless of any stale cached file.
+            if (FLOWS_HIDDEN_IDS.has(String(id))) {
+                return errorResponse(res, `Flows for "${id}" not found`, 404);
+            }
 
             const now = Math.floor(Date.now() / 1000);
             const startTs = Number(req.query.start);

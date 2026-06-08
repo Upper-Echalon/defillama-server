@@ -6,6 +6,7 @@ import { nullAddress } from "../../utils/shared/constants";
 import { Write } from "../utils/dbInterfaces";
 import getWrites from "../utils/getWrites";
 import { getApi } from "../utils/sdk";
+import { NAV_ORACLE_MAX_AGE_SECONDS } from "../utils/oracle";
 
 type Config = {
   chain: string;
@@ -792,10 +793,11 @@ export const configs: { [adapter: string]: Config } = {
         abi: "function shareValue() view returns (uint256 value, uint256 timestamp)",
         target: "0x04E5a6f7eE9977D38f57945c31B72178c9Cf1c06",
       });
-      // OALS2T's shareValue() NAV updates ~daily, not intraday. A 3h window
-      // rejected it ~21h/day and left onChainMcap blank. 27h matches the
-      // house default (DEFAULT_MAX_ORACLE_AGE_SECONDS) and tolerates the cadence.
-      if (rate.timestamp < api.timestamp - 27 * 60 * 60)
+      // OALS2T's shareValue() NAV only posts on business days, so the Friday print
+      // must survive the weekend (Fri->Mon ~72h, Fri->Tue holiday ~96h). The old 27h
+      // window tripped every Monday; NAV_ORACLE_MAX_AGE_SECONDS (~100h) tolerates the
+      // gap while still flagging a genuinely dead feed within ~4 days.
+      if (rate.timestamp < api.timestamp - NAV_ORACLE_MAX_AGE_SECONDS)
         throw new Error(`OALS2T stale rate`);
       return rate.value / 1e18;
     },

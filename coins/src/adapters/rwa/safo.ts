@@ -1,7 +1,7 @@
 import { Write } from "../utils/dbInterfaces";
 import { getApi } from "../utils/sdk";
 import { addToDBWritesList } from "../utils/database";
-import { checkOracleFresh } from "../utils/oracle";
+import { checkOracleFresh, NAV_ORACLE_MAX_AGE_SECONDS } from "../utils/oracle";
 
 const oracles: { [symbol: string]: string } = {
   SAFO: "0x372e37cA79747A2d1671EDBC5f1e2853B96BA351",
@@ -62,7 +62,8 @@ export async function safo(timestamp: number = 0): Promise<Write[]> {
 
   symbols.forEach((symbol, i) => {
     const [, answer, , updatedAt] = results[i];
-    if (!checkOracleFresh(updatedAt, { timestamp, label: symbol, throwIfStale: false })) return;
+    // Spiko NAVs only post on business days — tolerate the weekend gap (see NAV_ORACLE_MAX_AGE_SECONDS).
+    if (!checkOracleFresh(updatedAt, { timestamp, label: symbol, throwIfStale: false, maxAgeSeconds: NAV_ORACLE_MAX_AGE_SECONDS })) return;
 
     const price = answer / 1e6;
     const chains = config[symbol];

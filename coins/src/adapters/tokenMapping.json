@@ -1,4 +1,11 @@
 {
+  "canto": {
+    "0xfb8255f0de21acebf490f1df6f0bdd48cc1df03b": {
+      "decimals": "6",
+      "symbol": "USYC",
+      "to": "asset#ethereum:0x136471a34f6ef19fe571effc1ca711fdb8e49f2b"
+    }
+  },
   "haven1": {
     "0x0000000000000000000000000000000000000000": {
       "decimals": "18",
@@ -6593,7 +6600,7 @@
       "symbol": "SYRUPUSDC",
       "to": "asset#ethereum:0x80ac24aa929eaf5013f6436cda2a7ba190f5cc0b"
     },
-    "7lwanzteuktvfjv4mhygkxxdaucqyfpjysl9pxxdrqgn": {
+    "7LWanZteUKtvFjv4MHYgKXXdAuCQYFPJysL9pxxdRQGn": {
       "decimals": "6",
       "symbol": "USYC",
       "to": "asset#ethereum:0x136471a34f6ef19fe571effc1ca711fdb8e49f2b"

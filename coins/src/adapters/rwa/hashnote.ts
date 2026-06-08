@@ -12,7 +12,6 @@ export async function hashnote(timestamp: number): Promise<Write[]> {
     const tokenPrice = roundData.answer / 1e18;
 
     const writes: Write[] = [];
-    addToDBWritesList(writes, 'canto', '0xfb8255f0de21acebf490f1df6f0bdd48cc1df03b', tokenPrice, 6, symbol, timestamp, "hashnote-rwa", 1,);
     addToDBWritesList(writes, 'ethereum', '0x136471a34f6ef19fe571effc1ca711fdb8e49f2b', tokenPrice, 6, symbol, timestamp, "hashnote-rwa", 1,);
 
     return writes;

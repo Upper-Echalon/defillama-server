@@ -89,6 +89,8 @@ const ALLOWLIST: Record<string, string> = {
   "747474:0x7231dbacdfc968e07656d12389ab20de82fbfceb": "avKAT — Katana KAT/USD oracle feed is stale/low; our price tracks the DEX",
   "1:0x38eeb52f0771140d10c4e9a9a72349a329fe8a6a": "apyUSD — trades below NAV; oracle prices at NAV (Apyx capped collateralization ratio)",
   "1:0x7309e1e2e74af170c69bde8fcb30397f8697d5ff": "wbravUSDC — oracle hardcodes $1.00; our price is the vault NAV (oracle conservative by design)",
+  "1:0x238a700ed6165261cf8b2e544ba797bc11e466ba": "mF-ONE — Morpho oracle reads a deliberately discounted feed ('mF-ONE/USD Discounted', ~7.7% haircut, ~3d stale); our price is the live Midas NAV (matches CoinGecko)",
+  "1:0x7f47c3e6b2c00fc4eb4d5ae50d0ab0ab6888eb4d": "PT-USD3-17DEC2026 — Morpho uses a conservative Pendle linear-discount oracle (accretes to par at maturity, ~12.7% below market); our price matches Pendle's own market (+0.07%)",
 };
 const allowReason = (chainId: number, collateralAddress: string, marketId: string): string | undefined =>
   ALLOWLIST[`${chainId}:${marketId.toLowerCase()}`] ?? ALLOWLIST[`${chainId}:${collateralAddress.toLowerCase()}`];

@@ -1974,7 +1974,10 @@ const data: Protocol[] = [
     parentProtocol: "parent#pancakeswap",
     dimensions: {
       fees: "pancakeswap-v2",
-      dexs: "pancakeswap-v2"
+      dexs: {
+        genuineSpikes: [["2023-07-05", "High METIS token trading volume"]],
+        adapter: "pancakeswap-v2",
+      },
     }
   },
   {

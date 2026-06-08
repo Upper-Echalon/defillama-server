@@ -13119,6 +13119,9 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     ],
     listedAt: 1634846846,
     github: ["superfluid-finance"],
+    dimensions: {
+      dexs: "superfluid"
+    }
   },
   {
     id: "694",

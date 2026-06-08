@@ -1517,6 +1517,7 @@ const data6: Protocol[] = [
       derivatives: "dango",
       fees: "dango",
       "open-interest": "dango-oi",
+      "normalized-volume": "dango",
     }
   },
   {
@@ -4630,6 +4631,7 @@ const data6: Protocol[] = [
     dimensions: {
       derivatives: "edgeX-v2",
       fees: "edgeX-v2",
+      "normalized-volume": "edgeX-v2",
     }
   },
   {

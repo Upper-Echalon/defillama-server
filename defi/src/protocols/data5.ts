@@ -8093,7 +8093,8 @@ const data5: Protocol[] = [
     parentProtocol: "parent#sun",
     dimensions: {
       derivatives: "sunperp",
-      "open-interest": "sunperp-oi"
+      "open-interest": "sunperp-oi",
+      "normalized-volume": "sunx"
     }
   },
   {
@@ -9669,6 +9670,7 @@ const data5: Protocol[] = [
       derivatives: "sodex-perps",
       fees: "sodex-perps",
       "open-interest": "sodex-perps-oi",
+      "normalized-volume": "sodex",
     },
   },
   {
@@ -16101,6 +16103,7 @@ const data5: Protocol[] = [
     twitter: "AveaiGlobal",
     dimensions: {
       fees: "aveai",
+      dexs: "aveai",
     },
   },
   {

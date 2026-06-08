@@ -3057,6 +3057,9 @@ export const chainCoingeckoIds = {
     categories: ["EVM", "Bitcoin Sidechains"],
     twitter: "MerlinLayer2",
     url: "https://merlinchain.io",
+    dimensions: {
+      fees: "merlin-chain",
+    },
   },
   "Blast": {
     geckoId: "blast",

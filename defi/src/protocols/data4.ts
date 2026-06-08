@@ -25083,7 +25083,8 @@ const data4: Protocol[] = [
     dimensions: {
       fees: "orderly-perps-new",
       derivatives: "orderly-perps-new",
-      "open-interest": "orderly-perps-oi"
+      "open-interest": "orderly-perps-oi",
+      "normalized-volume": "orderly"
     }
   },
   {

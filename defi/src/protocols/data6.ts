@@ -5468,6 +5468,9 @@ const data6: Protocol[] = [
     chains: ["Ethereum"],
     module: "dummy.js",
     twitter: "brix_money",
+    dimensions: {
+      fees: "brix",
+    },
   },
   {
     id: "7968",
@@ -5835,6 +5838,28 @@ const data6: Protocol[] = [
     module: "igra-attestation/index.js",
     twitter: "Igra_Labs",
     listedAt: 1780937057,
+  },
+  {
+    id: "7986",
+    name: "Uniswap Auctions",
+    address: "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+    symbol: "UNI",
+    url: "https://app.uniswap.org/explore/auctions",
+    description:
+      "UniswapX Auctions is Uniswap's auction-based execution layer, where signed swap intents are routed through RFQ, Dutch auction, or priority gas auction mechanisms to improve execution",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/uniswap-auctions.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Ethereum", "Base", "Arbitrum", "Unichain"],
+    module: "dummy.js",
+    twitter: "Uniswap",
+    parentProtocol: "parent#uniswap",
+    dimensions: {
+      dexs: "uniswap-auctions"
+    }
   },
 ];
 export default data6;

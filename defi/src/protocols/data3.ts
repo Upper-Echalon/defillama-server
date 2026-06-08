@@ -39249,15 +39249,14 @@ const data3_2: Protocol[] = [
     chains: ["Base"],
     module: "arcadia-finance-v2/index.js",
     oraclesBreakdown: [
-      {
-        name: "Chainlink",
-        type: "Primary",
-        proof: ["https://github.com/arcadia-finance/accounts-v2/tree/main/src/oracle-modules"]
-      }
+      {name: "Chainlink",type: "Primary",proof: ["https://github.com/arcadia-finance/accounts-v2/tree/main/src/oracle-modules"]}
     ],
     twitter: "ArcadiaFi",
     parentProtocol: "parent#arcadia-finance",
     listedAt: 1712589897,
+    dimensions: {
+      fees: "arcadia-finance-v2",
+    },
   },
   {
     id: "4456",

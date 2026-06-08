@@ -14154,7 +14154,8 @@ const data3_0: Protocol[] = [
     module: "dummy.js",
     twitter: "BananaGunBot",
     dimensions: {
-      fees: "banana-gun-trading"
+      fees: "banana-gun-trading",
+      dexs: "banana-gun-trading",
     }
   },
   {

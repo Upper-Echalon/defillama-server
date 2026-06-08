@@ -993,7 +993,28 @@ export const configs: { [adapter: string]: Config } = {
     chain: "monad",
     underlying: "0x754704Bc059F8C67012fEd69BC8A327a5aafb603",
     address: "0xc9ea90692757831d98Ac629F2A0140E02b80A7DA",
-  }
+  },
+  // Huma Finance "PayFi Strategy Token" on Ethereum, via Chainlink's
+  // "PST-USDC Exchange Rate (Calculated)" NAV feed (quoteAsset USD, 6 decimals,
+  // 24h heartbeat). No `underlying` -> getWrites uses $1, so price = the feed
+  // rate (a USD-denominated, yield-accruing NAV that sits above $1). Distinct
+  // from the Solana PST in solana/pst.ts.
+  PST: {
+    rate: async ({ api }) => {
+      const rate = await api.call({
+        abi: "function latestRoundData() view returns (uint80 roundId, int256 answer, uint256 startedAt, uint256 updatedAt, uint80 answeredInRound)",
+        target: "0x4BE50bE32dB1510240d542f77c5B36Ca0D0965E6",
+      });
+      if (rate.updatedAt < api.timestamp - 27 * 60 * 60)
+        throw new Error(`PST stale rate`);
+      return rate.answer / 1e6;
+    },
+    chain: "ethereum",
+    address: "0x22aE3D9a738471f405169Af055d31c687087d4c7",
+    symbol: "PST",
+    decimals: 6,
+    confidence: 1,
+  },
 };
 
 export async function derivs(timestamp: number) {

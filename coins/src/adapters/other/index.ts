@@ -9,6 +9,7 @@ import manualInputAdapter from "./manualInput";
 import realtAdapter from "./realt";
 import metronomeAdapter from "./metronome";
 import { contracts as metronomeContracts } from "./metronome";
+import { metronomeSynth } from "./metronomeSynth";
 import { wrappedGasTokens } from "../utils/gasTokens";
 import collateralizedAdapter from "./collateralizedAssets";
 import swethAdapter from "./sweth";
@@ -571,6 +572,7 @@ export const adapters = {
   defiChain,
   shlb,
   metronome,
+  metronomeSynth,
   buck,
   synthetix,
   glp,

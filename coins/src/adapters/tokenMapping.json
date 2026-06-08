@@ -5645,7 +5645,7 @@
       "symbol": "EURC"
     },
     "0xe9185F0c5F296Ed1797AaE4238D26CCaBEadb86C": {
-      "to": "coingecko#hashnote-usyc",
+      "to": "asset#ethereum:0x136471a34f6ef19fe571effc1ca711fdb8e49f2b",
       "decimals": 6,
       "symbol": "USYC"
     },

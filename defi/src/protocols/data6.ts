@@ -5861,5 +5861,49 @@ const data6: Protocol[] = [
       dexs: "uniswap-auctions"
     }
   },
+  {
+    id: "7987",
+    name: "BULK",
+    address: null,
+    symbol: "-",
+    url: "https://www.bulk.trade/",
+    description:
+      "BULK is a Solana perpetuals DEX built for ultra-low-latency derivatives trading with sub-20ms matching and high-throughput execution",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/bulk.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Solana"],
+    module: "bulk-trade/index.js",
+    twitter: "bulktrade",
+    listedAt: 1780952157,
+  },
+  {
+    id: "7988",
+    name: "Deaderal Reserve Protocol",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://us.dead.box
+    description:
+      "An ETH backed lending protocol governed 100% by code, issuing the USDeAD Stablecoin with 0% interest to borrowers - just a 1% flat-fee whether they borrow for 3 days or 3 years. Created by DEADBOX",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/deaderal-reserve-protocol.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "CDP",
+    chains: ["Ethereum", "Base", "Optimism", "Arbitrum", "Scroll", "MegaETH"],
+    module: "deadbox/index.js",
+    twitter: "0xDEADBOX",
+    audit_links: ["https://skynet.certik.com/projects/deaderal-reserve-protocol"],
+    oraclesBreakdown: [
+      {name: "Chainlink", type: "Primary", proof: ["https://etherscan.io/address/0xb1c6f90225fb3b3027959f4893788e48eb819136#code"]},
+      {name: "Pyth", type: "Secondary", proof: ["https://etherscan.io/address/0xb1c6f90225fb3b3027959f4893788e48eb819136#code"]},
+      {name: "RedStone", type: "Secondary", proof: ["https://etherscan.io/address/0xb1c6f90225fb3b3027959f4893788e48eb819136#code"]},
+    ],
+    listedAt: 1780953077,
+  },
 ];
 export default data6;

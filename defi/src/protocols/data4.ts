@@ -10617,7 +10617,8 @@ const data4: Protocol[] = [
     listedAt: 1744213568,
     dimensions: {
       fees: "zo",
-      derivatives: "zo"
+      derivatives: "zo",
+      "open-interest": "zo-perps"
     }
   },
   {

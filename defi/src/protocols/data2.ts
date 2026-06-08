@@ -1938,7 +1938,8 @@ const data2: Protocol[] = [
     github: ["alexgo-io"],
     listedAt: 1645731214,
     dimensions: {
-      dexs: "alex"
+      dexs: "alex",
+      fees: "alex",
     }
   },
   {
@@ -11938,7 +11939,7 @@ const data2: Protocol[] = [
   {
     id: "1922",
     name: "Radiant V1",
-    address: null,
+    address: "arbitrum:0x3082cc23568ea640225c2467653db90e9250aaa0",
     symbol: "RDNT",
     url: "https://radiant.capital/#/markets",
     description:
@@ -27802,8 +27803,8 @@ const data2: Protocol[] = [
   {
     id: "2636",
     name: "Lighter V1",
-    address: null,
-    symbol: "-",
+    address: "ethereum:0x232ce3bd40fcd6f80f3d55a522d03f25df784ee2",
+    symbol: "LIT",
     url: "https://lighter.xyz",
     description:
       "Liquid digital assets traded the way they were meant to be with the fully decentralized order book exchange for spot trading on L2’s, now live on Arbitrum.",

@@ -9022,7 +9022,8 @@ const data3_0: Protocol[] = [
     module: "dummy.js",
     twitter: "TeamUnibot",
     dimensions: {
-      fees: "unibot"
+      fees: "unibot",
+      dexs: "unibot",
     }
   },
   {

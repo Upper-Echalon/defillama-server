@@ -5818,5 +5818,23 @@ const data6: Protocol[] = [
       dexs: "kipseli",
     }
   },
+  {
+    id: "7985",
+    name: "Igra Attestation",
+    address: null,
+    symbol: "-",
+    url: "https://attester-dashboard.igralabs.com/",
+    description: "IGRA tokens locked by attesters in the Attestation Diamond contract, securing Igra network state validation with a 6-month lockup",
+    chain: "Igra",
+    logo: `${baseIconsUrl}/igra-attestation.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Staking Pool",
+    chains: ["Igra"],
+    module: "igra-attestation/index.js",
+    twitter: "Igra_Labs",
+    listedAt: 1780937057,
+  },
 ];
 export default data6;

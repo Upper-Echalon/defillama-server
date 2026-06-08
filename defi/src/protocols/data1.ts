@@ -4910,6 +4910,9 @@ const data: Protocol[] = [
     twitter: "SovrynBTC",
     audit_links: ["https://www.sovryn.app/library"],
     parentProtocol: "parent#sovryn",
+    dimensions: {
+      dexs: "sovryn-dex"
+    }
   },
   {
     id: "330",

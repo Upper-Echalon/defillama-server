@@ -48485,7 +48485,7 @@ const data3_3: Protocol[] = [
     audit_links: ["https://docs.midas.app/resources/audits"],
     warningBanners: [
       {
-        message: "We are not tracking offchain positions either non EVM chains",
+        message: "We are not tracking offchain positions or non EVM chains",
         level: "alert",
       }
     ],
@@ -53733,7 +53733,7 @@ const data3_3: Protocol[] = [
     category: "CEX",
     chains: ["Ethereum", "Bitcoin"],
     module: "pionex-cex/index.js",
-    twitter: "pionex_com",
+    twitter: "pionex",
     listedAt: 1725872041
   },
   {

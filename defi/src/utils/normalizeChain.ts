@@ -6156,6 +6156,17 @@ export const chainCoingeckoIds = {
     categories: ["EVM"],
     twitter: "arc",
     url: "https://www.arc.io/",
+    chainId: 5042,
+  },
+  "Pearl": {
+    geckoId: "pearl-2",
+    symbol: "PRL",
+    cmcId: null,
+    twitter: "prlnet",
+    url: "https://pearlresearch.ai/",
+    dimensions: {
+      fees: "pearl-research",
+    },
   },
 } as unknown as ChainCoinGekcoIds;
 

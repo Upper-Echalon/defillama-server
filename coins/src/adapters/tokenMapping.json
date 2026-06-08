@@ -17278,6 +17278,11 @@
       "to": "coingecko#solana",
       "decimals": 9,
       "symbol": "SOL"
+    },
+    "0x093d77d397F8acCbaee0820345E9E700B1233cD1": {
+      "to": "coingecko#igra",
+      "decimals": 18,
+      "symbol": "IGRA"
     }
   },
   "strato": {

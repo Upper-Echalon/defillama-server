@@ -4639,6 +4639,9 @@ const data5: Protocol[] = [
     module: "jupiter-prediction/index.js",
     twitter: "JupiterExchange",
     parentProtocol: "parent#jupiter",
+    tokensExcludedFromParent: {
+      Solana: ["JupUSD"],
+    },
     listedAt: 1764869412,
     dimensions: {
       dexs: "jupiter-prediction",

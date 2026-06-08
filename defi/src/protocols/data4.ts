@@ -24036,7 +24036,7 @@ const data4: Protocol[] = [
     twitter: "JupiterExchange",
     parentProtocol: "parent#jupiter",
     tokensExcludedFromParent: {
-      Solana: ["JUPSOL", "JLP"],
+      Solana: ["JUPSOL", "JLP", "JupUSD"],
     },
     listedAt: 1755585345,
     dimensions: {

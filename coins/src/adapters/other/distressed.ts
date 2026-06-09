@@ -70,7 +70,8 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     BOBO: "0xb90b2a35c65dbc466b04240097ca756ad2005295",  // invalid price
     USDTC: "0x0f6b862e05a9b528b0002261f9eb616e6c4452e9",
     USDa: "0x8A60E489004Ca22d775C5F2c657598278d17D9c2",
-    sUSDa: "0x2B66AAdE1e9C062FF411bd47C44E0Ad696d43BD9"
+    sUSDa: "0x2B66AAdE1e9C062FF411bd47C44E0Ad696d43BD9",
+    H: "0xcf5104D094e3864CfCBDa43B82e1cEFD26A016eB", // hacked 2026-06-08
   },
   // beam: {
   //   WMC: '0xd51bfa777609213a653a2cd067c9a0132a2d316a'
@@ -169,7 +170,8 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     NEST: "0x98f8669f6481ebb341b522fcd3663f79a3d1a6a7",
     DOT: "0x8d010bf9c26881788b4e6bf5fd1bdc358c8f90b8", // hacked maybe, has insane supply
     USDS: "0xde7d1ce109236b12809c45b23d22f30dba0ef424", // radioshack inflated tvl
-    USDTC: "0x96fb784986284cb6d4a8da6dd50dd7e85ef38f5d"
+    USDTC: "0x96fb784986284cb6d4a8da6dd50dd7e85ef38f5d",
+    H: "0x44f161ae29361e332dea039dfa2f404e0bc5b5cc", // hacked 2026-06-08
   },
   cronos: {
     CRK: "0x065de42e28e42d90c2052a1b49e7f83806af0e1f",

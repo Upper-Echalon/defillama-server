@@ -17017,6 +17017,11 @@
     }
   },
   "pharos": {
+    "0xa39986f96b80d04e8d7aeaaf47175f47c23fd0f4": {
+      "decimals": "6",
+      "symbol": "rwaUSDi",
+      "to": "coingecko#usd-coin"
+    },
     "0xc879c018db60520f4355c26ed1a6d572cdac1815": {
       "to": "coingecko#usd-coin",
       "decimals": 6,

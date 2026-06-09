@@ -3479,13 +3479,13 @@ const data5: Protocol[] = [
     url: "https://kaching.vip",
     description:
       "Kaching! is an on-chain lottery on Aptos that uses AIP-79 randomness to provide transparent, trustless, and verifiably fair ticket purchases, draws, and payouts.",
-    chain: "Aptos",
+    chain: "Solana",
     logo: `${baseIconsUrl}/kaching.jpg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
     category: "Luck Games",
-    chains: ["Aptos"],
+    chains: ["Solana"],
     module: "kaching/index.js",
     twitter: "kachingvip",
     audit_links: [

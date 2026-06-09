@@ -3871,6 +3871,7 @@ const data6: Protocol[] = [
   {
     id: "7891",
     name: "Venice",
+    previousNames: ["Venice Staking"],
     address: "base:0xacfe6019ed1a7dc6f7b508c02d1b04ec88cc21bf",
     symbol: "VVV",
     url: "https://venice.ai/",

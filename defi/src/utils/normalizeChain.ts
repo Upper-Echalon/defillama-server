@@ -3059,6 +3059,7 @@ export const chainCoingeckoIds = {
     url: "https://merlinchain.io",
     dimensions: {
       fees: "merlin-chain",
+      "active-users": "merlin-chain",
     },
   },
   "Blast": {

@@ -27198,7 +27198,8 @@ const data2: Protocol[] = [
     listedAt: 1677586293,
     github: ["streamflow-finance"],
     dimensions: {
-      fees: "streamflow"
+      fees: "streamflow",
+      dexs: "streamflow"
     }
   },
   {

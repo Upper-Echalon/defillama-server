@@ -5911,5 +5911,27 @@ const data6: Protocol[] = [
     ],
     listedAt: 1780953077,
   },
+  {
+    id: "7989",
+    name: "Pull.fun",
+    address: null,
+    symbol: "-",
+    url: "https://pull.fun/",
+    description:
+      "TCG gacha platform — pull card packs on-chain, trade on marketplace, redeem for physical cards",
+    chain: "Off Chain",
+    logo: `${baseIconsUrl}/pull.fun.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Physical TCG",
+    chains: ["Off Chain"],
+    module: "dummy.js",
+    twitter: "pulldotfun",
+    dimensions: {
+      fees: "pullfun",
+      dexs: "pullfun",
+    },
+  },
 ];
 export default data6;

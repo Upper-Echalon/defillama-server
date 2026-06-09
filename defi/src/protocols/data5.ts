@@ -15355,6 +15355,7 @@ const data5: Protocol[] = [
     dimensions: {
       "open-interest": "phoenix-trade-oi",
       derivatives: "phoenix-trade",
+      fees: "phoenix-trade",
     }
   },
   {

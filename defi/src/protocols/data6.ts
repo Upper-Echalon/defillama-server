@@ -5860,7 +5860,10 @@ const data6: Protocol[] = [
     twitter: "Uniswap",
     parentProtocol: "parent#uniswap",
     dimensions: {
-      dexs: "uniswap-auctions"
+      dexs: {
+        adapter: "uniswap-auctions",
+        genuineSpikes: [["2025-12-06", "AZTEC Sale Completed"]],
+      }
     }
   },
   {

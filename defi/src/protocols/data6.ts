@@ -5680,7 +5680,8 @@ const data6: Protocol[] = [
     name: "Propr",
     address: null,
     symbol: "-",
-    url: "https://www.propr.xyz/",
+    url: "https://app.propr.xyz/r/41PGwHGY",
+    referralUrl: "https://app.propr.xyz/r/41PGwHGY",
     description:
       "Propr is a transparent prop firm built on Hyperliquid L1.",
     chain: "Ethereum",

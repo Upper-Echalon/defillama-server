@@ -5936,5 +5936,43 @@ const data6: Protocol[] = [
       dexs: "pullfun",
     },
   },
+  {
+    id: "7990",
+    name: "Tokamak Network Staking",
+    address: null,
+    symbol: "-",
+    url: "https://toki.tokamak.network/",
+    description:
+      "Gasless TON staking platform",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/tokamak-network-staking.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Staking Pool",
+    chains: ["Ethereum"],
+    module: "tokamak-network/index.js",
+    twitter: "Tokamak_Network",
+    listedAt: 1781037202,
+  },
+  {
+    id: "7991",
+    name: "Rotera",
+    address: "base:0x3c353834A622c6017c939ACEcA4035f22c47578C",
+    symbol: "ROTA",
+    url: " ", // pending to add url https://www.rotera.fi
+    description:
+      "Rotera is an autonomous AI stablecoin protocol on Base. Rotera USD utilizes Aave V3 for base yield, while the autonomous $ROTA Agent captures trading fees via Virtuals Protocol, deploying combined revenue as Aerodrome bribes",
+    chain: "Base",
+    logo: `${baseIconsUrl}/rotera.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Stablecoin Wrapper",
+    chains: ["Base"],
+    module: "rotera/index.js",
+    twitter: "roterafinance",
+    listedAt: 1781037947,
+  },
 ];
 export default data6;

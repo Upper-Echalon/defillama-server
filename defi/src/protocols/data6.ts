@@ -2252,7 +2252,10 @@ const data6: Protocol[] = [
     chains: ["Arbitrum"],
     module: "orai-quant-terminal/index.js",
     twitter: "oraichain",
-    listedAt: 1778177963
+    listedAt: 1778177963,
+    dimensions: {
+      fees: "orai-quant-terminal",
+    },
   },
   {
     id: "7813",

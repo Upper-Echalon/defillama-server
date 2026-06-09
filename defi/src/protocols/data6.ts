@@ -5974,5 +5974,28 @@ const data6: Protocol[] = [
     twitter: "roterafinance",
     listedAt: 1781037947,
   },
+  {
+    id: "7992",
+    name: "Ondo Perps",
+    address: "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
+    symbol: "ONDO",
+    url: "https://ondo.finance",
+    description: "A derivatives trading platform by Ondo",
+    chain: "Off Chain",
+    logo: `${baseIconsUrl}/ondo-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Off Chain"],
+    module: "dummy.js",
+    twitter: "OndoFinance",
+    parentProtocol: "parent#ondo-finance",
+    listedAt: 1781038014,
+    dimensions: {
+      derivatives: "ondo-perps",
+      "open-interest": "ondo-perps",
+    }
+  },
 ];
 export default data6;

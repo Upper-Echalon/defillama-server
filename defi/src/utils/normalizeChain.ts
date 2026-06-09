@@ -2657,8 +2657,8 @@ export const chainCoingeckoIds = {
     url: "https://manta.network/",
     dimensions: {
       fees: "manta",
-      "active-users": "manta",
-      "new-users": "manta",
+      "active-users": "manta_pacific",
+      "new-users": "manta_pacific",
     },
   },
   "ShimmerEVM": {

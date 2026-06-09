@@ -119,8 +119,8 @@ const RECONCILE_CONFIG: ReconcileEntry[] = [
   { adapterType: AdapterType.FEES, id: '2062', label: 'kamino liquidity', days: 7, mode: 'interval' },
 
   // near intent api delays
-  { adapterType: AdapterType.FEES, id: '6225', label: 'near intents', days: 7, mode: 'interval' },
-  { adapterType: AdapterType.DEXS, id: '6225', label: 'near intents', days: 7, mode: 'interval' },
+  { adapterType: AdapterType.FEES, id: '6225', label: 'near intents', days: 7, mode: 'daily' },
+  { adapterType: AdapterType.DEXS, id: '6225', label: 'near intents', days: 7, mode: 'daily' },
 
   // jupiter lend delayed fluid materialized view
   { adapterType: AdapterType.FEES, id: '6600', label: 'jupiter lend', days: 3, mode: 'daily' },

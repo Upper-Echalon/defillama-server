@@ -437,7 +437,7 @@ async function run() {
       const debugString = 'write /config/smol/bitcoin-addresses'
       console.time(debugString)
       const Bucket = "tvl-adapter-cache"
-      const data = await await sdk.cache.readCache(`${Bucket}/bitcoin-addresses.json`)
+      const data = await sdk.cache.readCache(`${Bucket}/bitcoin-addresses.json`)
       await storeRouteData('/config/smol/bitcoin-addresses.json', data)
       console.timeEnd(debugString)
     } catch (e) {
@@ -450,7 +450,7 @@ async function run() {
 
       const debugString = 'write /chain-assets/flows/24h'
       console.time(debugString)
-      const data = await await sdk.cache.readCache(`chain-assets/flows/24h`)
+      const data = await sdk.cache.readCache(`chain-assets/flows/24h`)
       await storeRouteData('/chain-assets/flows/24h', data)
       console.timeEnd(debugString)
     } catch (e) {

@@ -31,9 +31,6 @@ export type { Protocol };
 protocols.forEach(setProtocolCategory)
 
 protocols.forEach((protocol: Protocol) => {
-  // TODO: this is a hack to remove bad addresses like 'sui:-', we should fix this in the listings and remove this code
-  if (typeof protocol.address === "string" && protocol.address.endsWith(':-'))
-    protocol.address = null
   if (protocol.deadUrl === true || protocol.rugged === true) {
     protocol.url = "" // kill urls to prevent urls that are dead from having scammers taking them over
   }

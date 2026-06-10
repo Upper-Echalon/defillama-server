@@ -198,12 +198,13 @@ async function getTvl(
       return
     } catch (e: any) {
 
-      let errorString = e?.message
+      let errorString = e?.message ?? String(e)
+      let errorStringFull = errorString
       try {
-        errorString = JSON.stringify(e)
+        errorStringFull = JSON.stringify(e, Object.getOwnPropertyNames(e))
       } catch (e) { }
       await elastic.addErrorLog({
-        errorStringFull: JSON.stringify(e),
+        errorStringFull,
         errorString,
         metadata: {
           application: 'tvl',

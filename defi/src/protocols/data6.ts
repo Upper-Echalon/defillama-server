@@ -5980,7 +5980,7 @@ const data6: Protocol[] = [
     address: "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
     symbol: "ONDO",
     url: "https://app.ondoperps.xyz",
-    referralUrl: "https://app.ondoperps.xyz/?ref=76ZCWB",
+    referralUrl: "https://app.ondoperps.xyz/?ref=76ZCWB",
     description: "Ondo Perps is a platform for perpetual futures on equities, indices, and commodities with up to 20x leverage and 24/7 trading",
     chain: "Off Chain",
     logo: `${baseIconsUrl}/ondo-perps.jpg`,
@@ -5996,6 +5996,47 @@ const data6: Protocol[] = [
     dimensions: {
       derivatives: "ondo-perps",
       "open-interest": "ondo-perps",
+    }
+  },
+  {
+    id: "7993",
+    name: "WaterX",
+    address: null,
+    symbol: "-",
+    url: "https://waterx.app/en",
+    description: "AI-native trading engine on Sui Network",
+    chain: "Sui",
+    logo: `${baseIconsUrl}/waterx.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Sui"],
+    module: "dummy.js",
+    twitter: "WaterX_app",
+    dimensions: {
+      derivatives: "waterx",
+    }
+  },
+  {
+    id: "7994",
+    name: "Nansen Perps",
+    address: null,
+    symbol: "-",
+    url: "https://app.nansen.ai/",
+    description: "Nansen Perps is a platform for trading perps",
+    chain: "Sui",
+    logo: `${baseIconsUrl}/nansen-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Hyperliquid Builder"],
+    chains: ["Sui"],
+    module: "dummy.js",
+    twitter: "nansen_ai",
+    dimensions: {
+      derivatives: "nansen-perps",
+      fees: "nansen-perps",
     }
   },
 ];

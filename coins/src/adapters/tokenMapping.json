@@ -4975,7 +4975,7 @@
   "base": {
     "0x34a2798D47b238A7CbA9D87D49618DEE6C4D999F": {
       "decimals": "18",
-      "symbol": "sUSDN",
+      "symbol": "sUSN",
       "to": "coingecko#staked-usn"
     },
     "0x18f52b3fb465118731d9e0d276d4eb3599d57596": {

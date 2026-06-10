@@ -1,6 +1,6 @@
 import { getHistoricalTvlForAllProtocols, IProtocol } from "../../storeGetCharts";
 import { extraSections } from "../../utils/normalizeChain";
-import { DAY, getClosestDayStartTimestamp } from "../../utils/date";
+import { DAY, getTimestampAtStartOfDayUTC } from "../../utils/date";
 import { _InternalProtocolMetadata, _InternalProtocolMetadataMap } from "../../protocols/data";
 import { hiddenCategoriesFromUISet } from "../../utils/excludeProtocols";
 
@@ -100,8 +100,8 @@ export async function getCategoriesInternal({ ...options }: any = {}) {
 
     let previousItem: Item = { SK: 0 }
     protocolTvl.historicalTvl.forEach((item) => {
-      const timestamp = getClosestDayStartTimestamp(item.SK);
-      const previousTimestamp = getClosestDayStartTimestamp(previousItem.SK)
+      const timestamp = getTimestampAtStartOfDayUTC(item.SK);
+      const previousTimestamp = getTimestampAtStartOfDayUTC(previousItem.SK)
       const daysDifference = previousTimestamp ? (timestamp - previousTimestamp) / DAY : 0
 
       for (let i = 1; i < daysDifference; i++) {

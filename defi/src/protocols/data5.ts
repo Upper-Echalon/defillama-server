@@ -5540,6 +5540,7 @@ const data5: Protocol[] = [
     chains: ["Fogo"],
     module: "valiant-trade/index.js",
     twitter: "ValiantTrade",
+    parentProtocol: "parent#valiant-trade",
     listedAt: 1765544171,
     dimensions: {
       dexs: "valiant-trade",

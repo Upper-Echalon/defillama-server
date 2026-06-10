@@ -9880,6 +9880,17 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "bebop_dex",
   },
+  {
+    id: "parent#valiant-trade",
+    name: "Valiant Trade",
+    url: "https://valiant.trade",
+    description: "Institutional trading in your browser. CEX speed. DEX freedom. Building the future of trading on Fogo.",
+    logo: `${baseIconsUrl}/valiant-trade.png`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "ValiantTrade",
+  },
 ];
 
 export default parentProtocols;

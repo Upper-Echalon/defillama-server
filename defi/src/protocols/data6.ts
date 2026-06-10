@@ -6076,6 +6076,7 @@ const data6: Protocol[] = [
     chains: ["Hyperliquid L1"],
     module: "dummy.js",
     twitter: "ValiantTrade",
+    parentProtocol: "parent#valiant-trade",
     dimensions: {
       derivatives: "valiant-perps",
       fees: "valiant-perps",

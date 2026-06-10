@@ -5979,7 +5979,7 @@ const data6: Protocol[] = [
     name: "Ondo Perps",
     address: "0xfaba6f8e4a5e8ab82f62fe7c39859fa577269be3",
     symbol: "ONDO",
-    url: "https://app.ondoperps.xyz/?ref=76ZCWB",
+    url: "https://app.ondoperps.xyz",
     referralUrl: "https://app.ondoperps.xyz/?ref=76ZCWB",
     description: "Ondo Perps is a platform for perpetual futures on equities, indices, and commodities with up to 20x leverage and 24/7 trading",
     chain: "Off Chain",

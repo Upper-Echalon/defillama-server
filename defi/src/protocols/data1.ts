@@ -556,7 +556,7 @@ const data: Protocol[] = [
     name: "Hegic",
     address: "0x584bC13c7D411c00c01A62e8019472dE68768430",
     symbol: "HEGIC",
-    url: "https://www.hegic.co/?ref=0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
+    url: "https://www.hegic.co",
     referralUrl: "https://www.hegic.co/?ref=0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
     description:
       "Hegic is an on-chain peer-to-pool options trading protocol on Arbitrum. You can trade ETH and WBTC ATM / OTM Calls / Puts & One-click Option Strategies on Hegic",
@@ -905,7 +905,7 @@ const data: Protocol[] = [
     name: "dYdX V3",
     address: "0x92d6c1e31e14520e676a687f0a93788b716beff5",
     symbol: "DYDX",
-    url: "https://dydx.trade?ref=LoneHull0UN",
+    url: "https://dydx.trade",
     referralUrl: "https://dydx.trade?ref=LoneHull0UN",
     description:
       "The most powerful open trading platform for crypto assets. Margin trade, borrow, and lend cryptocurrency.",
@@ -9529,7 +9529,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     previousNames: ["Thales"],
     address: "0x90ce5720c17587d28e4af120ae2d313b3bad1722",
     symbol: "OVER",
-    url: "https://www.overtimemarkets.xyz/markets?referrerId=defillama",
+    url: "https://www.overtimemarkets.xyz",
     referralUrl: "https://www.overtimemarkets.xyz/markets?referrerId=defillama",
     description:
       "Overtime is a decentralized onchain sportsbook ecosystem enabling sports betting and digital options trading. Built on smart contracts with Chainlink data feeds, it operates without centralized control. Features pioneering AMM architecture and trustless liquidity pools for seamless, transparent betting experiences across popular sporting events.",
@@ -13509,7 +13509,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     name: "Polymarket International",
     address: null,
     symbol: "-",
-    url: "https://polymarket.com/?r=defillamareal", // replaced by the old one on the 25/03/26
+    url: "https://polymarket.com", // replaced by the old one on the 25/03/26
     referralUrl: "https://polymarket.com/?r=defillamareal",
     description:
       "Polymarket is an information markets platform that lets you trade on the world’s most highly-debated topics (e.g. coronavirus, politics, current events, etc). On Polymarket, you build a portfolio based on your forecasts and earn a return if you are right.",
@@ -17108,7 +17108,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     previousNames: ["Paraswap"],
     address: "0x4e107a0000db66f0e9fd2039288bf811dd1f9c74",
     symbol: "VLR",
-    url: "https://app.velora.xyz/?ref=MHg3OThmRjFlNkQ3QUZkMjhjMzMzZUU2ZUJlMDMxMjVkMzBlYzZlRjEw",
+    url: "https://app.velora.xyz",
     referralUrl: "https://app.velora.xyz/?ref=MHg3OThmRjFlNkQ3QUZkMjhjMzMzZUU2ZUJlMDMxMjVkMzBlYzZlRjEw", // https://x.com/VeloraDEX/status/2052715943621439728 problems with old url. changed once its fixed - was https://www.velora.xyz
     description:
       "Velora is the most comprehensive and flexible trading protocol for Decentralized Finance (DeFi). We use decentralized intents to provide advanced features such as limit orders, super hooks, and chain-abstracted swaps.",
@@ -18777,7 +18777,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     name: "Drift Trade",
     address: "solana:DriFtupJYLTosbwoN8koMbEYSx54aFAVLddWsbksjwg7",
     symbol: "DRIFT",
-    url: "https://app.drift.trade/ref/defillama",
+    url: "https://app.drift.trade",
     referralUrl: "https://app.drift.trade/ref/defillama",
     description:
       "Drift brings on-chain, cross-margined perpetual futures to Solana. Making futures DEXs the best way to trade.",
@@ -23122,7 +23122,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     address: null,
     symbol: "-",
     assetToken: "JSOL",
-    url: "https://app.jpool.one?ref=npkn8nfoja",
+    url: "https://app.jpool.one",
     referralUrl: "https://app.jpool.one?ref=npkn8nfoja",
     description:
       "JPool is a stake pool on the Solana blockchain network enabling safe, secure, high-yield rewards on your staked SOL.",

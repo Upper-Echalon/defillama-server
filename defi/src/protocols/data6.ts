@@ -6040,7 +6040,7 @@ const data6: Protocol[] = [
     }
   },
   {
-    id: "7994",
+    id: "7995",
     name: "Near Perps",
     address: null,
     symbol: "-",
@@ -6061,7 +6061,7 @@ const data6: Protocol[] = [
     }
   },
   {
-    id: "7994",
+    id: "7996",
     name: "Valiant Trade Perps",
     address: null,
     symbol: "-",

@@ -1,7 +1,7 @@
 import { successResponse, wrap, IResponse } from "./utils/shared";
 import ddb from "./utils/shared/dynamodb";
 import parseRequestBody from "./utils/shared/parseRequestBody";
-import { getRecordClosestToTimestamp } from "./utils/shared/getRecordClosestToTimestamp";
+import { getRecordClosestToTimestamp } from "./utils/distressedAwareRecord";
 import { CoinsResponse, getBasicCoins } from "./utils/getCoinsUtils";
 import { getCurrentUnixTimestamp } from "./utils/date";
 import { searchWidth } from "./utils/shared/constants";

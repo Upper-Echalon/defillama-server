@@ -1,8 +1,9 @@
 import { successResponse, wrap, IResponse, errorResponse } from "./utils/shared";
 import ddb from "./utils/shared/dynamodb";
 import parseRequestBody from "./utils/shared/parseRequestBody";
-import { getRecordClosestToTimestamp } from "./utils/shared/getRecordClosestToTimestamp";
+import { getRecordClosestToTimestamp } from "./utils/distressedAwareRecord";
 import { coinToPK, DAY } from "./utils/processCoin";
+import { isDistressedAssetPK } from "./utils/isDistressed";
 
 const handler = async (
     event: AWSLambda.APIGatewayEvent
@@ -17,6 +18,9 @@ const handler = async (
     if (coin === undefined) {
         return errorResponse({ message: "Coin doesn't exist" })
     }
+    // Distressed contracts read $0: ignore any coingecko redirect on this PK so
+    // the per-timestamp lookups resolve against the asset# PK (-> $0).
+    if (isDistressedAssetPK(coin.PK)) coin.redirect = undefined;
 
     const response = {
         decimals: coin.decimals == null ? undefined : Number(coin.decimals),

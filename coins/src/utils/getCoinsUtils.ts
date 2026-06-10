@@ -1,5 +1,7 @@
 import { batchGet } from "./shared/dynamodb";
 import { coinToPK } from "./processCoin";
+import { isDistressedAssetPK } from "./isDistressed";
+import { getCurrentUnixTimestamp } from "./date";
 import { getCoingeckoLock } from "../utils/shared/coingeckoLocks";
 import sleep from "../utils/shared/sleep";
 import fetch from "node-fetch";
@@ -45,7 +47,19 @@ export async function getBasicCoins(requestedCoins: string[]) {
     pks.add(pk);
   });
   const coins = await batchGetLatest([...pks]);
-  return { coins, PKTransforms };
+  // Distressed contracts read $0. Zero the current price/mcap, and drop the
+  // redirect so downstream historical lookups resolve against the bare asset#
+  // PK (which has no price rows of its own) instead of the still-live coingecko
+  // slot — i.e. the live price stops leaking on every endpoint. Only the
+  // contract address is touched; the shared coingecko id (and any other
+  // deployment redirecting to it) keeps its real price.
+  const now = getCurrentUnixTimestamp();
+  const sanitizedCoins = coins.map((coin: any) =>
+    isDistressedAssetPK(coin?.PK)
+      ? { ...coin, price: 0, mcap: 0, redirect: undefined, confidence: 1.01, timestamp: now }
+      : coin,
+  );
+  return { coins: sanitizedCoins, PKTransforms };
 }
 
 export async function retryCoingeckoRequest(

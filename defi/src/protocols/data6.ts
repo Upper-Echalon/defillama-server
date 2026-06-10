@@ -3762,7 +3762,7 @@ const data6: Protocol[] = [
     name: "Preddy",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://preddy.trade/events
+    url: "https://preddy.trade/",
     description:
       "Preddy is a prediction platform powered by Polymarket",
     chain: "Polygon",

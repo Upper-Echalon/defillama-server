@@ -9278,7 +9278,10 @@ const data5: Protocol[] = [
     twitter: "SaiDotFun",
     listedAt: 1769297153,
     dimensions: {
-      derivatives: "sai-perps",
+      derivatives: {
+        adapter: "sai-perps",
+        genuineSpikes: [["2026-06-09", "High volumes in BTC-USD pair"]],
+      },
       fees: "sai-perps",
       "open-interest": "sai-perps",
     },

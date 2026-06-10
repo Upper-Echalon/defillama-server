@@ -29841,7 +29841,7 @@ const data3_1: Protocol[] = [
       fees: "sudofinance",
       derivatives: {
         adapter: "sudofinance",
-        genuineSpikes: [["2026-05-13", "-"]]
+        genuineSpikes: [["2026-05-13", "-"], ["2026-06-09", "-"]]
       }
     }
   },

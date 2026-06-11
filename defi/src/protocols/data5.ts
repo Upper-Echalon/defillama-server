@@ -16587,9 +16587,10 @@ const data5: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     tags: ["AMM"],
-    chains: ["Ethereum", "Base", "Binance", "Arbitrum", "Polygon", "Avalanche"],
-    module: "dummy.js",
+    chains: ["Ethereum", "Base", "Binance", "Arbitrum", "Polygon", "Avalanche", "Hyperliquid L1", "MegaETH"],
+    module: "metric/index.js",
     twitter: "Metricxyz",
+    listedAt: 1781204869,
     dimensions: {
       dexs: "metric"
     }

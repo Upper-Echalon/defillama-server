@@ -38,6 +38,7 @@ import getWrites from "../utils/getWrites";
 import cap from "./cap";
 import hypezionAdapter from "./hypezion";
 import gohm from "./gohm";
+import hyperbeat from "./hyperbeat";
 
 export { glp };
 
@@ -607,5 +608,6 @@ export const adapters = {
   matrixdock,
   dsu, 
   cap,
-  gohm
+  gohm,
+  hyperbeat
 };

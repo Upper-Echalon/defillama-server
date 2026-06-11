@@ -4657,6 +4657,9 @@ const data6: Protocol[] = [
     github: ["SquareRoot-Labs"],
     treasury: "archer-exchange.js",
     listedAt: 1779821198,
+    dimensions: {
+      dexs: "archer-exchange",
+    }
   },
   {
     id: "7929",
@@ -6258,6 +6261,9 @@ const data6: Protocol[] = [
     parentProtocol: "parent#hyperbeat",
     oraclesBreakdown: [{name: "RedStone",type: "Primary",proof: ["https://github.com/DefiLlama/DefiLlama-Adapters/pull/19611"]}],
     listedAt: 1781204316,
+    dimensions: {
+      fees: "hyperbeat-liquidbank",
+    }
   },
   {
     id: "8006",
@@ -6361,6 +6367,28 @@ const data6: Protocol[] = [
     dimensions: {
       aggregators: "piteas",
       fees: "piteas",
+    }
+  },
+  {
+    id: "8011",
+    name: "Hyperbeat Liquid Bank Perps",
+    address: null,
+    symbol: "-",
+    url: "https://app.hyperbeat.org",
+    description: "Trading volume, fees and revenue from trades routed to Hyperliquid through Hyperbeat's builder code",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/hyperbeat-liquid-bank-perps.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Hyperliquid Builder"],
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "0xhyperbeat",
+    parentProtocol: "parent#hyperbeat",
+    dimensions: {
+      fees: "hyperbeat-liquidbank-perps",
+      derivatives: "hyperbeat-liquidbank-perps",
     }
   },
 ];

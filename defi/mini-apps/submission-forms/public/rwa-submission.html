@@ -574,6 +574,13 @@
                         </label>
                         <input type="text" name="coingeckoId" placeholder="e.g., ondo-us-dollar-yield  or  Not listed">
                     </div>
+
+                    <div class="form-group">
+                        <label>Pricing Source (if not on CoinGecko)
+                            <span class="hint">If the token isn't on CoinGecko, tell us how to price it: an onchain oracle/price feed (chain:address), a DEX pool to read price from, an issuer NAV/price API endpoint, a hardcoded peg (e.g., "always $1.00"), or any other method we can use to value it.</span>
+                        </label>
+                        <textarea name="pricingSource" placeholder="e.g., Chainlink feed at ethereum:0xabc...  |  NAV API https://issuer.com/api/nav returns price in USD  |  Pegged 1:1 to USD  |  Read price from Uniswap v3 pool ethereum:0xpool..."></textarea>
+                    </div>
                 </div>
             </div>
 
@@ -1131,6 +1138,12 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>Pricing Source (if not on CoinGecko)
+                            <span class="hint">If not on CoinGecko, how should we price it? Oracle/price feed (chain:address), DEX pool, NAV/price API, a hardcoded peg, etc.</span>
+                        </label>
+                        <textarea name="t${idx}_pricingSource" style="min-height:60px;" placeholder="e.g., Chainlink feed ethereum:0xabc... | NAV API https://... | Pegged 1:1 to USD"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label>Description</label>
                         <textarea name="t${idx}_description" style="min-height:60px;" placeholder="Short explanation of the asset and its backing..."></textarea>
                     </div>
@@ -1452,6 +1465,7 @@
             data.assetGroup = fd.get('assetGroup');
 
             data.coingeckoId = fd.get('coingeckoId');
+            data.pricingSource = fd.get('pricingSource');
             data.issuer = fd.get('issuer');
             data.attestation = fd.get('attestation');
 
@@ -1522,6 +1536,7 @@
             data.assetGroup = fd.get(p + 'assetGroup') || sharedDefaults.assetGroup;
 
             data.coingeckoId = fd.get(p + 'coingeckoId');
+            data.pricingSource = fd.get(p + 'pricingSource');
             data.issuer = sharedIssuer.issuer;
             data.attestation = fd.get(p + 'attestation') || sharedDefaults.attestation;
 

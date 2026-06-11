@@ -83,7 +83,7 @@ function formatRwaEmbed(data) {
         { name: '📋 Basic Information',     value: [`**Token Name:** ${data.tokenName || 'N/A'}`, `**Ticker:** ${data.ticker || 'N/A'}`, data.logo ? `**Logo:** ${data.logo}` : null, data.website ? `**Website:** ${data.website}` : null, data.twitter ? `**Twitter:** ${data.twitter}` : null, data.telegram ? `**Telegram/Discord:** ${data.telegram}` : null].filter(Boolean).join('\n'), inline: false },
         { name: '⛓️ Blockchain Information', value: [`**Primary Chain:** ${data.blockchain?.primaryChain || 'N/A'}`, `**All Chains:** ${data.blockchain?.allChains || 'N/A'}`, contractsStr ? `**Contracts:**\n${contractsStr}` : null, internalStr ? `**Internal Addresses:**\n${internalStr}` : null].filter(Boolean).join('\n'), inline: false },
         { name: '📂 Asset Classification',  value: `**Category:** ${data.category || 'N/A'}`, inline: false },
-        { name: '📊 Market Data',           value: `**CoinGecko ID:** ${data.coingeckoId || 'Not listed'}`, inline: false },
+        { name: '📊 Market Data',           value: [`**CoinGecko ID:** ${data.coingeckoId || 'Not listed'}`, data.pricingSource ? `**Pricing Source:** ${data.pricingSource}` : null].filter(Boolean).join('\n'), inline: false },
         { name: '🏢 Issuer Information',    value: `**Issuer:** ${data.issuer || 'N/A'}`, inline: false },
         { name: '🔍 Proof & Verification',  value: `**Attestation:** ${data.attestation || 'None'}`, inline: false },
         { name: '🏦 Exchange & Access',     value: [`**CEX Listed:** ${data.exchange?.cexListed ?? 'N/A'}${data.exchange?.cexDetails ? ` — ${data.exchange.cexDetails}` : ''}`, `**KYC to Mint:** ${data.exchange?.kycToMint ?? 'N/A'}`, `**KYC Whitelist to Hold/Transfer:** ${data.exchange?.kycWhitelist ?? 'N/A'}`].join('\n'), inline: false },
@@ -129,6 +129,7 @@ function formatRwaBatchEmbed(tokens) {
         if (contractsStr) lines.push(`**Contracts:** ${contractsStr}`);
         if (internalStr) lines.push(`**Internal:** ${internalStr}`);
         if (data.coingeckoId) lines.push(`**CoinGecko:** ${data.coingeckoId}`);
+        if (data.pricingSource) lines.push(`**Pricing Source:** ${data.pricingSource}`);
         lines.push(`**CEX:** ${data.exchange?.cexListed ?? 'N/A'}${data.exchange?.cexDetails ? ` (${data.exchange.cexDetails})` : ''} | **KYC Mint:** ${data.exchange?.kycToMint ?? 'N/A'} | **KYC Hold:** ${data.exchange?.kycWhitelist ?? 'N/A'}`);
         lines.push(`**Transferable:** ${data.custody?.transferable ?? 'N/A'} | **Self Custody:** ${data.custody?.selfCustody ?? 'N/A'}`);
         if (data.redemption) lines.push(`**Redemption:** ${data.redemption}`);

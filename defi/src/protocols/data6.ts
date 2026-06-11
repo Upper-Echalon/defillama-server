@@ -5352,7 +5352,7 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Gamified Mining",
     chains: ["Solana"],
-    module: "dummy.js",
+    module: "zinc/index.js",
     twitter: "zinc_cash",
     github: ["sphalerite-foundry"],
     dimensions: {
@@ -6390,6 +6390,24 @@ const data6: Protocol[] = [
       fees: "hyperbeat-liquidbank-perps",
       derivatives: "hyperbeat-liquidbank-perps",
     }
+  },
+  {
+    id: "8012",
+    name: "CrystalClear",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://crystalclear.finance
+    description: "ERC-4626 USDC vaults on HyperEVM. Deposits trade Hyperliquid perpetuals via a delegated agent",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/crystalclear.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Onchain Capital Allocator",
+    chains: ["Hyperliquid L1"],
+    module: "crystalclear/index.js",
+    twitter: "CrystalClearHL",
+    listedAt: 1781209093,
   },
 ];
 export default data6;

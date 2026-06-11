@@ -4168,6 +4168,9 @@ export const chainCoingeckoIds = {
     url: "https://sophon.xyz/",
     github: ["sophon-org"],
     chainId: 50104,
+    dimensions: {
+      fees: "sophon",
+    },
   },
   "QL1": {
     geckoId: null,

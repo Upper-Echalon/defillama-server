@@ -469,6 +469,9 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
     lUSDC: '0xc404e12d3466accb625c67dbab2e1a8a457def3c',
     lDAI: '0x4dd9c468a44f3fef662c35c1e9a6108b70415c2c',
     lBUSD: '0xb7ab962c42a8bb443e0362f58a5a43814c573ffb',
+  },
+  eni: {
+    USDT: '0xDC1a8A35b0BaA3229b13f348ED708a2fd50b5e3a', // minted bridge token without backing assets
   }
 };
 

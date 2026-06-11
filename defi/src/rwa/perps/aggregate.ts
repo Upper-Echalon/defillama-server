@@ -9,6 +9,7 @@ type MetadataPayload = {
   referenceAssetGroup?: unknown;
   assetClass?: unknown;
   category?: unknown;
+  suspicious?: unknown;
 };
 
 type MetadataRecord = {
@@ -34,6 +35,7 @@ export type AggregateHistoricalRow = {
   category: string[];
   openInterest: number;
   volume24h: number;
+  suspicious: boolean;
 };
 
 export type PerpsChartMetricKey = "openInterest" | "volume24h" | "markets";
@@ -127,6 +129,7 @@ function buildBaseHistoricalRow(record: DailyRecord, metadata: MetadataPayload):
     category: normalizeCategoryList(metadata.category),
     openInterest: toFiniteNumberOrZero(record.open_interest),
     volume24h: toFiniteNumberOrZero(record.volume_24h),
+    suspicious: metadata.suspicious === true,
   };
 }
 
@@ -141,6 +144,13 @@ function buildHistoricalRows(dailyRecords: DailyRecord[], metadata: MetadataReco
   }
 
   return rows;
+}
+
+// Markets flagged `suspicious` in Airtable (e.g. Parcl's constant-OI synthetic
+// markets) are kept in their own per-market and venue-scoped charts, but dropped
+// from every cross-venue aggregate so a flat OI line doesn't distort the overview.
+function dropSuspiciousRows(rows: AggregateHistoricalRow[]): AggregateHistoricalRow[] {
+  return rows.filter((row) => !row.suspicious);
 }
 
 function sortHistoricalRows(rows: AggregateHistoricalRow[]) {
@@ -273,7 +283,7 @@ export function buildCategoryHistoricalCharts(
   dailyRecords: DailyRecord[],
   metadata: MetadataRecord[]
 ): Record<string, AggregateHistoricalRow[]> {
-  const rows = buildHistoricalRows(dailyRecords, metadata);
+  const rows = dropSuspiciousRows(buildHistoricalRows(dailyRecords, metadata));
   const chartsByCategory: Record<string, AggregateHistoricalRow[]> = {};
 
   for (const row of rows) {
@@ -300,9 +310,12 @@ export function buildOverviewBreakdownCharts(
   dailyRecords: DailyRecord[],
   metadata: MetadataRecord[]
 ): Record<string, PerpsBreakdownChartRow[]> {
-  const rows = buildHistoricalRows(dailyRecords, metadata);
+  const allRows = buildHistoricalRows(dailyRecords, metadata);
+  // Cross-venue aggregates drop suspicious markets; venue-scoped breakdowns keep
+  // them (a suspicious market still belongs on its own venue's page, e.g. Parcl).
+  const rows = dropSuspiciousRows(allRows);
   const charts: Record<string, PerpsBreakdownChartRow[]> = {};
-  const rowsByVenue = buildGroupMap(rows, (row) => perpsSlug(row.venue));
+  const rowsByVenue = buildGroupMap(allRows, (row) => perpsSlug(row.venue));
   const rowsByAssetGroup = buildGroupMap(rows, (row) => perpsSlug(getAssetGroupLabel(row)));
   const rowsByAssetClass = buildGroupMap(rows, (row) => perpsSlug(getAssetClassLabel(row)));
 
@@ -360,9 +373,12 @@ export function buildContractBreakdownCharts(
   dailyRecords: DailyRecord[],
   metadata: MetadataRecord[]
 ): Record<string, PerpsBreakdownChartRow[]> {
-  const rows = buildHistoricalRows(dailyRecords, metadata);
+  const allRows = buildHistoricalRows(dailyRecords, metadata);
+  // Cross-venue aggregates drop suspicious markets; venue-scoped breakdowns keep
+  // them (a suspicious market still belongs on its own venue's page, e.g. Parcl).
+  const rows = dropSuspiciousRows(allRows);
   const charts: Record<string, PerpsBreakdownChartRow[]> = {};
-  const rowsByVenue = buildGroupMap(rows, (row) => perpsSlug(row.venue));
+  const rowsByVenue = buildGroupMap(allRows, (row) => perpsSlug(row.venue));
   const rowsByAssetGroup = buildGroupMap(rows, (row) => perpsSlug(getAssetGroupLabel(row)));
   const rowsByAssetClass = buildGroupMap(rows, (row) => perpsSlug(getAssetClassLabel(row)));
 

@@ -26,6 +26,11 @@ export interface PerpsContractMetadata {
     makerFeeRate: number;
     takerFeeRate: number;
     deployerFeeShare: number;
+    // Airtable `Suspicious` flag. Suspicious markets (e.g. Parcl's constant-OI
+    // synthetic markets) are kept in the tables and their own per-market /
+    // venue-scoped charts, but excluded from cross-venue aggregate charts so a
+    // flat OI line doesn't distort the overview — see aggregate.ts.
+    suspicious: boolean;
 }
 
 export const PERPS_ALWAYS_STRING_ARRAY_FIELDS = new Set<string>([
@@ -319,6 +324,10 @@ export async function loadContractMetadataFromAirtable(): Promise<number> {
             makerFeeRate: toNum(mapped.makerFeeRate, HYPERLIQUID_MAKER_FEE),
             takerFeeRate: toNum(mapped.takerFeeRate, HYPERLIQUID_TAKER_FEE),
             deployerFeeShare: toNum(mapped.deployerFeeShare, HYPERLIQUID_DEPLOYER_SHARE),
+            // `Suspicious` is a plain boolean column (getCsvData coerces TRUE/FALSE
+            // strings to booleans), so read it straight off the row rather than
+            // through PERPS_METADATA_KEY_MAP, mirroring how `Delisted` is handled.
+            suspicious: row?.Suspicious === true,
         };
 
         normalizePerpsMetadataInPlace(metadata);

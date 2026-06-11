@@ -292,7 +292,21 @@ describe("loadContractMetadataFromAirtable", () => {
       makerFeeRate: 0.001,
       takerFeeRate: 0.002,
       deployerFeeShare: 0.25,
+      suspicious: false,
     });
+  });
+
+  it("reads the Suspicious flag off the Airtable row", async () => {
+    mockGetCsvData.mockResolvedValue([
+      { "Canonical Market ID": "parcl:NY-NYC", Suspicious: true },
+      { "Canonical Market ID": "apex:META", Suspicious: false },
+      { "Canonical Market ID": "xyz:NOFLAG" },
+    ]);
+
+    await expect(loadContractMetadataFromAirtable()).resolves.toBe(3);
+    expect(getContractMetadata("parcl:NY-NYC")?.suspicious).toBe(true);
+    expect(getContractMetadata("apex:META")?.suspicious).toBe(false);
+    expect(getContractMetadata("xyz:NOFLAG")?.suspicious).toBe(false);
   });
 
   it("skips rows without a canonical contract id", async () => {
@@ -904,6 +918,7 @@ describe("buildVenueHistoricalCharts", () => {
           category: ["RWA Perpetuals"],
           openInterest: 10,
           volume24h: 3,
+          suspicious: false,
         },
         {
           timestamp: 200,
@@ -916,6 +931,7 @@ describe("buildVenueHistoricalCharts", () => {
           category: ["RWA Perpetuals"],
           openInterest: 12,
           volume24h: 4,
+          suspicious: false,
         },
       ],
       flx: [
@@ -930,6 +946,7 @@ describe("buildVenueHistoricalCharts", () => {
           category: ["Commodities"],
           openInterest: 7,
           volume24h: 2,
+          suspicious: false,
         },
       ],
     });
@@ -967,6 +984,7 @@ describe("buildCategoryHistoricalCharts", () => {
         category: ["RWA Perpetuals"],
         openInterest: 10,
         volume24h: 3,
+        suspicious: false,
       },
     ]);
     expect(result["equities"]).toEqual([
@@ -981,6 +999,7 @@ describe("buildCategoryHistoricalCharts", () => {
         category: ["Equities"],
         openInterest: 10,
         volume24h: 3,
+        suspicious: false,
       },
     ]);
   });

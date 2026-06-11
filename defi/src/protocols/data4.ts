@@ -5085,6 +5085,9 @@ const data4: Protocol[] = [
     module: "verio/index.js",
     twitter: "verio_story",
     listedAt: 1739459432,
+    dimensions: {
+      fees: "verio-staking"
+    }
   },
   {
     id: "5783",

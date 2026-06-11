@@ -163,7 +163,8 @@ const chainBlacklistedPools: any = {
     '0x8C720914Af9BB379fD7297DAB375c969d76e47D0'
   ], 
   ethereum: [
-    '0xab96aa0ee764924f49fbb372f3b4db9c2cb24ea2'
+    '0xab96aa0ee764924f49fbb372f3b4db9c2cb24ea2',  
+    '0x79a8c46dea5ada233abaffd40f3a0a2b1e5a4f27'
   ]
 }
 

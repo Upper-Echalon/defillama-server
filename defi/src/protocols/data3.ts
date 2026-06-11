@@ -56545,7 +56545,7 @@ const data3_3: Protocol[] = [
     symbol: "POWER",
     url: "https://www.m0.org/",
     description:
-      "M^0 is decentralized money middleware that allows institutions to issue cryptodollars",
+      "M0 is the modular stablecoin infrastructure. Build a stablecoin around your business, with the freedom to choose your regulated issuer and the option to change later",
     chain: "Ethereum",
     logo: `${baseIconsUrl}/m0.jpg`,
     audits: "2",
@@ -56554,7 +56554,7 @@ const data3_3: Protocol[] = [
     category: "Stablecoin Issuer",
     chains: ["Ethereum"],
     module: "m0/index.js",
-    twitter: "m0foundation",
+    twitter: "m0",
     oraclesBreakdown: [ { name: "Chronicle", type: "Primary", proof: ["https://www.m0.org/press-releases/chronicle-launches-real-world-asset-oracle-with-initial-integration-on-m-0-building-infrastructure-for-transformation-of-digital-money"] } ],
     audit_links: ["https://docs.m0.org/portal/technical/audits"],
     listedAt: 1728953339,

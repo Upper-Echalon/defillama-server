@@ -6312,7 +6312,7 @@ const parentProtocols: IParentProtocol[] = [
     gecko_id: "ethena",
     cmcId: "30171",
     chains: [],
-    twitter: "ethena_labs",
+    twitter: "ethena",
     github: ["ethena-labs"],
     stablecoins: ["ethena-usde", "ethena-usdtb"],
   },

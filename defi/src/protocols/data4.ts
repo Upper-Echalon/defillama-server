@@ -20958,7 +20958,7 @@ const data4: Protocol[] = [
     category: "Yield",
     chains: ["TON"],
     module: "ethena-tsusde/index.js",
-    twitter: "ethena_labs",
+    twitter: "ethena",
     parentProtocol: "parent#ethena",
     listedAt: 1753201159,
   },

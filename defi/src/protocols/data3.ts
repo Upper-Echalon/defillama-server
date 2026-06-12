@@ -32029,7 +32029,7 @@ const data3_1: Protocol[] = [
     // ethena uses different external and internal oracles, but the max amount that can be lost duo to a oracle is 500k$.
     chains: ["Ethereum"],
     module: "ethena/index.js",
-    twitter: "ethena_labs",
+    twitter: "ethena",
     parentProtocol: "parent#ethena",
     audit_links: ["https://ethena-labs.gitbook.io/ethena-labs/resources/audits#quantstamp-audit-on-v2-of-contracts"],
     tokensExcludedFromParent: {
@@ -62326,7 +62326,7 @@ const data3_3: Protocol[] = [
     tags: ["Treasury Bills"],
     chains: ["Ethereum"],
     module: "ethena-usdtb/index.js",
-    twitter: "ethena_labs",
+    twitter: "ethena",
     parentProtocol: "parent#ethena",
     stablecoins: ["ethena-usdtb"],
     listedAt: 1734350466

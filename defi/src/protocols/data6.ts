@@ -4658,7 +4658,10 @@ const data6: Protocol[] = [
     treasury: "archer-exchange.js",
     listedAt: 1779821198,
     dimensions: {
-      dexs: "archer-exchange",
+      dexs: {
+        genuineSpikes: [["2026-06-12", "Protocol launch ramp-up, API returns $0 for pre-June-2026 dates"]],
+        adapter: "archer-exchange",
+      }
     }
   },
   {

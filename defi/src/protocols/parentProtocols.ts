@@ -256,7 +256,7 @@ const parentProtocols: IParentProtocol[] = [
     gecko_id: "compound-governance-token",
     cmcId: "5692",
     chains: [],
-    twitter: "compoundfinance",
+    twitter: "Compound_xyz",
     governanceID: [
       "snapshot:comp-vote.eth",
       "eip155:1:0xc0Da02939E1441F497fd74F78cE7Decb17B66529",

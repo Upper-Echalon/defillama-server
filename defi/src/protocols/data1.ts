@@ -186,7 +186,7 @@ const data: Protocol[] = [
     category: "Lending",
     chains: ["Ethereum"],
     module: "compound-onchain/index.js",
-    twitter: "compoundfinance",
+    twitter: "Compound_xyz",
     audit_links: ["https://compound.finance/docs/security"],
     oraclesBreakdown: [
       {

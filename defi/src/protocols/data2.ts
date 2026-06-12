@@ -15642,7 +15642,7 @@ const data2: Protocol[] = [
       },
     ],
     module: "compound-v3/index.js",
-    twitter: "compoundfinance",
+    twitter: "Compound_xyz",
     audit_links: ["https://compound.finance/docs/security"],
     parentProtocol: "parent#compound-finance",
     listedAt: 1663169029,

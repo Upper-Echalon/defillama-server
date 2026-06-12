@@ -28745,7 +28745,7 @@ const data3_1: Protocol[] = [
     category: "Lending",
     chains: ["Ethereum"],
     module: "compound-v1/index.js",
-    twitter: "compoundfinance",
+    twitter: "Compound_xyz",
     audit_links: ["https://compound.finance/docs/security"],
     parentProtocol: "parent#compound-finance",
   },

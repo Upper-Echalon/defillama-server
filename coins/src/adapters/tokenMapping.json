@@ -14907,6 +14907,11 @@
     }
   },
   "katana": {
+    "0x88887bE419578051FF9F4eb6C858A951921D8888": {
+      "to": "coingecko#staked-cap-usd",
+      "decimals": 18,
+      "symbol": "stcUSD"
+    },
     "0xFCeF626dE4A0175ac962DD43EB0A002819FaAEFe": {
       "decimals": "18",
       "symbol": "sYUSD",

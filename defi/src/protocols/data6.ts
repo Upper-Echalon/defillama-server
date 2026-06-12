@@ -6123,7 +6123,10 @@ const data6: Protocol[] = [
     module: "dummy.js",
     twitter: "Gate",
     dimensions: {
-      dexs: "gate",
+      dexs: {
+        adapter: "gate",
+        genuineSpikes: [["2026-05-31", `Trader 'suntori' bought millions of FIFA World Cup shares at 0.1c`]],
+      },
     }
   },
   {

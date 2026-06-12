@@ -5879,6 +5879,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://www.bulk.trade/",
+    referralUrl: "https://early.bulk.trade/deposit?ref=llamas",
     description:
       "BULK is a Solana perpetuals DEX built for ultra-low-latency derivatives trading with sub-20ms matching and high-throughput execution",
     chain: "Solana",

@@ -6428,5 +6428,24 @@ const data6: Protocol[] = [
     parentProtocol: "parent#hyperbeat",
     listedAt: 1781212751,
   },
+  {
+    id: "8013",
+    name: "Circle Bitcoin",
+    address: null,
+    symbol: "-",
+    url: "https://www.circle.com/cirbtc",
+    description:
+      "Circle Wrapped Bitcoin (cirBTC) unlocks utility for institutional markets. Backed 1:1 by BTC that is readily verifiable onchain, cirBTC is live on Ethereum and integrates seamlessly into Circle’s established infrastructure and the wider DeFi ecosystem.",
+    chain: "Bitcoin",
+    logo: `${baseIconsUrl}/circle-bitcoin.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Bridge",
+    chains: ["Bitcoin"],
+    module: "circle-btc/index.js",
+    twitter: "circle",
+    listedAt: 1781222925
+  },
 ];
 export default data6;

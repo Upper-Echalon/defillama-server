@@ -6265,6 +6265,11 @@
     }
   },
   "solana": {
+    "AAAJXeGjpKu7W3X4QTSU4pm1Wbj4G2LPcdg7A6xJLLyG": {
+      "decimals": "6",
+      "symbol": "JAAA",
+      "to": "coingecko#janus-henderson-anemoy-aaa-clo-fund"
+    },
     "51tpgun58apNKgrk96xAVUCN5yC7cDzt3EHov9UjBh3Q": {
       "to": "asset#ethereum:0x3fea1cb36d2c5523c062d0e060eac253608b4daf",
       "decimals": 9,
@@ -11398,6 +11403,11 @@
     }
   },
   "stellar": {
+    "TESOURO-GCRYUGD5NVARGXT56XEZI5CIFCQETYHAPQQTHO2O3IQZTHDH4LATMYWC": {
+      "to": "asset#solana:BRNTNaZeTJANz9PeuD8drNbBHwGgg7ZTjiQYrFgWQ48p",
+      "decimals": 7,
+      "symbol": "TESOURO"
+    },
     "CDGSC6BA4TCAOVSFQCUEHDMOIIHYYVNYBT6YEARS4MX3ITAHUINVGQHX": {
       "to": "coingecko#safo",
       "decimals": 5,

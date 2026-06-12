@@ -20,6 +20,7 @@ export const deadChains = [
   'redstone', // shutdown 2026-05-18: https://x.com/redstonexyz/status/2055181780043579468
   'tenet', // stopped producing blocks 2026-04-22: https://tenetscan.io/block/27263599
   'enuls', // shutdown 2026-03-25 and merged with NerveNetwork: https://x.com/Nuls/status/2029433112254443679 
+  'nuls', // shutdown 2026-03-25 and merged with NerveNetwork: https://x.com/Nuls/status/2029433112254443679 
   'pryzm', // shutdown 2026-02-09: https://x.com/Pryzm_Zone/status/2000705996969091570
   'tara', // shutdown 2026-03-09: https://x.com/taraxa_project/status/2031039710278058142
   'artela', // block explorer and rpcs are dead: https://artscan.artela.network

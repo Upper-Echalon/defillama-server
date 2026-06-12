@@ -6410,7 +6410,7 @@ const data6: Protocol[] = [
     listedAt: 1781209093,
   },
   {
-    id: "8011",
+    id: "8013",
     name: "Hyperbeat wTokens",
     address: null,
     symbol: "-",
@@ -6429,7 +6429,7 @@ const data6: Protocol[] = [
     listedAt: 1781212751,
   },
   {
-    id: "8013",
+    id: "8014",
     name: "Circle Bitcoin",
     address: null,
     symbol: "-",

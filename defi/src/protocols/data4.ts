@@ -14764,6 +14764,17 @@ const data4: Protocol[] = [
         proof: ["https://app.morpho.org/polygon/earn","https://app.morpho.org/base/earn","https://app.morpho.org/markets"],
         chains: [{ chain: "Polygon" }, { chain: "Base" }, { chain: "Ethereum" }],
       },
+        {
+        name: "Chronicle",
+        type: "Primary",
+        proof: ["https://app.morpho.org/tempo/market/0xbaac31dc2fd22c08bedb0ea21d30f3fce2c8db713507cd737d18d2c239f71ac4/syrupusdc-pathusd#market",
+                "https://app.morpho.org/tempo/market/0xd53bf47b213c8432823931dd5294c9620981ad7f8681beb128eee3309a49160a/stcusd-pathusd",
+                "https://app.morpho.org/tempo/market/0x1ae5c974b17b644a92d4e15d6f9a48fdbf2e9b34826e66e09c6487f7a8f712a9/susde-pathusd",
+                "https://app.morpho.org/tempo/market/0xa131a2574aaf61275fe828127daaccb8f49b9fbbed0c6127dc01f992ec317f13/siusd-pathusd",
+                "https://app.morpho.org/tempo/market/0xfbcab9fffd7c3d1c2ecbf4084bc7968711f4f3108a46b27cbd3be8a31bc94352/wsrusd-pathusd", 
+        ],
+        chains: [{ chain: "Tempo" }],
+      },
     ],
     listedAt: 1747734127,
     dimensions: {

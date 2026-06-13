@@ -43655,7 +43655,10 @@ const data3_2: Protocol[] = [
     twitter: "vooi_io",
     listedAt: 1716372620,
     dimensions: {
-      "aggregator-derivatives": "vooi"
+      "aggregator-derivatives": {
+        adapter: "vooi",
+        genuineSpikes: [["2026-06-12", "Spacex perps launch"]]
+      }
     }
   },
   {

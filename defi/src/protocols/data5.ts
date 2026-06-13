@@ -13535,7 +13535,10 @@ const data5: Protocol[] = [
     module: "dummy.js",
     twitter: null,
     dimensions: {
-      dexs: "aptos-caliber-prop-amm",
+      dexs: {
+        adapter: "aptos-caliber-prop-amm",
+        genuineSpikes: [["2026-06-12", "Large volumes of USDC<>USDT swaps"]]
+      }
     }
   },
   {

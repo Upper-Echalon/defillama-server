@@ -14841,12 +14841,12 @@ const data3_0: Protocol[] = [
         type: "Primary",
         proof: ["https://docs.gmx.io/docs/intro", "https://docs.gmx.io/docs/trading/order-types/#oracle-prices-minprice-and-maxprice", "https://docs.gmx.io/docs/trading/liquidations/#trading-risks"]
       },
-      {
-        name: "Chaos",
-        type: "Primary",
-	    endDate: "2026-05-13",
-        proof: ["https://x.com/GMX_IO/status/1866794916392874021", "https://gov.gmx.io/t/implementation-of-chaos-labs-risk-oracles/3861", "https://docs.gmx.io/docs/providing-liquidity/#glv-pools", "https://docs.gmx.io/docs/trading/fees/#price-impact-caps-by-market"]
-      }
+      // { // used for risk parameters
+      //   name: "Chaos",
+      //   type: "Primary",
+	    // endDate: "2026-05-13",
+      //   proof: ["https://x.com/GMX_IO/status/1866794916392874021", "https://gov.gmx.io/t/implementation-of-chaos-labs-risk-oracles/3861", "https://docs.gmx.io/docs/providing-liquidity/#glv-pools", "https://docs.gmx.io/docs/trading/fees/#price-impact-caps-by-market"]
+      // }
     ],
     parentProtocol: "parent#gmx",
     audit_links: ["https://github.com/gmx-io/gmx-synthetics/tree/main/audits"],

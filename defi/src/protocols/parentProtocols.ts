@@ -6094,6 +6094,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "OcelexFi",
+    deadUrl: true,
   },
   {
     id: "parent#astherus",

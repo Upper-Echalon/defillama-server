@@ -22263,6 +22263,7 @@ const data2: Protocol[] = [
     twitter: "GeniusyieldO",
     listedAt: 1671795512,
     github: ["geniusyield"],
+    deadUrl: true,
   },
   {
     id: "2382",

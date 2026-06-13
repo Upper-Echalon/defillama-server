@@ -59624,7 +59624,8 @@ const data3_3: Protocol[] = [
     dimensions: {
       fees: "ocelex-v1",
       dexs: "ocelex-v1"
-    }
+    },
+    deadUrl: true
   },
   {
     id: "5379",
@@ -59648,7 +59649,8 @@ const data3_3: Protocol[] = [
     dimensions: {
       fees: "ocelex",
       dexs: "ocelex"
-    }
+    },
+    deadUrl: true
   },
   {
     id: "5380",

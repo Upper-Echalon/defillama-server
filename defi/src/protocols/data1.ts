@@ -18616,6 +18616,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     twitter: "retreeb_io",
     listedAt: 1638464179,
     github: ["RetreebInc"],
+    deadUrl: true,
   },
   {
     id: "963",

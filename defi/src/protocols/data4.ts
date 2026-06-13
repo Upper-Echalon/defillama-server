@@ -12453,14 +12453,7 @@ const data4: Protocol[] = [
     category: "Chain",
     chains: ["Ethereum"],
     module: "dummy.js",
-    twitter: "helium",
-    warningBanners: [
-      {
-        message:
-          "Data Credits burned for network usage are excluded from revenue: they are valued at the $0.50/GB peg (HIP-149) while carriers actually pay ~$0.10/GB, and the burned HNT is sourced from centralized-exchange wallets rather than a verifiable open-market buy, making it an inflated usage metric that can't be confirmed on-chain.",
-        level: "alert",
-      },
-    ],
+    twitter: "helium"
   },
   {
     id: "6100",
@@ -24741,7 +24734,14 @@ const data4: Protocol[] = [
     twitter: "helium",
     dimensions: {
       fees: "helium"
-    }
+    },
+    warningBanners: [
+      {
+        message:
+          "Data Credits burned for network usage are excluded from revenue: they are valued at the $0.50/GB peg (HIP-149) while carriers actually pay ~$0.10/GB, and the burned HNT is sourced from centralized-exchange wallets rather than a verifiable open-market buy, making it an inflated usage metric that can't be confirmed on-chain.",
+        level: "alert",
+      },
+    ],
   },
   {
     id: "6632",

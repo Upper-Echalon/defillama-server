@@ -599,6 +599,43 @@ export function getDimensionCategoryChainRoutes(route: 'overview' | 'chart' | 'c
   }
 }
 
+/**
+ * GET /v2/metrics/:type/categories
+ * Returns the list of categories that have data for a given adapter type,
+ * each with its aggregate metrics and the chains it is active on.
+ */
+export function getDimensionCategoryMetricsByType() {
+  return async function (req: HyperExpress.Request, res: HyperExpress.Response) {
+    const { adaptorType, dataType } = getEventParameters(req, true);
+
+    const categoryAggData = await readRouteData('dimensions/category-agg-data');
+    if (!categoryAggData) return errorResponse(res, 'Category data not available', { statusCode: 500 });
+
+    // keep only categories that have data for this adapter type and record type
+    const categories: any[] = [];
+    for (const [category, categoryData] of Object.entries<any>(categoryAggData)) {
+      const recordData = categoryData?.[adaptorType]?.[dataType];
+      if (!recordData) continue;
+
+      const chains = categoryData.chains
+        ? Object.keys(categoryData.chains)
+          .filter((chain: string) => categoryData.chains[chain]?.[adaptorType]?.[dataType])
+          .map(getChainLabelFromKey)
+        : [];
+
+      categories.push({
+        category,
+        total24h: recordData['24h'],
+        total7d: recordData['7d'],
+        total30d: recordData['30d'],
+        chains,
+      });
+    }
+
+    return successResponse(res, categories);
+  }
+}
+
 export function getDimensionProtocolRoutes(route: 'overview' | 'chart' | 'chart-chain-breakdown' | 'chart-version-breakdown' | 'chart-label-breakdown') {
   return async function (req: HyperExpress.Request, res: HyperExpress.Response) {
     const protocolName = req.path_parameters.name?.toLowerCase()

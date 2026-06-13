@@ -14834,17 +14834,18 @@ const data3_0: Protocol[] = [
     module: "gmx-v2/index.js",
     twitter: "GMX_IO",
     // https://x.com/GMX_IO/status/1866794916392874021 https://gov.gmx.io/t/implementation-of-chaos-labs-risk-oracles/3861
-    oracles: ["Chainlink","Chaos"],
+    oracles: ["Chainlink"],
     oraclesBreakdown: [
       {
         name: "Chainlink",
         type: "Primary",
-        proof: ["https://docs.gmx.io/docs/intro"]
+        proof: ["https://docs.gmx.io/docs/intro", "https://docs.gmx.io/docs/trading/order-types/#oracle-prices-minprice-and-maxprice", "https://docs.gmx.io/docs/trading/liquidations/#trading-risks"]
       },
       {
         name: "Chaos",
         type: "Primary",
-        proof: ["https://x.com/GMX_IO/status/1866794916392874021", "https://gov.gmx.io/t/implementation-of-chaos-labs-risk-oracles/3861"]
+	    endDate: "2026-05-13",
+        proof: ["https://x.com/GMX_IO/status/1866794916392874021", "https://gov.gmx.io/t/implementation-of-chaos-labs-risk-oracles/3861", "https://docs.gmx.io/docs/providing-liquidity/#glv-pools", "https://docs.gmx.io/docs/trading/fees/#price-impact-caps-by-market"]
       }
     ],
     parentProtocol: "parent#gmx",

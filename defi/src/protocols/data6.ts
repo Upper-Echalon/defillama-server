@@ -6001,7 +6001,10 @@ const data6: Protocol[] = [
     parentProtocol: "parent#ondo-finance",
     listedAt: 1781038014,
     dimensions: {
-      derivatives: "ondo-perps",
+      derivatives: {
+        genuineSpikes: [["2026-06-12", "Launch week trading rewards campaign"]],
+        adapter: "ondo-perps",
+      },
       "open-interest": "ondo-perps",
     }
   },

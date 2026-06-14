@@ -125,6 +125,13 @@ functions:
       - httpApi:
           path: /mcaps
           method: post
+  fdvs:
+    handler: src/getFdvs.default
+    timeout: 60
+    events:
+      - httpApi:
+          path: /fdvs
+          method: post
   chains:
     handler: src/getChains.default
     timeout: 60

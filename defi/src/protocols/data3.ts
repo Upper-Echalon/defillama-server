@@ -13516,7 +13516,15 @@ const data3_0: Protocol[] = [
     parentProtocol: "parent#sablier-finance",
     listedAt: 1690655852,
     dimensions: {
-      dexs: "sablier-lockup"
+      dexs: {
+        adapter: "sablier-lockup",
+        genuineSpikes: [
+          ["2025-10-23", "$RAIN token unlock"], 
+          ["2025-12-09", "$RAIN token unlock"], 
+          ["2026-02-16", "$RAIN token unlock"], 
+          ["2026-05-26", "$RAIN token unlock"], 
+        ],
+      }
     }
   },
   {

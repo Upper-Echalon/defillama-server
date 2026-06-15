@@ -11749,7 +11749,7 @@ const data5: Protocol[] = [
     address: "solana:CtAu3kc8cQ1jcDMmRTBsDHoPuE3sswCagQ3BuqFDC6dt",
     symbol: "dBTC",
     url: "https://minebtc.fun",
-    description: "A speculative entertainment and betting experiment building a fully AI-driven reserve currency on Solana. Players compete in 60-second faction warfare rounds to mine $dogeBTC — a deflationary Token-2022 with self-adjusting emissions that respond to market conditions. Features evolvable AI-generated Doge NFTs that power lore, gaming, and an AI content engine.",
+    description: "MineBTC is a Solana casino-mining game where players run SOL autominers, call country-race outcomes, and earn dBTC through Casino rolls, Country Race payouts, staking rewards, buybacks, and burned LP. HashBeast NFTs add boosts, identity, and game events.",
     chain: "Solana",
     logo: `${baseIconsUrl}/minebtc.jpg`,
     audits: "0",

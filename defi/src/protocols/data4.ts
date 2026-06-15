@@ -12459,7 +12459,7 @@ const data4: Protocol[] = [
     id: "6100",
     name: "TON",
     address: "ton:EQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM9c",
-    symbol: "TON",
+    symbol: "GRAM",
     url: "https://ton.org",
     description:
       "A decentralized and open internet designed to onboard 500M people on-chain, built by the community using technology developed by Telegram.",

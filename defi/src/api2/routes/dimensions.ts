@@ -25,11 +25,7 @@ function getPercentage(a: number, b: number) {
 const validMetricTypesSet = new Set(Object.values(AdapterType)) as Set<string>
 const validRecordTypesSet = new Set(Object.values(AdaptorRecordType)) as Set<string>
 const unixStartOfTodayTimestamp = timeSToUnix(getTimeSDaysAgo(0))
-
-const activeUserCountKeys = ['total24h', 'average1y', 'change_1d', 'change_7d', 'change_1m']
-const protocolBreakdownKeys = ['breakdown24h', 'breakdown30d']
-const activeUsersBreakdownKeys = ['breakdown24h']
-
+const protocolInfoKeys = ['defillamaId', 'name', 'displayName', 'module', 'category', 'logo', 'chains', 'protocolType', 'methodologyURL', 'methodology', 'childProtocols', 'parentProtocol', 'slug', 'linkedProtocols', 'doublecounted', 'breakdownMethodology', 'hasLabelBreakdown',]
 const protocolChainBreakdownKeys : string[] = [
   'total24h',
   'total48hto24h',
@@ -50,6 +46,23 @@ const protocolChainBreakdownKeys : string[] = [
   'change_7dover7d',
   'change_30dover30d',
 ] as const
+
+const activeUserCountKeys = ['total24h', 'average1y', 'change_1d', 'change_7d', 'change_1m']
+const protocolBreakdownKeys = ['breakdown24h', 'breakdown30d']
+const activeUsersBreakdownKeys = ['breakdown24h']
+
+type ProtocolRouteRow = {
+  id: string,
+  info: any,
+  summary: any,
+}
+
+type ProtocolRouteIndex = {
+  all: ProtocolRouteRow[],
+  byChain: Map<string, ProtocolRouteRow[]>,
+  byCategory: Map<string, ProtocolRouteRow[]>,
+  byCategoryChain: Map<string, Map<string, ProtocolRouteRow[]>>,
+}
 
 function getDimensionMetricKeys(keys:string[], recordType: AdaptorRecordType) {
   const allowedKeys : string[] = recordType === AdaptorRecordType.dailyActiveUsers ? activeUserCountKeys : protocolChainBreakdownKeys
@@ -116,18 +129,108 @@ function getEventParameters(req: HyperExpress.Request, isSummary = true) {
   return response
 }
 
+export function buildProtocolRouteIndex(protocolSummaries: any = {}, recordType: AdaptorRecordType): ProtocolRouteIndex {
+  const index: ProtocolRouteIndex = {
+    all: [],
+    byChain: new Map(),
+    byCategory: new Map(),
+    byCategoryChain: new Map(),
+  }
+
+  for (const [id, protocolSummary] of Object.entries(protocolSummaries) as any) {
+    const { summaries, info } = protocolSummary
+    const summary = summaries?.[recordType]
+    if (!summary) continue;
+    if (!summary.recordCount) continue;
+
+    const row = { id, info, summary }
+    index.all.push(row)
+
+    const protocolChainKeys = Object.entries(summary.chainSummary ?? {})
+      .filter(([chain, chainSummary]: any) => chainSummary?.recordCount && info?.chains?.includes(getChainLabelFromKey(chain)))
+      .map(([chain]) => chain)
+
+    for (const chain of protocolChainKeys) {
+      addToMapArray(index.byChain, chain, row)
+    }
+
+    for (const category of getProtocolCategories(info)) {
+      addToMapArray(index.byCategory, category, row)
+
+      for (const chain of protocolChainKeys) {
+        let chainMap = index.byCategoryChain.get(category)
+        if (!chainMap) {
+          chainMap = new Map()
+          index.byCategoryChain.set(category, chainMap)
+        }
+        addToMapArray(chainMap, chain, row)
+      }
+    }
+  }
+
+  return index
+
+  function addToMapArray(map: Map<string, ProtocolRouteRow[]>, key: string, row: ProtocolRouteRow) {
+    let rows = map.get(key)
+    if (!rows) {
+      rows = []
+      map.set(key, rows)
+    }
+    rows.push(row)
+  }
+}
+
+function getProtocolCategories(info: any): Array<string> {
+  if (!info) return [];
+  // We treat tags same as category and use labels (not slugs) for keys, only use slugs on storage and query.
+  let _pCategories = info.category ? [info.category] : [];
+  if (info.tags) _pCategories = _pCategories.concat(info.tags);
+  return [...new Set(_pCategories)];
+}
+
+function formatProtocolRows({
+  rows, chain, recordType,
+}: {
+  rows: ProtocolRouteRow[],
+  chain?: string,
+  recordType: AdaptorRecordType,
+}) {
+  const protocolDataKeys = getProtocolDataKeys(recordType)
+  let protocolTotalAllTimeSum = 0
+
+  const protocols = rows.map(({ summary: rootSummary, info }: ProtocolRouteRow) => {
+    const res: any = {}
+    const summary = chain ? rootSummary?.chainSummary?.[chain] : rootSummary
+
+    if (summary)
+      protocolDataKeys.forEach(key => res[key] = summary[key])
+
+    // sometimes a protocol is disabled or id is changed, we should disregard these data
+    if (!summary && !info) return null
+
+    if (!summary?.recordCount) return null; // if there are no data points, we should filter out the protocol
+    if (recordType !== AdaptorRecordType.dailyActiveUsers && summary?.totalAllTime) protocolTotalAllTimeSum += summary.totalAllTime
+
+    protocolInfoKeys.filter(key => info?.[key]).forEach(key => res[key] = info?.[key])
+    res.id = res.defillamaId ?? res.id
+    return res
+  }).filter((i: any) => i)
+
+  return { protocols, protocolTotalAllTimeSum }
+}
+
 async function getOverviewProcess({
-  recordType, cacheData, chain,
+  recordType, cacheData, chain, routeIndex,
 }: {
   recordType: AdaptorRecordType,
   cacheData: any,
   chain?: string,
+  routeIndex?: ProtocolRouteIndex,
 }) {
   const { summaries, allChains, protocolSummaries = {} } = cacheData
   if (chain)
     chain = getChainKeyFromLabel(chain) // normalize chain name like 'zksync-era' -> 'era' 
 
-  const chainDisplayName = chain ? getChainLabelFromKey(chain) : null
   let summary = chain ? summaries[recordType]?.chainSummary[chain] : summaries[recordType]
   const response: any = {}
   if (!summary) summary = {}
@@ -150,8 +253,6 @@ async function getOverviewProcess({
   responseKeys.forEach(key => {
     response[key] = summary[key]
   })
-  let protocolTotalAllTimeSum = 0
-
   response.change_1d = getPercentage(summary.total24h, summary.total48hto24h)
   response.change_7d = getPercentage(summary.total24h, summary.total7DaysAgo)
   response.change_1m = getPercentage(summary.total24h, summary.total30DaysAgo)
@@ -160,43 +261,17 @@ async function getOverviewProcess({
     response.change_30dover30d = getPercentage(summary.total30d, summary.total60dto30d)
   }
 
-  // These fields are for the protocol level data
-  const protocolInfoKeys = ['defillamaId', 'name', 'displayName', 'module', 'category', 'logo', 'chains', 'protocolType', 'methodologyURL', 'methodology', 'childProtocols', 'parentProtocol', 'slug', 'linkedProtocols', 'doublecounted', 'breakdownMethodology', 'hasLabelBreakdown',]
-  const protocolDataKeys = getProtocolDataKeys(recordType)
-
-  response.protocols = Object.entries(protocolSummaries).map(([_id, { summaries, info }]: any) => {
-    const res: any = {}
-
-    let summary = summaries?.[recordType]
-    if (chain) {
-      if (!info?.chains.includes(chainDisplayName)) return null
-      summary = summary?.chainSummary[chain]
-    }
-
-
-    if (summary)
-      protocolDataKeys.forEach(key => res[key] = summary[key])
-
-    // sometimes a protocol is diabled or id is changed, we should disregard these data 
-    if (!summary && !info) {
-      // console.log('no data found', _id, info)
-      return null
-    }
-
-    if (!summary?.recordCount) return null; // if there are no data points, we should filter out the protocol
-    if (recordType !== AdaptorRecordType.dailyActiveUsers && summary?.totalAllTime) protocolTotalAllTimeSum += summary.totalAllTime
-
-    protocolInfoKeys.filter(key => info?.[key]).forEach(key => res[key] = info?.[key])
-    res.id = res.defillamaId ?? res.id
-    return res
-  }).filter((i: any) => i)
+  routeIndex = routeIndex ?? buildProtocolRouteIndex(protocolSummaries, recordType)
+  const rows = chain ? routeIndex.byChain.get(chain) ?? [] : routeIndex.all
+  const { protocols, protocolTotalAllTimeSum } = formatProtocolRows({ rows, chain, recordType })
+  response.protocols = protocols
   if (recordType !== AdaptorRecordType.dailyActiveUsers && !response.totalAllTime) response.totalAllTime = protocolTotalAllTimeSum
 
   return response
 }
 
 // chain is key: ethereum, bsc
-async function getCategoryData({ recordType, cacheData, category, chain }: { recordType: AdaptorRecordType, cacheData: any, category: string, chain?: string }) {
+async function getCategoryData({ recordType, cacheData, category, chain, routeIndex }: { recordType: AdaptorRecordType, cacheData: any, category: string, chain?: string, routeIndex?: ProtocolRouteIndex }) {
   const { summaries, protocolSummaries = {} } = cacheData
 
   const chainDisplayName = chain ? getChainLabelFromKey(chain) : null
@@ -220,8 +295,6 @@ async function getCategoryData({ recordType, cacheData, category, chain }: { rec
   responseKeys.forEach(key => {
     response[key] = summary[key]
   })
-  let protocolTotalAllTimeSum = 0
-
   response.change_1d = getPercentage(summary.total24h, summary.total48hto24h)
   response.change_7d = getPercentage(summary.total24h, summary.total7DaysAgo)
   response.change_1m = getPercentage(summary.total24h, summary.total30DaysAgo)
@@ -229,49 +302,14 @@ async function getCategoryData({ recordType, cacheData, category, chain }: { rec
     response.change_7dover7d = getPercentage(summary.total7d, summary.total14dto7d)
     response.change_30dover30d = getPercentage(summary.total30d, summary.total60dto30d)
   }
-  // These fields are for the protocol level data
-  const protocolInfoKeys = ['defillamaId', 'name', 'displayName', 'module', 'category', 'logo', 'chains', 'protocolType', 'methodologyURL', 'methodology', 'childProtocols', 'parentProtocol', 'slug', 'linkedProtocols', 'doublecounted', 'breakdownMethodology', 'hasLabelBreakdown',]
-  const protocolDataKeys = getProtocolDataKeys(recordType)
 
-  response.protocols = Object.entries(protocolSummaries).map(([_id, { summaries, info }]: any) => {
-    const res: any = {}
-    const categories = getProtocolCategories(info)
-    if (!categories.includes(category)) return null
-
-    let summary = summaries?.[recordType]
-    if (chain) {
-      if (!info?.chains.includes(chainDisplayName)) return null
-      summary = summary?.chainSummary[chain]
-    }
-
-    if (summary)
-      protocolDataKeys.forEach(key => res[key] = summary[key])
-
-    // sometimes a protocol is diabled or id is changed, we should disregard these data 
-    if (!summary && !info) {
-      // console.log('no data found', _id, info)
-      return null
-    }
-
-    if (!summary?.recordCount) return null; // if there are no data points, we should filter out the protocol
-    if (recordType !== AdaptorRecordType.dailyActiveUsers && summary?.totalAllTime) protocolTotalAllTimeSum += summary.totalAllTime
-
-    protocolInfoKeys.filter(key => info?.[key]).forEach(key => res[key] = info?.[key])
-    res.id = res.defillamaId ?? res.id
-    return res
-  }).filter((i: any) => i)
+  routeIndex = routeIndex ?? buildProtocolRouteIndex(protocolSummaries, recordType)
+  const rows = chain ? routeIndex.byCategoryChain.get(category)?.get(chain) ?? [] : routeIndex.byCategory.get(category) ?? []
+  const { protocols, protocolTotalAllTimeSum } = formatProtocolRows({ rows, chain, recordType })
+  response.protocols = protocols
   if (recordType !== AdaptorRecordType.dailyActiveUsers && !response.totalAllTime) response.totalAllTime = protocolTotalAllTimeSum
 
   return response
-  
-  function getProtocolCategories(info: any): Array<string> {
-    if (!info) return [];
-    // we treat tags same as category and use labels (not slugs) for keys, only use slugs on storage and query
-    // ex: we use 'Dexs' when cumputing data, and use 'dexs' as storage and query on api later
-    let _pCategories = info.category ? [info.category] : [];
-    if (info.tags) _pCategories = _pCategories.concat(info.tags);
-    return _pCategories;
-  }
 }
 
 // some protocols dont support pulling current day data (can only pull daily data after the day is complete instead of past 24 hours)
@@ -816,9 +854,10 @@ export async function generateDimensionsResponseFiles(cache: Record<AdapterType,
     for (const recordType of recordTypes) {
       const timeKey = `dimensions-gen-files ${adapterType} ${recordType}`
       console.time(timeKey)
+      const routeIndex = buildProtocolRouteIndex(protocolSummaries, recordType)
 
       // fetch and store overview of each record type
-      const allData = await getOverviewProcess({ recordType, cacheData, })
+      const allData = await getOverviewProcess({ recordType, cacheData, routeIndex, })
       await storeRouteData(`dimensions/${adapterType}/${recordType}-all`, allData)
       allData.totalDataChart = []
       allData.totalDataChartBreakdown = []
@@ -830,7 +869,7 @@ export async function generateDimensionsResponseFiles(cache: Record<AdapterType,
 
       for (const chainLabel of chains) {
         let chain = getChainKeyFromLabel(chainLabel)
-        const data = await getOverviewProcess({ recordType, cacheData, chain })
+        const data = await getOverviewProcess({ recordType, cacheData, chain, routeIndex })
         await storeRouteData(`dimensions/${adapterType}/${recordType}-chain/${chain}-all`, data)
         for (const [date, value] of data.totalDataChart) {
           totalDataChartByChain[date] = totalDataChartByChain[date] || {}
@@ -861,7 +900,7 @@ export async function generateDimensionsResponseFiles(cache: Record<AdapterType,
       if (summaries && summaries[recordType] && summaries[recordType].categorySummary) {
         for (const [category, categorySummary] of Object.entries(summaries[recordType].categorySummary)) {
           const categorySlug = sluggifyCategoryString(category); // convert to slug Dexs -> dexs
-          const categoryData = await getCategoryData({ recordType, cacheData, category: category });
+          const categoryData = await getCategoryData({ recordType, cacheData, category: category, routeIndex });
           await storeRouteData(`dimensions/${adapterType}/${recordType}-category/${categorySlug}-chart`, categoryData.totalDataChart);
           await storeRouteData(`dimensions/${adapterType}/${recordType}-category/${categorySlug}-chart-protocol-breakdown`, categoryData.totalDataChartBreakdown);
           await storeRouteData(`dimensions/${adapterType}/${recordType}-category/${categorySlug}`, { ...categoryData, totalDataChart: undefined, totalDataChartBreakdown: undefined });
@@ -879,7 +918,7 @@ export async function generateDimensionsResponseFiles(cache: Record<AdapterType,
           const chartPerChainItems: Record<string, any> = {};
           for (const chain of Object.keys(categorySummary.chainSummary ?? {})) {
             const chainLabel = getChainLabelFromKey(chain);
-            const categoryChainData = await getCategoryData({ recordType, cacheData, category: category, chain });
+            const categoryChainData = await getCategoryData({ recordType, cacheData, category: category, chain, routeIndex });
             await storeRouteData(`dimensions/${adapterType}/${recordType}-category/${categorySlug}-chain/${chain}-chart`, categoryChainData.totalDataChart);
             await storeRouteData(`dimensions/${adapterType}/${recordType}-category/${categorySlug}-chain/${chain}-chart-protocol-breakdown`, categoryChainData.totalDataChartBreakdown);
             await storeRouteData(`dimensions/${adapterType}/${recordType}-category/${categorySlug}-chain/${chain}`, { ...categoryChainData, totalDataChart: undefined, totalDataChartBreakdown: undefined });

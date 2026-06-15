@@ -6700,7 +6700,7 @@
     "EQCajaUU1XXSAjTD-xOV7pE49fGtg4q8kF3ELCOJtGvQFQ2C": {
       "to": "coingecko#the-open-network",
       "decimals": "9",
-      "symbol": "TON"
+      "symbol": "GRAM"
     },
     "EQCf7Nb341dxOE3N0jimngRxGEV8T3zo-eU2EZVs_nchNhhZ": {
       "to": "coingecko#wemix-token",
@@ -7869,7 +7869,7 @@
     "factory:orai1wuvhex9xqs3r539mvc6mtm7n20fcj3qr2m0y9khx6n5vtlngfzes3k0rq9:ton": {
       "name": "TON",
       "decimals": "9",
-      "symbol": "TON",
+      "symbol": "GRAM",
       "to": "coingecko#the-open-network"
     }
   },
@@ -13152,7 +13152,7 @@
     "0x7F9308E8d724e724EC31395f3af52e0593BB2e3f": {
       "to": "coingecko#the-open-network",
       "decimals": 18,
-      "symbol": "TON"
+      "symbol": "GRAM"
     },
     "0x9bfa177621119e64cecbeabe184ab9993e2ef727": {
       "to": "coingecko#bitcoin",
@@ -15605,7 +15605,7 @@
     "0xb76d91340f5ce3577f0a056d29f6e3eb4e88b140": {
       "to": "coingecko#the-open-network",
       "decimals": 9,
-      "symbol": "TON"
+      "symbol": "GRAM"
     },
     "0xd44f691aed69fe43180b95b6f82f89c18fb93094": {
       "to": "coingecko#tonstakers",

@@ -17406,5 +17406,12 @@
       "decimals": 18,
       "symbol": "rETH"
     }
+  },
+   "xo": {
+      "0xCf65732699b4eFc2Bc7b87fB6d75F3aAa6CFC867": {
+      "to": "coingecko#usd-coin",
+      "decimals": 18,
+      "symbol": "USDC.e"
+    }
   }
 }

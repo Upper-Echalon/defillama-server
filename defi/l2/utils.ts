@@ -256,18 +256,105 @@ async function getSolanaTokenSupply(
 
   return supplies;
 }
+// Provenance is a Cosmos SDK chain. Its bank module honours the standard
+// `x-cosmos-block-height` header, so historical state reads work the same way
+// EVM archive reads do — resolve the block for a timestamp, then read at it.
+// Override the endpoint with PROVENANCE_LCD (e.g. an archive node) if needed.
+export const PROVENANCE_LCD = process.env.PROVENANCE_LCD ?? "https://api.provenance.io";
+
+// Cosmos block timestamps carry nanosecond precision ("...868036860Z"); JS Date
+// only wants milliseconds. Truncate the fractional part to 3 digits.
+function provenanceTimeToSeconds(iso: string): number {
+  return Math.floor(Date.parse(iso.replace(/(\.\d{3})\d+/, "$1")) / 1000);
+}
+
+const provenanceBlockTimeCache: Map<number, number | null> = new Map();
+let provenanceLatestCache: { height: number; ts: number; fetchedAt: number } | undefined;
+
+async function getProvenanceLatest(): Promise<{ height: number; ts: number } | null> {
+  if (provenanceLatestCache && Date.now() - provenanceLatestCache.fetchedAt < 300_000) {
+    return { height: provenanceLatestCache.height, ts: provenanceLatestCache.ts };
+  }
+  try {
+    const res: any = await fetch(`${PROVENANCE_LCD}/cosmos/base/tendermint/v1beta1/blocks/latest`).then((r) => r.json());
+    const h = res?.block?.header;
+    const height = Number(h?.height);
+    const ts = h?.time ? provenanceTimeToSeconds(h.time) : NaN;
+    if (!Number.isFinite(height) || !Number.isFinite(ts)) return null;
+    provenanceLatestCache = { height, ts, fetchedAt: Date.now() };
+    return { height, ts };
+  } catch (e) {
+    return null;
+  }
+}
+
+async function getProvenanceBlockTime(height: number): Promise<number | null> {
+  if (provenanceBlockTimeCache.has(height)) return provenanceBlockTimeCache.get(height) ?? null;
+  const r = await fetch(`${PROVENANCE_LCD}/cosmos/base/tendermint/v1beta1/blocks/${height}`);
+  if (r.status === 404) {
+    provenanceBlockTimeCache.set(height, null);
+    return null;
+  }
+  if (!r.ok) throw new Error(`Provenance block ${height} lookup failed: ${r.status}`);
+  const res: any = await r.json();
+  const t = res?.block?.header?.time;
+  const secs = t ? provenanceTimeToSeconds(t) : null;
+  provenanceBlockTimeCache.set(height, secs);
+  return secs;
+}
+
+// Resolve the block height to read state at for a unix timestamp: the largest
+// height whose block time <= timestamp (same at-or-before semantics as the EVM
+// getBlock path). Returns null only when no block header is available at/before
+// the timestamp. Caveat: the public node prunes app STATE more aggressively than
+// block headers (~6 months of state), so a pre-retention timestamp can still
+// resolve to a non-null height whose `by_denom` read then comes back empty —
+// the caller drops that leg, same net result as an EVM archive node that can't
+// reach the block. Results are cached so a multi-day refill doesn't re-walk the
+// same blocks.
+export async function getProvenanceHeightForTimestamp(timestamp: number): Promise<number | null> {
+  const latest = await getProvenanceLatest();
+  if (!latest) return null;
+  if (timestamp >= latest.ts) return latest.height;
+
+  let lo = 1, hi = latest.height, ans: number | null = null;
+  while (lo <= hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    const t = await getProvenanceBlockTime(mid);
+    if (t == null) {
+      // Pruned / missing block — older than the retained window. Search higher.
+      lo = mid + 1;
+      continue;
+    }
+    if (t <= timestamp) { ans = mid; lo = mid + 1; }
+    else hi = mid - 1;
+  }
+  // ans == null means every retained block is newer than `timestamp`, i.e. the
+  // timestamp is before the node's retention horizon → no readable history.
+  return ans;
+}
+
 async function getProvenanceSupplies(tokens: string[], timestamp?: number): Promise<{ [token: string]: number }> {
-  if (timestamp) throw new Error(`timestamp incompatible with Provenance adapter!`);
   // Record real values including 0; failed fetches are absent.
   const supplies: { [token: string]: number } = {};
-  const PROVENANCE_LCD = "https://api.provenance.io";
+
+  let headers: { [k: string]: string } | undefined;
+  if (timestamp) {
+    const height = await getProvenanceHeightForTimestamp(timestamp);
+    // Before the retained window: drop the leg for this timestamp rather than
+    // throwing, so refillParallel just skips Provenance where it can't read
+    // history (mirrors the swallowed-catch behaviour of the other adapters).
+    if (height == null) return supplies;
+    headers = { "x-cosmos-block-height": String(height) };
+  }
 
   await PromisePool.withConcurrency(3)
     .for(tokens)
     .process(async (token) => {
       try {
         const res = await fetch(
-          `${PROVENANCE_LCD}/cosmos/bank/v1beta1/supply/by_denom?denom=${encodeURIComponent(token)}`
+          `${PROVENANCE_LCD}/cosmos/bank/v1beta1/supply/by_denom?denom=${encodeURIComponent(token)}`,
+          headers ? { headers } : undefined
         ).then((r) => r.json());
         const amount = res?.amount?.amount;
         if (amount != null) supplies[`provenance:${token}`] = Number(amount);
@@ -402,6 +489,102 @@ async function getSuiSupplies(tokens: Address[], timestamp?: number): Promise<{ 
 
   return supplies;
 }
+// XRPL issued-token supply via the `gateway_balances` JSON-RPC method. The
+// public XRPL cluster has no by-timestamp archive query, so this is
+// current-only (matches the other non-EVM adapters that throw on historical).
+//
+// Token key formats (the `ripple:` chain prefix is already stripped by
+// getTotalSupplies before this is called):
+//   "<CURRENCY>.<rISSUER>"  e.g. "DIA-SD-COL1.rDgoZHy4SLPs4jhJZqkyaXX4iEsEUkCAVp"
+//   "<rISSUER>"             issuer-only → sum ALL of that issuer's obligations
+//                           (e.g. GDCP's dated GDCPyyyymmdd currency series)
+//
+// `obligations` = tokens the issuer owes to non-hot-wallet holders = circulating
+// supply. Keys are a 3-char ASCII currency code, or a 40-char hex blob for
+// non-standard (>3 char) codes; we decode the hex back to ASCII to match the
+// human-readable currency embedded in the token key.
+//
+// ⚠️ The returned value is the raw issued amount. XRPL IOUs are arbitrary-
+// precision decimals with no on-chain `decimals` field, so the coins price entry
+// for `ripple:<token>` MUST be created with decimals=0 — then atvlRefill's
+// `supply / 10**decimals` recovers the token count. Without a coins price entry
+// the supply is inert (atvlRefill only iterates priced tokens).
+// ⚠️ "ripple" is in bridgedTvlMixedCaseChains — XRPL addresses/currency codes
+// are case-sensitive and would otherwise be lowercased before reaching here.
+const XRPL_RPC = process.env.XRPL_RPC ?? "https://xrplcluster.com/";
+
+function decodeXrplCurrency(code: string): string {
+  if (code.length === 3) return code; // standard ASCII currency code
+  if (/^[0-9A-Fa-f]{40}$/.test(code)) {
+    const buf = Buffer.from(code, "hex");
+    let end = buf.length;
+    while (end > 0 && buf[end - 1] === 0) end--; // strip trailing null padding
+    return buf.slice(0, end).toString("ascii");
+  }
+  return code;
+}
+
+async function fetchXrplObligations(issuer: string): Promise<{ [currency: string]: string } | null> {
+  const res: any = await fetch(XRPL_RPC, {
+    method: "POST",
+    body: JSON.stringify({
+      method: "gateway_balances",
+      params: [{ account: issuer, ledger_index: "validated", strict: true }],
+    }),
+    headers: { "Content-Type": "application/json" },
+  }).then((r) => r.json());
+  const result = res?.result;
+  if (!result || result.status === "error") return null;
+  return result.obligations ?? {};
+}
+
+async function getXrplSupplies(tokens: string[], timestamp?: number): Promise<{ [token: string]: number }> {
+  if (timestamp) throw new Error(`timestamp incompatible with XRPL adapter!`);
+  // Record real values including 0; failed fetches are absent.
+  const supplies: { [token: string]: number } = {};
+
+  // Group by issuer so we hit gateway_balances once per issuer (the 4 Ctrl Alt
+  // diamond currencies share one issuer; GDCP is a lone issuer-only token).
+  const byIssuer: { [issuer: string]: string[] } = {};
+  for (const token of tokens) {
+    const dotIdx = token.indexOf(".");
+    const issuer = dotIdx === -1 ? token : token.substring(dotIdx + 1);
+    (byIssuer[issuer] ??= []).push(token);
+  }
+
+  await PromisePool.withConcurrency(3)
+    .for(Object.keys(byIssuer))
+    .process(async (issuer) => {
+      try {
+        const obligations = await fetchXrplObligations(issuer);
+        if (!obligations) return;
+
+        // Decode each obligation currency once; total across all for issuer-only tokens.
+        const byCurrency: { [human: string]: number } = {};
+        let total = 0;
+        for (const [code, amount] of Object.entries(obligations)) {
+          const v = Number(amount);
+          if (!Number.isFinite(v)) continue;
+          byCurrency[decodeXrplCurrency(code)] = (byCurrency[decodeXrplCurrency(code)] ?? 0) + v;
+          total += v;
+        }
+
+        for (const token of byIssuer[issuer]) {
+          const dotIdx = token.indexOf(".");
+          if (dotIdx === -1) {
+            supplies[`ripple:${token}`] = Math.round(total);
+          } else {
+            const currency = token.substring(0, dotIdx);
+            const v = byCurrency[currency];
+            if (v != null) supplies[`ripple:${token}`] = Math.round(v);
+          }
+        }
+      } catch (e) {}
+    });
+
+  return supplies;
+}
+
 async function getEVMSupplies(
   chain: Chain,
   contracts: Address[],
@@ -469,6 +652,7 @@ export async function fetchSupplies(
     if (chain == "provenance") return await getProvenanceSupplies(tokens, timestamp);
     if (chain == "stellar") return await getStellarSupplies(tokens, timestamp);
     if (chain == "starknet") return await getStarknetSupplies(tokens, timestamp);
+    if (chain == "ripple") return await getXrplSupplies(tokens, timestamp);
     return await getEVMSupplies(chain, tokens, timestamp);
   } catch (e) {
     throw new Error(`multicalling token supplies failed for chain ${chain} with ${e}`);

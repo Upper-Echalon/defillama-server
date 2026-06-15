@@ -2,7 +2,7 @@ import BigNumber from "bignumber.js";
 import { zero } from "../../l2/constants";
 import { getChainDisplayName } from "../utils/normalizeChain";
 import * as sdk from "@defillama/sdk";
-import { endpointMap, runInChunks } from "../../l2/utils";
+import { endpointMap, runInChunks, getProvenanceHeightForTimestamp, PROVENANCE_LCD } from "../../l2/utils";
 import axios from "axios";
 
 export type WalletEntry = { id: string; assets: string[] };
@@ -72,14 +72,22 @@ export async function fetchProvenance(
 ) {
   const chain = "provenance";
   const readableChain = getChainDisplayName(chain, true);
-  if (timestamp != 0) throw new Error("Provenance Active Mcap cannot be refilled");
 
-  const PROVENANCE_LCD = "https://api.provenance.io";
+  // Resolve the historical block height (Cosmos `x-cosmos-block-height` header),
+  // the same way getProvenanceSupplies does for onchain mcap. null = before the
+  // node's retained window → skip exclusions for this timestamp.
+  let headers: { [k: string]: string } | undefined;
+  if (timestamp != 0) {
+    const height = await getProvenanceHeightForTimestamp(timestamp);
+    if (height == null) return;
+    headers = { "x-cosmos-block-height": String(height) };
+  }
 
   for (const { id: address, assets } of wallets) {
     try {
       const res = await axios.get(
-        `${PROVENANCE_LCD}/cosmos/bank/v1beta1/balances/${address}?pagination.limit=200`
+        `${PROVENANCE_LCD}/cosmos/bank/v1beta1/balances/${address}?pagination.limit=200`,
+        headers ? { headers } : undefined
       );
       const balances: Array<{ denom: string; amount: string }> = res.data?.balances ?? [];
 

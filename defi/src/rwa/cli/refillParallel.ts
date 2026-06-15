@@ -30,27 +30,30 @@ import { Op, QueryTypes } from "sequelize";
 //
 // What writes with DRY_RUN=false:
 //   - Phase 1: nothing (runAtvlForTimestamp called without storeResults)
-//   - Phase 2: DELETE rows flagged as spikes (the $0 row at Aug 31)
+//   - Phase 1.6 (only with --merge-write): UPSERT merged rows into daily+backup
+//   - Phase 2: DELETE rows flagged as spikes (e.g. $0 dips)
 //   - Phase 3: UPDATE rows where mcap < expected × 0.7 (price-dip recovery)
-// Both Phase 2/3 scoped to id=644 only.
 const DRY_RUN = true;
 // --merge-write enables a Phase 1.5/1.6 merge-preserve write against existing
 // DB rows, run BEFORE Phases 2-3. Chains absent from the new compute are
 // preserved from the existing row, chains present in the new compute overwrite
 // (only when non-zero).
 // Use this when an RWA has on-chain contracts on a chain whose SDK adapter
-// throws on historical timestamps (stellar/aptos/solana/sui/starknet/osmosis/
-// provenance) AND you've already backfilled that chain separately — the merge
-// preserves your backfill values for those chains while filling in fresh data
-// from the new pipeline (peggedassets, EVM archive fetches, etc.).
+// throws on historical timestamps (stellar/aptos/solana/sui/starknet/osmosis/ripple)
+// AND you've already backfilled that chain separately — the merge preserves
+// your backfill values for those chains while filling in fresh data from the
+// new pipeline (peggedassets, EVM + Provenance archive fetches, etc.).
 const MERGE_WRITE = process.argv.includes("--merge-write");
-const START_DATE = "2021-06-09";
-const END_DATE = "2026-05-22";
+const START_DATE = "2025-09-08"; // Dinari dShare price-gap window (adapter dark 2025-09-08; coins prices backfilled)
+const END_DATE = "2026-06-11";
 const BACKFILL_CONCURRENCY = 5;
 const ID_CONCURRENCY = 10;
 const PRICE_FETCH_CONCURRENCY = 8;
-const IDS = [
-  "133",
+const IDS: string[] = [
+  // Dinari dShares re-derive (coins prices backfilled 2026-06-15). VALIDATION SUBSET (liquid names)
+  // first; once a few charts look right, expand to the full range 434–536 (103 dShares; #433 USD+
+  // excluded — unpriced by design / stablecoins-layer). Needs archive RPCs (ETHEREUM_RPC/ARBITRUM_RPC/BASE_RPC).
+  "434", "435", "437", "438", "446", "449", "451", "458", "534", // AAPL AMZN GOOGL COIN NVDA META MSFT MSTR TSLA
 ];
 
 // Early-stop: if an ID has 0 data for this many consecutive days (going backwards), skip it
@@ -750,7 +753,7 @@ function generateHtml(results: IdResult[]): string {
 //
 // Source: defi/l2/utils.ts — each entry that calls `if (timestamp) throw ...`.
 const HISTORICAL_INCOMPATIBLE_CHAINS = new Set([
-  "stellar", "aptos", "solana", "sui", "starknet", "osmosis", "provenance",
+  "stellar", "aptos", "solana", "sui", "starknet", "osmosis","ripple",
 ]);
 const CHAIN_TO_BACKFILL_SCRIPT: Record<string, string> = {
   stellar: "defi/src/rwa/cli/backfillStellarRwaMcap.ts",

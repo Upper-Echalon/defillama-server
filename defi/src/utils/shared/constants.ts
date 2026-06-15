@@ -2,9 +2,9 @@ const DAY = 3600 * 24;
 
 export const searchWidth = DAY;
 
-export const chainsThatShouldNotBeLowerCased = ["solana", "bitcoin", "eclipse"];
+export const chainsThatShouldNotBeLowerCased = ["solana", "bitcoin", "eclipse", "ripple"];
 
-export const bridgedTvlMixedCaseChains: string[] = ["solana", "tron", "sui", "aptos", "eclipse", "stellar"];
+export const bridgedTvlMixedCaseChains: string[] = ["solana", "tron", "sui", "aptos", "eclipse", "stellar", "ripple"];
 
 export const chainsWithCaseSensitiveDataProviders = ['aptos', 'stacks', 'sui', 'tron']
 

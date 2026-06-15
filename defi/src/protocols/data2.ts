@@ -11287,16 +11287,16 @@ const data2: Protocol[] = [
   {
     id: "1892",
     name: "Azuro",
-    address: null,
-    symbol: "-",
+    address: "0x9e6be44cc1236eef7e1f197418592d363bedcd5a",
+    symbol: "AZUR",
     url: "https://azuro.org",
     description:
       "Azuro is an infrastructure & liquidity layer for on-chain betting. It utilizes a new Liquidity Pool design called the “Liquidity Tree,” which creates and maintains market liquidity.",
     chain: "xDai",
     logo: `${baseIconsUrl}/azuro.png`,
     audits: "2",
-    gecko_id: null,
-    cmcId: null,
+    gecko_id: "azuro-protocol",
+    cmcId: "31775",
     category: "Prediction Market",
     chains: ["xDai"],
     // https://azuroprotocol.medium.com/azuro-partnerships-cross-chain-oracle-solution-supraoracles-f2e72f96fa3d

@@ -1999,7 +1999,7 @@ export const chainCoingeckoIds = {
   "TON": {
     geckoId: "the-open-network",
     github: ["ton-blockchain"],
-    symbol: "TON",
+    symbol: "GRAM",
     cmcId: "11419",
     twitter: "ton_blockchain",
     url: "https://ton.org/",

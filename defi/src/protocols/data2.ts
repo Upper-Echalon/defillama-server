@@ -24628,6 +24628,9 @@ const data2: Protocol[] = [
     twitter: "liqwidfinance",
     audit_links: ["https://github.com/vacuumlabs/audits/blob/master/reports/liqwid-app-v1.0.pdf"],
     listedAt: 1675383083,
+    dimensions: {
+      fees: "liqwid"
+    }
   },
   {
     id: "2492",

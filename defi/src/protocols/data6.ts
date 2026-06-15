@@ -6457,5 +6457,45 @@ const data6: Protocol[] = [
     twitter: "circle",
     listedAt: 1781222925
   },
+  {
+    id: "8015",
+    name: "Omni Terminal",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://omniterminal.app
+    description: "Hyperliquid-focused trading terminal for execution context, liquidation risk, wallet and trader investigation, funding/basis review, and AI-assisted market analysis",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/omni-terminal.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Hyperliquid Builder"],
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: null,
+    dimensions: {
+      fees: "omni-terminal",
+      derivatives: "omni-terminal",
+    }
+  },
+  {
+    id: "8016",
+    name: "SafeDealSwap",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://safedealswap.com
+    description: "P2P OTC token swap platform with AML control on Polygon. Users exchange USDT and RuCoin directly via smart contract without custodial risk",
+    chain: "Polygon",
+    logo: `${baseIconsUrl}/safedealswap.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "OTC Marketplace",
+    chains: ["Polygon"],
+    module: "safedealswap/index.js",
+    twitter: null,
+    github: ["Maga-swap"],
+    listedAt: 1781542961
+  },
 ];
 export default data6;

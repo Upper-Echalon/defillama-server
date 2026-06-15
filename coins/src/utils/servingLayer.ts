@@ -1,5 +1,7 @@
 import Redis from "ioredis";
 import { chQuery, chQueryJSON, isChEnabled } from "./clickhouseClient";
+import { isDistressedAssetPK } from "./isDistressed";
+import { lowercase } from "./coingeckoPlatforms";
 
 export type CoinsResponse = {
   [coin: string]: {
@@ -65,6 +67,25 @@ function sanitize(s: string): string {
   return s.replace(/[\\';]/g, "");
 }
 
+// Distressed contracts must read $0 on this serving path too — it bypasses the
+// DDB handlers where isDistressedAssetPK already runs. We derive the `asset#`
+// PK with the SAME key construction as the distressed map (chain lowercased,
+// address via `lowercase()` so Solana/bitcoin/eclipse case is preserved) and
+// zero per-address only — never by canonical_id, so other deployments sharing
+// the same id keep their real price.
+function distressedAssetPK(rawCoin: string): string | null {
+  if (rawCoin.startsWith("coingecko:")) return null;
+  const i = rawCoin.indexOf(":");
+  if (i === -1) return null;
+  const chain = rawCoin.slice(0, i).toLowerCase();
+  return `asset#${chain}:${lowercase(rawCoin.slice(i + 1), chain)}`;
+}
+
+function isDistressedCoin(rawCoin: string): boolean {
+  const pk = distressedAssetPK(rawCoin);
+  return pk != null && isDistressedAssetPK(pk);
+}
+
 export async function redisCurrentPrices(requestedCoins: string[]): Promise<CoinsResponse | null> {
   const redis = getServingRedis();
   if (!redis) return null;
@@ -84,16 +105,28 @@ export async function redisCurrentPrices(requestedCoins: string[]): Promise<Coin
     const mappings = rawMappings.map(raw => { if (!raw) return null; try { return JSON.parse(raw); } catch { return null; } });
 
     const uniqueIds = [...new Set(mappings.filter(Boolean).map((m: any) => m.canonical_id as string))];
-    if (uniqueIds.length === 0) return null;
-
-    const priceResults = await redis.mget(...uniqueIds.map(id => `price:${id}`));
     const priceMap = new Map<string, any>();
-    uniqueIds.forEach((id, i) => { if (priceResults[i]) priceMap.set(id, JSON.parse(priceResults[i]!)); });
+    if (uniqueIds.length > 0) {
+      const priceResults = await redis.mget(...uniqueIds.map(id => `price:${id}`));
+      uniqueIds.forEach((id, i) => { if (priceResults[i]) priceMap.set(id, JSON.parse(priceResults[i]!)); });
+    }
 
     const response: CoinsResponse = {};
+    const nowTs = Math.floor(Date.now() / 1000);
     let hits = 0;
     requestedCoins.forEach((coin, i) => {
       const mapping = mappings[i];
+      if (isDistressedCoin(coin)) {
+        response[coin] = {
+          decimals: mapping?.decimals == null ? undefined : Number(mapping.decimals),
+          symbol: mapping?.symbol ?? "",
+          price: 0,
+          timestamp: nowTs,
+          confidence: 1.01,
+        };
+        hits++;
+        return;
+      }
       if (!mapping) return;
       const price = priceMap.get(mapping.canonical_id);
       if (!price) return;
@@ -138,17 +171,30 @@ export async function chCurrentPrices(requestedCoins: string[]): Promise<CoinsRe
 
     const allMappings = normalized.map(c => resolvedMap.get(c) || null);
     const uniqueCids = [...new Set(allMappings.filter(Boolean).map(m => m!.canonical_id))];
-    if (uniqueCids.length === 0) return null;
 
-    const inList = uniqueCids.map(c => `'${sanitize(c)}'`).join(",");
-    const priceResult = await chQueryJSON(`SELECT canonical_id, argMax(price, timestamp) AS price, argMax(confidence, timestamp) AS confidence, argMax(adapter, timestamp) AS adapter, max(timestamp) AS ts FROM coins_prices WHERE canonical_id IN (${inList}) GROUP BY canonical_id`);
     const priceMap = new Map<string, any>();
-    for (const row of priceResult.data) priceMap.set(row[0], { price: parseFloat(row[1]), confidence: parseFloat(row[2]), source: row[3], timestamp: row[4] });
+    if (uniqueCids.length > 0) {
+      const inList = uniqueCids.map(c => `'${sanitize(c)}'`).join(",");
+      const priceResult = await chQueryJSON(`SELECT canonical_id, argMax(price, timestamp) AS price, argMax(confidence, timestamp) AS confidence, argMax(adapter, timestamp) AS adapter, max(timestamp) AS ts FROM coins_prices WHERE canonical_id IN (${inList}) GROUP BY canonical_id`);
+      for (const row of priceResult.data) priceMap.set(row[0], { price: parseFloat(row[1]), confidence: parseFloat(row[2]), source: row[3], timestamp: row[4] });
+    }
 
     const response: CoinsResponse = {};
+    const nowTs = Math.floor(Date.now() / 1000);
     let hits = 0;
     requestedCoins.forEach((coin, i) => {
       const mapping = allMappings[i];
+      if (isDistressedCoin(coin)) {
+        response[coin] = {
+          decimals: mapping?.decimals == null ? undefined : Number(mapping.decimals),
+          symbol: mapping?.symbol ?? "",
+          price: 0,
+          timestamp: nowTs,
+          confidence: 1.01,
+        };
+        hits++;
+        return;
+      }
       if (!mapping) return;
       const price = priceMap.get(mapping.canonical_id);
       if (!price) return;

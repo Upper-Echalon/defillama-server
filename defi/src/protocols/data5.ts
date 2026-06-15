@@ -9900,7 +9900,7 @@ const data5: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     tags: ["CLMM"],
-    forkedFromIds: ["1385"],
+    forkedFromIds: ["3710"],
     chains: ["Citrea"],
     module: "satsuma/index.js",
     twitter: "SatsumaDEX",

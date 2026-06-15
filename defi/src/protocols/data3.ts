@@ -44332,7 +44332,7 @@ const data3_2: Protocol[] = [
     cmcId: null,
     tags: ["CLMM"],
     chains: ["Taiko"],
-    forkedFromIds: ["1385"],
+    forkedFromIds: ["3710"],
     module: "henjin/index.js",
     twitter: "henjinDEX",
     audit_links: [
@@ -58013,7 +58013,7 @@ const data3_3: Protocol[] = [
     cmcId: null,
     tags: ["CLMM"],
     chains: ["Morph"],
-    forkedFromIds: ["1385"],
+    forkedFromIds: ["3710"],
     module: "MorFi/index.js",
     twitter: "MorFi_finance",
     listedAt: 1730381123,

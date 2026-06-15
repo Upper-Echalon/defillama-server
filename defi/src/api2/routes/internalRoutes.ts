@@ -26,12 +26,18 @@ export function setInternalRoutes(router: HyperExpress.Router, _routerBasePath: 
 
       // there is no need for else, as API2_SUBPATH would act as the temp secret key in this case
 
+      // Prevent path traversal in routerPath
+      const normalizedPath = routerPath?.replace(/^\/+/, '') ?? '';
+      if (normalizedPath.includes('..')) {
+        return errorResponse(res, 'Invalid path', { statusCode: 400 })
+      }
+
       switch (req.method) {
         case 'DELETE':
-          if (routerPath === '/clear-dimensions-cache') {
+          if (normalizedPath === 'clear-dimensions-cache') {
             await clearDimensionsCacheV2()
           } else
-            await deleteFromPGCache(routerPath)
+            await deleteFromPGCache(normalizedPath)
           return res.json({ success: true })
         default:
           throw new Error('Unsupported method')

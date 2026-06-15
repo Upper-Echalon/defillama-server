@@ -81,6 +81,18 @@ function safeDecodeRouteParam(value: string): string {
     }
 }
 
+/**
+ * Sanitize a URL path segment to prevent path traversal.
+ * Returns null if the segment contains ".." sequences or is otherwise invalid.
+ */
+function sanitizePathSegment(segment: string): string | null {
+    const normalized = segment.replace(/^\/+/, '');
+    if (normalized.includes('..') || normalized.startsWith('/') || normalized.includes('/')) {
+        return null;
+    }
+    return normalized;
+}
+
 function setRoutes(router: HyperExpress.Router): void {
     // Get current RWA data (list of all RWAs with current values)
     router.get(
@@ -127,7 +139,12 @@ function setRoutes(router: HyperExpress.Router): void {
             if (!id) {
                 return errorResponse(res, 'Missing id parameter', 400);
             }
-            return fileResponse(`charts/${id}.json`, res, 30);
+            // Sanitize id to prevent path traversal (e.g. "../" sequences)
+            const sanitizedId = sanitizePathSegment(String(id));
+            if (!sanitizedId) {
+                return errorResponse(res, 'Invalid id parameter', 400);
+            }
+            return fileResponse(`charts/${sanitizedId}.json`, res, 30);
         })
     );
 

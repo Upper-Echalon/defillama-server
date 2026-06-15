@@ -308,6 +308,12 @@ export default function setRoutes(router: HyperExpress.Router, routerBasePath: s
     if (protocolData) return successResponse(res, protocolData, 60);
     protocolData = cache.parentProtocolSlugMap[name]
     if (protocolData) return successResponse(res, protocolData, 60);
+    // smol config names are a fixed set of single-segment files (e.g. token.json,
+    // appMetadata-protocols.json). Whitelist safe chars to block path traversal:
+    // any '/' or percent-encoded sequence (which fileNameNormalizer would later decode) is rejected.
+    if (!/^[a-zA-Z0-9._-]+$/.test(req.path_parameters.name)) {
+      return errorResponse(res, 'Invalid path', { statusCode: 400 });
+    }
     return fileResponse('config/smol/' + req.path_parameters.name, res);
   }
 }

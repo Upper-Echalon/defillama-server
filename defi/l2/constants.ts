@@ -71,7 +71,8 @@ export const canonicalBridgeIds: { [id: string]: Chain } = {
   // "3866": "near",
   // "3866": "aurora",
   "3935": "boba",
-  "3936": "zksync",
+  // "3936": "zksync", // zksync-lite, legacy/deprecated, dust TVL ~$22k — perpetually trips canonical-bridge-missing alert
+
   "4032": "manta",
   "4141": "bsquared",
   "4236": "blast",
@@ -142,7 +143,8 @@ export const protocolBridgeIds: { [chain: string]: Chain } = {
   "126": "loopring",
   "1878": "apex",
   "344": "zkswap",
-  "5130": "polynomial",
+  // "5130": "polynomial", // bridge wound down (winddown announced 2025-06), $0 TVL — perpetually trips canonical-bridge-missing alert
+
   // "5323": "exSat",
   "5609": "sophon",
   "5693": "cyber",

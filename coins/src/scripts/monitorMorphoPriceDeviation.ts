@@ -93,6 +93,7 @@ const ALLOWLIST: Record<string, string> = {
   "1:0x7f47c3e6b2c00fc4eb4d5ae50d0ab0ab6888eb4d": "PT-USD3-17DEC2026 — Morpho uses a conservative Pendle linear-discount oracle (accretes to par at maturity, ~12.7% below market); our price matches Pendle's own market (+0.07%)",
   "1:0x3365554a61ceff74a76528f9e86c1e87946d16a5": "PT-apyUSD-18JUN2026 — our price matches Pendle's own PT market (~$0.93, within ~1.3%); Morpho oracle marks the PT ABOVE the live market (stale/low fixed-discount rate vs ~29% live implied APY). PT trades far below spot apyUSD (~$1.28) per Pendle's maturity-value expectation; our price is the accurate one",
   "1:0xb5be35d8ff83d431899b95851cb17a2b4bcef150": "PT-apyUSD-5NOV2026 — same Apyx/apyUSD case as the 18JUN PT: our price matches Pendle's own PT market (~$0.877, within ~1.3%); Morpho oracle marks the PT above the live market. Pre-allowlisted (was -4.6%, just under threshold; same benign pattern)",
+  "1:0xc689f76f90fe1762fac55983ff25ae71033a84f7": "PT-sUSDat-27AUG2026 — our price ($0.9311) matches Pendle's own PT market ($0.9359, within -0.5%); Morpho oracle ($0.8846, -5.5%) is a conservative Pendle linear-discount oracle marking below the live market (same benign pattern as PT-USD3). Underlying sUSDat/USDat priced correctly vs Pendle. Our price is the accurate one",
 };
 const allowReason = (chainId: number, collateralAddress: string, marketId: string): string | undefined =>
   ALLOWLIST[`${chainId}:${marketId.toLowerCase()}`] ?? ALLOWLIST[`${chainId}:${collateralAddress.toLowerCase()}`];

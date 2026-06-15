@@ -38,6 +38,7 @@ import getWrites from "../utils/getWrites";
 import cap from "./cap";
 import hypezionAdapter from "./hypezion";
 import gohm from "./gohm";
+import stellarSAC from "./stellarSAC";
 import hyperbeat from "./hyperbeat";
 
 export { glp };
@@ -606,8 +607,9 @@ export const adapters = {
   reyaUSD,
   karakWrapped,
   matrixdock,
-  dsu, 
+  dsu,
   cap,
   gohm,
+  stellarSAC,
   hyperbeat
 };

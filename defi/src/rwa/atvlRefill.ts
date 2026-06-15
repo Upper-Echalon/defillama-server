@@ -886,6 +886,10 @@ export async function runAtvlForTimestamp(
       timestamp == 0 ? storeMetadata(res) : Promise.resolve(),
       storeHistorical(res as any, {
         skipAssetMoveGuard: options.skipAssetMoveGuard || ids.length > 0 || ts != 0,
+        // Only the live full daily run (no specific ids, ts==0) writes the full
+        // asset set; targeted refills/historical single-day runs legitimately
+        // write far fewer rows, so the completeness guard must not fire for them.
+        skipCompletenessGuard: ids.length > 0 || ts != 0,
       }),
     ]);
     console.log(`[timer] storeResults: ${((performance.now() - tStore) / 1000).toFixed(1)}s`);

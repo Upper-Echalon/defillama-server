@@ -12,15 +12,17 @@ jest.mock('./db', () => ({
   storeMetadataPG: jest.fn(async () => {}),
   fetchLatestRwaRowsForIds: jest.fn(async () => ({})),
   fetchLastPositiveDailyRowsForIds: jest.fn(async () => ({})),
+  fetchRecentMaxDailyRowCount: jest.fn(async () => 0),
 }));
 
 jest.mock('./alerting', () => ({
   sendThrottledRwaAlert: jest.fn(async () => ({ status: 'sent' })),
+  sendRwaAlert: jest.fn(async () => {}),
 }));
 
 import { storeHistorical } from './historical';
-import { fetchLatestRwaRowsForIds, fetchLastPositiveDailyRowsForIds, storeHistoricalPG } from './db';
-import { sendThrottledRwaAlert } from './alerting';
+import { fetchLatestRwaRowsForIds, fetchLastPositiveDailyRowsForIds, storeHistoricalPG, fetchRecentMaxDailyRowCount } from './db';
+import { sendThrottledRwaAlert, sendRwaAlert } from './alerting';
 
 function makeStorePayload() {
   return {
@@ -49,8 +51,11 @@ describe('rwa historical store guard integration', () => {
     jest.clearAllMocks();
     (fetchLatestRwaRowsForIds as jest.Mock).mockResolvedValue({});
     (fetchLastPositiveDailyRowsForIds as jest.Mock).mockResolvedValue({});
+    (fetchRecentMaxDailyRowCount as jest.Mock).mockResolvedValue(0);
     (storeHistoricalPG as jest.Mock).mockResolvedValue(undefined);
     (sendThrottledRwaAlert as jest.Mock).mockResolvedValue({ status: 'sent' });
+    (sendRwaAlert as jest.Mock).mockResolvedValue(undefined);
+    delete process.env.RWA_MIN_WRITE_RATIO;
     delete process.env.RWA_ASSET_MOVE_GUARD_ENABLED;
     delete process.env.RWA_ASSET_MOVE_GUARD_BLOCK_WRITES;
     delete process.env.RWA_ASSET_MOVE_GUARD_MIN_DELTA;
@@ -180,5 +185,45 @@ describe('rwa historical store guard integration', () => {
     // Fast path: positive hourly baseline is used directly, no fallback query.
     expect(fetchLastPositiveDailyRowsForIds).not.toHaveBeenCalled();
     expect(storeHistoricalPG).not.toHaveBeenCalled();
+  });
+});
+
+describe('rwa daily-write completeness guard', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+    (fetchLatestRwaRowsForIds as jest.Mock).mockResolvedValue({});
+    (fetchLastPositiveDailyRowsForIds as jest.Mock).mockResolvedValue({});
+    (storeHistoricalPG as jest.Mock).mockResolvedValue(undefined);
+    (sendRwaAlert as jest.Mock).mockResolvedValue(undefined);
+    delete process.env.RWA_MIN_WRITE_RATIO;
+  });
+
+  // 2 valid inserts vs a recent peak of 100 rows = 2% << 80% floor.
+  it('aborts the entire write, alerts, and throws when the run is partial', async () => {
+    (fetchRecentMaxDailyRowCount as jest.Mock).mockResolvedValue(100);
+
+    await expect(storeHistorical(makeStorePayload() as any)).rejects.toThrow(/completeness guard/i);
+
+    expect(storeHistoricalPG).not.toHaveBeenCalled();
+    expect(sendRwaAlert).toHaveBeenCalledTimes(1);
+  });
+
+  it('writes normally when the row count is within range of the recent peak', async () => {
+    (fetchRecentMaxDailyRowCount as jest.Mock).mockResolvedValue(2);
+
+    await storeHistorical(makeStorePayload() as any);
+
+    expect(storeHistoricalPG).toHaveBeenCalledTimes(1);
+    expect(sendRwaAlert).not.toHaveBeenCalled();
+  });
+
+  it('is skipped for targeted refills via skipCompletenessGuard', async () => {
+    (fetchRecentMaxDailyRowCount as jest.Mock).mockResolvedValue(100);
+
+    await storeHistorical(makeStorePayload() as any, { skipCompletenessGuard: true });
+
+    expect(fetchRecentMaxDailyRowCount).not.toHaveBeenCalled();
+    expect(storeHistoricalPG).toHaveBeenCalledTimes(1);
+    expect(sendRwaAlert).not.toHaveBeenCalled();
   });
 });

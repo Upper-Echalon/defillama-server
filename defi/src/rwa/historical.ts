@@ -1,8 +1,8 @@
 import { getChainIdFromDisplayName } from "../utils/normalizeChain";
-import { initPG, storeHistoricalPG, storeMetadataPG, fetchLatestRwaRowsForIds, fetchLastPositiveDailyRowsForIds } from "./db";
+import { initPG, storeHistoricalPG, storeMetadataPG, fetchLatestRwaRowsForIds, fetchLastPositiveDailyRowsForIds, fetchRecentMaxDailyRowCount } from "./db";
 import { protocolIdMap } from "./constants";
 import { RWA_KEY_MAP } from "./metadataConstants";
-import { sendThrottledRwaAlert } from "./alerting";
+import { sendRwaAlert, sendThrottledRwaAlert } from "./alerting";
 import {
   filterRwaAssetMoveGuardInserts,
   getRwaAssetMoveGuardOptionsFromEnv,
@@ -90,7 +90,15 @@ export function buildAtvlInsert(id: string, perId: AtvlPerIdData, timestamp: num
 
 export type StoreHistoricalOptions = {
   skipAssetMoveGuard?: boolean;
+  skipCompletenessGuard?: boolean;
 };
+
+const DEFAULT_MIN_WRITE_RATIO = 0.8;
+
+function getMinWriteRatio(): number {
+  const ratio = Number(process.env.RWA_MIN_WRITE_RATIO);
+  return Number.isFinite(ratio) && ratio > 0 && ratio <= 1 ? ratio : DEFAULT_MIN_WRITE_RATIO;
+}
 
 function getRwaLabel(item: any, id: string): string {
   return item?.ticker || item?.canonicalMarketId || item?.name || id;
@@ -209,6 +217,29 @@ export async function storeHistorical(
   if (!insertsToStore.length) {
     console.warn('[RWA asset move guard] No RWA historical inserts left to store after guard filtering');
     return;
+  }
+
+  // Completeness guard: a full daily run should write roughly as many rows as
+  // recent days. A large shortfall means a partial/incomplete run — abort the
+  // ENTIRE write (so we never persist a gap), alert Discord, and throw.
+  if (!options.skipCompletenessGuard) {
+    const baseline = await fetchRecentMaxDailyRowCount(timestamp);
+    const minRatio = getMinWriteRatio();
+    if (baseline > 0 && insertsToStore.length < minRatio * baseline) {
+      const pct = ((insertsToStore.length / baseline) * 100).toFixed(0);
+      const message =
+        `Daily-write completeness guard tripped - NOTHING written for ${new Date(timestamp * 1000).toISOString().slice(0, 10)}.\n` +
+        `About to write ${insertsToStore.length} rows vs recent peak ${baseline} (${pct}%, floor ${(minRatio * 100).toFixed(0)}%).\n` +
+        `Likely a partial run (e.g. upstream price glitch mass-tripping the asset-move guard). ` +
+        `Investigate, then backfill via cli/interpolateMissingRwaDays.ts.`;
+      console.error(`[RWA completeness guard] ${message}`);
+      try {
+        await sendRwaAlert(message, { formatted: false });
+      } catch (alertError) {
+        console.error('[RWA completeness guard] Failed to send alert:', (alertError as any)?.message);
+      }
+      throw new Error(`RWA daily-write completeness guard tripped: ${insertsToStore.length}/${baseline} rows`);
+    }
   }
 
   await storeHistoricalPG(insertsToStore, timestamp);

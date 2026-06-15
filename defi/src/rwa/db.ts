@@ -721,6 +721,34 @@ export async function fetchLatestAggregateTotals(): Promise<{ defiActiveTvl: num
     }
 }
 
+// Returns the highest count of distinct ids written on any single day within the
+// last `lookbackDays` days strictly before `beforeTimestamp`. Used as a robust
+// "expected row count" baseline for the daily-write completeness guard — taking
+// the max (rather than just yesterday) avoids a single prior partial day from
+// lowering the bar and letting a second partial day slip through.
+export async function fetchRecentMaxDailyRowCount(
+    beforeTimestamp: number,
+    lookbackDays = 7
+): Promise<number> {
+    const dayTimestamp = getTimestampAtStartOfDay(beforeTimestamp);
+    const windowStart = dayTimestamp - lookbackDays * secondsInDay;
+    try {
+        const rows = await DAILY_RWA_DATA.sequelize!.query(
+            `SELECT MAX(cnt) AS max_cnt FROM (
+                SELECT COUNT(DISTINCT id) AS cnt
+                FROM "${DAILY_RWA_DATA.getTableName()}"
+                WHERE timestamp >= :windowStart AND timestamp < :dayTimestamp
+                GROUP BY timestamp
+            ) per_day`,
+            { type: QueryTypes.SELECT, replacements: { windowStart, dayTimestamp } }
+        ) as any[];
+        return Number(rows?.[0]?.max_cnt) || 0;
+    } catch (e) {
+        console.error(`Failed to fetch recent max daily row count: ${e}`);
+        return 0;
+    }
+}
+
 // Close the database connection
 async function closeConnection(): Promise<void> {
     if (!pgConnection) return;

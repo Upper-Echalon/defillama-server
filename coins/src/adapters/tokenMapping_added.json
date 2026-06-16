@@ -286,6 +286,12 @@
     }
   },
   "bsc": {
+    "0x03ff0ff224f904be3118461335064bb48df47938": {
+      "name": "Wrapped ONE",
+      "decimals": "18",
+      "symbol": "WONE",
+      "to": "coingecko#harmony"
+    },
     "0x352cb5e19b12fc216548a2677bd0fce83bae434b": {
       "decimals": "18",
       "symbol": "BTT",

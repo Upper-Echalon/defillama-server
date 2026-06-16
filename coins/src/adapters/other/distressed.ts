@@ -213,6 +213,7 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
   oasis: {
     USDT: "0x6Cb9750a92643382e020eA9a170AbB83Df05F30B",
     USDC: "0x94fbffe5698db6f54d6ca524dbe673a7729014be",
+    USDT_multichain: "0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8", // multichain bridge hacked, unbacked
   },
   fantom: {
     CoUSD: "0x0DeF844ED26409C5C46dda124ec28fb064D90D27",
@@ -286,6 +287,7 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
   metis: {
     BIOS: "0x3405a1bd46b85c5c029483fbecf2f3e611026e45",
     BIFI: "0xe6801928061cdbe32ac5ad0634427e140efd05f9",
+    FTM: "0x6ab6d61428fde76768d7b45d8bfeec19c6ef91a8", // multichain bridge hacked, unbacked
   },
   kava: {
     BUSD: "0x332730a4f6e03d9c55829435f10360e13cfa41ff",
@@ -472,7 +474,17 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
   },
   eni: {
     USDT: '0xDC1a8A35b0BaA3229b13f348ED708a2fd50b5e3a', // minted bridge token without backing assets
-  }
+  },
+  // multichain bridge was hacked, bridged tokens are unbacked/worthless
+  dogechain: {
+    ETH: "0xb44a9b6905af7c801311e8f4e76932ee959c663c",
+  },
+  velas: {
+    DAI: "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
+  },
+  moonbeam: {
+    USDT: "0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73",
+  },
 };
 
 export const distressedAssets = Object.fromEntries(

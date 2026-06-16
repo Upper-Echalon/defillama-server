@@ -199,6 +199,7 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "Bancor",
     governanceID: ["snapshot:bancornetwork.eth"],
     github: ["bancorprotocol"],
+    treasury: "bancor.js",
   },
   {
     id: "parent#spiritswap",
@@ -2844,6 +2845,7 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "KyanExchange",
     governanceID: ["snapshot:premia.eth"],
     github: ["Premian-Labs"],
+    treasury: "premia.js",
   },
   {
     id: "parent#dackieswap",

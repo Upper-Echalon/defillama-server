@@ -38,15 +38,33 @@ async function fetchTokensFromSubgraph(subgraph: string): Promise<SubgraphToken[
   return result.tokens;
 }
 
-// Filter out tokens that have lower than CHF 10'000 total liquidity at the current price. 
-// The liquidity returned from the API is in CHF and in Rappen, i.e. 123.45 CHF is returned as 12345. 
-// Therefore, the liquidity needed to be considered to have active trading is >= 1000000 
+// Filter out tokens that have lower than CHF 10'000 total liquidity at the current price.
+// The liquidity returned from the API is in CHF and in Rappen, i.e. 123.45 CHF is returned as 12345.
+// Therefore, the liquidity needed to be considered to have active trading is >= 1000000
 async function filterTokensByLiquidity(tokens: SubgraphToken[]): Promise<SubgraphToken[]> {
   const tokenAddresses = tokens.map((t) => t.id);
-  const { data } = await axios.post<LiquidityData>("https://ext.aktionariat.com/defillama/getLiquidity", { tokenAddresses });
+  let data: LiquidityData | undefined;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const res = await axios.post<LiquidityData>("https://ext.aktionariat.com/defillama/getLiquidity", { tokenAddresses });
+      data = res.data;
+      break;
+    } catch (e) {
+      console.warn(
+        `[aktionariat] getLiquidity failed (attempt ${attempt + 1}/2): ${(e as any)?.message}`
+      );
+    }
+  }
+  if (!data?.liquidityByTokenAddress) {
+    console.warn(
+      `[aktionariat] getLiquidity unavailable — failing OPEN, publishing all ${tokens.length} tokens at subgraph price without the liquidity filter`
+    );
+    return tokens;
+  }
+  const liquidityByTokenAddress = data.liquidityByTokenAddress;
   return tokens.filter((t) => {
-    const liquidity = data.liquidityByTokenAddress[t.id];
-    return liquidity && liquidity.totalBuyLiquidityDepth >= 1000000; 
+    const liquidity = liquidityByTokenAddress[t.id];
+    return liquidity && liquidity.totalBuyLiquidityDepth >= 1000000;
   });
 }
 

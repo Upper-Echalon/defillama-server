@@ -478,12 +478,17 @@ export const contracts: { [chain: string]: { [token: string]: string } } = {
   // multichain bridge was hacked, bridged tokens are unbacked/worthless
   dogechain: {
     ETH: "0xb44a9b6905af7c801311e8f4e76932ee959c663c",
+    QUICK: "0xb12c13e66ade1f72f71834f2fc5082db8c091358",
   },
   velas: {
     DAI: "0xe3f5a90f9cb311505cd691a46596599aa1a0ad7d",
   },
   moonbeam: {
     USDT: "0xefaeee334f0fd1712f9a8cc375f427d9cdd40d73",
+  },
+  shiden: {
+    BNB: "0x332730a4f6e03d9c55829435f10360e13cfa41ff",
+    BUSD: "0x65e66a61d0a8f1e686c2d6083ad611a10d84d97a",
   },
 };
 

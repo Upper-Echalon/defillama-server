@@ -34,6 +34,7 @@ export default async function getWrites(params: {
       symbol: obj.symbol ?? undefined,
       decimals: obj.decimals ?? undefined,
       confidence: obj.confidence ?? confidence,
+      cgId: obj.cgId ?? undefined,
     };
   });
 
@@ -43,7 +44,7 @@ export default async function getWrites(params: {
   ]);
 
   entries.map(
-    ({ token, price, underlying, symbol, decimals, confidence }, i) => {
+    ({ token, price, underlying, symbol, decimals, confidence, cgId }, i) => {
       const finalSymbol = symbol ?? tokenInfos.symbols[i].output;
       const finalDecimals = decimals ?? tokenInfos.decimals[i].output;
       let coinData: CoinData | undefined = coinsData[underlying ?? 'missing'];
@@ -61,8 +62,8 @@ export default async function getWrites(params: {
 
       addToDBWritesList(
         writes,
-        chain,
-        token,
+        cgId ? "coingecko" : chain,
+        cgId ?? token,
         coinData.price * price,
         finalDecimals,
         finalSymbol,

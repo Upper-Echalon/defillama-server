@@ -16,6 +16,11 @@ type Config = {
   symbol?: string;
   decimals?: number;
   confidence?: number;
+  // When set, write `rate × underlying` straight to `coingecko#<cgId>` instead of
+  // an asset# record. Use for tokens whose tokenMapping redirects + history already
+  // live under a coingecko# key whose CG price is wrong (and denylisted). Requires
+  // symbol/decimals; underlying omitted => $1.
+  cgId?: string;
 };
 
 export const configs: { [adapter: string]: Config } = {
@@ -101,6 +106,22 @@ export const configs: { [adapter: string]: Config } = {
   //   chain: "ethereum",
   //   address: "0x7F43fDe12A40dE708d908Fb3b9BFB8540d9Ce444",
   // },
+  rswETH: {
+    rate: async ({ api }) => {
+      const rate = await api.call({
+        abi: "function getRate() external view returns (uint256)",
+        target: "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0",
+      });
+      return rate / 1e18;
+    },
+    chain: "ethereum",
+    underlying: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    address: "0xFAe103DC9cf190eD75350761e95403b7b8aFa6c0",
+    cgId: "restaked-swell-eth",
+    symbol: "rswETH",
+    decimals: 18,
+    confidence: 0.995,
+  },
   weETHk: {
     rate: async ({ api }) => {
       const rate = await api.call({
@@ -1037,7 +1058,7 @@ export async function derivs(timestamp: number) {
 }
 
 export async function deriv(timestamp: number, projectName: string, config: Config) {
-  const { chain, underlying, address, symbol, decimals, confidence } = config;
+  const { chain, underlying, address, symbol, decimals, confidence, cgId } = config;
   let t = timestamp == 0 ? getCurrentUnixTimestamp() : timestamp;
   const api = await getApi(chain, t, true);
   const pricesObject: any = {
@@ -1045,6 +1066,7 @@ export async function deriv(timestamp: number, projectName: string, config: Conf
       underlying,
       symbol,
       decimals,
+      cgId,
       price: await config.rate({ api, timestamp }),
     },
   };

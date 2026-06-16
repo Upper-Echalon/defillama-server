@@ -1128,6 +1128,21 @@
       "symbol": "stakedao-frxUsDOLA",
       "to": "asset#ethereum:0x9d8afd5ce19a3b948049468188f1de13951a4383"
     },
+    "0x62923a64D7940be920FD5cdc27873Ab8eEc59F9F": {
+      "decimals": "18",
+      "symbol": "stakedao-frxsUSDS",
+      "to": "asset#ethereum:0x81a2612f6dea269a6dd1f6deab45c5424ee2c4b7"
+    },
+    "0xA31b5941F2e74d89bDC66632959FE6A152692920": {
+      "decimals": "18",
+      "symbol": "stakedao-FrxMsUSD",
+      "to": "asset#ethereum:0x9a9e2e70919c75d80aaaa1d483c46cdbb8ac4d1b"
+    },
+    "0x728c3B9Eb722F7aFC17F0D26A80d625C53059086": {
+      "decimals": "18",
+      "symbol": "stakedao-crvfrxUSD",
+      "to": "asset#ethereum:0x13e12bb0e6a2f1a3d6901a59a9d585e89a6243e1"
+    },
     "0xCA137e3853Eab95541290B372223e7F2ee4c0cFa": {
       "decimals": "18",
       "symbol": "sd-crvfrxUSD-vault",

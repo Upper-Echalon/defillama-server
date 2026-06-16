@@ -15,6 +15,7 @@ export const cgIdDenylist = new Set<string>([
   'apxusd',              // priced via the deep Curve apxUSD/USDC pool (+ base redirect via tokenMapping.json)
   'wrapped-staked-link', // wstLINK — priced by the wstlink adapter (getUnderlyingByWrapped × LINK)
   'universal-btc',       // uniBTC — CG mark intermittently glitches to a bogus ~$93k; priced by bedrockUniBTC (1:1 × Chainlink BTC/USD), other chains redirect to ethereum via tokenMapping.json
+  'restaked-swell-eth',  // rswETH — CG marks it ~1:1 with ETH (thin market), ignoring the ~7.4% accrued rate; priced on-chain by the `rswETH` derivs entry (getRate × WETH), other chains redirect to ethereum via tokenMapping.json
   'wrapped-one',         // WONE — stale/abandoned CG listing marks ~$0.20 (~135× real ONE) on ~$23k vol; the Harmony WONE contract is the real ONE, redirect to coingecko#harmony via tokenMapping_added.json. CG slot shadowing the redirect inflates Harmony chain TVL ~$0.25M→~$25M (sawtooth since Nov 2025).
 ]);
 

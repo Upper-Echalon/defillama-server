@@ -10,7 +10,7 @@ import { z } from 'zod';
 
 const raiseSchema = z.object({
   date: z.union([z.string(), z.number()]).optional(),
-  round: z.string().optional(),
+  round: z.string().nullable().optional(),
   amount: z.number().nullable().optional(),
   valuation: z.number().nullable().optional(),
   otherInvestors: z.array(z.string()).optional(),

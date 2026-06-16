@@ -16,7 +16,7 @@ export const rwaItemSchema = z.object({
   ticker: z.string().optional(),
   category: z.array(z.string()).optional(),
   chain: z.array(z.string()).optional(),
-  primaryChain: z.string().optional(),
+  primaryChain: z.string().nullable().optional(),
   onChainMcap: z.record(z.string(), z.number().finite()).optional(),
   activeMcap: z.record(z.string(), z.number().finite()).optional(),
   defiActiveTvl: defiActiveTvlSchema.optional(),

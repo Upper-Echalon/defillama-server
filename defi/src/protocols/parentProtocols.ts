@@ -9892,6 +9892,17 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "ValiantTrade",
   },
+  {
+    id: "parent#brownfi",
+    name: "BrownFi",
+    url: "https://brownfi.io/",
+    description: "A renovated AMM derived from Elastic Parameterized Limit Order Book",
+    logo: `${baseIconsUrl}/brownfi.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "brownfiamm",
+  },
 ];
 
 export default parentProtocols;

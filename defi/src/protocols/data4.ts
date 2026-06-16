@@ -24380,13 +24380,13 @@ const data4: Protocol[] = [
   // },
   {
     id: "6616",
-    name: "BrownFi",
+    name: "BrownFi V2",
     address: null,
     symbol: "-",
     url: "https://brownfi.io/",
     description: "A renovated AMM derived from Elastic Parameterized Limit Order Book",
     chain: "Berachain",
-    logo: `${baseIconsUrl}/brownfi.jpg`,
+    logo: `${baseIconsUrl}/brownfi-v2.jpg`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -24400,6 +24400,7 @@ const data4: Protocol[] = [
       "https://github.com/verichains/public-audit-reports/blob/main/Verichains%20Public%20Audit%20Report%20-%20BrownFi%20AMM%20Smartcontracts%20-%20v1.0.pdf",
     ],
     listedAt: 1755874767,
+    parentProtocol: "parent#brownfi",
     dimensions: {
       fees: "brownfi",
       dexs: "brownfi"

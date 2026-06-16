@@ -39,6 +39,7 @@ import cap from "./cap";
 import hypezionAdapter from "./hypezion";
 import gohm from "./gohm";
 import stellarSAC from "./stellarSAC";
+import bittensorSubnets from "./bittensorSubnets";
 import hyperbeat from "./hyperbeat";
 
 export { glp };
@@ -611,5 +612,6 @@ export const adapters = {
   cap,
   gohm,
   stellarSAC,
-  hyperbeat
+  hyperbeat,
+  bittensorSubnets
 };

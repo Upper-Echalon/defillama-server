@@ -6720,5 +6720,43 @@ const data6: Protocol[] = [
       fees: "sTONks",
     },
   },
+  {
+    id: "8028",
+    name: "G1Flare",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://g1flare.com/
+    description: "G1Flare is a Flare interface that atomically converts USDT into sFLR by swapping through SparkDEX and minting via Sceptre in a single transaction",
+    chain: "Flare",
+    logo: `${baseIconsUrl}/g1flare.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Interface",
+    chains: ["Flare"],
+    module: "dummy.js",
+    twitter: "G1Flare",
+    dimensions: {
+      fees: "g1flare",
+    },
+  },
+  {
+    id: "8029",
+    name: "wTAO",
+    address: null,
+    symbol: "-",
+    url: "https://bittensor.com",
+    description: "Bridge that locks native TAO on Bittensor and mints an ERC-20 representation (wTAO) on Ethereum 1:1.",
+    chain: "Bittensor",
+    logo: `${baseIconsUrl}/wtao.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Bridge",
+    chains: ["Bittensor"],
+    module: "wtao/index.js",
+    twitter: "opentensor",
+    listedAt: 1781652347
+  },
 ];
 export default data6;

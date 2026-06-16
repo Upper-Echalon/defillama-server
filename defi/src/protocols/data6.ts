@@ -6497,5 +6497,44 @@ const data6: Protocol[] = [
     github: ["Maga-swap"],
     listedAt: 1781542961
   },
+  {
+    id: "8017",
+    name: "HypeMarket",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://beta.hypemarket.trade
+    description: "HypeMarket is a community-driven, on-chain prediction market on Supra L1. It uses an LS-LMSR (Liquidity-Sensitive Logarithmic Market Scoring Rule) automated market maker: users trade outcome shares of real-world events against a per-market collateral pool, and anyone can create markets. Markets are denominated in native SUPRA and settled on-chain using Supra's native oracle and automation services",
+    chain: "Supra",
+    logo: `${baseIconsUrl}/hypemarket.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Prediction Market",
+    chains: ["Supra"],
+    module: "hypemarket/index.js",
+    twitter: "HypeMarketTrade",
+    github: ["HypeMarket-Protocol"],
+    listedAt: 1781568273
+  },
+  {
+    id: "8018",
+    name: "Kraken Bitcoin Vault",
+    address: null,
+    symbol: "-",
+    url: "https://www.kraken.com/bitcoin-vault",
+    description: "BTC Vault lets users earn rewards on their Bitcoin. Users allocate BTC to an onchain vault, where it is deployed into DeFi lending and borrowing strategies that generate rewards in BTC",
+    chain: "Ink",
+    logo: `${baseIconsUrl}/kraken-bitcoin-vault.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Ink"],
+    module: "dummy.js",
+    twitter: "krakenfx",
+    dimensions: {
+      fees: "kraken-bitcoin-vault",
+    }
+  },
 ];
 export default data6;

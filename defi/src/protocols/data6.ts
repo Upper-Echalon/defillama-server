@@ -6627,7 +6627,7 @@ const data6: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     tags: ["AMM"],
-    chains: ["Base", "Berachain", "Hyperliquid L1", "Linea", "Binance", "Monad"],
+    chains: ["Berachain", "Hyperliquid L1"],
     forkedFromIds: ["2198"],
     module: "brownfi-v3/index.js",
     twitter: "brownfiamm",

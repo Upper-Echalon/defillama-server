@@ -6277,6 +6277,7 @@ const data6: Protocol[] = [
     listedAt: 1781204316,
     dimensions: {
       fees: "hyperbeat-liquidbank",
+      "new-users": "hyperbeat-liquidbank",
     }
   },
   {
@@ -6556,7 +6557,10 @@ const data6: Protocol[] = [
     chains: ["Hyperliquid L1"],
     module: "monetrix/index.js",
     twitter: "monetrix_xyz",
-    listedAt: 1781570191
+    listedAt: 1781570191,
+    dimensions: {
+      fees: "monetrix",
+    }
   },
   {
     id: "8020",

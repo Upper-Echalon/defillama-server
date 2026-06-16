@@ -2078,7 +2078,8 @@ const data: Protocol[] = [
     audit_links: ["https://certificate.quantstamp.com/full/sablier"],
     parentProtocol: "parent#sablier-finance",
     dimensions: {
-      fees: "sablier"
+      fees: "sablier",
+      dexs: "sablier-legacy"
     }
   },
   {

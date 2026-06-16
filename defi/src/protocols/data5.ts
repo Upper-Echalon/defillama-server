@@ -16744,6 +16744,7 @@ const data5: Protocol[] = [
       dexs: "thorwallet",
     }
   },
+/*
   {
     id: "7656",
     name: "Polymarket US",
@@ -16767,6 +16768,7 @@ const data5: Protocol[] = [
       dexs: "polymarket-us",
     }
   },
+*/
   {
     id: "7657",
     name: "Kizzy",

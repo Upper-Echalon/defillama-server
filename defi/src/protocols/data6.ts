@@ -6676,5 +6676,24 @@ const data6: Protocol[] = [
       "bridge-aggregators": "gas-zip",
     }
   },
+  {
+    id: "8026",
+    name: "Kayen Finance V3",
+    address: "chz:0x60f397acbcfb8f4e3234c659a3e10867e6fa6b67",
+    symbol: "PEPPER",
+    url: " ", // pending to add url https://app.kayen.finance
+    description: "Kayen is a Chiliz-native DEX for fan tokens",
+    chain: "Chiliz",
+    logo: `${baseIconsUrl}/kayen-finance-v3.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["CLMM"],
+    chains: ["Chiliz"],
+    module: "kayen-v3/index.js",
+    forkedFromIds: ["2198"],
+    twitter: "KayenFinance",
+    listedAt: 1781636957
+  },
 ];
 export default data6;

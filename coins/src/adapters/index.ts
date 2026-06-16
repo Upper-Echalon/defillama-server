@@ -222,4 +222,5 @@ export default {
   valos: require("./other/valos"),
   pathUSD: require("./other/pathUSD"),
   bouncetech: require("./other/bouncetech"),
+  hyperbeatEarn: require("./yield/hyperbeat"),
 };

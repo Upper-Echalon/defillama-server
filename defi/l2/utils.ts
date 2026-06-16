@@ -585,10 +585,29 @@ async function getXrplSupplies(tokens: string[], timestamp?: number): Promise<{ 
   return supplies;
 }
 
+// Cache eth_getCode per (chain, address, block) so the RWA `dropNonContracts` filter below
+// costs at most one lookup per address per block, even when many assets re-read the same
+// chain/day. On RPC error we return "ERR" (≠ "0x") and DON'T cache it, so a transient failure
+// never causes a real token to be dropped and can be retried later.
+const _evmCodeCache: { [key: string]: string } = {};
+async function getCodeCached(chain: Chain, address: Address, block: number | undefined): Promise<string> {
+  const key = `${chain}:${address.toLowerCase()}:${block ?? "latest"}`;
+  if (_evmCodeCache[key] !== undefined) return _evmCodeCache[key];
+  try {
+    const provider: any = (sdk as any).getProvider(chain);
+    const code: string = await provider.getCode(address, block);
+    _evmCodeCache[key] = code;
+    return code;
+  } catch (e) {
+    return "ERR";
+  }
+}
+
 async function getEVMSupplies(
   chain: Chain,
   contracts: Address[],
-  timestamp?: number
+  timestamp?: number,
+  dropNonContracts = false
 ): Promise<{ [token: string]: number }> {
   const step: number = 200;
   // Record every value the multicall returned, including a real `0`. Failed
@@ -596,6 +615,35 @@ async function getEVMSupplies(
   // "no data" (e.g. `supply == null` covers both undefined and null).
   const supplies: { [token: string]: number } = {};
   const block: any = timestamp ? await getBlock(chain, timestamp) : undefined;
+
+  // A non-contract address returns a *successful* empty `0x` for `totalSupply()`, which
+  // `permitFailure` (reverts only) does not drop. In a batched aggregate3 read that empty
+  // return misaligns the decode and scrambles the OTHER tokens in the same chunk (Ink xStock
+  // batch, 2026-06-11: a non-contract USDC address garbled 160+ legs to junk — RIOTx 646,412
+  // -> 39, KRAQx -> 0, Brera -> empty). Opt-in (RWA only) so the shared L2/bridge-TVL callers,
+  // which don't hit this, don't pay the extra getCode round-trip.
+  if (dropNonContracts && contracts.length) {
+    try {
+      // Rate-limit the getCode probes (matches the other adapters in this file) so a large token
+      // list can't fire 100+ concurrent eth_getCode RPCs at once. Caching makes repeats free.
+      const codes: string[] = new Array(contracts.length);
+      await PromisePool.withConcurrency(3)
+        .for(contracts.map((c: Address, i: number) => ({ c, i })))
+        .process(async ({ c, i }: { c: Address; i: number }) => {
+          codes[i] = await getCodeCached(chain, c, block?.block);
+        });
+      // Drop ONLY addresses confirmed to have no code ("0x"); keep real contracts (a reverting
+      // totalSupply is already handled by permitFailure) and any address whose getCode errored.
+      const kept = contracts.filter((_: Address, i: number) => codes[i] !== "0x");
+      if (kept.length < contracts.length)
+        console.log(
+          `[getEVMSupplies] ${chain}: dropped ${contracts.length - kept.length}/${contracts.length} non-contract address(es) before supply read`
+        );
+      contracts = kept;
+    } catch (e) {
+      if (process.env.DEBUG_ENABLED) console.error(`[getEVMSupplies] getCode filter failed for ${chain}: ${e}`);
+    }
+  }
 
   for (let i = 0; i < contracts.length; i += step) {
     try {
@@ -642,7 +690,8 @@ async function getEVMSupplies(
 export async function fetchSupplies(
   chain: Chain,
   tokens: Address[],
-  timestamp: number | undefined
+  timestamp: number | undefined,
+  dropNonContracts = false
 ): Promise<{ [token: string]: number }> {
   try {
     if (chain == "osmosis") return await getOsmosisSupplies(tokens, timestamp);
@@ -653,7 +702,7 @@ export async function fetchSupplies(
     if (chain == "stellar") return await getStellarSupplies(tokens, timestamp);
     if (chain == "starknet") return await getStarknetSupplies(tokens, timestamp);
     if (chain == "ripple") return await getXrplSupplies(tokens, timestamp);
-    return await getEVMSupplies(chain, tokens, timestamp);
+    return await getEVMSupplies(chain, tokens, timestamp, dropNonContracts);
   } catch (e) {
     throw new Error(`multicalling token supplies failed for chain ${chain} with ${e}`);
   }

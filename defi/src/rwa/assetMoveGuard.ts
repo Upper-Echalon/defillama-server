@@ -1,5 +1,6 @@
 import { formatUsd } from './chartGuards';
 import { sendThrottledRwaAlert } from './alerting';
+import { AssetMoveAck, getAssetMoveAck, RWA_ASSET_MOVE_ACKS } from './assetMoveAcks';
 
 type AssetMoveMetric = 'onChainMcap' | 'activeMcap';
 
@@ -271,9 +272,11 @@ export async function filterRwaAssetMoveGuardInserts<T extends RwaAssetMoveGuard
   previousById: { [id: string]: RwaAssetMoveGuardPreviousRow | undefined };
   labelsById?: { [id: string]: string | undefined };
   options?: RwaAssetMoveGuardOptions;
+  acks?: AssetMoveAck[];
   sendAlert?: (alertKey: string, message: string) => Promise<void>;
 }): Promise<RwaAssetMoveGuardResult<T>> {
   const options = params.options ?? getRwaAssetMoveGuardOptionsFromEnv();
+  const acks = params.acks ?? RWA_ASSET_MOVE_ACKS;
   const labelsById = params.labelsById ?? {};
   const trips = findRwaAssetMoveTrips(params.inserts, params.previousById, labelsById, options);
   const tripsById = groupTripsById(trips);
@@ -292,6 +295,13 @@ export async function filterRwaAssetMoveGuardInserts<T extends RwaAssetMoveGuard
     }).then(() => undefined));
 
   for (const [id, idTrips] of Object.entries(tripsById)) {
+    // A known-correct block whose move still matches its acked shape: keep blocking
+    // the write (the id stays in blockedIds), just suppress the repeating alert.
+    const ack = getAssetMoveAck(id, idTrips, acks);
+    if (ack) {
+      console.log(`[RWA asset move guard] Suppressing acknowledged alert for ${id} (${ack.note})`);
+      continue;
+    }
     const alertKey = getAssetMoveAlertKey(id, idTrips);
     const message = formatRwaAssetMoveGuardMessage(id, idTrips, options);
     try {

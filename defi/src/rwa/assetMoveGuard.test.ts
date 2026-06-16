@@ -4,6 +4,7 @@ import {
   formatRwaAssetMoveGuardMessage,
   RwaAssetMoveGuardOptions,
 } from './assetMoveGuard';
+import { getAssetMoveAck, AssetMoveAck } from './assetMoveAcks';
 
 const baseOptions: RwaAssetMoveGuardOptions = {
   enabled: true,
@@ -190,5 +191,72 @@ describe('rwa asset move guard', () => {
     expect(message).toContain('WRITE BLOCKED');
     expect(message).toContain('sei');
     expect(message).toContain('-35.9%');
+  });
+});
+
+describe('rwa asset move acknowledgements', () => {
+  // A drop-to-~$0 price-gap on a known asset, banded to the down direction and a
+  // ~zero current value.
+  const gapTrip = {
+    id: '94',
+    label: 'FIUSD',
+    metric: 'onChainMcap' as const,
+    previous: 5_000_000,
+    current: 0,
+    delta: -5_000_000,
+    ratio: -1,
+    direction: 'down' as const,
+    contributors: [],
+  };
+  const ack: AssetMoveAck = {
+    id: '94',
+    metrics: ['onChainMcap', 'activeMcap'],
+    direction: 'down',
+    maxCurrentUsd: 1,
+    note: 'known price-feed gap',
+  };
+
+  it('matches a banded ack only for the right id, direction and value band', () => {
+    expect(getAssetMoveAck('94', [gapTrip], [ack])).toBe(ack);
+    // wrong id
+    expect(getAssetMoveAck('95', [{ ...gapTrip, id: '95' }], [ack])).toBeUndefined();
+    // current value above the band (gap resolved + a real partial move) -> alert
+    expect(getAssetMoveAck('94', [{ ...gapTrip, current: 3_000_000, delta: -2_000_000, ratio: -0.4 }], [ack])).toBeUndefined();
+    // an unrelated UP move on the same id -> alert
+    expect(getAssetMoveAck('94', [{ ...gapTrip, direction: 'up', current: 9_000_000, delta: 4_000_000, ratio: 0.8 }], [ack])).toBeUndefined();
+  });
+
+  it('requires EVERY trip to match (a partially-new move still alerts)', () => {
+    const freshTrip = { ...gapTrip, metric: 'activeMcap' as const, current: 4_000_000, delta: -1_000_000, ratio: -0.2 };
+    expect(getAssetMoveAck('94', [gapTrip, freshTrip], [ack])).toBeUndefined();
+  });
+
+  it('suppresses the alert for an acked move but STILL blocks the write', async () => {
+    const sendAlert = jest.fn(async (_alertKey: string, _message: string) => {});
+    const result = await filterRwaAssetMoveGuardInserts({
+      inserts: [{ id: '94', aggregatemcap: 0, aggregatedactivemcap: 0, mcap: { arbitrum: 0 } }],
+      previousById: { '94': { id: '94', aggregatemcap: 5_000_000, aggregatedactivemcap: 5_000_000, mcap: { arbitrum: 5_000_000 } } },
+      labelsById: { '94': 'FIUSD' },
+      options: baseOptions,
+      acks: [ack],
+      sendAlert,
+    });
+
+    expect(sendAlert).not.toHaveBeenCalled();        // alert muted
+    expect(result.blockedIds.has('94')).toBe(true);  // write still blocked
+    expect(result.allowedInserts.map((i) => i.id)).toEqual([]);
+  });
+
+  it('still alerts for a non-acked asset', async () => {
+    const sendAlert = jest.fn(async (_alertKey: string, _message: string) => {});
+    await filterRwaAssetMoveGuardInserts({
+      inserts: [{ id: '99', aggregatemcap: 0, aggregatedactivemcap: 0, mcap: { ethereum: 0 } }],
+      previousById: { '99': { id: '99', aggregatemcap: 50_000_000, aggregatedactivemcap: 50_000_000, mcap: { ethereum: 50_000_000 } } },
+      options: baseOptions,
+      acks: [ack],
+      sendAlert,
+    });
+
+    expect(sendAlert).toHaveBeenCalledTimes(1);
   });
 });

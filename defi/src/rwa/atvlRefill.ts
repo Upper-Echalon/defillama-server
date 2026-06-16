@@ -150,7 +150,9 @@ async function getTotalSupplies(tokensSortedByChain: { [chain: string]: string[]
       });
 
       try {
-        const res = await fetchSupplies(chain, tokens, timestamp == 0 ? undefined : timestamp);
+        // dropNonContracts=true: a non-contract address (bad metadata) returns a successful
+        // empty totalSupply that scrambles the whole batched multicall — drop it first.
+        const res = await fetchSupplies(chain, tokens, timestamp == 0 ? undefined : timestamp, true);
         Object.keys(res).forEach((token: string) => {
           totalSupplies[token] = res[token];
         });

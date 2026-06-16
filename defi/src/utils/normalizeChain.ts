@@ -6455,6 +6455,7 @@ const chainLabelMap = {
   "dfio_meta_main": "Defi Oracle Meta",
   "inri": "INRI",
   "cookiechain": "CookieChain",
+  "xo": "XO",
 } as { [key: string]: string }
 
 // When we decide to change the display name of a chain, we add the mapping for the new name here

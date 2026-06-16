@@ -3479,7 +3479,8 @@ const data6: Protocol[] = [
     name: "MemeMax",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://mememax.com/
+    url: "https://mememax.com/", 
+    referralUrl: "https://mememax.com/referral?ref=2TJ93G",
     description:
       "MemeMax is a perpetual DEX routed through the Orderly Network.",
     chain: "Orderly",

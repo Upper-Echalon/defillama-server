@@ -12932,10 +12932,14 @@ const data4: Protocol[] = [
     oraclesBreakdown: [
       {
         name: "RedStone",
+        type: "Aggregator",
         proof: [
           "https://docs.blend.capital/pool-creators/selecting-an-oracle",
-          "https://github.com/blend-capital/oracle-aggregator#supported-oracles",
-         name: "Reflector",
+          "https://github.com/blend-capital/oracle-aggregator#supported-oracles"],
+      },
+      {
+        name: "Reflector",
+        type: "Aggregator",
         proof: [
           "https://docs.blend.capital/pool-creators/selecting-an-oracle#well-known-oracles",
           "https://github.com/blend-capital/oracle-aggregator#supported-oracles",

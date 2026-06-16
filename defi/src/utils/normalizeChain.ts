@@ -6179,6 +6179,19 @@ export const chainCoingeckoIds = {
     twitter: "TheCookieChain",
     url: "https://www.cookiechain.wtf/",
   },
+  "XO": {
+    geckoId: null,
+    symbol: null,
+    cmcId: null,
+    twitter: "xomarket",
+    categories: ["EVM", "Rollup"],
+    url: "https://xo.market/",
+    parent: {
+      chain: "Base",
+      types: ["L3"],
+      da: "Celestia",
+    },
+  },
 } as unknown as ChainCoinGekcoIds;
 
 // We are creating the list here because, later in the code, we include historical chain labels with the same chain metadata, so, chainCoingeckoIds will have duplicate keys

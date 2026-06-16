@@ -5006,6 +5006,9 @@ const data6: Protocol[] = [
     oraclesBreakdown: [{ name: "Pyth", type: "Primary", proof: ["https://prodigyfi.gitbook.io/structured-yields/how-prodigy.fi-works/vault-creation/vault-states"] }],
     github: ["prodigyfi"],
     listedAt: 1779987404,
+    dimensions: {
+      options: "prodigy-fi",
+    },
   },
   {
     id: "7945",
@@ -6535,6 +6538,24 @@ const data6: Protocol[] = [
     dimensions: {
       fees: "kraken-bitcoin-vault",
     }
+  },
+  {
+    id: "8019",
+    name: "Monetrix",
+    address: null,
+    symbol: "-",
+    url: "https://www.monetrix.xyz/",
+    description: "Monetrix is the first fully on-chain funding-driven yield-bearing stable token, native to Hyperliquid",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/monetrix.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Basis Trading",
+    chains: ["Hyperliquid L1"],
+    module: "monetrix/index.js",
+    twitter: "monetrix_xyz",
+    listedAt: 1781570191
   },
 ];
 export default data6;

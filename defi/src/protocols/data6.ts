@@ -6635,5 +6635,46 @@ const data6: Protocol[] = [
     parentProtocol: "parent#brownfi",
     listedAt: 1781584549
   },
+  {
+    id: "8024",
+    name: "Ripple USD",
+    address: null,
+    symbol: "-",
+    url: "https://ripple.com/solutions/stablecoin/",
+    description: "RLUSD is Ripple's USD-backed stablecoin for enterprise payments and liquidity, backed by cash and cash-equivalent reserves with attestation reporting",
+    chain: "Off Chain",
+    logo: `${baseIconsUrl}/ripple-usd.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Stablecoin Issuer",
+    chains: ["Off Chain"],
+    module: "dummy.js",
+    twitter: "Ripple",
+    stablecoins: ["ripple-usd"],
+    dimensions: {
+      fees: "ripple-usd",
+    }
+  },
+  {
+    id: "8025",
+    name: "Gas.zip",
+    address: null,
+    symbol: "-",
+    url: "https://gas.zip",
+    description: "Instant cross-chain liquidity layer",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/gas.zip.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Bridge Aggregators",
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "gasdotzip",
+    dimensions: {
+      "bridge-aggregators": "gas-zip",
+    }
+  },
 ];
 export default data6;

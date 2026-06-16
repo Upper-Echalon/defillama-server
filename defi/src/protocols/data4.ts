@@ -24024,6 +24024,9 @@ const data4: Protocol[] = [
     parentProtocol: "parent#frax-finance",
     stablecoins: ["frax-usd"],
     listedAt: 1755567417,
+    dimensions: {
+      fees: "frx-usd",
+    }
   },
   {
     id: "6599",

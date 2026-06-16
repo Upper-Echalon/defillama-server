@@ -6699,5 +6699,26 @@ const data6: Protocol[] = [
     twitter: "KayenFinance",
     listedAt: 1781636957
   },
+  {
+    id: "8027",
+    name: "sTONks",
+    address: "ton:EQBng_Ux8DLKeaLZ4kN4eec-U-SJ1fMtYvqQANtL0oxKRQh_",
+    symbol: "sTONks",
+    url: " ", // pending to add url https://stonks.dog/
+    description: "The complete on-chain ecosystem to build, deploy, tokenize and trade — all from one place",
+    chain: "TON",
+    logo: `${baseIconsUrl}/stonks.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["TON"],
+    module: "dummy.js",
+    twitter: "stonksbots",
+    github: ["Doggetti"],
+    dimensions: {
+      fees: "sTONks",
+    },
+  },
 ];
 export default data6;

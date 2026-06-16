@@ -2022,6 +2022,12 @@ export const chainCoingeckoIds = {
     url: "https://www.starknet.io/en",
     dimensions: {
       fees: "starknet",
+      "active-users": {
+        adapter: "starknet",
+        genuineSpikes: [
+          ["2024-10-29", "Chain stress test via viral Flippy Flop game."] //https://www.starknet.io/blog/starknet-sustained-tps-record/
+        ]
+      }
     },
   },
   "Dexit": {

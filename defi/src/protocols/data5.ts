@@ -12907,7 +12907,7 @@ const data5: Protocol[] = [
     symbol: "LIQ",
     url: "https://liquidium.fi/",
     description:
-      "Liquidium is a decentralized, cross-chain lending protocol for native assets. Users supply native assets like Bitcoin and borrow native assets like USDT or USDC on Ethereum through a non-custodial, pool-based architecture.",
+      "Liquidium is a decentralized, cross-chain lending protocol for native assets. Users supply native assets like Bitcoin or ICP and borrow native assets like USDT or USDC on Ethereum through a non-custodial, pool-based architecture.",
     chain: "ICP",
     logo: `${baseIconsUrl}/liquidium.jpg`,
     audits: "0",

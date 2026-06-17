@@ -6763,5 +6763,25 @@ const data6: Protocol[] = [
     twitter: "opentensor",
     listedAt: 1781652347
   },
+  {
+    id: "8030",
+    name: "Exponent V2",
+    address: null,
+    symbol: "-",
+    url: "https://www.exponent.finance/",
+    description: "Strategy Vaults are managed yield strategies built on top of Exponent's interest rate markets and/or combined with leading protocols on Solana",
+    chain: "Solana",
+    logo: `${baseIconsUrl}/exponent-v2.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Interest Rate Derivatives",
+    chains: ["Solana"],
+    module: "exponent-v2/index.js",
+    twitter: "ExponentFinance",
+    audit_links: ["https://docs.exponent.finance/user-documentation/audits-bug-bounty"],
+    listedAt: 1781716622,
+    parentProtocol: "parent#exponent",
+  },
 ];
 export default data6;

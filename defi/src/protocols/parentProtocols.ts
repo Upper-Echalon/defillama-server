@@ -9910,6 +9910,17 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "brownfiamm",
   },
+  {
+    id: "parent#exponent",
+    name: "Exponent",
+    url: "https://www.exponent.finance/",
+    description: "Exponent is a yield exchange protocol on Solana for fixed-rate and leveraged yield farming",
+    logo: `${baseIconsUrl}/exponent.jpg`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "ExponentFinance",
+  },
 ];
 
 export default parentProtocols;

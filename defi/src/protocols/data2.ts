@@ -9991,6 +9991,7 @@ const data2: Protocol[] = [
     twitter: "UniDexFinance",
     parentProtocol: "parent#unidex",
     listedAt: 1655547687,
+    deadUrl: true,
     dimensions: {
       fees: "unidex",
       derivatives: "unidex-perps"
@@ -17775,6 +17776,7 @@ const data2: Protocol[] = [
     twitter: "Algomint_io",
     listedAt: 1665742020,
     github: ["Algomint"],
+    deadUrl: true,
   },
   {
     id: "2183",
@@ -18701,6 +18703,7 @@ const data2: Protocol[] = [
     twitter: "Wavelength_DAO",
     forkedFromIds: ["2611"],
     listedAt: 1666624359,
+    deadUrl: true,
     dimensions: {
       dexs: "wavelength-dao"
     }

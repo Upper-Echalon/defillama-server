@@ -19061,6 +19061,7 @@ const data3_1: Protocol[] = [
     parentProtocol: "parent#aperture-finance",
     audit_links: ["https://docs.aperture.finance/docs/transparency/security-audit"],
     listedAt: 1695550869,
+    deadUrl: true,
     dimensions: {
       fees: "apertureSwap",
       dexs: "apertureSwap",
@@ -51544,6 +51545,7 @@ const data3_3: Protocol[] = [
     module: "dummy.js",
     twitter: "UniDexFinance",
     parentProtocol: "parent#unidex",
+    deadUrl: true,
     dimensions: {
       "aggregator-derivatives": "unidex-agg-perp"
     }

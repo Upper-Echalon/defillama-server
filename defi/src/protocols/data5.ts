@@ -6428,6 +6428,7 @@ const data5: Protocol[] = [
     twitter: "GroveXchange",
     forkedFromIds: ["2197"],
     listedAt: 1766422211,
+    deadUrl: true,
   },
   {
     id: "7175",

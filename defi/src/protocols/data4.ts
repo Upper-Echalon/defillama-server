@@ -2151,6 +2151,7 @@ const data4: Protocol[] = [
       "https://github.com/Marvin051499/atoll-smart-contracts/blob/main/PeckShield-Audit-Report-Atoll-v1.0.pdf",
     ],
     listedAt: 1737560233,
+    deadUrl: true,
   },
   {
     id: "5653",

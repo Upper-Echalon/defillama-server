@@ -5313,6 +5313,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "UniDexFinance",
     governanceID: ["snapshot:unidexapp.eth"],
+    deadUrl: true,
   },
   {
     id: "parent#h2-finance",

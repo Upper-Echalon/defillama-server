@@ -11419,24 +11419,25 @@ const data4: Protocol[] = [
     parentProtocol: "parent#lista-dao",
     oraclesBreakdown: [
       {
+        name: "Atlas",
+        type: "Primary",
+        proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
+        startDate: "2026-06-02",
+      },
+      {
         name: "Chainlink",
         type: "Primary",
-        proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"],
+        proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
       },
       {
         name: "Binance Oracle",
         type: "Secondary",
-        proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"],
+        proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
       },
       {
         name: "RedStone",
-        type: "Secondary",
-        proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"],
-      },
-      {
-        name: "API3",
-        type: "Secondary",
-        proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"],
+        type: "Fallback",
+        proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
       },
     ],
     tokensExcludedFromParent: {

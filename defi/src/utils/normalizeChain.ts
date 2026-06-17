@@ -2789,7 +2789,7 @@ export const chainCoingeckoIds = {
     url: "https://www.chiliz.com/",
     dimensions: {
       fees: "chiliz",
-      "new-users": "chiliz",
+      "new-users": "chz",
     },
   },
   "LightLink": {

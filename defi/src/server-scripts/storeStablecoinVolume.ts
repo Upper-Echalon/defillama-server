@@ -51,7 +51,7 @@ const TOKEN_BLACKLIST: Record<string, 'all' | string[]> = {
   SUSD: ['2025-08-06'],
 };
 
-function isTokenBlacklisted(token: string, dayTimestamp: number): boolean {
+export function isTokenBlacklisted(token: string, dayTimestamp: number): boolean {
   const rule = TOKEN_BLACKLIST[token];
   if (!rule) return false;
   if (rule === 'all') return true;

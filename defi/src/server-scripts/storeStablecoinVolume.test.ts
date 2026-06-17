@@ -1,6 +1,7 @@
 import {
   detectSpikes,
   collectHistoricalVolumes,
+  isTokenBlacklisted,
   median,
   VolumeCache,
   DailyVolume,
@@ -44,6 +45,23 @@ describe('median', () => {
   });
 });
 
+describe('isTokenBlacklisted', () => {
+  test('returns true for all-days blacklist entries', () => {
+    const ts = Math.floor(new Date('2026-01-01T00:00:00Z').getTime() / 1000);
+    expect(isTokenBlacklisted('DUSD', ts)).toBe(true);
+  });
+
+  test('returns true for specific-date blacklist entries', () => {
+    const ts = Math.floor(new Date('2022-08-14T12:00:00Z').getTime() / 1000);
+    expect(isTokenBlacklisted('USDZ', ts)).toBe(true);
+  });
+
+  test('returns false for non-blacklisted tokens', () => {
+    const ts = Math.floor(new Date('2022-08-14T12:00:00Z').getTime() / 1000);
+    expect(isTokenBlacklisted('USDC', ts)).toBe(false);
+  });
+});
+
 describe('collectHistoricalVolumes', () => {
   test('excludes the target day even if it has volume for that pair', () => {
     const cache: VolumeCache = {
@@ -58,7 +76,7 @@ describe('collectHistoricalVolumes', () => {
       [String(targetTs - 1 * DAY)]: makeDaily(targetTs - 1 * DAY, 'ethereum', 'USDE', 100_000),
       [String(targetTs - 2 * DAY)]: makeDaily(targetTs - 2 * DAY, 'ethereum', 'USDE', 0),
       [String(targetTs - 3 * DAY)]: { timestamp: targetTs - 3 * DAY, chains: {} },
-      [String(targetTs - 4 * DAY)]: makeDaily(targetTs - 4 * DAY, 'ethereum', 'USDE', NaN as any),
+      [String(targetTs - 4 * DAY)]: makeDaily(targetTs - 4 * DAY, 'ethereum', 'USDE', NaN),
       [String(targetTs - 5 * DAY)]: makeDaily(targetTs - 5 * DAY, 'ethereum', 'USDE', 200_000),
     };
     expect(collectHistoricalVolumes(cache, 'ethereum', 'USDE', targetTs).sort()).toEqual([100_000, 200_000]);

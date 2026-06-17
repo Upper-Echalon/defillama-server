@@ -6783,5 +6783,23 @@ const data6: Protocol[] = [
     listedAt: 1781716622,
     parentProtocol: "parent#exponent",
   },
+  {
+    id: "8031",
+    name: "DefiLords",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://defilords.finance
+    description: "AI-powered DeFi vault protocol — deposit once, AI allocates across stable yield, UniV3 LP, and hybrid strategies",
+    chain: "Arbitrum",
+    logo: `${baseIconsUrl}/defilords.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Arbitrum", "Ethereum"],
+    module: "defilords/index.js",
+    twitter: "defilordsss",
+    listedAt: 1781717461,
+  },
 ];
 export default data6;

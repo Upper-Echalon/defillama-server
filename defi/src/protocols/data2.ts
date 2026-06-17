@@ -963,6 +963,7 @@ const data2: Protocol[] = [
     twitter: "thewinkies1",
     audit_links: ["https://docsend.com/view/v9fk2ajkksjd9xcz"],
     listedAt: 1645036853,
+    deadUrl: true,
   },
   {
     id: "1423",
@@ -6120,6 +6121,7 @@ const data2: Protocol[] = [
     twitter: "predyfinance",
     parentProtocol: "parent#predy-finance",
     listedAt: 1650190517,
+    deadUrl: true,
     dimensions: {
       fees: "predy-finance-v320"
     }
@@ -11453,6 +11455,7 @@ const data2: Protocol[] = [
     twitter: "TaigaProtocol",
     parentProtocol: "parent#taiga-protocol",
     listedAt: 1657807133,
+    deadUrl: true,
   },
   {
     id: "1900",
@@ -11472,6 +11475,7 @@ const data2: Protocol[] = [
     twitter: "TaigaProtocol",
     parentProtocol: "parent#taiga-protocol",
     listedAt: 1657825354,
+    deadUrl: true,
   },
   {
     id: "1901",
@@ -26327,6 +26331,7 @@ const data2: Protocol[] = [
     twitter: "spice_finance",
     audit_links: ["https://docs.spicefi.xyz/info/audits"],
     listedAt: 1677089952,
+    deadUrl: true,
   },
   {
     id: "2570",

@@ -1983,6 +1983,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "predyfinance",
     github: ["predyprotocol"],
+    deadUrl: true,
   },
   {
     id: "parent#magicfox",
@@ -3021,6 +3022,7 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "TaigaProtocol",
     github: ["nutsfinance"],
     stablecoins: ["3usd"],
+    deadUrl: true,
   },
   {
     id: "parent#contango",
@@ -4400,6 +4402,7 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "KriyaDEX",
     github: ["efficacy-finance"],
+    deadUrl: true,
   },
   {
     id: "parent#solidlizard",
@@ -8935,6 +8938,7 @@ const parentProtocols: IParentProtocol[] = [
     cmcId: null,
     chains: [],
     twitter: "PikeFinance",
+    deadUrl: true,
   },
   {
     id: "parent#warpx",

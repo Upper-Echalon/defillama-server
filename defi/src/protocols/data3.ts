@@ -5343,6 +5343,7 @@ const data3_0: Protocol[] = [
     audit_links: ["https://docs.kriya.finance/sdk-smart-contracts-and-security/audit-reports"],
     parentProtocol: "parent#kriyadex",
     listedAt: 1683484651,
+    deadUrl: true,
     dimensions: {
       dexs: "kriya-dex"
     }
@@ -7406,6 +7407,7 @@ const data3_0: Protocol[] = [
     module: "eazyswap/index.js",
     twitter: "EazySwap",
     listedAt: 1685224607,
+    deadUrl: true,
   },
   {
     id: "3035",
@@ -8286,6 +8288,7 @@ const data3_0: Protocol[] = [
     ],
     parentProtocol: "parent#predy-finance",
     listedAt: 1686148857,
+    deadUrl: true,
   },
   {
     id: "3074",
@@ -8306,6 +8309,7 @@ const data3_0: Protocol[] = [
     twitter: "predyfinance",
     parentProtocol: "parent#predy-finance",
     listedAt: 1686148859,
+    deadUrl: true,
   },
   {
     id: "3075",
@@ -10361,6 +10365,7 @@ const data3_0: Protocol[] = [
     treasury: "savvy.js",
     stablecoins: ["savvy-usd"],
     listedAt: 1687942907,
+    deadUrl: true,
   },
   {
     id: "3170",
@@ -10438,6 +10443,7 @@ const data3_0: Protocol[] = [
     module: "concordex-io/index.js",
     twitter: "concordexlabs",
     listedAt: 1687960810,
+    deadUrl: true,
     dimensions: {
       fees: "concordex-io",
       dexs: "concordex-io"
@@ -11039,6 +11045,7 @@ const data3_0: Protocol[] = [
     twitter: "CollectifDAO",
     audit_links: ["https://github.com/collectif-dao/collectif-audits"],
     listedAt: 1688494775,
+    deadUrl: true,
   },
  /*  {
     id: "3200",
@@ -13886,6 +13893,7 @@ const data3_0: Protocol[] = [
     twitter: "predyfinance",
     parentProtocol: "parent#predy-finance",
     listedAt: 1690901941,
+    deadUrl: true,
     dimensions: {
       fees: "predy-finance-v5"
     }
@@ -21010,6 +21018,7 @@ const data3_1: Protocol[] = [
     module: "flooring-io/index.js",
     twitter: "floorprotocol",
     listedAt: 1697566485,
+    deadUrl: true,
   },
   {
     id: "3645",
@@ -31183,6 +31192,7 @@ const data3_1: Protocol[] = [
     twitter: "PikeFinance",
     parentProtocol: "parent#pike",
     listedAt: 1706973667,
+    deadUrl: true,
   },
   {
     id: "4101",
@@ -33176,6 +33186,7 @@ const data3_2: Protocol[] = [
     oraclesBreakdown: [ { name: "Pyth", type: "Primary", proof: [] } ], //github.com/DefiLlama/defillama-server/pull/6111
     github: ["baker-fi"],
     listedAt: 1709045112,
+    deadUrl: true,
   },
   {
     id: "4183",
@@ -38781,6 +38792,7 @@ const data3_2: Protocol[] = [
     parentProtocol: "parent#kriyadex",
     audit_links: ["https://docs.kriya.finance/sdk-smart-contracts-and-security/audit-reports"],
     listedAt: 1712244227,
+    deadUrl: true,
   },
   {
     id: "4434",
@@ -41192,6 +41204,7 @@ const data3_2: Protocol[] = [
     github: ["DXN-Hyperstructure"],
     audit_links: ["https://github.com/TheArcadiaGroup/publications/blob/main/audits/NXDFinal.pdf"],
     listedAt: 1714472654,
+    deadUrl: true,
   },
   {
     id: "4543",
@@ -44480,6 +44493,7 @@ const data3_2: Protocol[] = [
     module: "dummy.js",
     twitter: "basecampwtf",
     listedAt: 1716990287,
+    deadUrl: true,
     dimensions: {
       fees: "basecamp"
     }
@@ -49000,6 +49014,7 @@ const data3_3: Protocol[] = [
     audit_links: ["https://docs.kriya.finance/sdk-smart-contracts-and-security/audit-reports"],
     parentProtocol: "parent#kriyadex",
     listedAt: 1721229731,
+    deadUrl: true,
     dimensions: {
       dexs: "kriya-clmm"
     }
@@ -52301,7 +52316,8 @@ const data3_3: Protocol[] = [
     forkedFromIds: ["111"],
     module: "iolend/index.js",
     twitter: "iolendfi",
-    listedAt: 1724694512
+    listedAt: 1724694512,
+    deadUrl: true,
   },
   {
     id: "5049",
@@ -54780,7 +54796,8 @@ const data3_3: Protocol[] = [
       "https://www.beosin.com/audits/Aqua_Protocol_202407221416.pdf",
       "https://github.com/BugBlow/audits/blob/main/AquaProtocol/Aqua_Security_Audit_BugBlow.md"
     ],
-    listedAt: 1726675917
+    listedAt: 1726675917,
+    deadUrl: true,
   },
   {
     id: "5160",
@@ -61110,7 +61127,8 @@ const data3_3: Protocol[] = [
       "https://github.com/oak-security/audit-reports/tree/main/Eclipse%20Fi"
     ],
     github: ["EclipsePad"],
-    listedAt: 1732997519
+    listedAt: 1732997519,
+    deadUrl: true,
   },
   {
     id: "5448",

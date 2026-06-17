@@ -369,6 +369,7 @@ const data5: Protocol[] = [
     twitter: "FOOMCASH",
     github: ["Terrestrials"],
     listedAt: 1761284804,
+    deadUrl: true,
     dimensions: {
       fees: "foom-cash",
     },
@@ -1249,6 +1250,7 @@ const data5: Protocol[] = [
     ],
     module: "dummy.js",
     twitter: "carina_finance",
+    deadUrl: true,
     dimensions: {
       aggregators: "carina-aggregator",
     },
@@ -7557,6 +7559,7 @@ const data5: Protocol[] = [
     twitter: "Chopcorpsol",
     github: ["chopcorpio"],
     listedAt: 1767885661,
+    deadUrl: true,
     dimensions: {
       fees: "chopcorp",
     },
@@ -9804,7 +9807,8 @@ const data5: Protocol[] = [
     module: "pike-local-markets/index.js",
     twitter: "PikeFinance",
     parentProtocol: "parent#pike",
-    listedAt: 1769607030
+    listedAt: 1769607030,
+    deadUrl: true,
   },
   {
     id: "7332",
@@ -13962,6 +13966,7 @@ const data5: Protocol[] = [
     twitter: "BasaFishNetwork",
     github: ["yukeen-ocean"],
     listedAt: 1773153603,
+    deadUrl: true,
   },
   {
     id: "7530",

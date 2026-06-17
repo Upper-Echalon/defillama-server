@@ -1067,6 +1067,7 @@ const data4: Protocol[] = [
     module: "memebox-fi/index.js",
     twitter: "MemeboxFi",
     listedAt: 1736387595,
+    deadUrl: true,
   },
   {
     id: "5605",
@@ -7906,6 +7907,7 @@ const data4: Protocol[] = [
     module: "stout/index.js",
     twitter: "stout_fi",
     listedAt: 1741885291,
+    deadUrl: true,
     dimensions: {
       fees: "stout"
     }
@@ -13746,6 +13748,7 @@ const data4: Protocol[] = [
     twitter: "dripit_io",
     github: ["dripit-io"],
     listedAt: 1747046774,
+    deadUrl: true,
   },
   {
     id: "6162",
@@ -13879,6 +13882,7 @@ const data4: Protocol[] = [
     github: ["Logarithm-Labs"],
     listedAt: 1747156379,
     wrongLiquidity: true,
+    deadUrl: true,
     dimensions: {
       fees: "basisos"
     }
@@ -15086,6 +15090,7 @@ const data4: Protocol[] = [
     module: "relend/index.js",
     twitter: "relend_network",
     listedAt: 1747735979,
+    deadUrl: true,
     oraclesBreakdown: [
       {
         name: "Chainlink",
@@ -16226,6 +16231,7 @@ const data4: Protocol[] = [
       "https://github.com/SpyWolfNetwork/Smart_Contract_Audits/blob/70be486adea28f0bafc2522b77e1118631b4fefa/September/Lotus_Audit.pdf",
     ],
     listedAt: 1748884884,
+    deadUrl: true,
   },
   /* was delisted from agg volumes, the reported values are not accurate
   {
@@ -17822,6 +17828,7 @@ const data4: Protocol[] = [
     chains: ["Solana"],
     module: "dummy.js",
     twitter: "TradeonNova",
+    deadUrl: true,
     dimensions: {
       fees: "nova"
     }
@@ -19071,7 +19078,7 @@ const data4: Protocol[] = [
     name: "Rango",
     address: null,
     symbol: "-",
-    url: "https://rango.vip",
+    url: "https://rango.vip/a/XdoHRA",
     referralUrl: "https://rango.vip/a/XdoHRA",
     description:
       "Rango is a cutting-edge routing and aggregation protocol for all cross-chain and on-chain swaps, aggregating bridges and DEXs in crypto world",
@@ -19433,6 +19440,7 @@ const data4: Protocol[] = [
     module: "1776meme/index.js",
     twitter: "1776meme_",
     listedAt: 1751660645,
+    deadUrl: true,
     dimensions: {
       fees: "1776meme",
       dexs: "1776meme"

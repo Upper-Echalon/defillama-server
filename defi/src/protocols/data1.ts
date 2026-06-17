@@ -2874,6 +2874,7 @@ const data: Protocol[] = [
     module: "perlinx/index.js",
     twitter: "PerlinNetwork",
     audit_links: ["https://perlinx.finance/risks"],
+    deadUrl: true,
   },
   {
     id: "237",
@@ -13216,6 +13217,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     audit_links: ["https://github.com/CookFinance/cook-token/tree/master/audits"],
     listedAt: 1634930710,
     github: ["CookFinance"],
+    deadUrl: true,
   },
   /*
   {
@@ -25681,6 +25683,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     ],
     listedAt: 1642625568,
     github: ["grapefi"],
+    deadUrl: true,
   },
   {
     id: "1291",

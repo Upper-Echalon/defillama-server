@@ -6677,7 +6677,10 @@ const data6: Protocol[] = [
     module: "dummy.js",
     twitter: "gasdotzip",
     dimensions: {
-      "bridge-aggregators": "gas-zip",
+      "bridge-aggregators": {
+        adapter: "gas-zip",
+        genuineSpikes: [["2025-06-17", "High bridge volume driven by user 0x03f7e8B18af7da4af7DBA541fFd9df6eE7864DD0"]],
+      }
     }
   },
   {
@@ -6718,6 +6721,7 @@ const data6: Protocol[] = [
     github: ["Doggetti"],
     dimensions: {
       fees: "sTONks",
+      dexs: "sTONks",
     },
   },
   {

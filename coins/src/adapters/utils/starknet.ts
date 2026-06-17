@@ -20,8 +20,9 @@ function formCallBody(
   requestData.contract_address = requestData.contractAddress;
   delete requestData.contractAddress;
   delete requestData.entrypoint;
-  if (abi.customInput === "address")
-    requestData.calldata = params.map((i: any) => i.slice(2));
+  if (abi.customInput === 'address') requestData.calldata = params
+  // Starknet RPC now (2026-06-11) rejects calls without 0x prefix
+  // if (abi.customInput === 'address') requestData.calldata = params.map(i => i.slice(2))
   return getCallBody(requestData);
 
   function getCallBody(i: any) {

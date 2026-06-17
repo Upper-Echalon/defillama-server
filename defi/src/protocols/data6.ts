@@ -6547,6 +6547,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://www.monetrix.xyz/",
+    referralUrl: "https://www.monetrix.xyz/app/dashboard?code=TW51HHJ2",
     description: "Monetrix is the first fully on-chain funding-driven yield-bearing stable token, native to Hyperliquid",
     chain: "Hyperliquid L1",
     logo: `${baseIconsUrl}/monetrix.jpg`,

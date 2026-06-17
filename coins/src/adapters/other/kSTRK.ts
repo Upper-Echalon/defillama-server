@@ -1,5 +1,5 @@
 import { Write } from "../utils/dbInterfaces";
-import { call } from "../utils/starknet";
+import { multiCall } from "../utils/starknet";
 import { addToDBWritesList, getTokenAndRedirectData } from "../utils/database";
 
 const TOKEN =
@@ -33,8 +33,12 @@ const abis = [
 ];
 
 export async function kSTRK(timestamp: number = 0) {
-  const totalAssets = await call({ target: POOL, abi: abis[0] });
-  const totalSupply = await call({ target: TOKEN, abi: abis[1] });
+  const [totalAssets, totalSupply] = await multiCall({
+    calls: [
+      { target: POOL, abi: abis[0] },
+      { target: TOKEN, abi: abis[1] },
+    ],
+  });
   const [{ price: basePrice }] = await getTokenAndRedirectData(
     ["starknet"],
     "coingecko",

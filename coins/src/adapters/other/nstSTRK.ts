@@ -1,5 +1,5 @@
 import { Write } from "../utils/dbInterfaces";
-import { call } from "../utils/starknet";
+import { multiCall } from "../utils/starknet";
 
 import { addToDBWritesList, getTokenAndRedirectData } from "../utils/database";
 
@@ -35,8 +35,10 @@ async function getTokenPrice(timestamp: number) {
       state_mutability: "view",
     },
   ];
-  const totalAssets = await call({ target: STAKED_STRK, abi: abis[0] });
-  const totalSupply = await call({ target: STAKED_STRK, abi: abis[1] });
+  const [totalAssets, totalSupply] = await multiCall({
+    target: STAKED_STRK,
+    calls: [{ abi: abis[0] }, { abi: abis[1] }],
+  });
   const [{ price: basePrice }] = await getTokenAndRedirectData(
     ["starknet"],
     "coingecko",

@@ -1,9 +1,31 @@
 import { getCurrentUnixTimestamp } from "../../utils/date";
 import { addToDBWritesList } from "../utils/database";
 import { Write } from "../utils/dbInterfaces";
-import fetch from "node-fetch";
+import { multiCall } from "../utils/starknet";
 
 type Feed = { id: string; symbol: string; address: string; decimals: number };
+
+// Pragma oracle: get_data_median(data_type, pair_id) -> (price, offset,
+// last_updated_timestamp, num_sources_aggregated). data_type 0x0 == SpotEntry.
+const PRAGMA_ORACLE =
+  "0x2a85bd616f912537c50a49a4076db02c00b29b2cdc8a197ce92ed1837fa875b";
+const SPOT_ENTRY = "0x0";
+const getDataMedianAbi = {
+  name: "get_data_median",
+  type: "function",
+  inputs: [
+    { name: "data_type", type: "core::felt252" },
+    { name: "pair_id", type: "core::felt252" },
+  ],
+  outputs: [
+    { name: "price", type: "core::felt252" },
+    { name: "offset", type: "core::felt252" },
+    { name: "publishTime", type: "core::felt252" },
+    { name: "sources", type: "core::felt252" },
+  ],
+  state_mutability: "view",
+  customInput: "address",
+};
 
 const feeds: Feed[] = [
   {
@@ -27,54 +49,34 @@ export async function pragma(timestamp: number = 0) {
   const now = getCurrentUnixTimestamp();
   const threeDaysAgo = (timestamp ? timestamp : now) - THREE_DAYS;
 
+  // One on-chain aggregated call covers every feed in a single RPC execution.
+  const results = await multiCall({
+    target: PRAGMA_ORACLE,
+    abi: getDataMedianAbi,
+    calls: feeds.map(({ id }) => ({ params: [SPOT_ENTRY, id] })),
+  });
+
   const writes: Write[] = [];
-  await Promise.all(
-    feeds.map(async ({ id, symbol, address, decimals }: Feed) => {
-      const res = await fetch(
-        process.env.STARKNET_RPC ??
-          "https://starknet-mainnet.public.blastapi.io",
-        {
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            id: 1,
-            jsonrpc: "2.0",
-            method: "starknet_call",
-            params: {
-              request: {
-                contract_address:
-                  "0x2a85bd616f912537c50a49a4076db02c00b29b2cdc8a197ce92ed1837fa875b",
-                entry_point_selector:
-                  "0x24b869ce68dd257b370701ca16e4aaf9c6483ff6805d04ba7661f3a0b6ce59",
-                calldata: ["0x0", id],
-              },
-              block_id: "pending",
-            },
-          }),
-          method: "POST",
-        },
-      ).then((r) => r.json());
+  feeds.forEach(({ symbol, address, decimals }: Feed, i: number) => {
+    const price = Number(results[i].price);
+    const offset = Number(results[i].offset);
+    const publishTime = Number(results[i].publishTime);
+    const sources = Number(results[i].sources);
 
-      const [price, offset, publishTime, sources] = res.result.map(
-        (r: string) => parseInt(r.substring(2), 16),
-      );
+    if (publishTime < threeDaysAgo || sources == 1) return;
 
-      if (publishTime < threeDaysAgo || sources == 1) return;
-
-      addToDBWritesList(
-        writes,
-        "starknet",
-        address,
-        price / 10 ** offset,
-        decimals,
-        symbol,
-        timestamp,
-        "pragma",
-        0.9,
-      );
-    }),
-  );
+    addToDBWritesList(
+      writes,
+      "starknet",
+      address,
+      price / 10 ** offset,
+      decimals,
+      symbol,
+      timestamp,
+      "pragma",
+      0.9,
+    );
+  });
 
   return writes;
 }

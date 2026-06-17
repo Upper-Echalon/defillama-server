@@ -423,41 +423,87 @@ async function getStellarSupplies(tokens: string[], timestamp?: number): Promise
   return supplies;
 }
 
+const STARKNET_RPC = process.env.STARKNET_RPC ?? "https://starknet-mainnet.public.blastapi.io";
+const STARKNET_TOTAL_SUPPLY_SELECTOR = "0x1557182e4359a1f0c6301278e8f5b35a776ab58d39892581e357578fb287836";
+// On-chain multicall aggregator: aggregate(calls) executes all sub-calls in one
+// call frame, so N total_supply reads cost a single RPC execution instead of N.
+const STARKNET_MULTICALL = process.env.STARKNET_MULTICALL ?? "0x01a33330996310a1e3fa1df5b16c1e07f0491fdd20c441126e02613b948f0225";
+const STARKNET_AGGREGATE_SELECTOR = "0x23ce8154ba7968a9d040577a2140e30474cee3aad4ba52d26bc483e648643f4";
+// Kept small: aggregate() reverts atomically, so a bad token only forces a
+// per-token fallback for its own (small) chunk rather than a large batch.
+const STARKNET_CHUNK_SIZE = 20;
+
+// u256 (low, high) felt pair -> number
+function starknetU256ToNumber(low: string, high: string): number {
+  return new BigNumber(low).plus(new BigNumber(high).times(new BigNumber(2).pow(128))).toNumber();
+}
+
+async function starknetTotalSupply(token: string): Promise<number | undefined> {
+  const res = await fetch(STARKNET_RPC, {
+    method: "POST",
+    body: JSON.stringify({
+      jsonrpc: "2.0",
+      id: 1,
+      method: "starknet_call",
+      params: [{ contract_address: token, entry_point_selector: STARKNET_TOTAL_SUPPLY_SELECTOR, calldata: [] }, "latest"],
+    }),
+    headers: { "Content-Type": "application/json" },
+  }).then((r) => r.json());
+  if (res?.result && res.result.length >= 2) return starknetU256ToNumber(res.result[0], res.result[1]);
+  return undefined;
+}
+
 async function getStarknetSupplies(tokens: string[], timestamp?: number): Promise<{ [token: string]: number }> {
   if (timestamp) throw new Error(`timestamp incompatible with Starknet adapter!`);
   // Record real values including 0; failed fetches are absent.
   const supplies: { [token: string]: number } = {};
-  const STARKNET_RPC = process.env.STARKNET_RPC ?? "https://starknet-mainnet.public.blastapi.io";
-  const TOTAL_SUPPLY_SELECTOR = "0x1557182e4359a1f0c6301278e8f5b35a776ab58d39892581e357578fb287836";
+
+  const chunks: string[][] = [];
+  for (let i = 0; i < tokens.length; i += STARKNET_CHUNK_SIZE) chunks.push(tokens.slice(i, i + STARKNET_CHUNK_SIZE));
 
   await PromisePool.withConcurrency(5)
-    .for(tokens)
-    .process(async (token) => {
+    .for(chunks)
+    .process(async (chunk) => {
       try {
+        // Build aggregate calldata: [n, (to, selector, calldata_len=0) x n]
+        const aggCalldata: string[] = ["0x" + chunk.length.toString(16)];
+        chunk.forEach((token) => {
+          aggCalldata.push(token, STARKNET_TOTAL_SUPPLY_SELECTOR, "0x0");
+        });
         const res = await fetch(STARKNET_RPC, {
           method: "POST",
           body: JSON.stringify({
             jsonrpc: "2.0",
             id: 1,
             method: "starknet_call",
-            params: [
-              {
-                contract_address: token,
-                entry_point_selector: TOTAL_SUPPLY_SELECTOR,
-                calldata: [],
-              },
-              "latest",
-            ],
+            params: [{ contract_address: STARKNET_MULTICALL, entry_point_selector: STARKNET_AGGREGATE_SELECTOR, calldata: aggCalldata }, "latest"],
           }),
           headers: { "Content-Type": "application/json" },
         }).then((r) => r.json());
-        if (res?.result && res.result.length >= 2) {
-          const low = new BigNumber(res.result[0]);
-          const high = new BigNumber(res.result[1]);
-          const supply = low.plus(high.times(new BigNumber(2).pow(128)));
-          supplies[`starknet:${token}`] = supply.toNumber();
+        if (!res?.result) throw new Error(res?.error?.data?.revert_error ?? res?.error?.message ?? "aggregate failed");
+
+        // result layout: [block_number, results_len, (span_len, ...span_felts) x results_len]
+        const result: string[] = res.result;
+        let i = 1; // skip block_number
+        const resultsLen = parseInt(result[i++], 16);
+        for (let j = 0; j < resultsLen; j++) {
+          const spanLen = parseInt(result[i++], 16);
+          const span = result.slice(i, i + spanLen);
+          i += spanLen;
+          if (span.length >= 2) supplies[`starknet:${chunk[j]}`] = starknetU256ToNumber(span[0], span[1]);
         }
-      } catch (e) {}
+      } catch (e) {
+        // aggregate reverts atomically (one bad token fails the chunk). Recover
+        // the rest of this chunk with per-token calls.
+        await PromisePool.withConcurrency(5)
+          .for(chunk)
+          .process(async (token) => {
+            try {
+              const supply = await starknetTotalSupply(token);
+              if (supply != null) supplies[`starknet:${token}`] = supply;
+            } catch (e) {}
+          });
+      }
     });
 
   return supplies;

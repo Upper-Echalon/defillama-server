@@ -19079,8 +19079,8 @@ const data4: Protocol[] = [
     name: "Rango",
     address: null,
     symbol: "-",
-    url: "https://rango.vip/a/XdoHRA",
-    referralUrl: "https://rango.vip/a/XdoHRA",
+    url: "https://app.rango.exchange",
+    referralUrl: "https://app.rango.exchange?ref=XdoHRA",
     description:
       "Rango is a cutting-edge routing and aggregation protocol for all cross-chain and on-chain swaps, aggregating bridges and DEXs in crypto world",
     chain: "Ethereum",

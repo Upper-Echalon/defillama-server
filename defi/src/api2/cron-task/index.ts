@@ -16,6 +16,7 @@ import * as sdk from '@defillama/sdk'
 import { RUN_TYPE, runWithRuntimeLogging } from "../utils";
 import { genFormattedChains } from "./genFormattedChains";
 import { fetchRWAStats } from "../../rwa";
+import { getDALayersInternal } from "../routes/getDALayers";
 import { sendMessage } from "../../utils/discord";
 import { extraSections, chainKeyToLabelMap } from "../../utils/normalizeChain";
 import { dailyTvl, hourlyTvl, hourlyUsdTokensTvl } from "../../utils/getLastRecord";
@@ -81,6 +82,7 @@ async function run() {
   await writeOracles()
   await writeForks()
   await writeCategories()
+  await writeDALayers()
   await writeChainAssetsCache()
 
   console.time('write /langs')
@@ -367,6 +369,14 @@ async function run() {
         await storeRouteData(`oracles-v2/charts/chains/${key}-protocol-breakdown`, buildTimeseriesItemValueBreakdown(valueByTimestamp));
       }
     }
+  }
+
+  async function writeDALayers() {
+    const debugString = 'write /da-layers'
+    console.time(debugString)
+    const data = await getDALayersInternal(processProtocolsOptions)
+    await storeRouteData('da-layers', data)
+    console.timeEnd(debugString)
   }
 
   async function writeForks() {

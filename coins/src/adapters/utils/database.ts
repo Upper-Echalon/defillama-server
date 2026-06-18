@@ -21,7 +21,7 @@ import { staleMargin } from "../../utils/coingeckoPlatforms";
 import * as sdk from '@defillama/sdk'
 const { sliceIntoChunks, } = sdk.util
 
-import { lowercase, canonicalizeStarknetAddress } from "../../utils/coingeckoPlatforms";
+import { lowercase } from "../../utils/coingeckoPlatforms";
 import { sendMessage } from "../../../../defi/src/utils/discord";
 import { chainsThatShouldNotBeLowerCased } from "../../utils/shared/constants";
 import { dualWriteToChRedis } from "./chRedisWrite";
@@ -35,7 +35,9 @@ function normalizedPKFor(pk: string): string {
   if (colonIdx === -1) return pk.toLowerCase();
   const chain = body.slice(0, colonIdx).toLowerCase();
   let address = body.slice(colonIdx + 1).toLowerCase();
-  if (chain === "starknet") address = canonicalizeStarknetAddress(address);
+  if (chain === "starknet" && address.length === 66 && address.startsWith("0x0")) {
+    address = address.replace(/^0x0+/, "0x");
+  }
   return `asset#${chain}:${address}`;
 }
 

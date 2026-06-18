@@ -1,15 +1,11 @@
-import { canonicalizeStarknetAddress } from "./coingeckoPlatforms";
+import { padAddress } from "./coingeckoPlatforms";
 import { chainsThatShouldNotBeLowerCased } from "./shared/constants";
 import { resolveChainInCoinId } from "./chainIdMap";
 
 export function lowercaseAddress(coinRaw: string) {
   const { chain, coin } = resolveChainInCoinId(coinRaw);
   if (chainsThatShouldNotBeLowerCased.includes(chain)) return coin;
-  // `coin` still carries the `starknet:` prefix, so canonicalize the bare address
-  else if (chain == "starknet")
-    return `starknet:${canonicalizeStarknetAddress(
-      coin.slice(coin.indexOf(":") + 1).toLowerCase(),
-    )}`;
+  else if (chain == "starknet") return `starknet:${padAddress(coin.toLowerCase())}`;
   return coin.toLowerCase();
 }
 

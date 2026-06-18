@@ -37,13 +37,6 @@ export function padAddress(address: string, length: number = 66): string {
   for (let i = 0; i < zeros; i++) prefix += "0";
   return prefix + data;
 }
-// Collapse padded (0x033..) and unpadded (0x33..) starknet addresses to one
-// canonical key, on both write and read. Only a full 66-char 0x0.. address.
-export function canonicalizeStarknetAddress(address: string): string {
-  if (address.length !== 66 || !address.startsWith("0x0")) return address;
-  const stripped = address.replace(/^0x0+/, "0x");
-  return stripped === "0x" ? "0x0" : stripped; // all-zero felt -> 0x0, not empty
-}
 export function lowercase(address: string, chain: string) {
   if (chain == "starknet") return padAddress(address.toLowerCase());
   return chainsThatShouldNotBeLowerCased.includes(chain)

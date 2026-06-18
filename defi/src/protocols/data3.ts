@@ -3522,6 +3522,9 @@ const data3_0: Protocol[] = [
     twitter: "glifio",
     listedAt: 1681809804,
     github: ["glifio"],
+    dimensions: {
+      fees: "glif",
+    },
   },
   {
     id: "2859",

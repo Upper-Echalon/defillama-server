@@ -6519,7 +6519,11 @@ const data6: Protocol[] = [
     module: "hypemarket/index.js",
     twitter: "HypeMarketTrade",
     github: ["HypeMarket-Protocol"],
-    listedAt: 1781568273
+    listedAt: 1781568273,
+    dimensions: {
+      fees: "hypemarket",
+      dexs: "hypemarket",
+    }
   },
   {
     id: "8018",
@@ -6895,6 +6899,74 @@ const data6: Protocol[] = [
     forkedFromIds: ["4025"],
     parentProtocol: "parent#justlend",
     listedAt: 1781806178,
+  },
+  {
+    id: "8036",
+    name: "Kinetiq Launch",
+    address: null,
+    symbol: "-",
+    url: "https://kinetiq.xyz/",
+    description:
+      "Kinetiq Launch is a Hyperliquid liquid-staking product for exLST assets, where staking yield accrues through the exLST-to-HYPE exchange rate and protocol fees are taken as a performance fee on that yield.",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/kinetiq-launch.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Liquid Staking",
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "kinetiq_xyz",
+    parentProtocol: "parent#kinetiq",
+    dimensions: {
+      fees: "kinetiq-launch"
+    }
+  },
+  {
+    id: "8037",
+    name: "Mercury",
+    address: "hyperliquid:0x1145d266ad5A9411fd47eC4d4d48bC265682A1F6",
+    symbol: "MRCY",
+    url: " ", // pending to add url https://mrcy.supply
+    description:
+      "ORE-style on-chain mining game native to HyperEVM. Players deploy HYPE onto a 5x5 grid each ~50s round; one block wins the pot and the protocol mints fresh $MRCY to the winners.",
+    chain: "Hyperliquid L1",
+    logo: `${baseIconsUrl}/mercury.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Gamified Mining",
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "MRCYsupply",
+    dimensions: {
+      fees: "mercury",
+      dexs: "mercury",
+    }
+  },
+  {
+    id: "8038",
+    name: "YourGrails",
+    address: null,
+    symbol: "-",
+    url: "https://yourgrails.com",
+    description:
+      "YourGrails is an on-chain physical TCG platform for graded-card pack openings, pack battles, marketplace sales, and instant buybacks.",
+    chain: "Avalanche",
+    logo: `${baseIconsUrl}/yourgrails.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Physical TCG",
+    oraclesBreakdown: [{name: 'Chainlink',type: 'RNG',proof: ['https://github.com/DefiLlama/dimension-adapters/pull/7702'],},],
+    chains: ["Avalanche"],
+    module: "dummy.js",
+    twitter: "yourgrails",
+    github: ["Polypup"],
+    dimensions: {
+      fees: "yourgrails",
+      dexs: "yourgrails",
+    }
   },
 ];
 export default data6;

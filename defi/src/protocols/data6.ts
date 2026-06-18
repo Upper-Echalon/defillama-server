@@ -6842,5 +6842,25 @@ const data6: Protocol[] = [
     ],
     listedAt: 1781754096,
   },
+  {
+    id: "8034",
+    name: "Avici",
+    address: null,
+    symbol: "-",
+    url: "https://avici.money/",
+    description: "Avici is a crypto-backed card issuer that lets users deposit crypto, open secured Visa cards, and spend through self-custodial credit lines with Apple Pay and Google Pay support.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/avici.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Crypto Card Issuer",
+    chains: ["Ethereum"],
+    module: "dummy.js",
+    twitter: "AviciMoney",
+    dimensions: {
+      fees: "avici",
+    },
+  },
 ];
 export default data6;

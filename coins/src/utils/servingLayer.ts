@@ -1,7 +1,7 @@
 import Redis from "ioredis";
 import { chQuery, chQueryJSON, isChEnabled } from "./clickhouseClient";
 import { isDistressedAssetPK } from "./isDistressed";
-import { lowercase } from "./coingeckoPlatforms";
+import { lowercase, canonicalizeStarknetAddress } from "./coingeckoPlatforms";
 
 export type CoinsResponse = {
   [coin: string]: {
@@ -60,7 +60,10 @@ function normalizeInput(coin: string): string {
   if (coin.startsWith("coingecko:")) return coin.toLowerCase();
   const i = coin.indexOf(":");
   if (i === -1) return coin.toLowerCase();
-  return coin.slice(0, i).toLowerCase() + ":" + coin.slice(i + 1).toLowerCase();
+  const chain = coin.slice(0, i).toLowerCase();
+  let address = coin.slice(i + 1).toLowerCase();
+  if (chain === "starknet") address = canonicalizeStarknetAddress(address);
+  return chain + ":" + address;
 }
 
 function sanitize(s: string): string {

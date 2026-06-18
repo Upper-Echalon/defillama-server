@@ -6839,7 +6839,7 @@ const data6: Protocol[] = [
     audits: "2",
     gecko_id: null,
     cmcId: null,
-    category: "Derivatives",
+    tags: ["Order Book"],
     chains: ["Solana"],
     module: "deriverse/index.js",
     twitter: "deriverse_io",

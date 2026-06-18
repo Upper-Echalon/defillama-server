@@ -41,9 +41,13 @@ function formCallBody(
   requestData.contract_address = requestData.contractAddress;
   delete requestData.contractAddress;
   delete requestData.entrypoint;
-  if (abi.customInput === 'address') requestData.calldata = params
-  // Starknet RPC now (2026-06-11) rejects calls without 0x prefix
-  // if (abi.customInput === 'address') requestData.calldata = params.map(i => i.slice(2))
+  // customInput bypasses starknet.js calldata encoding and passes params straight
+  // through (u256 inputs are pre-split into [low, high] elements by the caller).
+  if (abi.customInput === 'address') requestData.calldata = params;
+  // The RPC (since 2026-06-11) rejects any felt in the calldata without a 0x
+  // prefix, but Contract.populate() emits bare decimal strings. Normalize every
+  // felt to 0x hex regardless of how the calldata was built.
+  requestData.calldata = (requestData.calldata ?? []).map((i: any) => num.toHex(i));
   return getCallBody(requestData);
 
   function getCallBody(i: any) {

@@ -3554,6 +3554,9 @@ export const chainCoingeckoIds = {
     twitter: "aelfblockchain",
     url: "https://aelf.com/",
     github: ["aelfProject"],
+    dimensions: {
+      fees: "aelf",
+    },
   },
   "LUKSO": {
     geckoId: "lukso-token-2",

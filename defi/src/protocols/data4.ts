@@ -17958,7 +17958,7 @@ const data4: Protocol[] = [
     symbol: "-",
     url: "https://kgen.io/",
     description:
-      "The proof of human model providing verified human infrastructure to the world's leading AI systems.",
+      "KGeN collects data from verified humans in the Global South to train Physical AI and LLMs.",
     chain: "Aptos",
     logo: `${baseIconsUrl}/kgen.jpg`,
     audits: "0",

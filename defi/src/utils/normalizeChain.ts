@@ -2735,6 +2735,11 @@ export const chainCoingeckoIds = {
     github: ["bifrost-platform"],
     twitter: "Bifrost_Network",
     url: "https://www.bifrostnetwork.com/",
+    dimensions: {
+      fees: "bifrost-network",
+      "new-users": "bifrost-network",
+      "active-users": "bifrost-network",
+    },
   },
   "Radix": {
     geckoId: "radix",

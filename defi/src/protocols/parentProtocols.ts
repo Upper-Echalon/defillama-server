@@ -9921,6 +9921,18 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "ExponentFinance",
   },
+  {
+    id: "parent#justlend",
+    name: "JustLend",
+    url: "https://justlend.org/",
+    description: "JustLend is a TRON-powered coin market protocol aimed at establishing fund pools whose interest rates are determined by an algorithm based on the supply and demand of TRON assets.",
+    logo: `${baseIconsUrl}/justlend.png`,
+    gecko_id: "just",
+    cmcId: "5488",
+    chains: [],
+    twitter: "DeFi_JUST",
+    github: ["justlend"],
+  },
 ];
 
 export default parentProtocols;

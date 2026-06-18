@@ -8645,38 +8645,32 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
   },
   {
     id: "494",
-    name: "JustLend",
+    name: "JustLend V1",
     address: "tron:TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
     symbol: "JST",
-    url: "https://justlend.just.network",
+    url: "https://justlend.org/",
     description:
       "JustLend is a TRON-powered coin market protocol aimed at establishing fund pools whose interest rates are determined by an algorithm based on the supply and demand of TRON assets.",
     chain: "Tron",
-    logo: `${baseIconsUrl}/justlend.png`,
+    logo: `${baseIconsUrl}/justlend-v1.jpg`,
     audits: "2",
-    gecko_id: "just",
-    cmcId: "5488",
+    gecko_id: null,
+    cmcId: null,
     category: "Lending",
     chains: ["Tron"],
     module: "justlend.js",
     twitter: "DeFi_JUST",
     oraclesBreakdown: [
-      {
-        name: 'WINkLink',
-        type: 'Primary',
-        proof: ['https://docs.justlend.org/developers/supply-and-borrow-market/price-oracle'],
+      {name: 'WINkLink',type: 'Primary',proof: ['https://docs.justlend.org/developers/supply-and-borrow-market/price-oracle'],
         startDate: '2021-11-04',
         endDate: '2025-05-15',
       },
-      {
-        name: 'Internal',
-        type: 'Primary',
-        proof: ['https://docs.justlend.org/developers/supply-and-borrow-market/price-oracle', 'https://tronscan.org/#/address/TBPtNVdgkB8QPRHAJeZok6D9pqsFdALv9w'],
+      {name: 'Internal',type: 'Primary',proof: ['https://docs.justlend.org/developers/supply-and-borrow-market/price-oracle', 'https://tronscan.org/#/address/TBPtNVdgkB8QPRHAJeZok6D9pqsFdALv9w'],
         startDate: '2025-05-15',
       },
     ],
-    audit_links: ["https://www.justlend.link/docs/justlend_audit_en.pdf"],
-    github: ["justlend"],
+    audit_links: ["https://justlend.org/docs/justlend_audit_en.pdf"],
+    parentProtocol: "parent#justlend",
     dimensions: {
       fees: "justlend"
     }

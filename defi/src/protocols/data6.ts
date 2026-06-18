@@ -6701,7 +6701,11 @@ const data6: Protocol[] = [
     module: "kayen-v3/index.js",
     forkedFromIds: ["2198"],
     twitter: "KayenFinance",
-    listedAt: 1781636957
+    listedAt: 1781636957,
+    dimensions: {
+      fees: "kayen-v3",
+      dexs: "kayen-v3",
+    }
   },
   {
     id: "8027",
@@ -6861,6 +6865,36 @@ const data6: Protocol[] = [
     dimensions: {
       fees: "avici",
     },
+  },
+  {
+    id: "8035",
+    name: "JustLend V2",
+    address: "tron:TCFLL5dx5ZJdKnWuesXxi1VPwjLVmWZZy9",
+    symbol: "JST",
+    url: "https://app.justlend.org/home?lang=en-US",
+    description:
+      "An isolated-collateral lending protocol that enhances security by separating collateral assets.",
+    chain: "Tron",
+    logo: `${baseIconsUrl}/justlend-v2.jpg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Lending",
+    chains: ["Tron"],
+    module: "justlend-v2/index.js",
+    twitter: "DeFi_JUST",
+    oraclesBreakdown: [
+      {name: 'WINkLink',type: 'Primary',proof: ['https://docs.justlend.org/developers/supply-and-borrow-market/price-oracle'],
+        startDate: '2021-11-04',
+        endDate: '2025-05-15',
+      },
+      {name: 'Internal',type: 'Primary',proof: ['https://docs.justlend.org/developers/supply-and-borrow-market/price-oracle', 'https://tronscan.org/#/address/TBPtNVdgkB8QPRHAJeZok6D9pqsFdALv9w'],
+        startDate: '2025-05-15',
+      },
+    ],
+    forkedFromIds: ["4025"],
+    parentProtocol: "parent#justlend",
+    listedAt: 1781806178,
   },
 ];
 export default data6;

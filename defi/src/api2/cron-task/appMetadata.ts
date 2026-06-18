@@ -900,6 +900,17 @@ async function _storeAppMetadata() {
       };
     }
 
+    for (const protocolId in protocolInfoMap) {
+      const protocol = protocolInfoMap[protocolId];
+      if (protocol.category !== "CEX") continue;
+      const metadata = finalProtocols[protocolId] ?? {};
+      if (!metadata.name) metadata.name = slug(protocol.name);
+      metadata.tvl = true;
+      metadata.stablecoins = true;
+      metadata.cex = true;
+      finalProtocols[protocolId] = metadata;
+    }
+
     const chainProtocolCount: any = {};
     const sortedProtocolData = Object.keys(finalProtocols)
       .sort()

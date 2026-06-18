@@ -6,7 +6,7 @@ export async function getHacksInternal() {
   return allRecords
     .filter((r) => r.fields["Name"] !== undefined)
     .map((r) => {
-      const defillamaId = r.fields["DefiLlama Id"] ?? null;
+      const defillamaId = r.fields["DefiLlama Id"]?.toString() ?? null;
       const protocol = defillamaId ? protocols.find((p) => p.id == defillamaId) : null;
 
       let date: any = Math.floor(new Date(r.fields["Date"]).getTime() / 1000)

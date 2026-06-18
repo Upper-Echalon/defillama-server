@@ -77,4 +77,5 @@ export interface IProtocolMetadata {
   newUsers?: boolean;
   gasUsed?: boolean;
   txCount?: boolean;
+  cex?: boolean;
 }

@@ -59,9 +59,25 @@ export interface IRaise {
   sector: string;
   source: string;
   valuation: number;
-  defillamaId?: number;
+  defillamaId?: string;
   leadInvestors: Array<string>;
   otherInvestors: Array<string>;
+}
+
+export interface IHack {
+  date: number | null;
+  name: string;
+  classification: string | null;
+  technique: string | null;
+  amount: number | null;
+  chain: string | null;
+  bridgeHack: boolean;
+  targetType: string | null;
+  source: string;
+  returnedFunds: number | null;
+  defillamaId: string | null;
+  parentProtocolId?: string;
+  language: string | null;
 }
 
 export interface IProtocolResponse extends Omit<Protocol, "symbol" | "chain" | "module"> {
@@ -82,6 +98,7 @@ export interface IProtocolResponse extends Omit<Protocol, "symbol" | "chain" | "
   tokens?: ITokens;
   isParentProtocol?: boolean;
   raises: Array<IRaise>;
+  hacks?: Array<IHack>;
   metrics?: IJSON<boolean>;
   mcap?: number | null;
   tokenPrice?: number | null;

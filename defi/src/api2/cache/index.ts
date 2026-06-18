@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-import { IRaise, IProtocol } from '../../types';
+import { IHack, IRaise, IProtocol } from '../../types';
 import { fetchMcaps } from '../../utils/coinsApi';
 import sluggify, { sluggifyString } from '../../utils/sluggify';
 import { getLatestProtocolItems, } from '../db';
@@ -27,6 +27,7 @@ export const cache: {
   },
   mcaps: Record<string, { mcap: number, timestamp: number }>,
   raises: any,
+  hacks: any,
   protocolSlugMap: any,
   treasurySlugMap: any,
   entitiesSlugMap: any,
@@ -58,6 +59,7 @@ export const cache: {
   },
   mcaps: {},
   raises: {},
+  hacks: {},
   protocolSlugMap: {},
   treasurySlugMap: {},
   entitiesSlugMap: {},
@@ -94,7 +96,7 @@ export async function initCache({ cacheType = RUN_TYPE.API_SERVER }: { cacheType
 
     // dont run it for local dev env
     if (!process.env.API2_DEBUG_MODE) {
-      setInterval(updateRaises, 20 * MINUTES)
+      setInterval(updateRaisesAndHacks, 20 * MINUTES)
       setInterval(updateMCaps, 20 * MINUTES)
       setInterval(tvlProtocolDataUpdate, 20 * MINUTES)
       setInterval(setHistoricalTvlForAllProtocols, 2 * HOUR)
@@ -106,7 +108,7 @@ export async function initCache({ cacheType = RUN_TYPE.API_SERVER }: { cacheType
 
   } else if (cacheType === RUN_TYPE.CRON) {
     await Promise.all([
-      updateRaises(),
+      updateRaisesAndHacks(),
       updateMCaps(),
       tvlProtocolDataUpdate(cacheType),
       updateAllTvlData(cacheType),
@@ -193,6 +195,27 @@ async function updateRaises() {
   }
 }
 
+async function updateHacks() {
+  try {
+    const hacks = await readRouteData("/hacks")
+    const hacksObject: any = {}
+    hacks.forEach((hack: IHack) => {
+      const id = hack.defillamaId
+      if (!id) return;
+      if (!hacksObject[id]) hacksObject[id] = []
+      hacksObject[id].push(hack)
+    })
+    cache.hacks = hacksObject
+  } catch (e) {
+    console.error('Error updating hacks', e);
+    cache.hacks = {}
+  }
+}
+
+function updateRaisesAndHacks() {
+  return Promise.all([updateRaises(), updateHacks()])
+}
+
 async function updateAllTvlData(cacheType?: string) {
   if (cacheType !== 'cron') return;
 
@@ -228,6 +251,10 @@ export function getTreasuries() {
 
 export function getRaises(protocolId: string): IRaise[] {
   return cache.raises[protocolId] ?? []
+}
+
+export function getHacks(protocolId: string): IHack[] {
+  return cache.hacks[protocolId] ?? []
 }
 
 async function updateMCaps() {

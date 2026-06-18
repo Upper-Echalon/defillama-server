@@ -42,7 +42,7 @@ export async function getRaisesInternal() {
       leadInvestors: r.fields["Lead Investor"] ?? [],
       otherInvestors: r.fields["Other investors"] ?? [],
       valuation: r.fields[VALUATION]?.endsWith("\n") ? r.fields[VALUATION].slice(-1) : r.fields[VALUATION] || null,
-      defillamaId: r.fields["DefiLlama Id"],
+      defillamaId: r.fields["DefiLlama Id"]?.toString(),
     }));
   return { raises: formattedRaises }
 }

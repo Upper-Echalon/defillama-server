@@ -1,7 +1,7 @@
 import type { Protocol } from "../../protocols/types";
 import { nonChains, getChainDisplayName, transformNewChainName, addToChains } from "../../utils/normalizeChain";
 import type { IProtocolResponse, } from "../../types";
-import { getRaises, getCachedMCap, CACHE_KEYS, cacheAndRespond, cache, getLastHourlyRecord, getLastHourlyTokensUsd, getLastHourlyTokens } from "../cache/index";
+import { getRaises, getHacks, getCachedMCap, CACHE_KEYS, cacheAndRespond, cache, getLastHourlyRecord, getLastHourlyTokensUsd, getLastHourlyTokens } from "../cache/index";
 import { normalizeEthereum, selectChainFromItem, } from "../../utils/craftProtocol";
 import * as sdk from '@defillama/sdk'
 import { getProtocolAllTvlData } from "./cachedFunctions";
@@ -9,6 +9,7 @@ import { getObjectKeyCount } from ".";
 import { parentProtocolsById } from "../../protocols/parentProtocols";
 import sluggify from "../../utils/sluggify";
 import { _InternalProtocolMetadataMap } from "../../protocols/data";
+import { isDuplicateHackHallmark } from "../../utils/hallmarks";
 
 export type CraftProtocolV2Common = {
   useNewChainNames: boolean;
@@ -101,6 +102,7 @@ export async function craftProtocolV2({
     chains: [],
     currentChainTvls: {},
     raises: getRaises(protocolData.id),
+    hacks: getHacks(protocolData.id),
     mcap,
   };
 
@@ -220,8 +222,17 @@ export async function craftProtocolV2({
   if (treasuryCodePath)
     response.treasuryCodePath = treasuryCodePath
 
-  if (Array.isArray(hallmarks) && hallmarks.length > 0) {
-    response.hallmarks = hallmarks as any
+  const hackTimestamps: any = {}
+  for (const hack of response.hacks ?? []) {
+    if (hack.date != null) hackTimestamps[hack.date] = true
+  }
+  const responseHallmarks: any = []
+  for (const hallmark of Array.isArray(hallmarks) ? hallmarks : []) {
+    if (isDuplicateHackHallmark(hallmark, hackTimestamps)) continue
+    responseHallmarks.push(hallmark)
+  }
+  if (responseHallmarks.length > 0) {
+    response.hallmarks = responseHallmarks as any
   }
 
   if (restProtocolData.deprecated) {

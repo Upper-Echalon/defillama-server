@@ -1,7 +1,8 @@
 import type { IParentProtocol } from "../protocols/types";
 import { sortHallmarks } from "../protocols/data";
-import { IProtocolResponse, ICurrentChainTvls, IRaise } from "../types";
+import { IProtocolResponse, ICurrentChainTvls, IRaise, IHack } from "../types";
 import { getObjectKeyCount } from "../api2/utils";
+import { isDuplicateHackHallmark } from "./hallmarks";
 
 export interface ICombinedTvls {
   chainTvls: {
@@ -42,6 +43,7 @@ export async function craftParentProtocolInternal({
   childProtocolsTvls,
   fetchMcap,
   parentRaises,
+  parentHacks,
   feMini = false,
   restrictResponseSize = true,
 }: {
@@ -50,6 +52,7 @@ export async function craftParentProtocolInternal({
   fetchMcap: Function;
   childProtocolsTvls: Array<IProtocolResponse>;
   parentRaises: IRaise[];
+  parentHacks: IHack[];
   feMini?: boolean;
   restrictResponseSize?: boolean;
 }) {
@@ -110,6 +113,26 @@ export async function craftParentProtocolInternal({
   }
 
   const [tokenMcap] = await Promise.all([fetchMcap(parentProtocol.gecko_id)]);
+  const raises: IRaise[] = [];
+  const hacks: IHack[] = [];
+
+  for (const raise of parentRaises) {
+    raises.push(raise);
+  }
+
+  for (const hack of parentHacks) {
+    hacks.push(hack);
+  }
+
+  for (const protocol of childProtocolsTvls) {
+    for (const raise of protocol.raises ?? []) {
+      raises.push(raise);
+    }
+
+    for (const hack of protocol.hacks ?? []) {
+      hacks.push(hack);
+    }
+  }
 
   const response: IProtocolResponse = {
     ...parentProtocol,
@@ -119,10 +142,8 @@ export async function craftParentProtocolInternal({
     tokensInUsd,
     tvl,
     isParentProtocol: true,
-    raises: childProtocolsTvls?.reduce((acc, curr) => {
-      acc = [...acc, ...(curr.raises || [])];
-      return acc;
-    }, parentRaises as Array<IRaise>),
+    raises,
+    hacks,
     symbol:
       parentProtocol.symbol ??
       (parentProtocol.gecko_id
@@ -179,6 +200,16 @@ export async function craftParentProtocolInternal({
       if (module.hallmarks)
         hallmarks.push(...module.hallmarks);
     });
+
+    const hackTimestamps: any = {}
+    for (const hack of response.hacks ?? []) {
+      if (hack.date != null) hackTimestamps[hack.date] = true
+    }
+    for (let i = hallmarks.length - 1; i >= 0; i--) {
+      if (isDuplicateHackHallmark(hallmarks[i], hackTimestamps)) {
+        hallmarks.splice(i, 1)
+      }
+    }
 
     sortHallmarks(hallmarks);
     response.hallmarks = hallmarks

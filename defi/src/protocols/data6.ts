@@ -2285,7 +2285,7 @@ const data6: Protocol[] = [
     chain: "Base",
     logo: `${baseIconsUrl}/land-bid.jpg`,
     audits: "0",
-    gecko_id: null,
+    gecko_id: "land-bid",
     cmcId: null,
     category: "Gamified Mining",
     chains: ["Base"],

@@ -1972,7 +1972,7 @@ const data6: Protocol[] = [
     chain: "Solana",
     logo: `${baseIconsUrl}/jade.jpg`,
     audits: "0",
-    gecko_id: null,
+    gecko_id: "jade-protocol-2",
     cmcId: null,
     category: "Gamified Mining",
     chains: ["Solana"],

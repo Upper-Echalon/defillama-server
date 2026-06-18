@@ -9599,13 +9599,14 @@ const data5: Protocol[] = [
   {
     id: "7322",
     name: "AXC GYTW",
+    previousNames: ["AXC GIFT"],
     address: null,
     symbol: "-",
     url: "https://axc.xyz",
     description:
-      "Growth Yield Token Whitelist (GYTW) is a fund‑of‑hedge‑funds (RWA) product. The fund issuer has partnered up with AXC labs to issue a tokenised fund product.  Its investment strategy allocates capital to top‑performing global hedge funds.  The underlying fund manager has over 20 years of industry experience and has established strategic shareholder relationships with top-tier investment manager.",
+      "Growth Yield Token Whitelist (GYTW) is a fund-of-hedge-funds (RWA) product. The fund issuer has partnered up with AXC labs to issue a tokenised fund product.  Its investment strategy allocates capital to top-performing global hedge funds.  The underlying fund manager has over 20 years of industry experience and has established strategic shareholder relationships with top-tier investment manager.",
     chain: "Binance",
-    logo: `${baseIconsUrl}/axc-gift.jpg`,
+    logo: `${baseIconsUrl}/axc-gytw.jpg`,
     audits: "0",
     gecko_id: null,
     cmcId: null,

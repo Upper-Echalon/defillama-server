@@ -251,6 +251,11 @@ export const RWA = {
   ASSET_GROUP: (assetGroup: string) => `/assetGroup/${encodeURIComponent(assetGroup)}`,
   CHAIN: (chain: string) => `/chain/${chain}`,
   FLOWS: (id: string) => `/flows/${encodeURIComponent(id)}`,
+  FLOWS_OVERVIEW: '/flows/overview',
+  FLOWS_LEADERBOARD: '/flows/leaderboard',
+  FLOWS_GROUP: (group: string) => `/flows/group/${encodeURIComponent(group)}`,
+  FLOWS_PLATFORM: (platform: string) => `/flows/platform/${encodeURIComponent(platform)}`,
+  FLOWS_CHAIN: (chain: string) => `/flows/chain/${encodeURIComponent(chain)}`,
 } as const;
 
 export const RWA_PERPS = {

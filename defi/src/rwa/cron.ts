@@ -18,8 +18,9 @@ import {
   getPGSyncMetadata,
   setPGSyncMetadata,
   storeFlowsForId,
+  readFlowsForId,
 } from './file-cache';
-import { initPG, fetchCurrentPG, fetchMetadataPG, fetchAllDailyRecordsPG, fetchMaxUpdatedAtPG, fetchAllDailyIdsPG, fetchDailyRecordsForIdPG, fetchDailyRecordsWithChainsPG, fetchDailyRecordsWithChainsForIdPG, fetchLatestHourlyForChartTipsPG, ChartTipRow, computeFlowSeries, FlowRow } from './db';
+import { initPG, fetchCurrentPG, fetchMetadataPG, fetchAllDailyRecordsPG, fetchMaxUpdatedAtPG, fetchAllDailyIdsPG, fetchDailyRecordsForIdPG, fetchDailyRecordsWithChainsPG, fetchDailyRecordsWithChainsForIdPG, fetchLatestHourlyForChartTipsPG, ChartTipRow, computeFlowSeries, FlowRow, FlowPoint, DailyFlow, aggregateFlows, sumFlowWindow, FlowAggregateResult } from './db';
 import { getTimestampAtStartOfDay } from '../utils/date';
 
 import { shouldEmitRwaBreakdownItem } from './chartBreakdown';
@@ -27,6 +28,7 @@ import { rwaSlug, toFiniteNumberOrZero, smoothHistoricalData, normalizeRwaMetada
 import { parentProtocolsById } from '../protocols/parentProtocols';
 import { protocolsById } from '../protocols/data';
 import { getChainLabelFromKey } from '../utils/normalizeChain';
+import { FLOWS_HIDDEN_IDS } from './metadataConstants';
 import { sendThrottledRwaAlert } from './alerting';
 import {
   formatRwaHistoricalChartGuardReport,
@@ -1371,7 +1373,7 @@ export async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]
       // Category asset-breakdown files power category detail charts, so include
       // every asset category rather than only the primary aggregate bucket.
       for (const category of categoryAssetBreakdownCategories) {
-        const dpa = ensureBreakdownDataPoint(byCategoryTickerBreakdown, category, timestamp, canonicalMarketId);
+        const dpa = ensureBreakdownDataPoint(byCategoryTickerBreakdown, category as string, timestamp, canonicalMarketId);
         addBreakdownValue(dpa, 'onChainMcap', timestamp, canonicalMarketId, totalOnChainMcap);
         addBreakdownValue(dpa, 'activeMcap', timestamp, canonicalMarketId, totalActiveMcap);
         addBreakdownValue(dpa, 'defiActiveTvl', timestamp, canonicalMarketId, totalTvl);
@@ -1600,6 +1602,147 @@ export async function generateAggregatedHistoricalCharts(metadata: RWAMetadata[]
   console.log(`  Processed ${processedCount} assets. Chains: ${Object.keys(byChain).length}, Categories: ${Object.keys(byCategory).length}, Platforms: ${Object.keys(byPlatform).length}, AssetGroups: ${Object.keys(byAssetGroup).length}`);
 }
 
+// Pre-compute aggregated net-flow series (overview / group / platform / chain) +
+// windowed leaderboard, like generateAggregatedHistoricalCharts does for mcap. Runs
+// after generatePGCache so per-asset flow files + pg-cache exist on disk.
+// Chain agg sums netFlowByChain AS-IS: bridges show as outflow+inflow per chain
+// (nets to 0 in asset/group/platform totals; per-chain = "supply change by chain").
+export async function generateAggregatedFlows(metadata: RWAMetadata[]): Promise<void> {
+  console.log('Generating aggregated flows...');
+  const startTime = Date.now();
+
+  type AssetFlows = {
+    id: string;
+    label: string;            // canonicalMarketId
+    assetGroup: string | null;
+    platform: string | null;
+    series: FlowPoint[];
+    latestMcap: number;       // for flow-intensity
+    latestMcapByChain: { [chainLabel: string]: number };
+    chains: Set<string>;
+  };
+
+  const assets: AssetFlows[] = [];
+  for (const m of metadata) {
+    const label = m.data.canonicalMarketId;
+    if (!label) continue;
+    if (FLOWS_HIDDEN_IDS.has(String(m.id))) continue;
+
+    const series = (await readFlowsForId(m.id)) as FlowPoint[] | null;
+    if (!series || series.length === 0) continue;
+
+    let latestMcap = 0;
+    const latestMcapByChain: { [c: string]: number } = {};
+    const pgCache = await readPGCacheForId(m.id);
+    if (pgCache) {
+      const timestamps = Object.keys(pgCache).map(Number);
+      if (timestamps.length > 0) {
+        const lastTs = Math.max(...timestamps);
+        const rec = pgCache[lastTs] as any;
+        latestMcap = toFiniteNumberOrZero(rec?.onChainMcap);
+        for (const [chainKey, chainData] of Object.entries(rec?.chains || {})) {
+          latestMcapByChain[getChainLabelFromKey(chainKey)] = toFiniteNumberOrZero((chainData as any)?.onChainMcap);
+        }
+      }
+    }
+
+    const chains = new Set<string>();
+    for (const p of series) for (const c of Object.keys(p.netFlowByChain || {})) chains.add(c);
+
+    assets.push({
+      id: String(m.id),
+      label,
+      assetGroup: typeof m.data.assetGroup === 'string' && m.data.assetGroup.trim() ? m.data.assetGroup.trim() : null,
+      platform: typeof m.data.parentPlatform === 'string' && m.data.parentPlatform.trim() ? m.data.parentPlatform.trim() : null,
+      series,
+      latestMcap,
+      latestMcapByChain,
+      chains,
+    });
+  }
+
+  // null day stays null; chains missing supply stay null (unknown, not 0);
+  // otherwise this chain's contribution (byChain or a genuine 0).
+  const chainMemberSeries = (a: AssetFlows, chainLabel: string): DailyFlow[] =>
+    a.series.map((p) => ({
+      timestamp: p.timestamp,
+      netFlowUsd:
+        p.netFlowUsd == null || p.missingChains?.includes(chainLabel)
+          ? null
+          : (p.netFlowByChain?.[chainLabel] ?? 0),
+    }));
+
+  const byGroup: { [g: string]: AssetFlows[] } = {};
+  const byPlatform: { [p: string]: AssetFlows[] } = {};
+  const byChain: { [c: string]: AssetFlows[] } = {};
+  for (const a of assets) {
+    if (a.assetGroup) (byGroup[a.assetGroup] ||= []).push(a);
+    if (a.platform) (byPlatform[a.platform] ||= []).push(a);
+    for (const c of a.chains) (byChain[c] ||= []).push(a);
+  }
+
+  const overview = aggregateFlows(assets.map((a) => ({ id: a.label, series: a.series })));
+  const groupResults: { [g: string]: FlowAggregateResult } = {};
+  for (const [g, members] of Object.entries(byGroup)) groupResults[g] = aggregateFlows(members.map((a) => ({ id: a.label, series: a.series })));
+  const platformResults: { [p: string]: FlowAggregateResult } = {};
+  for (const [p, members] of Object.entries(byPlatform)) platformResults[p] = aggregateFlows(members.map((a) => ({ id: a.label, series: a.series })));
+  const chainResults: { [c: string]: FlowAggregateResult } = {};
+  for (const [c, members] of Object.entries(byChain)) chainResults[c] = aggregateFlows(members.map((a) => ({ id: a.label, series: chainMemberSeries(a, c) })));
+
+  // Stacked rotation chart: per timestamp, {dimensionKey: dayFlow}; null days omitted.
+  const buildStacked = (results: { [k: string]: FlowAggregateResult }): Array<{ [k: string]: number }> => {
+    const byTs: { [ts: number]: { [k: string]: number } } = {};
+    for (const [key, r] of Object.entries(results)) {
+      for (const p of r.series) {
+        if (p.netFlowUsd == null) continue;
+        (byTs[p.timestamp] ||= { timestamp: p.timestamp })[key] = p.netFlowUsd;
+      }
+    }
+    return Object.values(byTs).sort((a, b) => a.timestamp - b.timestamp);
+  };
+
+  // leaderboard: rank by |Σf| over trailing 7d/30d windows
+  const now = Math.floor(Date.now() / 1000);
+  const WINDOWS: { [w: string]: number } = { '7d': now - 7 * 86400, '30d': now - 30 * 86400 };
+  type LbRow = { id: string; group: string | null; platform: string | null; flow: number; mcap: number; intensityPct: number | null; coverage: number };
+  const intensity = (flow: number, mcap: number): number | null => (mcap > 0 ? (flow / mcap) * 100 : null);
+  const rankRows = (rows: LbRow[]): LbRow[] => rows.filter((r) => r.flow !== 0).sort((a, b) => Math.abs(b.flow) - Math.abs(a.flow));
+
+  const leaderboard: { [by: string]: { [w: string]: LbRow[] } } = { asset: {}, group: {}, platform: {}, chain: {} };
+  for (const [w, startTs] of Object.entries(WINDOWS)) {
+    leaderboard.asset[w] = rankRows(assets.map((a) => {
+      const { flow, coverage } = sumFlowWindow(a.series, startTs);
+      return { id: a.label, group: a.assetGroup, platform: a.platform, flow, mcap: a.latestMcap, intensityPct: intensity(flow, a.latestMcap), coverage };
+    }));
+    leaderboard.group[w] = rankRows(Object.entries(byGroup).map(([g, members]) => {
+      const { flow, coverage } = sumFlowWindow(groupResults[g].series, startTs);
+      const mcap = members.reduce((s, a) => s + a.latestMcap, 0);
+      return { id: g, group: g, platform: null, flow, mcap, intensityPct: intensity(flow, mcap), coverage };
+    }));
+    leaderboard.platform[w] = rankRows(Object.entries(byPlatform).map(([p, members]) => {
+      const { flow, coverage } = sumFlowWindow(platformResults[p].series, startTs);
+      const mcap = members.reduce((s, a) => s + a.latestMcap, 0);
+      return { id: p, group: null, platform: p, flow, mcap, intensityPct: intensity(flow, mcap), coverage };
+    }));
+    leaderboard.chain[w] = rankRows(Object.entries(byChain).map(([c, members]) => {
+      const { flow, coverage } = sumFlowWindow(chainResults[c].series, startTs);
+      const mcap = members.reduce((s, a) => s + (a.latestMcapByChain[c] || 0), 0);
+      return { id: c, group: null, platform: null, flow, mcap, intensityPct: intensity(flow, mcap), coverage };
+    }));
+  }
+
+  await storeRouteData('flows/overview.json', { series: overview.series, coverage: overview.coverage });
+  await storeRouteData('flows/overview-split/group.json', buildStacked(groupResults));
+  await storeRouteData('flows/overview-split/chain.json', buildStacked(chainResults));
+  for (const [g, r] of Object.entries(groupResults)) await storeRouteData(`flows/group/${rwaSlug(g)}.json`, r);
+  for (const [p, r] of Object.entries(platformResults)) await storeRouteData(`flows/platform/${rwaSlug(p)}.json`, r);
+  for (const [c, r] of Object.entries(chainResults)) await storeRouteData(`flows/chain/${rwaSlug(c)}.json`, r);
+  await storeRouteData('flows/leaderboard.json', leaderboard);
+
+  console.log(`Generated aggregated flows in ${Date.now() - startTime}ms`);
+  console.log(`  Assets: ${assets.length}, Groups: ${Object.keys(byGroup).length}, Platforms: ${Object.keys(byPlatform).length}, Chains: ${Object.keys(byChain).length}`);
+}
+
 function toTimeseriesBreakdownChart(data: any, chainLabel?: boolean): any {
   const timeseries: any = {};
   for (const [timestamp, dataMap] of Object.entries(data)) {
@@ -1676,6 +1819,9 @@ async function main() {
 
     // Generate aggregated historical charts by chain, category, platform
     await generateAggregatedHistoricalCharts(metadata);
+
+    // Aggregated flow series + leaderboard (needs per-asset flow files from above)
+    await generateAggregatedFlows(metadata);
 
     // Clear old cache versions only after the new cache has been fully generated.
     console.log('Clearing old cache versions...');

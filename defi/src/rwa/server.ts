@@ -2,15 +2,11 @@ import * as HyperExpress from 'hyper-express';
 import { readRouteData, getCacheVersion, readPGCacheForId, readFlowsForId, PGCacheRecord } from './file-cache';
 import { rwaSlug } from './utils';
 import { trimLeadingZeros } from './cron';
+import { FLOWS_HIDDEN_IDS } from './metadataConstants';
 
 const webserver = new HyperExpress.Server();
 const port = +(process.env.RWA_PORT ?? 5002);
 const RWA_SUBPATH = process.env.RWA_SUBPATH;
-
-// RWA ids hidden from /flows/:id because their flow series is junk from bad
-// upstream mcap (e.g. BRZ#609 — phantom Gnosis/Stellar mcap yields ~1e17 spikes).
-// Serving-layer hide only; remove an id once its upstream mcap is fixed.
-const FLOWS_HIDDEN_IDS = new Set<string>(['609']);
 
 if (!RWA_SUBPATH) {
     throw new Error('Missing required environment variable: RWA_SUBPATH');
@@ -311,6 +307,64 @@ function setRoutes(router: HyperExpress.Router): void {
         })
     );
 
+    // Aggregated flows (generateAggregatedFlows). Registered before /flows/:id so
+    // "overview"/"leaderboard" aren't matched as asset ids.
+    router.get(
+        '/flows/overview',
+        errorWrapper(async (req, res) => {
+            const splitBy = req.query.splitBy;
+            if (splitBy === 'group' || splitBy === 'chain') {
+                return fileResponse(`flows/overview-split/${splitBy}.json`, res, 30);
+            }
+            return fileResponse('flows/overview.json', res, 30);
+        })
+    );
+
+    router.get(
+        '/flows/leaderboard',
+        errorWrapper(async (req, res) => {
+            const window = String(req.query.window ?? '30d');
+            const by = String(req.query.by ?? 'asset');
+            const limitRaw = Number(req.query.limit);
+            const limit = Number.isFinite(limitRaw) && limitRaw > 0 ? Math.floor(limitRaw) : 20;
+            if (!['asset', 'platform', 'group', 'chain'].includes(by)) {
+                return errorResponse(res, 'Invalid `by` (asset|platform|group|chain)', 400);
+            }
+            if (!['7d', '30d'].includes(window)) {
+                return errorResponse(res, 'Invalid `window` (7d|30d)', 400);
+            }
+            const all = await readRouteData('flows/leaderboard.json', { skipErrorLog: true });
+            const rows = all?.[by]?.[window];
+            if (!rows) return errorResponse(res, 'Leaderboard not found', 404);
+            return successResponse(res, { window, by, rows: rows.slice(0, limit) }, 30);
+        })
+    );
+
+    router.get(
+        '/flows/group/:group',
+        errorWrapper(async (req, res) => {
+            const { group } = req.params;
+            if (!group) return errorResponse(res, 'Missing group parameter', 400);
+            return fileResponse(`flows/group/${rwaSlug(group)}.json`, res, 30);
+        })
+    );
+    router.get(
+        '/flows/platform/:platform',
+        errorWrapper(async (req, res) => {
+            const { platform } = req.params;
+            if (!platform) return errorResponse(res, 'Missing platform parameter', 400);
+            return fileResponse(`flows/platform/${rwaSlug(platform)}.json`, res, 30);
+        })
+    );
+    router.get(
+        '/flows/chain/:chain',
+        errorWrapper(async (req, res) => {
+            const { chain } = req.params;
+            if (!chain) return errorResponse(res, 'Missing chain parameter', 400);
+            return fileResponse(`flows/chain/${rwaSlug(chain)}.json`, res, 30);
+        })
+    );
+
     // Daily net-flow time-series for one RWA over [start, end].
     // Series is pre-computed in cron (see storeFlowsForIdFromChainRecords) and
     // served from disk; this route filters by the requested window in-memory.
@@ -339,8 +393,23 @@ function setRoutes(router: HyperExpress.Router): void {
             if (!series) {
                 return errorResponse(res, `Flows for "${id}" not found`, 404);
             }
-            const data = series.filter((p: any) => p.timestamp >= startTs && p.timestamp <= endTs);
-            return successResponse(res, { id, start: startTs, end: endTs, data }, 30);
+            let data = series.filter((p: any) => p.timestamp >= startTs && p.timestamp <= endTs);
+
+            // ?withMcap joins each day's onChainMcap (as /chart/asset/:id serves) for the
+            // flow-vs-price decomposition. null (not 0) when no record that day.
+            if (req.query.withMcap === 'true') {
+                const pgCache = await readPGCacheForId(String(id));
+                data = data.map((p: any) => ({
+                    ...p,
+                    mcap: pgCache?.[p.timestamp]?.onChainMcap ?? null,
+                }));
+            }
+
+            // coverage = non-null flow days / total days in window (null = unknown, not 0).
+            const nonNullDays = data.reduce((n: number, p: any) => n + (p.netFlowUsd != null ? 1 : 0), 0);
+            const coverage = data.length ? nonNullDays / data.length : 0;
+
+            return successResponse(res, { id, start: startTs, end: endTs, data, coverage }, 30);
         })
     );
 

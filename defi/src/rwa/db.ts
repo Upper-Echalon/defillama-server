@@ -668,6 +668,50 @@ export function computeFlowSeries(rows: FlowRow[], chainLabelFn: (slug: string) 
     });
 }
 
+export interface DailyFlow { timestamp: number; netFlowUsd: number | null; }
+export interface FlowAggregatePoint { timestamp: number; netFlowUsd: number | null; coverage: number; }
+export interface FlowAggregateResult { series: FlowAggregatePoint[]; coverage: number; members: string[]; }
+
+// Sum per-member daily flows (null≠0): a day's flow = sum of non-null members; null
+// only when every member that day is null. coverage = non-null (member×day) cells /
+// total cells. Members with no point at a timestamp don't count toward that day.
+export function aggregateFlows(members: { id: string; series: DailyFlow[] }[]): FlowAggregateResult {
+    const byTs = new Map<number, { sum: number; nonNull: number; total: number }>();
+    for (const m of members) {
+        for (const p of m.series) {
+            let agg = byTs.get(p.timestamp);
+            if (!agg) { agg = { sum: 0, nonNull: 0, total: 0 }; byTs.set(p.timestamp, agg); }
+            agg.total += 1;
+            if (p.netFlowUsd != null) { agg.sum += p.netFlowUsd; agg.nonNull += 1; }
+        }
+    }
+    let coveredCells = 0;
+    let totalCells = 0;
+    const series: FlowAggregatePoint[] = Array.from(byTs.entries())
+        .sort((a, b) => a[0] - b[0])
+        .map(([timestamp, agg]) => {
+            coveredCells += agg.nonNull;
+            totalCells += agg.total;
+            return {
+                timestamp,
+                netFlowUsd: agg.nonNull > 0 ? agg.sum : null,
+                coverage: agg.total > 0 ? agg.nonNull / agg.total : 0,
+            };
+        });
+    return { series, coverage: totalCells > 0 ? coveredCells / totalCells : 0, members: members.map((m) => m.id) };
+}
+
+// Sum a daily flow series over [startTs, ∞) with day-level coverage (leaderboard windows).
+export function sumFlowWindow(series: DailyFlow[], startTs: number): { flow: number; coverage: number } {
+    let flow = 0, nonNull = 0, total = 0;
+    for (const p of series) {
+        if (p.timestamp < startTs) continue;
+        total += 1;
+        if (p.netFlowUsd != null) { flow += p.netFlowUsd; nonNull += 1; }
+    }
+    return { flow, coverage: total > 0 ? nonNull / total : 0 };
+}
+
 // Fetch unique timestamps
 export async function fetchTimestampsPG(): Promise<number[]> {
     const results = await DAILY_RWA_DATA.sequelize!.query(

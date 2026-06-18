@@ -17,6 +17,10 @@ export const RWA_KEY_MAP: { [value: string]: string } = {
   totalSupply: "totalSupply",
 };
 
+// RWA ids hidden from flows (per-asset + aggregates) due to bad upstream mcap
+// (BRZ#609 phantom mcap → ~1e17 spikes). Shared by server route + cron aggregator.
+export const FLOWS_HIDDEN_IDS = new Set<string>(["609"]);
+
 // Some metadata fields should always be exposed as string arrays in the API,
 // even if the underlying stored metadata is a single string (legacy) or mixed types.
 export const RWA_ALWAYS_STRING_ARRAY_FIELDS = new Set<string>([

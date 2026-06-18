@@ -6939,6 +6939,7 @@ const data6: Protocol[] = [
     chains: ["Hyperliquid L1"],
     module: "dummy.js",
     twitter: "MRCYsupply",
+    forkedFromIds: ["7486"],
     dimensions: {
       fees: "mercury",
       dexs: "mercury",

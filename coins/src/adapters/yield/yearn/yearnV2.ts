@@ -29,6 +29,8 @@ const manualVaults: { [chain: string]: string[] } = {
     "0xd6ad7a6750a7593e092a9b218d66c0a814a3436e", // yUSDC
     "0x83f798e925bcd4017eb265844fddabb448f1707d", // yUSDT
     "0x73a052500105205d34daf004eab301916da8190f", // yTUSD
+    "0x27B5739e22ad9033bcBf192059122d163b60349D", // st-yCRV
+    "0xc97232527B62eFb0D8ed38CF3EA103A6CcA4037e", // lp-yCRV
   ],
   optimism: [
     "0x22f39d6535df5767f8f57fee3b2f941410773ec4", // yvETH
@@ -40,6 +42,11 @@ const manualVaults: { [chain: string]: string[] } = {
   arbitrum: [],
   fantom: [],
   base: [],
+};
+
+const cgKeyOverrides: { [address: string]: { id: string; confidence: number } } = {
+  "0x27b5739e22ad9033bcbf192059122d163b60349d": { id: "staked-yearn-crv-vault", confidence: 0.995 }, // st-yCRV
+  "0xc97232527b62efb0d8ed38cf3ea103a6cca4037e": { id: "lp-yearn-crv-vault", confidence: 0.995 }, // lp-yCRV (underlying = yCRV-f Curve LP)
 };
 const registries: {
   [chain: string]: { target: string; fromBlock: number };
@@ -237,16 +244,17 @@ export default async function getTokenPrices(chain: string, timestamp: number) {
 
   let writes: Write[] = [];
   usdValues.map((v) => {
+    const override = cgKeyOverrides[v.address.toLowerCase()];
     addToDBWritesList(
       writes,
-      chain,
-      v.address,
+      override ? "coingecko" : chain,
+      override ? override.id : v.address,
       v.price,
       v.decimal,
       v.symbol,
       timestamp,
       "yearnV2",
-      0.9,
+      override ? override.confidence : 0.9,
     );
   });
   return writes;

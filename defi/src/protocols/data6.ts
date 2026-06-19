@@ -1,4 +1,4 @@
-import { protocolIconsUrl } from "../constants";
+import { baseIconsUrl, protocolIconsUrl } from "../constants";
 import type { Protocol } from "./types";
 /*
 {
@@ -6644,7 +6644,11 @@ const data6: Protocol[] = [
     module: "brownfi-v3/index.js",
     twitter: "brownfiamm",
     parentProtocol: "parent#brownfi",
-    listedAt: 1781584549
+    listedAt: 1781584549,
+    dimensions: {
+      fees: "brownfi-v3",
+      dexs: "brownfi-v3",
+    }
   },
   {
     id: "8024",
@@ -6970,6 +6974,47 @@ const data6: Protocol[] = [
       fees: "yourgrails",
       dexs: "yourgrails",
     }
+  },
+  {
+    id: "8039",
+    name: "Panoptic V2",
+    address: null,
+    symbol: "-",
+    url: "https://panoptic.xyz",
+    description:
+      "Panoptic is the first on-chain, permissionless options protocol, revolutionizing trading and liquidity provision.",
+    chain: "Ethereum",
+    logo: `${baseIconsUrl}/panoptic-v2.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Options",
+    chains: ["Ethereum"],
+    module: "panoptic-v2/index.js",
+    twitter: "Panoptic_xyz",
+    audit_links: ["https://panoptic.xyz/docs/security/security_audits"],
+    parentProtocol: "parent#panoptic",
+    listedAt: 1781895131,
+  },
+  {
+    id: "8040",
+    name: "EZMoney",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://ezmoney.finance
+    description:
+      "EZMoney helps users create and manage individual automated liquidity positions without needing to choose pools, set ranges, collect fees, or rebalance manually. Powered by EZManager, it keeps each position's history, performance, and real P&L easy to track.",
+    chain: "Base",
+    logo: `${baseIconsUrl}/ezmoney.jpg`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Liquidity Manager",
+    chains: ["Base", "Arbitrum", "Hyperliquid L1", "Binance"],
+    module: "ezmoney/index.js",
+    twitter: "EZManagerCL",
+    audit_links: ["https://docs.ezmanager.finance/audits"],
+    listedAt: 1781895398,
   },
 ];
 export default data6;

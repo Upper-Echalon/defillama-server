@@ -5895,6 +5895,10 @@ export const chainCoingeckoIds = {
     cmcId: "36405",
     twitter: "spaceandtime",
     url: "https://www.spaceandtime.io/",
+    dimensions: {
+      "new-users": "space-and-time",
+      "active-users": "space-and-time",
+    },
   },
   "Canton": {
     geckoId: "canton-network",

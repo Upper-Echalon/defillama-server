@@ -5889,7 +5889,7 @@ export const chainCoingeckoIds = {
     url: "https://www.everclear.org/",
     chainId: 25327,
   },
-  "Space and Time": {
+  "SXT Chain": {
     geckoId: null,
     symbol: "SXT",
     cmcId: null,
@@ -6533,6 +6533,7 @@ const newChainLabelMap = {
   "area": "Areum Network",
   "dango": "Dango Mainnet",
   "aleo": "ALEO",
+  "space_and_time": "SXT Chain",
 } as { [key: string]: string }
 
 const allChainLabelMap = {

@@ -205,6 +205,7 @@ export default function setRoutes(router: HyperExpress.Router, routerBasePath: s
 
 
   router.get("/news/articles", defaultFileHandler) // TODO: ensure that env vars are set
+  router.get("/graveyard", defaultFileHandler)
 
   router.post("/reportError", ew(reportErrorHandler)) // TODO: ensure that env vars are set
   router.post("/reportSupport", ew(reportSupportHandler)) // TODO: ensure that env vars are set

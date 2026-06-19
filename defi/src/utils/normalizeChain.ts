@@ -5890,14 +5890,15 @@ export const chainCoingeckoIds = {
     chainId: 25327,
   },
   "Space and Time": {
-    geckoId: "space-and-time",
+    geckoId: null,
     symbol: "SXT",
-    cmcId: "36405",
+    cmcId: null,
     twitter: "spaceandtime",
     url: "https://www.spaceandtime.io/",
     dimensions: {
       "new-users": "space-and-time",
       "active-users": "space-and-time",
+      fees: "space-and-time",
     },
   },
   "Canton": {

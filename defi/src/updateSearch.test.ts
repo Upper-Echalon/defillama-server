@@ -4,6 +4,7 @@ import {
   PAGES_INDEX_SETTINGS,
   SEARCH_RANK,
   buildDirectoryResults,
+  buildEquitySearchResult,
   buildFrontendPageSearchResult,
   buildProtocolSearchResult,
   buildStablecoinSearchResult,
@@ -272,6 +273,23 @@ describe("entity and subpage search docs", () => {
       r: SEARCH_RANK.entity,
       topLevelRank: SEARCH_DEPTH_RANK.topLevel,
       type: "Stablecoin",
+    });
+  });
+
+  it("builds equity routes and logos from raw ticker-country values", () => {
+    const result = buildEquitySearchResult(
+      { name: "Berkshire Hathaway", ticker: "brk.B", country: "us" },
+      { "/equities/brk.B:us": 10, "/equities/brk.b": 99 }
+    );
+
+    expect(result).toMatchObject({
+      name: "Berkshire Hathaway",
+      symbol: "brk.B",
+      logo: "https://icons.llamao.fi/icons/equities/brk.B:us?w=48&h=48",
+      route: "/equities/brk.B:us",
+      r: SEARCH_RANK.collection,
+      v: 10,
+      type: "Equities",
     });
   });
 });

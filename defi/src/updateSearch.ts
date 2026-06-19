@@ -122,6 +122,12 @@ interface StablecoinSearchInput {
   circulating: { peggedUSD: number };
 }
 
+interface EquitySearchInput {
+  name: string;
+  ticker: string;
+  country: string;
+}
+
 interface ProtocolSearchSource {
   name: string;
   category?: string;
@@ -305,6 +311,20 @@ export function buildStablecoinSearchResult(
     topLevelRank: SEARCH_DEPTH_RANK.topLevel,
     v: tastyMetrics[`/stablecoin/${slug}`] ?? 0,
     type: "Stablecoin",
+  };
+}
+
+export function buildEquitySearchResult(equity: EquitySearchInput, tastyMetrics: Record<string, number>): SearchResult {
+  const slug = `${equity.ticker}:${equity.country}`;
+  return {
+    id: `equity_${normalize(equity.name)}_${normalize(equity.ticker)}_${normalize(equity.country)}`,
+    name: equity.name,
+    symbol: equity.ticker,
+    logo: `https://icons.llamao.fi/icons/equities/${slug}?w=48&h=48`,
+    route: `/equities/${slug}`,
+    r: SEARCH_RANK.collection,
+    v: tastyMetrics[`/equities/${slug}`] ?? 0,
+    type: "Equities",
   };
 }
 
@@ -1601,16 +1621,10 @@ async function generateSearchList() {
       type: "RWA Perps",
     });
   }
-  const equities: Array<SearchResult> = equitiesData.map((equity) => ({
-    id: `equity_${normalize(equity.name)}_${normalize(equity.ticker)}`,
-    name: equity.name,
-    symbol: equity.ticker,
-    logo: `https://icons.llamao.fi/icons/equities/${equity.ticker}?w=48&h=48`,
-    route: `/equities/${equity.ticker.toLowerCase()}`,
-    r: SEARCH_RANK.collection,
-    v: tastyMetrics[`/equities/${equity.ticker.toLowerCase()}`] ?? 0,
-    type: "Equities",
-  }));
+  const equities: Array<SearchResult> = [];
+  for (const equity of equitiesData) {
+    equities.push(buildEquitySearchResult(equity, tastyMetrics));
+  }
 
   const sortDesc = (a: any, b: any) => (b.v ?? 0) - (a.v ?? 0);
   // Sort each visible group by recent route popularity before concatenating.

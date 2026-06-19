@@ -1,4 +1,4 @@
-import { baseIconsUrl, protocolIconsUrl } from "../constants";
+import {protocolIconsUrl } from "../constants";
 import type { Protocol } from "./types";
 /*
 {

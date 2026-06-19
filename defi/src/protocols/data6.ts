@@ -6984,7 +6984,7 @@ const data6: Protocol[] = [
     description:
       "Panoptic is the first on-chain, permissionless options protocol, revolutionizing trading and liquidity provision.",
     chain: "Ethereum",
-    logo: `${baseIconsUrl}/panoptic-v2`,
+    logo: `${protocolIconsUrl}/panoptic-v2`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -7005,7 +7005,7 @@ const data6: Protocol[] = [
     description:
       "EZMoney helps users create and manage individual automated liquidity positions without needing to choose pools, set ranges, collect fees, or rebalance manually. Powered by EZManager, it keeps each position's history, performance, and real P&L easy to track.",
     chain: "Base",
-    logo: `${baseIconsUrl}/ezmoney`,
+    logo: `${protocolIconsUrl}/ezmoney`,
     audits: "2",
     gecko_id: null,
     cmcId: null,

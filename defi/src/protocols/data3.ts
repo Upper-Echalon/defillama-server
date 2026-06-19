@@ -11238,7 +11238,7 @@ const data3_0: Protocol[] = [
     audit_links: ["https://blog.openzeppelin.com/uncx-uniswapv3-liquidity-locker-audit"],
     parentProtocol: "parent#uncx-network",
     listedAt: 1688652343,
-    deadUrl: true,  },
+  },
   {
     id: "3209",
     name: "Pinnako",
@@ -37067,7 +37067,7 @@ const data3_2: Protocol[] = [
     name: "3F Mutual",
     address: null,
     symbol: "-",
-    url: "https://3fmutual.org",
+    url: "https://3fmutual.com/",
     description: `MakerDAO Crash Insurance Pool. You buy some units of insurance. The price of a single unit is determined by a given formula.`,
     chain: "Ethereum",
     logo: `${protocolIconsUrl}/3f-mutual.jpg`,
@@ -37078,7 +37078,6 @@ const data3_2: Protocol[] = [
     chains: ["Ethereum"],
     module: "3fmutual/index.js",
     twitter: "HakkaFinance",
-    deadUrl: true,
     listedAt: 1711376333,
   },
   {
@@ -45444,7 +45443,7 @@ const data3_3: Protocol[] = [
     name: "DoubleUp",
     address: "sui:0x87dfe1248a1dc4ce473bd9cb2937d66cdc6c30fee63f3fe0dbb55c7a09d35dec::up::UP",
     symbol: "UP",
-    url: "https://www.doubleup.fun/",
+    url: "https://www.doubleup.io/",
     description: "Defi gaming platform on Sui Network",
     chain: "Sui",
     logo: `${protocolIconsUrl}/doubleup.png`,
@@ -45457,7 +45456,6 @@ const data3_3: Protocol[] = [
     module: "doubleup/index.js",
     twitter: "doubleup_app",
     listedAt: 1717724531,
-    deadUrl: true,
     dimensions: {
       fees: "pumpup"
     }

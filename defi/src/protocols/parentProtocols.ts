@@ -4654,7 +4654,6 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "SundaeSwap",
     github: ["SundaeSwap-finance"],
-    deadUrl: true,
   },
   {
     id: "parent#flowx-finance",

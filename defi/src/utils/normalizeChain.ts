@@ -5898,7 +5898,6 @@ export const chainCoingeckoIds = {
     dimensions: {
       "new-users": "space-and-time",
       "active-users": "space-and-time",
-      fees: "space-and-time",
     },
   },
   "Canton": {

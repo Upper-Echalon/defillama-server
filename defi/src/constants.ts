@@ -1,5 +1,6 @@
 import path from "path";
-export const baseIconsUrl = "https://icons.llama.fi";
+export const baseIconsUrl = "https://icons.llamao.fi";
+export const protocolIconsUrl = `${baseIconsUrl}/icons/protocols`;
 export const DATA_FILES = [
   'data1',
   'data2',

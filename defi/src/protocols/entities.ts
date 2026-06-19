@@ -1,4 +1,4 @@
-import { baseIconsUrl } from "../constants";
+import { protocolIconsUrl } from "../constants";
 import { setProtocolMetadata } from "./data";
 import treasuries from "./treasury";
 
@@ -356,7 +356,7 @@ const entities = [
 ].map(entity => ({
     ...entity,
     id: `entity-${entity.id}`,
-    logo: `${baseIconsUrl}/${entity.logo}`,
+    logo: `${protocolIconsUrl}/${entity.logo}`,
     symbol: "", chain: "", gecko_id: null, cmcId: null, chains: []
 }))
 

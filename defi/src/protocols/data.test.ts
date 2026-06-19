@@ -362,7 +362,7 @@ test("no module repeated", async () => {
 /*
 test("icon exists", async () => {
   for (const protocol of protocols) {
-    const icon = protocol.logo?.substr(baseIconsUrl.length + 1);
+    const icon = protocol.logo?.substr(protocolIconsUrl.length + 1);
     if (icon !== undefined) {
       const path = `./icons/${icon}`;
       if (!fs.existsSync(path)) {

@@ -104,7 +104,7 @@ export async function storeGetProtocols({
           mcap: protocol.mcap,
           name: protocol.name,
           symbol: protocol.symbol,
-          logo: protocol.logo,
+          logo: protocol.logo ? `${protocol.logo}?w=48&h=48` : protocol.logo,
           url: protocol.url,
           referralUrl: protocol.referralUrl,
           tvl: protocolTvls.tvl,
@@ -180,6 +180,7 @@ export async function storeGetProtocols({
     });
     return {
       ...parent,
+      logo: `${parent.logo}?w=48&h=48`,
       chains: Array.from(chains),
       mcap,
     };

@@ -12,7 +12,14 @@ jest.mock("./protocols/data", () => ({
 
 jest.mock("./protocols/parentProtocols", () => ({
   __esModule: true,
-  default: [],
+  default: [
+    {
+      id: "parent#visible",
+      name: "Visible Parent",
+      logo: "https://icons.llama.fi/visible-parent.png",
+      gecko_id: null,
+    },
+  ],
 }));
 
 jest.mock("./getProtocols", () => ({
@@ -105,7 +112,7 @@ describe("storeGetProtocols visible chain filtering", () => {
         chainTvls: { Ethereum: 100 },
         oraclesByChain: {},
         symbol: "VP",
-        logo: "",
+        logo: "https://icons.llama.fi/visible-protocol.png",
         url: "",
         referralUrl: "",
         parentProtocol: undefined,
@@ -141,6 +148,8 @@ describe("storeGetProtocols visible chain filtering", () => {
     });
 
     expect(protocols2Data.protocols).toHaveLength(1);
+    expect(protocols2Data.protocols[0].logo).toBe("https://icons.llama.fi/visible-protocol.png?w=48&h=48");
+    expect(protocols2Data.parentProtocols[0].logo).toBe("https://icons.llama.fi/visible-parent.png?w=48&h=48");
     expect(protocols2Data.protocols[0].chains).toEqual(["Ethereum"]);
     expect(protocols2Data.chains).toEqual(expect.arrayContaining(["Ethereum", "Hyperliquid L1", "Akash", "Arweave"]));
     expect(protocols2Data.chains).not.toContain("HyperEVM");

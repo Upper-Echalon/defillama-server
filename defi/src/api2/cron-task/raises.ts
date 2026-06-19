@@ -2,12 +2,14 @@ import { getRaisesInternal } from "../routes/getRaises";
 import { getHacksInternal } from "../routes/getHacks";
 import { getTokenRightsInternal } from "../routes/getTokenRights";
 import { fetchArticles } from "../utils/newsArticles";
+import { generateGraveyard } from "../utils/genGraveyardData";
 import * as sdk from "@defillama/sdk";
 
 async function run() {
   const dataMappings: any = {
     raises: getRaisesInternal,
     hacks: getHacksInternal,
+    graveyard: generateGraveyard,
     "token-rights": getTokenRightsInternal,
     "news/articles": fetchArticles,
   }

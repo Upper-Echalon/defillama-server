@@ -32,7 +32,8 @@ async function storeCachedR2Files() {
   const r2Data = [
     'raises', 'hacks',
     'token-rights',
-    'news/articles'
+    'news/articles',
+    'graveyard',
   ]
 
   for (const subPath of r2Data) {

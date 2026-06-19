@@ -15100,7 +15100,7 @@ const data4: Protocol[] = [
   {
     id: "6212",
     name: "Steakhouse Financial",
-    address: null,
+    address: "null",
     symbol: "-",
     url: "https://www.steakhouse.financial/",
     description: `We build transparent, efficient, and accessible financial primitives to power the next generation of capital markets on public blockchains`,
@@ -15145,7 +15145,7 @@ const data4: Protocol[] = [
     ],
     module: "steakhouse/index.js",
     twitter: "SteakhouseFi",
-    deadUrl: true, // https://x.com/SteakhouseFi/status/2038565540625543406
+     // https://x.com/SteakhouseFi/status/2038565540625543406  // added back on 19/06/2026
     listedAt: 1747736199,
     dimensions: {
       fees: "steakhouse"

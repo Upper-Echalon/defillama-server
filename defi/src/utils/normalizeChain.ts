@@ -5889,17 +5889,15 @@ export const chainCoingeckoIds = {
     url: "https://www.everclear.org/",
     chainId: 25327,
   },
-  "SXT Chain": {
-    geckoId: null,
-    symbol: "SXT",
-    cmcId: null,
-    twitter: "spaceandtime",
-    url: "https://www.spaceandtime.io/",
-    dimensions: {
-      "new-users": "space-and-time",
-      "active-users": "space-and-time",
-    },
-  },
+  // "SXT Chain": { commented to keep all metrics under the protocol listing
+  //   geckoId: null,
+  //   symbol: "SXT",
+  //   cmcId: null,
+  //   twitter: "spaceandtime",
+  //   url: "https://www.spaceandtime.io/",
+  //   dimensions: {
+  //   },
+  // },
   "Canton": {
     geckoId: "canton-network",
     symbol: "CC",

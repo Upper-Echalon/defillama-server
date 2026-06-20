@@ -7210,6 +7210,8 @@ const data5: Protocol[] = [
     github: ["spaceandtimefdn"],
     dimensions: {
       fees: "space-and-time",
+      "new-users": "space-and-time",
+      "active-users": "space-and-time",
     },
   },
   {

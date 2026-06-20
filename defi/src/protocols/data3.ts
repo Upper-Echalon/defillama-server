@@ -10661,6 +10661,9 @@ const data3_0: Protocol[] = [
     chains: ["Sui"],
     module: "dummy.js",
     twitter: "SuiNetwork",
+    dimensions: {
+      fees: "sui",
+    },
   },
   {
     id: "3182",

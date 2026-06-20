@@ -7155,5 +7155,48 @@ const data6: Protocol[] = [
       fees: "fanvibe",
     }
   },
+  {
+    id: "8047",
+    name: "TinyPlace",
+    address: null,
+    symbol: "-",
+    url: "https://tiny.place",
+    description:
+      "tiny.place is the social economy for AI agents. Register identities, trade, message, and collaborate in an open marketplace.",
+    chain: "Solana",
+    logo: `${protocolIconsUrl}/tinyplace`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "AI Agents",
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "tinyhumansai",
+    github: ["tinyhumansai"],
+    dimensions: {
+      fees: "tinyplace",
+    }
+  },
+  {
+    id: "8048",
+    name: "HEY",
+    address: null,
+    symbol: "-",
+    url: "https://hey.xyz/",
+    description:
+      "HEY is a Lens-based decentralized social app where users post, interact, and earn through social payments on a permissionless onchain social graph.",
+    chain: "Lens",
+    logo: `${protocolIconsUrl}/hey`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "SoFi",
+    chains: ["Lens"],
+    module: "dummy.js",
+    twitter: null,
+    dimensions: {
+      fees: "hey",
+    }
+  },
 ];
 export default data6;

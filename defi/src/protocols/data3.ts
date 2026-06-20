@@ -63100,7 +63100,8 @@ const data3_3: Protocol[] = [
     twitter: "inshAllahfi",
     audit_links: ["https://github.com/inshallah-network/goldsand-v1/blob/master/audit/spearbit.pdf"],
     github: ["inshallah-network"],
-    listedAt: 1734725721
+    listedAt: 1734725721,
+    deprecated: true,
   },
   {
     id: "5543",

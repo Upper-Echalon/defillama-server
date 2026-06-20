@@ -18826,7 +18826,7 @@ const data4: Protocol[] = [
     url: "https://www.ether.fi/refer/04bb2542",
     description: "Take control of your crypto. Save, grow, and spend. Start now at www.ether.fi",
     chain: "Scroll",
-    logo: `${protocolIconsUrl}/etherfi-borrowing-market.fi`,
+    logo: `${protocolIconsUrl}/etherfi-borrowing-market`,
     audits: "0",
     gecko_id: null,
     cmcId: null,

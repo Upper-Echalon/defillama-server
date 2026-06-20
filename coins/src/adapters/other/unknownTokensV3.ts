@@ -117,7 +117,12 @@ const configCustomAbi: any = {
 
 export function unknownTokensV3(timestamp: number = 0) {
   return Promise.all(
-    Object.keys(config).map((chain) => getTokenPrice(chain, timestamp)),
+    Object.keys(config).map((chain) =>
+      getTokenPrice(chain, timestamp).catch((e) => {
+        console.error(`${projectName}: ${chain} failed, skipping`, e);
+        return [];
+      }),
+    ),
   );
 }
 
@@ -136,7 +141,7 @@ async function getTokenPrice(chain: string, timestamp: number) {
   const customSlot0s: any[] = await runInPromisePool({
     items: customAbiPools,
     concurrency: 5,
-    processor: async (p: any) =>  api.call({ abi: p.abi, target: p.pool })
+    processor: async (p: any) =>  api.call({ abi: p.abi, target: p.pool, permitFailure: true })
   })
 
   const tokens0Decimals = await api.multiCall({
@@ -149,6 +154,7 @@ async function getTokenPrice(chain: string, timestamp: number) {
   });
 
   [...regularSlot0s, ...customSlot0s].forEach((v: any, i: number) => {
+    if (!v || !token0s[i] || !token1s[i]) return; // skip pools that failed to read
     const token = tokens[i].toLowerCase();
     let token0 = token0s[i].toLowerCase();
     let price =

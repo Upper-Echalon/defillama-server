@@ -5326,7 +5326,7 @@ const data5: Protocol[] = [
   },
   {
     id: "7122",
-    name: "Kinetiq kmHype", // previous Kinetiq Markets , new listing for it
+    name: "Kinetiq kmHYPE", // previous Kinetiq Markets , new listing for it
     address: null,
     symbol: "-",
     url: "https://markets.xyz",

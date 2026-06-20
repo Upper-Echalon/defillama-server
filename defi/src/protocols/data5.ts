@@ -7084,7 +7084,7 @@ const data5: Protocol[] = [
     url: "https://www.permapod.xyz/",
     description: "Permapod is a non custodial DeFi protocol built on Zigchain, part of the Cosmos ecosystem. It enables users to deposit assets as collateral and borrow stablecoins or other tokens in a secure, decentralized environment",
     chain: "ZIGChain",
-    logo: `${protocolIconsUrl}/perma-pod`,
+    logo: `${protocolIconsUrl}/permapod`,
     audits: "2",
     gecko_id: null,
     cmcId: null,

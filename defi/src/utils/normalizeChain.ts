@@ -6456,7 +6456,7 @@ const chainLabelMap = {
   "qiev3": "QIE",
   "voi": "Voi Network",
   "everclear": "Everclear",
-  "space_and_time": "Space and Time",
+  //"space_and_time": "Space and Time",
   "edgex": "edgeX L1",
   "blockdag": "BlockDAG",
   "bcypher": "BCHyper",
@@ -6530,7 +6530,7 @@ const newChainLabelMap = {
   "area": "Areum Network",
   "dango": "Dango Mainnet",
   "aleo": "ALEO",
-  "space_and_time": "SXT Chain",
+  //"space_and_time": "SXT Chain",
 } as { [key: string]: string }
 
 const allChainLabelMap = {

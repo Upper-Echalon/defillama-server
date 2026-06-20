@@ -10662,7 +10662,7 @@ const data3_0: Protocol[] = [
     module: "dummy.js",
     twitter: "SuiNetwork",
     dimensions: {
-      fees: "sui",
+      fees: "sui-foundation",
     },
   },
   {

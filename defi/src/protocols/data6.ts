@@ -7017,5 +7017,94 @@ const data6: Protocol[] = [
     audit_links: ["https://docs.ezmanager.finance/audits"],
     listedAt: 1781895398,
   },
+  {
+    id: "8041",
+    name: "dreamDEX",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://dreamdex.io
+    description:
+      "Zero-fee, yield-bearing CLOB DEX.",
+    chain: "Somnia",
+    logo: `${protocolIconsUrl}/dreamdex`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Order Book"],
+    chains: ["Somnia"],
+    module: "dummy.js",
+    twitter: "dreamDEXSomnia",
+    audit_links: ["https://hacken.io/audits/somnia/"],
+    dimensions: {
+      dexs: "dreamdex",
+    }
+  },
+  {
+    id: "8042",
+    name: "Lightspeed",
+    address: null,
+    symbol: "-",
+    url: "https://templedigitalgroup.com/",
+    description:
+      "Lightspeed is Temple's private, compliant spot orderbook for institutional markets on the Canton Network.",
+    chain: "Canton",
+    logo: `${protocolIconsUrl}/lightspeed`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Order Book"],
+    chains: ["Canton"],
+    module: "dummy.js",
+    twitter: "temple_ny",
+    dimensions: {
+      dexs: "temple",
+    }
+  },
+  {
+    id: "8043",
+    name: "sendfun Launchpad",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://send.fun/
+    description:
+      "Launch and trade memecoins on Solana with 0% fees.",
+    chain: "Solana",
+    logo: `${protocolIconsUrl}/sendfun-launchpad`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "sendfun",
+    parentProtocol: "parent#sendfun",
+    dimensions: {
+      dexs: "send-fun-launchpad",
+      fees: "send-fun-launchpad",
+    }
+  },
+  {
+    id: "8044",
+    name: "Sendfun DEX",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://send.fun
+    description:
+      "Launch and trade memecoins on Solana with 0% fees.",
+    chain: "Solana",
+    logo: `${protocolIconsUrl}/sendfun-dex`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["AMM"],
+    chains: ["Solana"],
+    module: "dummy.js",
+    twitter: "sendfun",
+    parentProtocol: "parent#sendfun",
+    dimensions: {
+      dexs: "send-fun-dex",
+      fees: "send-fun-dex",
+    }
+  },
 ];
 export default data6;

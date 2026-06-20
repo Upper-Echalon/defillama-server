@@ -9932,6 +9932,17 @@ const parentProtocols: IParentProtocol[] = [
     twitter: "DeFi_JUST",
     github: ["justlend"],
   },
+  {
+    id: "parent#sendfun",
+    name: "Sendfun",
+    url: " ", // pending to add url https://send.fun
+    description: "Launch and trade memecoins on Solana with 0% fees.",
+    logo: `${protocolIconsUrl}/sendfun`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "sendfun",
+  },
 ];
 
 export default parentProtocols;

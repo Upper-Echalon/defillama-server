@@ -4043,6 +4043,9 @@ export const chainCoingeckoIds = {
       da: "Celestia",
     },
     url: "https://www.eclipse.xyz",
+    dimensions: {
+      fees: "eclipse",
+    },
   },
   "Unit Zero": {
     geckoId: "unit0",

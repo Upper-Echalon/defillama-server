@@ -7110,5 +7110,50 @@ const data6: Protocol[] = [
       fees: "send-fun-dex",
     }
   },
+  {
+    id: "8045",
+    name: "Mintpad",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://mintpad.app
+    description:
+      "NFT marketplace on Cronos with trading rewards, creator tools, and collection management features.",
+    chain: "Cronos",
+    logo: `${protocolIconsUrl}/mintpad`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "NFT Marketplace",
+    chains: ["Cronos"],
+    module: "dummy.js",
+    twitter: "mintpadx",
+    dimensions: {
+      dexs: "mintpad",
+      fees: "mintpad",
+    }
+  },
+  {
+    id: "8046",
+    name: "FanVibe",
+    address: "xlayer:0x35a676Ca9347499f97819813a38ED14e6a7C5e3F",
+    symbol: "FVB",
+    url: " ", // pending to add url https://www.fanvibe.xyz
+    description:
+      "FanVibe is a World Cup prediction market and fan leaderboard platform on X Layer. Users stake OKB on real World Cup match and champion outcomes, while FanVibe tracks matchday activity, country backing, and FVB holder participation.",
+    chain: "X Layer",
+    logo: `${protocolIconsUrl}/fanvibe`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Prediction Market",
+    chains: ["X Layer"],
+    module: "dummy.js",
+    twitter: "FanVibeOnX",
+    github: ["Cyano88"],
+    dimensions: {
+      dexs: "fanvibe",
+      fees: "fanvibe",
+    }
+  },
 ];
 export default data6;

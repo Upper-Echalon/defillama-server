@@ -54370,6 +54370,7 @@ const data3_3: Protocol[] = [
     listedAt: 1726153138,
     dimensions: {
       fees: "elixir",
+      dexs: "elixir",
     },
   },
   {

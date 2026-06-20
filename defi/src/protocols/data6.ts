@@ -6920,7 +6920,7 @@ const data6: Protocol[] = [
     audits: "2",
     gecko_id: null,
     cmcId: null,
-    category: "Developer Tools",
+    category: "Liquid Staking",
     chains: ["Hyperliquid L1"],
     module: "dummy.js",
     twitter: "kinetiq_xyz",

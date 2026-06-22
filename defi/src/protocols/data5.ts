@@ -13318,6 +13318,7 @@ const data5: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://ezmanager.finance",
+    referralUrl: "https://ezmanager.finance/r/0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
     description:
       "EZManager is a concentrated liquidity management platform that helps users open, manage, and track LP positions with full lifecycle history, real P&L, and built-in automation.",
     chain: "Base",

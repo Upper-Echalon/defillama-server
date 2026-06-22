@@ -8841,7 +8841,6 @@ const data4: Protocol[] = [
   {
     id: "5942",
     name: "Gacha Markets", // previous gacha
-    previousNames: ["Gacha"],
     address: null,
     symbol: "-",
     url: "https://gacha.game/",

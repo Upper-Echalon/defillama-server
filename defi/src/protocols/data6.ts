@@ -6287,7 +6287,8 @@ const data6: Protocol[] = [
     name: "AFX",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://app.afx.xyz/trade
+    url: "https://app.afx.xyz/trade", // pending to add url https://app.afx.xyz/trade
+    referralUrl: "https://app.afx.xyz/?referral=O7S278",
     description: "AFX is a high-performance sovereign L1 purpose-built for decentralized derivatives. By synthesizing the rapid execution of a centralized exchange with the immutable sovereignty of the blockchain, AFX delivers a professional-grade Perp DEX environment characterized by sub-100ms finality, institutional liquidity, and unmatched capital efficiency. AFX fees are generated from perpetual trading activity, excluding funding, with non-protocol allocations including referral rebates, trader rewards, Points Program rewards, and other incentive distributions. The Points Program rewards trading activity, AFX LP Vault participation, and Guild activity. See https://docs.afx.xyz and https://medium.com/@AFXTrade for more details.",
     chain: "Arbitrum",
     logo: `${protocolIconsUrl}/afx`,

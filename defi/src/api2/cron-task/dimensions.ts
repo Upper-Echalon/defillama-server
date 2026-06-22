@@ -7,7 +7,7 @@ import { getAllItemsUpdatedAfter } from "../../adaptors/db-utils/db2";
 import { getChainKeyFromLabel, getChainLabelFromKey } from '../../utils/normalizeChain';
 import { protocolsById } from "../../protocols/data";
 import { parentProtocolsById } from "../../protocols/parentProtocols";
-import { addAggregateRecords, getDimensionsCacheV2, storeDimensionsCacheV2, storeDimensionsMetadata, transformDimensionRecord, validateAggregateRecords, } from "../utils/dimensionsUtils";
+import { addAggregateRecords, getDimensionsCacheV2, storeDimensionsCacheV2, storeDimensionsMetadata, transformDimensionRecord, validateAggregateRecords, validateRevenueRecords, } from "../utils/dimensionsUtils";
 import { storeEmissionsCache, } from "../utils/emissionsUtils";
 import { getNextTimeS, getTimeSDaysAgo, getUnixTimeNow, timeSToUnix } from "../utils/time";
 
@@ -94,6 +94,16 @@ async function run() {
 
 ${tableToString(invalidFinancialStatementRecords, ['protocol', 'timeframe', 'key', 'error', 'debug'])}`,
         process.env.FINANCIAL_STATEMENT_ERROR_CHANNEL_WEBHOOK!)
+    }
+  }
+
+  if (process.env.REVENUE_MISMATCHES_CHANNEL_WEBHOOK) {
+    if (invalidRevenueRecords.length) {
+      await sendMessage(`Invalid revenue records detected - Please fix them asap:
+
+
+${tableToString(invalidRevenueRecords, ['protocol', 'timeframe', 'key', 'error', 'debug'])}`,
+        process.env.REVENUE_MISMATCHES_CHANNEL_WEBHOOK!)
     }
   }
 
@@ -324,6 +334,7 @@ ${tableToString(invalidFinancialStatementRecords, ['protocol', 'timeframe', 'key
 
       // validate and detect invalid financial statement records
       validateAggregateRecords(protocol, invalidFinancialStatementRecords)
+      validateRevenueRecords(protocol, invalidRevenueRecords)
 
 
       const protocolRecordMapWithMissingData = getProtocolRecordMapWithMissingData({ records, info: protocol.info, adapterType, metadata: dimensionProtocolInfo }) as any
@@ -873,6 +884,7 @@ runWithRuntimeLogging(run, {
 const spikeRecords = [] as any[]
 const invalidDataRecords = [] as any[]
 const invalidFinancialStatementRecords = [] as any[]
+const invalidRevenueRecords = [] as any[]
 
 const NOTIFY_ON_DISCORD = cronNotifyOnDiscord()
 

@@ -256,7 +256,7 @@ export function validateAggregateRecords(pSummary: PROTOCOL_SUMMARY, invalidReco
         const df = (value as any)[AdaptorRecordType.dailyFees]?.value || 0
         const dr = (value as any)[AdaptorRecordType.dailyRevenue]?.value || 0
         const dssr = (value as any)[AdaptorRecordType.dailySupplySideRevenue]?.value || 0
-        
+
         // ignore low fees protocols
         if (df < THRESHOLD_TOTAL_FEES) continue;
         
@@ -274,7 +274,7 @@ export function validateAggregateRecords(pSummary: PROTOCOL_SUMMARY, invalidReco
             }
           }
         }
-        
+
         // sum of breakdown labels should be equal to total
         for (const label of [AdaptorRecordType.dailyFees, AdaptorRecordType.dailySupplySideRevenue, AdaptorRecordType.dailyRevenue]) {
           if ((value as any)[label] && (value as any)[label]['by-label']) {
@@ -282,7 +282,7 @@ export function validateAggregateRecords(pSummary: PROTOCOL_SUMMARY, invalidReco
             for (const labelValue of Object.values((value as any)[label]['by-label'])) {
               sumOfLabels += Number(labelValue);
             }
-            
+
             if (unsafeMargin(sumOfLabels, Number((value as any)[label].value), SAFE_NUMBER_MARGIN)) {
               if (!invalidRecordsMessages.find(i => i.protocol === pSummary.info.name)) {
                 invalidRecordsMessages.push({
@@ -299,9 +299,81 @@ export function validateAggregateRecords(pSummary: PROTOCOL_SUMMARY, invalidReco
       }
     }
   }
-  
-  function unsafeMargin(valueA: number, valueB: number, valueMargin: number) {
-    const diff = Math.abs(valueA - valueB);
-    return diff / valueB > valueMargin;
+}
+
+export function validateRevenueRecords(pSummary: PROTOCOL_SUMMARY, invalidRevenueRecords: Array<any> = []) {
+  const STRICT_NUMBER_MARGIN = 0.001; // 0.1%
+  const THRESHOLD_TOTAL_REVENUE = 500_000; // total yearly revenue >= $500K
+  const THRESHOLD_TIMEFRAMES = ['yearly']; // check yearly only for now
+
+  if (pSummary.aggregatedRecords) {
+    for (const timeframe of THRESHOLD_TIMEFRAMES) {
+      for (const [key, value] of Object.entries((pSummary.aggregatedRecords as any)[timeframe])) {
+        const dr = (value as any)[AdaptorRecordType.dailyRevenue]?.value || 0
+        const dhr = (value as any)[AdaptorRecordType.dailyHoldersRevenue]?.value || 0
+        const dpr = (value as any)[AdaptorRecordType.dailyProtocolRevenue]?.value || 0
+
+        if (Math.max(Math.abs(dr), Math.abs(dhr), Math.abs(dpr)) < THRESHOLD_TOTAL_REVENUE) continue;
+
+        if (dr && dhr && dpr) {
+          if (unsafeMargin(dhr + dpr, dr, STRICT_NUMBER_MARGIN)) {
+            if (!invalidRevenueRecords.find(i => i.protocol === pSummary.info.name)) {
+              invalidRevenueRecords.push({
+                protocol: pSummary.info.name,
+                timeframe: timeframe,
+                key: key,
+                error: 'Sum of dhr and dpr is not equal to dr',
+                debug: `dhr: ${dhr}, dpr: ${dpr}, dr: ${dr}`,
+              })
+            }
+          }
+        } else if (dr && dhr) {
+          if (exceedsTotal(dhr, dr, STRICT_NUMBER_MARGIN)) {
+            if (!invalidRevenueRecords.find(i => i.protocol === pSummary.info.name)) {
+              invalidRevenueRecords.push({
+                protocol: pSummary.info.name,
+                timeframe: timeframe,
+                key: key,
+                error: 'dhr is greater than dr',
+                debug: `dhr: ${dhr}, dr: ${dr}`,
+              })
+            }
+          }
+        } else if (dr && dpr) {
+          if (exceedsTotal(dpr, dr, STRICT_NUMBER_MARGIN)) {
+            if (!invalidRevenueRecords.find(i => i.protocol === pSummary.info.name)) {
+              invalidRevenueRecords.push({
+                protocol: pSummary.info.name,
+                timeframe: timeframe,
+                key: key,
+                error: 'dpr is greater than dr',
+                debug: `dpr: ${dpr}, dr: ${dr}`,
+              })
+            }
+          }
+        } else if (!dr && (dhr || dpr)) {
+          if (!invalidRevenueRecords.find(i => i.protocol === pSummary.info.name)) {
+            invalidRevenueRecords.push({
+              protocol: pSummary.info.name,
+              timeframe: timeframe,
+              key: key,
+              error: 'dr is 0 but dhr/dpr is greater than 0',
+              debug: `dhr: ${dhr}, dpr: ${dpr}, dr: ${dr}`,
+            })
+          }
+        }
+      }
+    }
   }
+}
+
+function exceedsTotal(component: number, total: number, margin: number) {
+  if (total > 0) return component > total * (1 + margin);
+  if (total < 0) return component > 0 || component < total * (1 + margin);
+  return false;
+}
+
+function unsafeMargin(valueA: number, valueB: number, valueMargin: number) {
+  const diff = Math.abs(valueA - valueB);
+  return diff / Math.abs(valueB) > valueMargin;
 }

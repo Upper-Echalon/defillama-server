@@ -7019,6 +7019,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: " ", // pending to add url https://ezmoney.finance
+    referralUrl: "https://ezmoney.finance/0x798ff1e6d7afd28c333ee6ebe03125d30ec6ef10",
     description:
       "EZMoney helps users create and manage individual automated liquidity positions without needing to choose pools, set ranges, collect fees, or rebalance manually. Powered by EZManager, it keeps each position's history, performance, and real P&L easy to track.",
     chain: "Base",

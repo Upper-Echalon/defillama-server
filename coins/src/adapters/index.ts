@@ -223,4 +223,5 @@ export default {
   pathUSD: require("./other/pathUSD"),
   bouncetech: require("./other/bouncetech"),
   hyperbeatEarn: require("./yield/hyperbeat"),
+  auxite: require("./rwa/auxite"),
 };

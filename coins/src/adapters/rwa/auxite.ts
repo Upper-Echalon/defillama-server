@@ -20,7 +20,7 @@ export async function auxite(timestamp: number = 0) {
   Object.keys(AUXITE_TOKENS).forEach((token, i) => {
     addToDBWritesList(
       writes,
-      "ethereum",
+      "base",
       AUXITE_TOKENS[token],
       allPrices[i] / 1e9,
       3,

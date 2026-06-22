@@ -3265,6 +3265,9 @@ export const chainCoingeckoIds = {
     chainId: 666666666,
     twitter: "degentokenbase",
     url: "https://www.degen.tips",
+    dimensions: {
+      fees: "degen",
+    },
   },
   "HAQQ": {
     geckoId: "islamic-coin",
@@ -6210,6 +6213,22 @@ export const chainCoingeckoIds = {
       chain: "Base",
       types: ["L3"],
       da: "Celestia",
+    },
+  },
+  "B3": {
+    geckoId: "b3",
+    symbol: "B3",
+    cmcId: "35690",
+    twitter: "b3dotfun",
+    categories: ["EVM", "Rollup"],
+    url: "https://www.b3.fun/",
+    chainId: 8333,
+    parent: {
+      chain: "Base",
+      types: ["L3"],
+    },
+    dimensions: {
+      fees: "b3"
     },
   },
 } as unknown as ChainCoinGekcoIds;

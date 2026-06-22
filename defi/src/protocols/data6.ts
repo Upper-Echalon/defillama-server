@@ -6886,6 +6886,7 @@ const data6: Protocol[] = [
     twitter: "AviciMoney",
     dimensions: {
       fees: "avici",
+      dexs: "avici",
     },
   },
   {
@@ -7263,8 +7264,9 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "Derivatives",
     chains: ["Monad"],
-    module: "dummy.js",
+    module: "obsdn/index.js",
     twitter: "obsdntrade",
+    listedAt: 1782154467,
     dimensions: {
       fees: "obsdn",
       derivatives: "obsdn",

@@ -6301,6 +6301,12 @@ const data6: Protocol[] = [
     twitter: "AFX_XYZ",
     github: ["afx-dex"],
     audit_links: ["https://afx-docs.gitbook.io/afx/audits"],
+    dimensions: {
+      derivatives: "afx",
+      fees: "afx",
+      "active-users": "afx",
+      "open-interest": "afx",
+    },
     listedAt: 1781204431,
   },
   {

@@ -7199,5 +7199,24 @@ const data6: Protocol[] = [
       fees: "hey",
     }
   },
+  {
+    id: "8049",
+    name: "Gacha TCG",
+    address: null,
+    symbol: "-",
+    url: "https://pull.gacha.game/play/packs",
+    description:
+      "Graded cards. Digital packs. Redeem globally.",
+    chain: "Abstract",
+    logo: `${protocolIconsUrl}/gacha-tcg`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "SoFi",
+    chains: ["Abstract"],
+    module: "dummy.js",
+    twitter: "gacha_game_",
+    parentProtocol: "parent#gacha",
+  },
 ];
 export default data6;

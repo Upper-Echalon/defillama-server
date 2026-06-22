@@ -9943,6 +9943,17 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "sendfun",
   },
+  {
+    id: "parent#gacha",
+    name: "Gacha",
+    url: "https://pull.gacha.game/play/packs", 
+    description: "raded cards. Digital packs. Redeem globally.",
+    logo: `${protocolIconsUrl}/gacha`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "gacha_game_",
+  },
 ];
 
 export default parentProtocols;

@@ -8840,13 +8840,14 @@ const data4: Protocol[] = [
   },
   {
     id: "5942",
-    name: "Gacha",
+    name: "Gacha Markets", // previous gacha
+    previousNames: ["Gacha"],
     address: null,
     symbol: "-",
     url: "https://gacha.game/",
     description: "A new super app making crypto fun, simple, and accessible for everyone",
     chain: "Abstract",
-    logo: `${protocolIconsUrl}/gacha`,
+    logo: `${protocolIconsUrl}/gacha-markets`,
     audits: "0",
     gecko_id: null,
     cmcId: null,
@@ -8855,6 +8856,7 @@ const data4: Protocol[] = [
     module: "gacha/index.js",
     twitter: "gacha_game_",
     listedAt: 1742726734,
+    parentProtocol: "parent#gacha",
     dimensions: {
       fees: "gacha",
       dexs: "gacha"

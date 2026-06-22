@@ -7224,5 +7224,48 @@ const data6: Protocol[] = [
     twitter: "gacha_game_",
     parentProtocol: "parent#gacha",
   },
+  {
+    id: "8050",
+    name: "Bloxwap Perps",
+    address: null,
+    symbol: "-",
+    url: "https://bloxwap.com",
+    description: "Bloxwap Perps is allows users to trade perps on Hyperliquid L1.",
+    chain: "Hyperliquid L1",
+    logo: `${protocolIconsUrl}/bloxwap-perps`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["Hyperliquid Builder"],
+    chains: ["Hyperliquid L1"],
+    module: "dummy.js",
+    twitter: "bloxwap",
+    dimensions: {
+      fees: "bloxwap-perps",
+      derivatives: "bloxwap-perps",
+    }
+  },
+  {
+    id: "8051",
+    name: "OBSDN",
+    address: null,
+    symbol: "-",
+    url: "https://obsdn.trade",
+    description: "Perpetual exchange with off-chain matching and on-chain settlement on Monad.",
+    chain: "Monad",
+    logo: `${protocolIconsUrl}/obsdn`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Derivatives",
+    chains: ["Monad"],
+    module: "dummy.js",
+    twitter: "obsdntrade",
+    dimensions: {
+      fees: "obsdn",
+      derivatives: "obsdn",
+      "open-interest": "obsdn",
+    }
+  },
 ];
 export default data6;

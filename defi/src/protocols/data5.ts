@@ -7103,6 +7103,9 @@ const data5: Protocol[] = [
     twitter: "PermaPod_xyz",
     github: ["permapod"],
     listedAt: 1767215831,
+    dimensions: {
+      fees: "perma-pod",
+    },
   },
   {
     id: "7206",

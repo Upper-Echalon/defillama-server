@@ -6633,6 +6633,10 @@ const data6: Protocol[] = [
     twitter: "PharaohExchange",
     parentProtocol: "parent#pharaoh-exchange",
     listedAt: 1781584224,
+    dimensions: {
+      fees: "pharaoh-dlmm",
+      dexs: "pharaoh-dlmm",
+    }
   },
   {
     id: "8023",
@@ -7265,6 +7269,47 @@ const data6: Protocol[] = [
       fees: "obsdn",
       derivatives: "obsdn",
       "open-interest": "obsdn",
+    }
+  },
+  {
+    id: "8052",
+    name: "Aster Predictions",
+    address: "bsc:0x000ae314e2a2172a039b26378814c252734f556a",
+    symbol: "ASTER",
+    url: "https://www.asterdex.com/en/trade/prediction",
+    description: "A decentralized prediction market",
+    chain: "Off Chain",
+    logo: `${protocolIconsUrl}/aster-predictions`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Prediction Market",
+    chains: ["Off Chain"],
+    module: "dummy.js",
+    twitter: "Aster_DEX",
+    parentProtocol: "parent#astherus",
+    dimensions: {
+      dexs: "aster-predictions",
+    }
+  },
+  {
+    id: "8053",
+    name: "DYLI",
+    address: null,
+    symbol: "-",
+    url: "https://www.dyli.io/",
+    description: "The marketplace for collectibles. Buy, sell, trade, and vault authentic collectibles across cards, packs, slabs, toys, and more. Collect digitally, own physically. Ship globally",
+    chain: "Abstract",
+    logo: `${protocolIconsUrl}/dyli`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Physical TCG",
+    chains: ["Abstract"],
+    module: "dummy.js",
+    twitter: "dyli_io",
+    dimensions: {
+      fees: "dyli",
     }
   },
 ];

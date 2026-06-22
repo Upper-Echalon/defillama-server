@@ -216,8 +216,8 @@ const endpoints: TestEndpoint[] = [
   // { name: 'dat institutions MSTR', path: '/dat/institutions/MSTR' },
 
   // ── Equities ─────────────────────────────────────────────────────────
-  // { name: 'equities companies', path: '/equities/v1/companies' },
-  // { name: 'equities summary', path: '/equities/v1/summary?ticker=NVDA' },
+  { name: 'equities companies', path: '/equities/v1/companies' },
+  { name: 'equities summary', path: '/equities/v1/summary?ticker=NVDA&country=US' },
 ];
 
 // ── Tests ──────────────────────────────────────────────────────────────

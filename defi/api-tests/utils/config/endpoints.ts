@@ -224,6 +224,45 @@ export const NEW_USERS_DIM = {
   SUMMARY: (protocol: string) => `/summary/new-users/${protocol}`,
 } as const;
 
+function equitiesTicker(
+  path: string,
+  ticker: string,
+  country?: string,
+  extra?: Record<string, string | number | undefined>
+): string {
+  const params = new URLSearchParams();
+  params.set('ticker', ticker);
+  if (country) params.set('country', country);
+  if (extra) {
+    for (const [key, value] of Object.entries(extra)) {
+      if (value !== undefined) params.set(key, String(value));
+    }
+  }
+  return `${path}?${params.toString()}`;
+}
+
+export const EQUITIES = {
+  BASE_URL: getProApiBaseUrl() + '/equities',
+  COMPANIES_LIST: '/v1/companies-list',
+  COMPANIES: '/v1/companies',
+  STATEMENTS: (ticker: string, country?: string) =>
+    equitiesTicker('/v1/statements', ticker, country),
+  PRICE_HISTORY: (ticker: string, timeframe?: string, country?: string) =>
+    equitiesTicker('/v1/price-history', ticker, country, { timeframe }),
+  OHLCV: (ticker: string, timeframe?: string, country?: string) =>
+    equitiesTicker('/v1/ohlcv', ticker, country, { timeframe }),
+  SUMMARY: (ticker: string, country?: string) =>
+    equitiesTicker('/v1/summary', ticker, country),
+  METADATA: (ticker: string, country?: string) =>
+    equitiesTicker('/v1/metadata', ticker, country),
+  FILINGS: (ticker: string, country?: string) =>
+    equitiesTicker('/v1/filings', ticker, country),
+  DIMENSIONS: (ticker: string, country?: string) =>
+    equitiesTicker('/v1/dimensions', ticker, country),
+  ONCHAIN: (ticker: string, country?: string) =>
+    equitiesTicker('/v1/onchain', ticker, country),
+} as const;
+
 export const RWA = {
   BASE_URL: BASE_URLS.RWA,
   CURRENT: '/current',
@@ -301,6 +340,7 @@ export const endpoints = {
   NFT_VOLUME,
   ACTIVE_USERS_DIM,
   NEW_USERS_DIM,
+  EQUITIES,
 } as const;
 
 export const API_CONFIG = {

@@ -103,6 +103,16 @@
     }
   },
   "berachain": {
+    "0xa744fe3688291ac3a4a7ec917678783ad9946a1e": {
+      "decimals": 18,
+      "symbol": "savUSD",
+      "to": "coingecko#avant-staked-usd"
+    },
+    "0xda67b4284609d2d48e5d10cfac411572727dc1ed": {
+      "decimals": "18",
+      "symbol": "sUSN",
+      "to": "coingecko#staked-usn"
+    },
     "0x316cd39632Cac4F4CdfC21757c4500FE12f64514": {
       "decimals": "18",
       "symbol": "wsrUSD",

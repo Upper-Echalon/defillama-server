@@ -2,6 +2,7 @@ import {
   detectSpikes,
   collectHistoricalVolumes,
   isTokenBlacklisted,
+  isEmptyDaily,
   median,
   VolumeCache,
   DailyVolume,
@@ -59,6 +60,20 @@ describe('isTokenBlacklisted', () => {
   test('returns false for non-blacklisted tokens', () => {
     const ts = Math.floor(new Date('2022-08-14T12:00:00Z').getTime() / 1000);
     expect(isTokenBlacklisted('USDC', ts)).toBe(false);
+  });
+});
+
+describe('isEmptyDaily', () => {
+  test('treats undefined as empty (so it gets re-queried)', () => {
+    expect(isEmptyDaily(undefined)).toBe(true);
+  });
+
+  test('treats a cached day with no chains as empty', () => {
+    expect(isEmptyDaily({ timestamp: targetTs, chains: {} })).toBe(true);
+  });
+
+  test('treats a cached day with chains as non-empty', () => {
+    expect(isEmptyDaily(makeDaily(targetTs, 'ethereum', 'USDE', 100))).toBe(false);
   });
 });
 

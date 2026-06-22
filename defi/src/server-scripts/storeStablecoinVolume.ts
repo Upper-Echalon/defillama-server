@@ -265,6 +265,12 @@ function buildEmptyDaily(timestamp: number): DailyVolume {
   return { timestamp, chains: {} };
 }
 
+// a cached day with no chains means the query returned no data (e.g. allium had not
+// ingested that day yet when the cron ran). treat these as missing so they get re-queried.
+export function isEmptyDaily(daily: DailyVolume | undefined): boolean {
+  return !daily || Object.keys(daily.chains || {}).length === 0;
+}
+
 export function median(xs: number[]): number {
   const s = [...xs].sort((a, b) => a - b);
   const n = s.length;
@@ -446,10 +452,14 @@ if (require.main === module) (async function () {
   }
 
   const missingDays: number[] = [];
+  let emptyRequeried = 0;
   for (let ts = startTs; ts <= yesterdayStart; ts += DAY) {
-    if (!cache[String(ts)]) missingDays.push(ts);
+    if (isEmptyDaily(cache[String(ts)])) {
+      missingDays.push(ts);
+      if (cache[String(ts)]) emptyRequeried++;
+    }
   }
-  console.log(`# missing days: ${missingDays.length}`);
+  console.log(`# missing days: ${missingDays.length} (incl. ${emptyRequeried} empty days re-queried)`);
 
   let updatedCount = 0;
   for (let i = 0; i < missingDays.length; i++) {

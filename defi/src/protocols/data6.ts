@@ -7300,6 +7300,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://www.dyli.io/",
+    referralUrl: "https://www.dyli.io/?code=42yv76ec",
     description: "The marketplace for collectibles. Buy, sell, trade, and vault authentic collectibles across cards, packs, slabs, toys, and more. Collect digitally, own physically. Ship globally",
     chain: "Abstract",
     logo: `${protocolIconsUrl}/dyli`,

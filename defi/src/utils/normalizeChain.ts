@@ -6231,6 +6231,15 @@ export const chainCoingeckoIds = {
       fees: "b3"
     },
   },
+  "ADI": {
+    geckoId: "adi-token",
+    symbol: "ADI",
+    cmcId: null,
+    categories: ["EVM"],
+    twitter: "ADIChain_",
+    url: "https://www.adi.foundation/",
+    chainId: 36900,
+  },
 } as unknown as ChainCoinGekcoIds;
 
 // We are creating the list here because, later in the code, we include historical chain labels with the same chain metadata, so, chainCoingeckoIds will have duplicate keys

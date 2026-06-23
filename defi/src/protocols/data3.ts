@@ -33528,7 +33528,7 @@ const data3_2: Protocol[] = [
     parentProtocol: "parent#secured-finance",
     listedAt: 1709216649,
     dimensions: {
-      dexs: "SecuredFinance"
+      dexs: "securedfinance"
     }
   },
   {

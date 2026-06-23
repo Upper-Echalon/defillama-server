@@ -33,6 +33,9 @@ const config: { [chain: string]: { pendleOracle: string } } = {
   plasma: {
     pendleOracle: "0x9a9fa8338dd5e5b2188006f1cd2ef26d921650c2",
   },
+  monad: {
+    pendleOracle: "0x5542be50420e88dd7d5b4a3d488fa6ed82f6dac2",
+  }
 };
 
 export async function pendle(timestamp: number = 0) {

@@ -6504,6 +6504,7 @@ const chainLabelMap = {
   "inri": "INRI",
   "cookiechain": "CookieChain",
   "xo": "XO",
+  "adi": "ADI",
 } as { [key: string]: string }
 
 // When we decide to change the display name of a chain, we add the mapping for the new name here

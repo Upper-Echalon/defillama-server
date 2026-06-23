@@ -1,5 +1,5 @@
 import type { PlatformAdapter, FundingEntry, ParsedPerpsMarket } from "../types";
-import { safeFloat, safeFetch } from "../types";
+import { safeFloat, safeFetch, bidAskSpreadBps } from "../types";
 
 // Apex Omni — public perpetual markets API.
 // Docs/endpoints provided by Apex:
@@ -206,6 +206,7 @@ export function parseApexMarkets(
       szDecimals: decimalPlacesFromStep(contract.stepSize),
       makerFeeRate: feeOrFallback(ticker.maker_fee, APEX_MAKER_FEE),
       takerFeeRate: feeOrFallback(ticker.taker_fee, APEX_TAKER_FEE),
+      spreadBps: bidAskSpreadBps(bid, ask),
     });
   }
 

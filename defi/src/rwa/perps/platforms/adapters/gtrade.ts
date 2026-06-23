@@ -188,6 +188,13 @@ function parseGtradeMarkets(data: GtradeTradingVars): ParsedPerpsMarket[] {
     // gTrade maxLeverage is stored × 1000 (e.g., 50000 = 50x)
     const maxLev = (group.maxLeverage ?? 0) / 1000;
 
+    // `spreadP` is the one-sided entry spread in 1e10-precision percent (gTrade
+    // fills at price × (1 ± spreadP)). Convert to the full bid/ask-equivalent in
+    // bps: percent = spreadP/1e10, bps = percent × 100, and ×2 because spreadP is
+    // a single side. The pipeline halves it back to the per-side fee component.
+    const spreadPct = safeFloat(pair.spreadP) / 1e10;
+    const spreadBps = spreadPct > 0 ? spreadPct * 100 * 2 : null;
+
     markets.push({
       contract,
       venue: "gtrade",
@@ -203,6 +210,7 @@ function parseGtradeMarkets(data: GtradeTradingVars): ParsedPerpsMarket[] {
       premium: 0,
       maxLeverage: maxLev,
       szDecimals: 0,
+      spreadBps,
     });
   }
 

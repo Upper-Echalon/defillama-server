@@ -83,6 +83,11 @@ function parseAvantisMarkets(
     const feedId = pair.feed?.feedId ?? "";
     const price = pythPrices.get(feedId) ?? 0;
 
+    // `spreadP` is the one-sided entry spread as a percent (e.g. 0.01 = 0.01%).
+    // Full bid/ask-equivalent bps = percent × 100 × 2 (×2 because it's one side);
+    // the pipeline halves it back to the per-side fee component.
+    const spreadBps = pair.spreadP > 0 ? pair.spreadP * 100 * 2 : null;
+
     markets.push({
       contract,
       venue: "avantis",
@@ -100,6 +105,7 @@ function parseAvantisMarkets(
       premium: 0,
       maxLeverage: pair.leverages?.maxLeverage ?? 0,
       szDecimals: 0,
+      spreadBps,
     });
   }
 

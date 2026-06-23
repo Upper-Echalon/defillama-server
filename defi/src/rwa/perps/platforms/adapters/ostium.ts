@@ -1,5 +1,5 @@
 import type { PlatformAdapter, FundingEntry, ParsedPerpsMarket } from "../types";
-import { safeFloat, safeFetch } from "../types";
+import { safeFloat, safeFetch, bidAskSpreadBps } from "../types";
 
 // Ostium — Arbitrum
 // Docs: https://ostium-labs.gitbook.io/ostium-docs/developer/api-and-sdk
@@ -140,6 +140,7 @@ function parseOstiumMarkets(
       // (e.g., 5000 = 50×, 10000 = 100×). Pair overrides group when non-zero.
       maxLeverage: (safeFloat(pair.maxLeverage) || safeFloat(pair.group?.maxLeverage)) / 100,
       szDecimals: 0,
+      spreadBps: bidAskSpreadBps(livePrice?.bid, livePrice?.ask),
     });
   }
 

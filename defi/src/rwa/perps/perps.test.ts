@@ -49,6 +49,8 @@ import { parseApexMarkets, type ApexContract, type ApexTicker, type ApexUiTicker
 import { isGtradeRwaGroupName, toGtradePythPairKey } from "./platforms/adapters/gtrade";
 import {
   parseVariationalMarkets,
+  filterVariationalRwaListings,
+  variationalContractId,
   VARIATIONAL_MAX_LEVERAGE,
   VARIATIONAL_MAKER_FEE,
   VARIATIONAL_TAKER_FEE,
@@ -61,7 +63,12 @@ import {
   type OndoContract,
   type OndoMarketSpec,
 } from "./platforms/adapters/ondoperps";
-import { normalizeFundingRateHourly } from "./platforms/types";
+import {
+  normalizeFundingRateHourly,
+  bidAskSpreadBps,
+  spreadFeeComponentRate,
+  effectiveFeeWithSpread,
+} from "./platforms/types";
 import { getCsvData } from "../spreadsheet";
 
 // ── utils.ts ──────────────────────────────────────────────────────────────────
@@ -648,17 +655,51 @@ describe("parseVariationalMarkets", () => {
     },
   ];
 
-  it("keeps only Variational RWA tickers", () => {
+  it("parses every listing it is given (filtering happens upstream)", () => {
     const parsed = parseVariationalMarkets(listings);
-    expect(parsed).toHaveLength(1);
+    expect(parsed).toHaveLength(2);
     expect(parsed[0].contract).toBe("variational:XAU");
     expect(parsed[0].venue).toBe("variational");
     expect(parsed[0].platform).toBe("variational");
+    expect(parsed[1].contract).toBe("variational:BTC");
+  });
+
+  it("filterVariationalRwaListings keeps only markets with Airtable metadata", () => {
+    resetContractMetadataStore();
+    // No metadata loaded → preview fallback emits everything for discovery.
+    expect(filterVariationalRwaListings(listings)).toHaveLength(2);
+
+    // With a metadata row for XAU only, crypto (BTC) is dropped.
+    setContractMetadata(variationalContractId("XAU"), {
+      referenceAsset: "Gold",
+      referenceAssetGroup: "Commodities",
+      assetClass: ["Commodity"],
+      parentPlatform: "Variational",
+      pair: null,
+      marginAsset: "USDC",
+      settlementAsset: "USDC",
+      category: ["RWA Perpetuals"],
+      issuer: null,
+      website: null,
+      oracleProvider: null,
+      description: null,
+      accessModel: null,
+      rwaClassification: null,
+      link: null,
+      makerFeeRate: VARIATIONAL_MAKER_FEE,
+      takerFeeRate: VARIATIONAL_TAKER_FEE,
+      deployerFeeShare: 0,
+      suspicious: false,
+    });
+    const filtered = filterVariationalRwaListings(listings);
+    expect(filtered.map((l) => l.ticker)).toEqual(["XAU"]);
+    resetContractMetadataStore();
   });
 
   it("maps notional market fields from the stats listing", () => {
     const [xau] = parseVariationalMarkets(listings);
-    expect(xau.openInterest).toBe(11386983.5);
+    // One-sided OI = long + short (trader legs); not doubled (see adapter note).
+    expect(xau.openInterest).toBe(5693491.75);
     expect(xau.volume24h).toBe(23277904.91);
     expect(xau.markPx).toBe(4497.97);
     expect(xau.oraclePx).toBe(0);
@@ -668,6 +709,8 @@ describe("parseVariationalMarkets", () => {
     expect(xau.maxLeverage).toBe(VARIATIONAL_MAX_LEVERAGE);
     expect(xau.makerFeeRate).toBe(VARIATIONAL_MAKER_FEE);
     expect(xau.takerFeeRate).toBe(VARIATIONAL_TAKER_FEE);
+    // RFQ/spread-priced venue: base_spread_bps surfaced for the spread→fee rule.
+    expect(xau.spreadBps).toBeCloseTo(6.43);
   });
 });
 
@@ -794,6 +837,50 @@ describe("normalizeFundingRateHourly", () => {
 
   it("keeps zero funding at zero regardless of interval", () => {
     expect(normalizeFundingRateHourly(0, 8)).toBe(0);
+  });
+});
+
+// ── spread → fee (platforms/types.ts) ─────────────────────────────────────────
+
+describe("bidAskSpreadBps", () => {
+  it("computes the full spread in bps from bid/ask", () => {
+    // (4344.01 - 4342.7) / 4343.355 * 1e4 ≈ 3.016 bps (Variational XAU)
+    expect(bidAskSpreadBps(4342.7, 4344.01)).toBeCloseTo(3.016, 2);
+  });
+
+  it("returns null for missing, non-positive, or crossed quotes", () => {
+    expect(bidAskSpreadBps(undefined, 100)).toBeNull();
+    expect(bidAskSpreadBps(0, 100)).toBeNull();
+    expect(bidAskSpreadBps(100, 0)).toBeNull();
+    expect(bidAskSpreadBps(101, 100)).toBeNull(); // ask < bid
+    expect(bidAskSpreadBps(100, 100)).toBe(0); // zero spread is valid
+  });
+});
+
+describe("spreadFeeComponentRate", () => {
+  it("returns half the spread as a per-side rate", () => {
+    expect(spreadFeeComponentRate(6)).toBeCloseTo(0.0003); // 6 bps → 3 bps/side = 0.0003
+    expect(spreadFeeComponentRate(2)).toBeCloseTo(0.0001); // gTrade SPY full 2 bps → 1 bps/side
+  });
+
+  it("returns 0 for missing / non-positive / non-finite spreads", () => {
+    expect(spreadFeeComponentRate(null)).toBe(0);
+    expect(spreadFeeComponentRate(undefined)).toBe(0);
+    expect(spreadFeeComponentRate(0)).toBe(0);
+    expect(spreadFeeComponentRate(-5)).toBe(0);
+    expect(spreadFeeComponentRate(NaN)).toBe(0);
+  });
+});
+
+describe("effectiveFeeWithSpread", () => {
+  it("adds the per-side spread component on top of the explicit fee", () => {
+    // explicit 0.05% taker + half of a 6 bps spread (0.03%) = 0.08%
+    expect(effectiveFeeWithSpread(0.0005, 6)).toBeCloseTo(0.0008);
+  });
+
+  it("leaves the fee unchanged when there is no spread (spread-free venues)", () => {
+    expect(effectiveFeeWithSpread(0.0005, null)).toBe(0.0005);
+    expect(effectiveFeeWithSpread(0, undefined)).toBe(0);
   });
 });
 

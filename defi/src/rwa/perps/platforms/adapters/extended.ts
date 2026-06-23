@@ -1,5 +1,5 @@
 import type { PlatformAdapter, FundingEntry, ParsedPerpsMarket } from "../types";
-import { safeFloat } from "../types";
+import { safeFloat, bidAskSpreadBps } from "../types";
 
 // Extended (formerly 10x Exchange) — StarkNet
 // Docs: https://docs.extended.exchange
@@ -116,6 +116,7 @@ function parseExtendedMarkets(raw: ExtendedMarket[]): ParsedPerpsMarket[] {
       premium: 0,
       maxLeverage: safeFloat(config.maxLeverage),
       szDecimals: 0,
+      spreadBps: bidAskSpreadBps(safeFloat(stats.bidPrice), safeFloat(stats.askPrice)),
     });
   }
 

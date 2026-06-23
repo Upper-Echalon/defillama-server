@@ -6,7 +6,7 @@ import { initPG, fetchLatestAggregateTotals, fetchCumulativeFundingPG, fetchLate
 import { sendMessage } from "../../utils/discord";
 import { getAllAdapters, getAdapter } from "./platforms";
 import type { ParsedPerpsMarket, FundingEntry } from "./platforms";
-import { normalizeOpenInterestUsd, normalizeFundingRateHourly } from "./platforms/types";
+import { normalizeOpenInterestUsd, normalizeFundingRateHourly, effectiveFeeWithSpread } from "./platforms/types";
 import {
   getContractId,
   getContractMetadata,
@@ -155,6 +155,16 @@ export async function main(ts: number = 0): Promise<void> {
           ? market.takerFeeRate
           : metadata.takerFeeRate;
       const deployerShare = metadata.deployerFeeShare;
+
+      // Many RWA perps venues price via the bid/ask spread instead of (or on top
+      // of) explicit fees. Fold half the spread (the per-side cost of crossing
+      // it) into the REPORTED maker/taker fee so costs are comparable across
+      // orderbook and quote/RFQ venues. Protocol-fee estimation below stays on
+      // the explicit `takerFee` — spread accrues to the LP/market maker, not the
+      // protocol, so counting it as protocol revenue would overstate fees.
+      const makerFeeWithSpread = effectiveFeeWithSpread(makerFee, market.spreadBps);
+      const takerFeeWithSpread = effectiveFeeWithSpread(takerFee, market.spreadBps);
+
       const fees24h = computeProtocolFees(market.volume24h, takerFee, deployerShare);
 
       const rolling = rollingVolumes[marketId] || { volume7d: 0, volume30d: 0, volumeAllTime: 0 };
@@ -197,8 +207,8 @@ export async function main(ts: number = 0): Promise<void> {
           // recover the raw per-period rate (= fundingRate × fundingIntervalHours).
           fundingIntervalHours:
             market.fundingIntervalHours === undefined ? 1 : market.fundingIntervalHours,
-          makerFeeRate: makerFee,
-          takerFeeRate: takerFee,
+          makerFeeRate: makerFeeWithSpread,
+          takerFeeRate: takerFeeWithSpread,
           volume7d,
           volume30d,
           volumeAllTime,

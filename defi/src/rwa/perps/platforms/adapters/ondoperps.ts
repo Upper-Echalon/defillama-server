@@ -1,5 +1,5 @@
 import type { PlatformAdapter, FundingEntry, ParsedPerpsMarket } from "../types";
-import { safeFloat, safeFetch } from "../types";
+import { safeFloat, safeFetch, bidAskSpreadBps } from "../types";
 
 // Ondo Perps — ondoperps.xyz
 // API base: https://api.ondoperps.xyz/v1
@@ -145,6 +145,7 @@ export function parseOndoPerpsMarkets(
       szDecimals: decimalsFromIncrement(spec?.baseIncrement),
       makerFeeRate: feeOrFallback(c.makerFee, ONDO_PERPS_MAKER_FEE),
       takerFeeRate: feeOrFallback(c.takerFee, ONDO_PERPS_TAKER_FEE),
+      spreadBps: bidAskSpreadBps(bid, ask),
     });
   }
 

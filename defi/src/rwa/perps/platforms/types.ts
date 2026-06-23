@@ -55,6 +55,18 @@ export interface ParsedPerpsMarket {
    *                          adaptive / velocity model); rate passed through as-is.
    */
   fundingIntervalHours?: number | null;
+  /**
+   * Full bid/ask spread in basis points — `(ask - bid) / mid × 1e4`. For venues
+   * that quote a one-sided entry spread (gTrade/Avantis apply `price × (1 ±
+   * spreadP)`), this is the bid/ask-equivalent, i.e. `2 × spreadP`. Many RWA
+   * perps venues are quote/RFQ/oracle-priced and charge via this spread rather
+   * than (or on top of) explicit maker/taker fees, so the pipeline adds HALF of
+   * it — the per-side cost of crossing the spread — to both the maker and taker
+   * fee (see `spreadFeeComponentRate` / `effectiveFeeWithSpread`). Omit / `null`
+   * when the venue exposes no quote or spread (e.g. orderbook venues whose bid/
+   * ask isn't on a bulk endpoint) — then no spread component is added.
+   */
+  spreadBps?: number | null;
 }
 
 export interface FundingEntry {
@@ -170,4 +182,52 @@ export function normalizeFundingRateHourly(
     return fundingRate; // no fixed-period funding — leave as-is
   }
   return fundingRate / intervalHours;
+}
+
+/**
+ * Per-side fee contribution of a venue's bid/ask spread, as a rate (fraction).
+ *
+ * `spreadBps` is the FULL bid/ask spread in basis points (see
+ * `ParsedPerpsMarket.spreadBps`). Crossing the spread one way costs HALF of it,
+ * so the per-side component is `spreadBps / 1e4 / 2`. Returns 0 for missing /
+ * non-positive / non-finite spreads.
+ *
+ * SINGLE SOURCE OF TRUTH for the spread→fee conversion. The prod pipeline
+ * (`perps.ts`) and the preview HTML (`cli/previewAdapters.ts`) BOTH call this
+ * (via `effectiveFeeWithSpread`) — do not inline the math anywhere else.
+ */
+export function spreadFeeComponentRate(spreadBps: number | null | undefined): number {
+  if (spreadBps == null || !Number.isFinite(spreadBps) || spreadBps <= 0) return 0;
+  return spreadBps / 1e4 / 2;
+}
+
+/**
+ * Full bid/ask spread in basis points: `(ask - bid) / mid × 1e4`. Returns null
+ * when bid/ask are missing or non-positive (so callers can leave `spreadBps`
+ * unset rather than emit a bogus 0). Adapters that expose bid/ask quotes use
+ * this to populate `ParsedPerpsMarket.spreadBps`.
+ */
+export function bidAskSpreadBps(
+  bid: number | null | undefined,
+  ask: number | null | undefined,
+): number | null {
+  const b = typeof bid === "number" ? bid : NaN;
+  const a = typeof ask === "number" ? ask : NaN;
+  if (!Number.isFinite(b) || !Number.isFinite(a) || b <= 0 || a <= 0 || a < b) return null;
+  const mid = (a + b) / 2;
+  if (mid <= 0) return null;
+  return ((a - b) / mid) * 1e4;
+}
+
+/**
+ * Effective per-side fee = explicit maker/taker fee + the spread's per-side
+ * contribution. Many RWA perps venues price via the bid/ask spread instead of
+ * (or on top of) explicit fees; folding half the spread into the reported fee
+ * makes the displayed cost comparable across orderbook and quote/RFQ venues.
+ */
+export function effectiveFeeWithSpread(
+  baseFeeRate: number,
+  spreadBps: number | null | undefined,
+): number {
+  return baseFeeRate + spreadFeeComponentRate(spreadBps);
 }

@@ -19,7 +19,10 @@ import type { ParsedPerpsMarket } from "../platforms/types";
 // Import the SAME OI-normalization the prod pipeline uses (perps.ts) so the
 // preview can never drift from production. Per project memory, visualisers
 // must mirror prod exactly — never re-implement transforms here.
-import { normalizeOpenInterestUsd, normalizeFundingRateHourly } from "../platforms/types";
+import { normalizeOpenInterestUsd, normalizeFundingRateHourly, effectiveFeeWithSpread } from "../platforms/types";
+// Mirror prod fee resolution: prefer the venue-sourced fee, else the curated
+// Airtable metadata fee, then add the spread component (see perps.ts).
+import { loadContractMetadataFromAirtable, getContractMetadata, hasContractMetadata } from "../constants";
 import fs from "fs";
 import path from "path";
 
@@ -56,6 +59,24 @@ async function main() {
   }
   console.log(`Running ${adapters.length} adapters: ${adapters.map((a) => a.name).join(", ")}\n`);
 
+  // Mirror prod: load the Airtable metadata so (a) adapters that filter by
+  // metadata (variational/aster) narrow to live RWA rows exactly as the cron
+  // does, and (b) fees resolve from the curated metadata when the venue API
+  // doesn't expose them. Without a key we run in discovery mode (all markets,
+  // venue-sourced fees only) — useful for surfacing untagged markets.
+  let metadataCount = 0;
+  if (process.env.AIRTABLE_API_KEY) {
+    try {
+      metadataCount = await loadContractMetadataFromAirtable();
+      console.log(`Loaded ${metadataCount} Airtable metadata rows — mirroring prod\n`);
+    } catch (e: any) {
+      console.log(`⚠️  Airtable metadata load failed (${e.message}) — falling back to discovery mode\n`);
+    }
+  } else {
+    console.log(`No AIRTABLE_API_KEY set — discovery mode (all markets, venue-sourced fees only)\n`);
+  }
+  const mirroringProd = metadataCount > 0;
+
   const results: AdapterResult[] = [];
 
   await Promise.all(
@@ -63,9 +84,16 @@ async function main() {
       const start = Date.now();
       try {
         console.log(`  ⏳ ${adapter.name} ...`);
-        const markets = await adapter.fetchMarkets();
+        const fetched = await adapter.fetchMarkets();
+        // Prod ingests only markets with an Airtable row (perps.ts gate). Apply
+        // the same filter so the preview's market set matches prod exactly.
+        const markets = mirroringProd ? fetched.filter((m) => hasContractMetadata(m.contract)) : fetched;
         const dur = Date.now() - start;
-        console.log(`  ✅ ${adapter.name}: ${markets.length} markets (${dur}ms)`);
+        const skipped = fetched.length - markets.length;
+        console.log(
+          `  ✅ ${adapter.name}: ${markets.length} markets (${dur}ms)` +
+            (skipped > 0 ? ` — ${skipped} skipped (no Airtable row)` : "")
+        );
         results.push({ name: adapter.name, markets, error: null, durationMs: dur, oiIsNotional: adapter.oiIsNotional });
       } catch (e: any) {
         const dur = Date.now() - start;
@@ -78,7 +106,7 @@ async function main() {
   // Sort by name for consistent ordering
   results.sort((a, b) => a.name.localeCompare(b.name));
 
-  const html = generateHTML(results);
+  const html = generateHTML(results, mirroringProd);
   const fileName = onlySet ? `adapter-preview-${[...onlySet].join("-").replace(/[^a-z0-9-]/gi, "")}.html` : "adapter-preview.html";
   const outPath = path.join(__dirname, fileName);
   fs.writeFileSync(outPath, html, "utf-8");
@@ -134,17 +162,32 @@ function fmtPct(n: number): string {
 // pipeline stores. The "Intvl" column shows each venue's native settlement
 // period for transparency.
 
-function generateHTML(results: AdapterResult[]): string {
+function generateHTML(results: AdapterResult[], mirroringProd = false): string {
   // Look up oiIsNotional per adapter so OI rendering can be normalized to USD.
   const oiNotionalByAdapter = new Map<string, boolean>();
   for (const r of results) oiNotionalByAdapter.set(r.name, r.oiIsNotional);
 
   const allMarkets = results.flatMap((r) =>
-    r.markets.map((m) => ({
-      ...m,
-      oiUsd: normalizeOpenInterestUsd(m, { oiIsNotional: r.oiIsNotional }),
-      fundingRate1h: normalizeFundingRateHourly(m.fundingRate, m.fundingIntervalHours),
-    }))
+    r.markets.map((m) => {
+      // Resolve the base fee exactly like prod (perps.ts): prefer the venue-
+      // sourced fee, else the curated Airtable metadata fee. Then fold in half
+      // the bid/ask spread (the per-side cost of crossing it). Stays null only
+      // when neither a fee nor a spread is known (discovery mode, no Airtable).
+      const meta = getContractMetadata(m.contract);
+      const resolveBase = (venueFee: number | null | undefined, metaFee: number | undefined): number | null =>
+        typeof venueFee === "number" && Number.isFinite(venueFee) ? venueFee : metaFee ?? null;
+      const baseMaker = resolveBase(m.makerFeeRate, meta?.makerFeeRate);
+      const baseTaker = resolveBase(m.takerFeeRate, meta?.takerFeeRate);
+      return {
+        ...m,
+        oiUsd: normalizeOpenInterestUsd(m, { oiIsNotional: r.oiIsNotional }),
+        fundingRate1h: normalizeFundingRateHourly(m.fundingRate, m.fundingIntervalHours),
+        makerFeeRate:
+          baseMaker == null && m.spreadBps == null ? null : effectiveFeeWithSpread(baseMaker ?? 0, m.spreadBps),
+        takerFeeRate:
+          baseTaker == null && m.spreadBps == null ? null : effectiveFeeWithSpread(baseTaker ?? 0, m.spreadBps),
+      };
+    })
   );
   const totalOI = allMarkets.reduce((s, m) => s + m.oiUsd, 0);
   const totalVol = allMarkets.reduce((s, m) => s + m.volume24h, 0);
@@ -240,7 +283,7 @@ function generateHTML(results: AdapterResult[]): string {
 <body>
 
 <h1>RWA Perps — Adapter Preview</h1>
-<div class="subtitle">Generated ${esc(ts)} — raw data from all platform adapters (no Airtable metadata filtering)</div>
+<div class="subtitle">Generated ${esc(ts)} — ${mirroringProd ? "Airtable-filtered market set (mirrors prod)" : "raw data from all platform adapters (no Airtable metadata filtering)"}</div>
 
 <!-- Summary cards -->
 <div class="cards">

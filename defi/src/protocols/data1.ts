@@ -5070,7 +5070,7 @@ const data: Protocol[] = [
     address: "arbitrum:0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
     symbol: "GMX",
     url: "https://gmx.io/",
-    referralUrl: "https://gmx.io/#/?ref=defillama",
+    referralUrl: "https://app.gmx.io/#/trade/?ref=llamao",
     description:
       "GMX is a decentralized spot and perpetual exchange that supports low swap fees and zero price impact trades. Trading is supported by a unique multi-asset pool that earns liquidity providers fees from market making, swap fees, leverage trading (spreads, funding fees & liquidations) and asset rebalancing.",
     chain: "Binance",

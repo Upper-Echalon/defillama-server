@@ -2595,8 +2595,8 @@ const parentProtocols: IParentProtocol[] = [
   {
     id: "parent#gmx",
     name: "GMX",
-    url: "https://gmx.io/#/?ref=defillama",
-    referralUrl: "https://gmx.io/#/?ref=defillama",
+    url: "https://gmx.io",
+    referralUrl: "https://app.gmx.io/#/trade/?ref=llamao",
     description:
       "GMX is a leading onchain exchange for perpetual and spot trading, offering deep liquidity, low fees, multi-chain support, and seamless one-click trading. Powered by isolated and multi-asset pools, the permissionless DEX enables anybody to provide liquidity and integrates with 80+ DeFi projects across Arbitrum, Avalanche, and Solana.",
     logo: `${protocolIconsUrl}/gmx`,

@@ -7228,6 +7228,10 @@ const data6: Protocol[] = [
     chains: ["Abstract"],
     module: "dummy.js",
     twitter: "gacha_game_",
+    dimensions: {
+      dexs: " gacha-tcg",
+      fees: "gacha-tcg",
+    },
     parentProtocol: "parent#gacha",
   },
   {

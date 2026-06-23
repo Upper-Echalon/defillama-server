@@ -25377,6 +25377,7 @@ const data4: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://woofi.com/",
+    referralUrl: "https://woofi.com?ref=UZ0G0B3J",
     description: "Provides an interface for trading perps via Orderly.",
     chain: "Orderly",
     logo: `${protocolIconsUrl}/woofi-pro-perps`,

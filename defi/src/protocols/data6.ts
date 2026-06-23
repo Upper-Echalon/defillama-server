@@ -7280,6 +7280,7 @@ const data6: Protocol[] = [
     address: "bsc:0x000ae314e2a2172a039b26378814c252734f556a",
     symbol: "ASTER",
     url: "https://www.asterdex.com/en/trade/prediction",
+    referralUrl: "https://www.asterdex.com/en/referral/c6eF10",
     description: "A decentralized prediction market",
     chain: "Off Chain",
     logo: `${protocolIconsUrl}/aster-predictions`,

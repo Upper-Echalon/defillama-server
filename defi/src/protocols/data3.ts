@@ -50244,17 +50244,11 @@ const data3_3: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     category: "Yield",
-    oraclesBreakdown: [
-      {
-      name: "Pragma",
-      type: "Primary",
-      proof: ["https://docs.strkfarm.xyz/p/strategies/sensei-delta-neutral-lending"]
-      }
-    ],
+    oraclesBreakdown: [{name: "Pragma",type: "Primary",proof: ["https://docs.strkfarm.xyz/p/strategies/sensei-delta-neutral-lending"]}],
     chains: ["Starknet"],
     module: "strkfarm/index.js",
-    twitter: "troves",
-    github: ["troves"],
+    twitter: "trovesfi",
+    github: ["trovesfi"],
     listedAt: 1722961657,
   },
   {

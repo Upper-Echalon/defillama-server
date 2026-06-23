@@ -7128,7 +7128,7 @@ const data6: Protocol[] = [
     name: "Mintpad",
     address: null,
     symbol: "-",
-    url: " ", // pending to add url https://mintpad.app
+    url: "https://mintpad.app", // pending to add url https://mintpad.app
     description:
       "NFT marketplace on Cronos with trading rewards, creator tools, and collection management features.",
     chain: "Cronos",

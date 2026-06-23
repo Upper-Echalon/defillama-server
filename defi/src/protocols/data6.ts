@@ -7429,5 +7429,48 @@ const data6: Protocol[] = [
       dexs: "ramses-cl-v2",
     },
   },
+  {
+    id: "8059",
+    name: "NoRekt",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://norekt.xyz/
+    description:
+      "NoRekt is a hedged lending protocol that lets users borrow USDC against ETH collateral while using option-based protection to reduce liquidation risk.",
+    chain: "Arbitrum",
+    logo: `${protocolIconsUrl}/norekt`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Lending",
+    chains: ["Arbitrum"],
+    module: "norekt/index.js",
+    forkedFromIds: ["6876"],
+    twitter: "NoRektFi",
+    oraclesBreakdown: [ { name: "Chainlink", type: "Primary", proof: ["https://github.com/DefiLlama/DefiLlama-Adapters/pull/19751"] } ],
+    listedAt: 1782255803,
+  },
+  {
+    id: "8060",
+    name: "Frgmnt",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://frgmnt.fi/
+    description:
+      "Frgmnt is a multi-collateralized stablecoin on Base. fUSD is minted against USDC (1 fUSD = 1 USD) and its reserves are deployed into DeFi yield strategies. Staking fUSD mints sfUSD, a non-transferable token whose yield is claimable by stakers.",
+    chain: "Base",
+    logo: `${protocolIconsUrl}/frgmnt`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield Aggregator",
+    chains: ["Base"],
+    module: "frgmnt/index.js",
+    twitter: "frgmnt",
+    audit_links: ["https://docs.frgmnt.fi/resources-and-ecosystem/audits"],
+    oraclesBreakdown: [ { name: "Chainlink", type: "Primary", proof: ["https://docs.frgmnt.fi/resources-and-ecosystem/technical-docs/security#oracle-security"] } ],
+    github: ["frgmnt-dao"],
+    listedAt: 1782256237
+  },
 ];
 export default data6;

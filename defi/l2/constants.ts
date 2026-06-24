@@ -135,6 +135,7 @@ export const canonicalBridgeIds: { [id: string]: Chain } = {
   "7371": "keeta",
   //"7512": "qiev3",
   // "6938": "move",
+  "7343": "citrea",
 };
 
 export const protocolBridgeIds: { [chain: string]: Chain } = {
@@ -289,4 +290,5 @@ export const ownTokens: { [chain: Chain]: { ticker: string; address: string } } 
   "hedera": { ticker: "HBAR", address: "coingecko:hedera-hashgraph" },
   "sei": { ticker: "SEI", address: "coingecko:sei-network" },
   "stable": { ticker: "STABLE", address: "coingecko:stable-2" },
+  "citrea": { ticker: "CTR", address: "coingecko:citrea" },
 };

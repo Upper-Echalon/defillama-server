@@ -8424,7 +8424,7 @@ const data5: Protocol[] = [
     gecko_id: null,
     cmcId: null,
     tags: ["Other Fixed Income", "Private Credit"],
-    chains: ["Solana"],
+    chains: ["Solana", "Ethereum"],
     module: "hastra/index.js",
     twitter: "HastraFi",
     audit_links: ["https://hastra.io/Hastra_vault-mint_&_vault-stake_Solana_Programs_Summary_Audit_Report.pdf"],

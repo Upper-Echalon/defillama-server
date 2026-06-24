@@ -24,6 +24,7 @@ RUN if [ -n "$DEPLOY_KEY" ]; then \
         chmod 600 ~/.ssh/id_rsa; \
         ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null; \
         REPO_URL="git@github.com:DefiLlama/defillama-server.git"; \
+        echo "Using SSH to clone the repo"; \
     else \
         REPO_URL="https://github.com/DefiLlama/defillama-server"; \
     fi; \

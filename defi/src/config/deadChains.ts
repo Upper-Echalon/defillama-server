@@ -29,6 +29,7 @@ export const deadChains = [
   'ham', // block explorer and rpcs are dead: https://explorer.ham.fun/
   'onus', // block explorer and rpcs are dead (rug?): https://explorer.onuschain.io
   'planq', // block explorer and rpcs are dead: https://evm.planq.network & https://explorer.planq.network
+  'functionx', // sunset, migrating to Ethereum: https://medium.com/pundiai/pundi-aifx-omnilayer-sunsetting-migration-to-ethereum-begins-584f6ea70b27
   // 'btnx', // shutdown 2026-07-09: https://x.com/botanix/status/2064420116578590941
 ]
 

@@ -14272,6 +14272,7 @@ const data5: Protocol[] = [
     chains: ["Solana"],
     module: "pigeonhouse/index.js",
     twitter: "941pigeondotfun",
+    deadUrl: true,
     dimensions: {
       fees: "pigeonhouse",
       dexs: "pigeonhouse",

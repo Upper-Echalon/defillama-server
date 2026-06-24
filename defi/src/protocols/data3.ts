@@ -10705,6 +10705,7 @@ const data3_0: Protocol[] = [
     module: "ghast/index.js",
     twitter: "GhastProtocol",
     listedAt: 1688204419,
+    deadUrl: true,
   },
   {
     id: "3184",
@@ -23013,6 +23014,7 @@ const data3_1: Protocol[] = [
     module: "baki/index.js",
     twitter: "Canza_Finance",
     listedAt: 1698954528,
+    deadUrl: true,
   },
   {
     id: "3736",
@@ -49355,7 +49357,7 @@ const data3_3: Protocol[] = [
     name: "Akronswap",
     address: null,
     symbol: "-",
-    url: "https://akronswap.com/",
+    url: "https://akronswap.com/swap",
     description:
       "Akronswap is a decentralized exchange that captures arbitrage profits from arbitrageurs and gives them back to LPs through dynamic swap fees, thereby protecting LPs from loss-versus-rebalancing",
     chain: "Base",

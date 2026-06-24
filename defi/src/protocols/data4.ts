@@ -22826,8 +22826,8 @@ const data4: Protocol[] = [
     name: "Liquid Perps",
     address: null,
     symbol: "-",
-    url: "https://referral.tryliquid.xyz",
-    referralUrl: "https://referral.tryliquid.xyz/Wxg6W0U2r3b",
+    url: "https://www.liquid.trade/",
+    //referralUrl: "https://referral.tryliquid.xyz/Wxg6W0U2r3b", temporary removed
     description: "Liquid provides a way to trade Bitcoin, ETH, and trending tokens with up to 40x leverage",
     chain: "Hyperliquid L1",
     logo: `${protocolIconsUrl}/liquid-perps`,

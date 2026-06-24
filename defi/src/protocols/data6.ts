@@ -7493,5 +7493,43 @@ const data6: Protocol[] = [
       aggregators: "gateswap",
     }
   },
+  {
+    id: "8062",
+    name: "Intrinsic",
+    address: null,
+    symbol: "-",
+    url: "https://intrinsic.finance",
+    description: `Dex on Rootstock.`,
+    chain: "RSK",
+    logo: `${protocolIconsUrl}/intrinsic`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    tags: ["AMM"],
+    chains: ["RSK"],
+    module: "intrinsic/index.js",
+    twitter: "Intrinsicfi",
+    github: ["Intrinsic-network"],
+    listedAt: 1782275545
+  },
+  {
+    id: "8063",
+    name: "Tori Finance",
+    address: null,
+    symbol: "-",
+    url: "https://tori.finance/",
+    description: `Tori is a synthetic dollar protocol where trUSD is backed by delta-neutral trading positions and can be staked into strUSD to earn yield from those market-neutral strategies.`,
+    chain: "Ethereum",
+    logo: `${protocolIconsUrl}/tori-finance`,
+    audits: "2",
+    gecko_id: null,
+    cmcId: null,
+    category: "Basis Trading",
+    chains: ["Ethereum"],
+    module: "tori-finance/index.js",
+    twitter: "tori_finance",
+    audit_links: ["https://docs.tori.finance/security/audits"],
+    listedAt: 1782275555
+  },
 ];
 export default data6;

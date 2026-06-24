@@ -31,6 +31,9 @@ export const deadChains = [
   'planq', // block explorer and rpcs are dead: https://evm.planq.network & https://explorer.planq.network
   'functionx', // sunset, migrating to Ethereum: https://medium.com/pundiai/pundi-aifx-omnilayer-sunsetting-migration-to-ethereum-begins-584f6ea70b27
   'genesys', // shutdown 2026-03-01: https://x.com/GenesysChain/status/2024935948228985085
+  'stargaze', // shutdown 2026-06-01: https://x.com/StargazeZone/status/2068094181617410185
+  'fhe', // chain sunset 2026-06-01: https://x.com/mindnetwork_xyz/status/2046484856260141543
+  // 'fantom', // chain sunset 2026-06-30: https://x.com/SonicLabs/status/2041551455254097988
   // 'btnx', // shutdown 2026-07-09: https://x.com/botanix/status/2064420116578590941
 ]
 

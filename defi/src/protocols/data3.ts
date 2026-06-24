@@ -22486,7 +22486,7 @@ const data3_1: Protocol[] = [
     description:
       "Volo is the go-to Earn Hub for all your assets on Sui that offers much more than its established status in offering its fully decentralized LST Sui (vSui). Volo is expanding to offering vaults of all major assets on Sui especially BTCFi-related token that allows users to simply earn yield on their assets with one click.",
     chain: "Sui",
-    logo: `${protocolIconsUrl}/volo-vaults`,
+    logo: `${protocolIconsUrl}/volo-vault`,
     audits: "2",
     gecko_id: null,
     cmcId: null,
@@ -58479,7 +58479,7 @@ const data3_3: Protocol[] = [
     description:
       "Astros - A DEX Aggregator and perpetual market on SUI, powered by NAVI Protocol",
     chain: "Sui",
-    logo: `${protocolIconsUrl}/navi-protocol`,
+    logo: `${protocolIconsUrl}/astros`,
     audits: "0",
     gecko_id: null,
     cmcId: null,

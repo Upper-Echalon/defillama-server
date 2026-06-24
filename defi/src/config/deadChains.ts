@@ -5,7 +5,7 @@ export const deadChains = [
   'kroma', 'qom', 'airdao', 'bevm',
   'milkyway', 'milkyway_rollup', 'boba_bnb',
   'kardia', // deprecated in favor of kai 2.0 https://docs.kardiachain.io/docs/from-kyokai-to-kai-2.0
-  'nos', 'dfs','curio', 'cube', 
+  'nos', 'dfs', 'curio', 'cube',
   'saga', // chain paused after the hack
   'vision',
   'kinto', // chain is dead,
@@ -30,6 +30,7 @@ export const deadChains = [
   'onus', // block explorer and rpcs are dead (rug?): https://explorer.onuschain.io
   'planq', // block explorer and rpcs are dead: https://evm.planq.network & https://explorer.planq.network
   'functionx', // sunset, migrating to Ethereum: https://medium.com/pundiai/pundi-aifx-omnilayer-sunsetting-migration-to-ethereum-begins-584f6ea70b27
+  'genesys', // shutdown 2026-03-01: https://x.com/GenesysChain/status/2024935948228985085
   // 'btnx', // shutdown 2026-07-09: https://x.com/botanix/status/2064420116578590941
 ]
 

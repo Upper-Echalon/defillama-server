@@ -35,6 +35,8 @@ export const deadChains = [
   'fhe', // chain sunset 2026-06-01: https://x.com/mindnetwork_xyz/status/2046484856260141543
   'winr', // chain sunset 2026-05-01 https://x.com/WINRProtocol/status/2047577896080834696
   'dchainmainnet', // saga rollup torn down, RPC returns "default backend - 404"
+  'godwoken', // chain sunset 2026-01-06 https://sunset.forcebridge.com/announcement
+  'godwoken_v1', // chain sunset 2026-01-06 https://sunset.forcebridge.com/announcement
   // 'fantom', // chain sunset 2026-06-30: https://x.com/SonicLabs/status/2041551455254097988
   // 'btnx', // shutdown 2026-07-09: https://x.com/botanix/status/2064420116578590941
 ]

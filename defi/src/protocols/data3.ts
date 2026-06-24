@@ -51824,7 +51824,8 @@ const data3_3: Protocol[] = [
     parentProtocol: "parent#meridian",
     listedAt: 1724255821,
     dimensions: {
-      dexs: "meridian-swap"
+      dexs: "meridian-swap",
+      fees: "meridian-swap"
     }
   },
   {

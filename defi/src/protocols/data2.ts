@@ -9794,7 +9794,8 @@ const data2: Protocol[] = [
     parentProtocol: "parent#swapsicle",
     listedAt: 1655221773,
     dimensions: {
-      fees: "swapsicle"
+      fees: "swapsicle",
+      dexs: "swapsicle"
     }
   },
   {
@@ -15897,7 +15898,8 @@ const data2: Protocol[] = [
     audit_links: ["https://github.com/okex/OKCSwap/tree/main/audits/oklink"],
     listedAt: 1663593914,
     dimensions: {
-      dexs: "okcswap"
+      dexs: "okcswap",
+      fees: "okcswap"
     }
   },
   {

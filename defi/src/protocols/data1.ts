@@ -4654,7 +4654,8 @@ const data: Protocol[] = [
     governanceID: ["snapshot:dfyn.eth"],
     github: ["dfyn"],
     dimensions: {
-      dexs: "dfyn"
+      dexs: "dfyn",
+      fees: "dfyn"
     }
   },
   {

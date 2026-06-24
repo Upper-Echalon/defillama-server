@@ -4264,6 +4264,7 @@ const data5: Protocol[] = [
     listedAt: 1764612049,
     dimensions: {
       fees: "capx",
+      dexs: "capx",
     },
   },
   {

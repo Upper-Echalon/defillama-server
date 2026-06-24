@@ -11418,18 +11418,18 @@ const data4: Protocol[] = [
         startDate: "2026-06-02",
       },
       {
-        name: "Chainlink",
+        name: "RedStone",
         type: "Primary",
+        proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
+      },
+      {
+        name: "Chainlink",
+        type: "Secondary",
         proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
       },
       {
         name: "Binance Oracle",
         type: "Secondary",
-        proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
-      },
-      {
-        name: "RedStone",
-        type: "Fallback",
         proof: ["https://docs.bsc.lista.org/for-developer/multi-oracle"],
       },
     ],

@@ -9954,6 +9954,17 @@ const parentProtocols: IParentProtocol[] = [
     chains: [],
     twitter: "gacha_game_",
   },
+  {
+    id: "parent#crovia",
+    name: "Crovia",
+    url: " ", // pending to add url https://crovia.app
+    description: "Crovia is a decentralized NFT marketplace and aggregator on Cronos.",
+    logo: `${protocolIconsUrl}/crovia`,
+    gecko_id: null,
+    cmcId: null,
+    chains: [],
+    twitter: "CroviaNFT",
+  },
 ];
 
 export default parentProtocols;

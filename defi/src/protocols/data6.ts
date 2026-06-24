@@ -7549,10 +7549,61 @@ const data6: Protocol[] = [
     cmcId: null,
     category: "NFT Marketplace",
     chains: ["Base"],
-    module: "pumpbox/index.js",
+    module: "dummy.js",
     twitter: "pump_box",
     github: ["pumpinglabs"],
-    listedAt: 1782325327
+    listedAt: 1782325327,
+    dimensions: {
+      dexs: "pumpbox",
+      fees: "pumpbox",
+    }
+  },
+  {
+    id: "8065",
+    name: "Crovia NFT Marketplace",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://crovia.app
+    description:
+      "Cronos NFT Marketplace & Analytics Hub.",
+    chain: "Cronos",
+    logo: `${protocolIconsUrl}/crovia-nft-marketplace`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "NFT Marketplace",
+    chains: ["Cronos"],
+    module: "crovia/index.js",
+    twitter: "CroviaNFT",
+    listedAt: 1782343564,
+    parentProtocol: "parent#crovia",
+    dimensions: {
+      dexs: "crovia-nft-marketplace",
+      fees: "crovia-nft-marketplace",
+    }
+  },
+  {
+    id: "8066",
+    name: "Crovia Aggregator",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://crovia.app
+    description:
+      "Crovia is a decentralized NFT marketplace and aggregator on Cronos.",
+    chain: "Cronos",
+    logo: `${protocolIconsUrl}/crovia-aggregator`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Cronos"],
+    module: "dummy.js",
+    twitter: "CroviaNFT",
+    parentProtocol: "parent#crovia",
+    dimensions: {
+      aggregators: "crovia",
+      fees: "crovia",
+    }
   },
 ];
 export default data6;

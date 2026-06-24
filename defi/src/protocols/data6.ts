@@ -7472,5 +7472,26 @@ const data6: Protocol[] = [
     github: ["frgmnt-dao"],
     listedAt: 1782256237
   },
+  {
+    id: "6872",
+    name: "Gate Swap Aggregator",
+    address: null,
+    symbol: "-",
+    url: "https://web3.gate.com/en/swap",
+    description: `GateSwap is a decentralized exchange (DEX) platform built on the Gate Layer, a high-performance Layer 2 blockchain powered by the Optimism OP Stack. Designed for seamless token swaps, it supports low-cost, high-speed transactions with EVM compatibility, enabling users to trade meme coins, DeFi assets, and more. Integrated with Gate Wallet and Gate Fun for one-click token creation, GateSwap empowers the Web3 ecosystem by fostering fair launches, community-driven liquidity, and innovative features like dual-buy mechanisms to prevent arbitrage, making it a go-to hub for crypto enthusiasts in the Gate.io universe.`,
+    chain: "GateLayer",
+    logo: `${protocolIconsUrl}/gate-swap-aggregator`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "DEX Aggregator",
+    chains: ["Ethereum", "Binance", "Base", "Arbitrum", "Berachain", "ENI", "Optimism", "GateLayer", "Avalanche", "Blast", "Linea", "World Chain", "Sonic", "Polygon", "zkSync Era", "Solana"],
+    module: "dummy.js",
+    twitter: "Gate_Fun",
+    parentProtocol: "parent#gate-products",
+    dimensions: {
+      aggregators: "gateswap",
+    }
+  },
 ];
 export default data6;

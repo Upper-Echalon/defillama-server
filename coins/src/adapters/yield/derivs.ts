@@ -306,6 +306,19 @@ export const configs: { [adapter: string]: Config } = {
     underlying: nullAddress, // IP
     address: "0x5267F7eE069CEB3D8F1c760c215569b79d0685aD",
   },
+  wstHYPE: {
+    rate: async ({ api }) => {
+      const rate = await api.call({
+        abi: "uint256:balancePerShare",
+        target: "0xfFaa4a3D97fE9107Cef8a3F48c069F577Ff76cC1",
+      });
+      return rate / 1e18;
+    },
+    chain: "hyperliquid",
+    underlying: "0xfFaa4a3D97fE9107Cef8a3F48c069F577Ff76cC1",
+    address: "0x94e8396e0869c9f2200760af0621afd240e1cf38",
+    confidence: 1,
+  },
   hywstHYPE: {
     rate: async ({ api }) => {
       const rate = await api.call({

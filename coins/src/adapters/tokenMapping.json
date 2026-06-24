@@ -6340,6 +6340,16 @@
       "symbol": "nOPAL",
       "to": "coingecko#nest-blackopal-liquidstone-ii-vault"
     },
+    "VyXKJnVhkSkB6KAozSZCiLQbuB1k1r6Nu4etNYVo5LJ": {
+      "decimals": "6",
+      "symbol": "NPERENA",
+      "to": "asset#ethereum:0xd99076fCfd61B3695c5A00740364a84AC8c46cBA"
+    },
+    "2GazQTpcdPkxiRyeSBKoCm2DCFUUnMxn3RfCjZ1zRQvh": {
+      "decimals": "6",
+      "symbol": "NSCOPE",
+      "to": "asset#ethereum:0x770C2D6b16c8F8AB5535ae719A5475411c120f6e"
+    },
     "9DRPPWYud8i6CaSsDsFESs1xyVr8dBCMtjPZji2xiZEa": {
       "decimals": "6",
       "symbol": "ULTRA",
@@ -14090,11 +14100,6 @@
       "decimals": 18,
       "symbol": "STHYPE"
     },
-    "0x94e8396e0869c9f2200760af0621afd240e1cf38": {
-      "to": "coingecko#hyperliquid",
-      "decimals": 18,
-      "symbol": "wstHYPE"
-    },
     "0xbe6727b535545c67d5caa73dea54865b92cf7907": {
       "to": "coingecko#ethereum",
       "decimals": 18,
@@ -14634,6 +14639,41 @@
       "decimals": "6",
       "symbol": "JTRSY",
       "to": "asset#ethereum:0x8c213ee79581ff4984583c6a801e5263418c4b86"
+    },
+    "0x066D10E240999aea6798b2e2CA0bdac2923cbdFf": {
+      "decimals": 6,
+      "symbol": "NFALCON",
+      "to": "asset#ethereum:0x066D10E240999aea6798b2e2CA0bdac2923cbdFf"
+    },
+    "0x63810d7F1C7b4DbfB60c173ba120A2be98b59E13": {
+      "decimals": 6,
+      "symbol": "NCLOA",
+      "to": "asset#ethereum:0x63810d7F1C7b4DbfB60c173ba120A2be98b59E13"
+    },
+    "0x6e28FB79Ba12B808c439fddB22C09753A83057Fc": {
+      "decimals": 6,
+      "symbol": "NFBND",
+      "to": "asset#ethereum:0x6e28FB79Ba12B808c439fddB22C09753A83057Fc"
+    },
+    "0xd99076fCfd61B3695c5A00740364a84AC8c46cBA": {
+      "decimals": 6,
+      "symbol": "NPERENA",
+      "to": "asset#ethereum:0xd99076fCfd61B3695c5A00740364a84AC8c46cBA"
+    },
+    "0x7488B23f4C26b44eEf2E0766896bE47443e86d79": {
+      "decimals": 6,
+      "symbol": "NAXI",
+      "to": "asset#ethereum:0x7488B23f4C26b44eEf2E0766896bE47443e86d79"
+    },
+    "0x8e95a7d99812190Bf9691C1dF0EEf3405165E0FE": {
+      "decimals": 6,
+      "symbol": "NBYBIT1",
+      "to": "asset#ethereum:0x8e95a7d99812190Bf9691C1dF0EEf3405165E0FE"
+    },
+    "0x7F80D7A9C0DfE52dE38692F4642a5Aa3d3A7f5dD": {
+      "decimals": 6,
+      "symbol": "NETHERFI",
+      "to": "asset#ethereum:0x7F80D7A9C0DfE52dE38692F4642a5Aa3d3A7f5dD"
     }
   },
   "mxczkevm": {

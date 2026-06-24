@@ -150,8 +150,8 @@ async function getTotalSupplies(tokensSortedByChain: { [chain: string]: string[]
       });
 
       try {
-        // dropNonContracts=true: a non-contract address (bad metadata) returns a successful
-        // empty totalSupply that scrambles the whole batched multicall — drop it first.
+        // dropNonContracts=true: drop bad non-contract metadata addresses before the read.
+        // Defensive hygiene only — NOT the cause of the Ink xStock drop (that's the exclusion).
         const res = await fetchSupplies(chain, tokens, timestamp == 0 ? undefined : timestamp, true);
         Object.keys(res).forEach((token: string) => {
           totalSupplies[token] = res[token];
@@ -729,10 +729,10 @@ function findActiveMcaps(
   const thisChainExcluded = excludedAmounts[rwaId][chain];
   if (!thisChainExcluded) return;
   const excludedUsdValue = thisChainExcluded.div(BigNumber(10).pow(assetPrices.decimals)).times(assetPrices.price);
-  finalData[rwaId][RWA_KEY_MAP.activeMcap][chain] = toFixedNumber(
+  finalData[rwaId][RWA_KEY_MAP.activeMcap][chain] = Math.max(0, toFixedNumber(
     finalData[rwaId][RWA_KEY_MAP.activeMcap][chain] - excludedUsdValue.toNumber(),
     0
-  );
+  ));
 }
 
 // ── Exported: context + per-timestamp runner ────────────────────────

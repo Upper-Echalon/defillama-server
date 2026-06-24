@@ -5778,9 +5778,9 @@ export const chainCoingeckoIds = {
     chainId: 286623,
   },
   "Citrea": {
-    geckoId: null,
-    symbol: null,
-    cmcId: null,
+    geckoId: "citrea",
+    symbol: "CTR",
+    cmcId: "39916",
     categories: ["EVM"],
     twitter: "citrea_xyz",
     url: "https://citrea.xyz/",

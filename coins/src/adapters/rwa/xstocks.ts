@@ -37,11 +37,35 @@ async function discoverChainTokens(chain: string, timestamp: number) {
   return logs.map((l: any) => ({ address: l.newToken, symbol: l.symbol }));
 }
 
+function findTopLevelPK(
+  address: string,
+  tokenChains: string[],
+  dataByChain: { [chain: string]: any },
+): string | undefined {
+  for (const chain of tokenChains) {
+    const d = dataByChain[chain]?.[address];
+    if (d?.redirect?.startsWith("coingecko#")) return d.redirect;
+  }
+
+  let best: string | undefined;
+  let bestConf = -1;
+  for (const chain of tokenChains) {
+    const d = dataByChain[chain]?.[address];
+    if (typeof d?.price !== "number" || !isFinite(d.price)) continue;
+    if (d.redirect) continue;
+    const conf = d.confidence ?? 0;
+    if (conf > bestConf) {
+      bestConf = conf;
+      best = `asset#${chain}:${address}`;
+    }
+  }
+  return best;
+}
+
 async function getTokenPrices(timestamp: number) {
   const writes: Write[] = [];
   const chains = Object.keys(factoryFromBlock);
 
-  // Get all tokens across chains and group by address to identify the same token (CREATE2)
   const byAddress: {
     [address: string]: { symbol: string; chains: string[] };
   } = {};
@@ -56,14 +80,13 @@ async function getTokenPrices(timestamp: number) {
     }),
   );
 
-  // Get prices per chain
-  const pricesByChain: { [chain: string]: any } = {};
+  const dataByChain: { [chain: string]: any } = {};
   await Promise.all(
     chains.map(async (chain) => {
       const addresses = Object.entries(byAddress)
         .filter(([, v]) => v.chains.includes(chain))
         .map(([addr]) => addr);
-      pricesByChain[chain] = await getTokenAndRedirectDataMap(
+      dataByChain[chain] = await getTokenAndRedirectDataMap(
         addresses,
         chain,
         timestamp,
@@ -71,31 +94,17 @@ async function getTokenPrices(timestamp: number) {
     }),
   );
 
-  // Identify chains that are already priced, then fan prices to the unpriced chains. 
-  // We never overwrite an existing price and we skip tokens with no prices
   for (const [address, { symbol, chains: tokenChains }] of Object.entries(
     byAddress,
   )) {
-    const pricedChains = tokenChains.filter(
-      (c) =>
-        typeof pricesByChain[c]?.[address]?.price === "number" &&
-        isFinite(pricesByChain[c][address].price),
-    );
-    if (pricedChains.length === 0) continue;
+    const topLevelPK = findTopLevelPK(address, tokenChains, dataByChain);
+    if (!topLevelPK) continue;
 
-    const price = pricesByChain[pricedChains[0]][address].price;
     for (const chain of tokenChains) {
-      if (pricedChains.includes(chain)) continue;
+      if (`asset#${chain}:${address}` === topLevelPK) continue;
       addToDBWritesList(
-        writes,
-        chain,
-        address,
-        price,
-        18,
-        symbol,
-        timestamp,
-        "xstocks",
-        0.95,
+        writes, chain, address, undefined, 18, symbol,
+        timestamp, "xstocks", 0.95, topLevelPK,
       );
     }
   }

@@ -73,7 +73,7 @@ export async function getTokenAndRedirectData(
     if (getCurrentUnixTimestamp() - lastCacheClear > 60 * 15)
       cache = {}; // clear cache every 15 minutes
 
-    const cacheKey = `${chain}-${hoursRange}`;
+    const cacheKey = `${chain}-${hoursRange}-${timestamp}`;
     if (!cache[cacheKey]) cache[cacheKey] = {};
     const alreadyInCache: any[] = [];
     tokens.forEach((token: string) => {

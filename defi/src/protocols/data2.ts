@@ -14476,9 +14476,14 @@ const data2: Protocol[] = [
     // oracle dev docs: https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle#intro-of-resilient-oracle
     // announcement: https://medium.com/listadao/lista-dao-upgrades-from-redstone-to-the-chainlink-standard-for-verifiable-market-data-d9988f94109d
     oraclesBreakdown: [
+         {
+        name: "RedStone",
+        type: "Primary",
+        proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"]
+      },
       {
         name: "Chainlink",
-        type: "Primary",
+        type: "Secondary",
         proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"]
       },
       {
@@ -14486,11 +14491,7 @@ const data2: Protocol[] = [
         type: "Secondary",
         proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"]
       },
-      {
-        name: "RedStone",
-        type: "Secondary",
-        proof: ["https://docs.bsc.lista.org/for-developer/collateral-debt-position/multi-oracle"]
-      },
+   
       {
         name: "API3",
         type: "Secondary",

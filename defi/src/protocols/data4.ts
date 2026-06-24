@@ -20903,6 +20903,7 @@ const data4: Protocol[] = [
     module: "hits4fun/index.js",
     twitter: "hits4fun",
     listedAt: 1753110715,
+    deadUrl: true,
   },
   {
     id: "6460",
@@ -23810,6 +23811,7 @@ const data4: Protocol[] = [
     chains: ["Arbitrum"],
     module: "dummy.js",
     twitter: "Zapfi_Finance",
+    deadUrl: true,
     dimensions: {
       fees: "zapfi"
     }

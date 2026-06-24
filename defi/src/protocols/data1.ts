@@ -7786,6 +7786,7 @@ The eWIT token is a custodial, wrapped version of the Witnet coin managed by the
     module: "zoodex/index.js",
     twitter: "CoinZoo",
     forkedFromIds: ["2197"],
+    deadUrl: true,
   },
   {
     id: "456",

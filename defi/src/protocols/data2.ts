@@ -9171,6 +9171,7 @@ const data2: Protocol[] = [
     audit_links: ["https://github.com/polynetwork/audit-report"],
     listedAt: 1654083965,
     github: ["polynetwork"],
+    deadUrl: true,
   },
   {
     id: "1797",

@@ -2199,6 +2199,7 @@ const data5: Protocol[] = [
     module: "Corepilot/index.js",
     twitter: "CorepilotHQ",
     listedAt: 1762925487,
+    deadUrl: true,
   },
   {
     id: "6988",

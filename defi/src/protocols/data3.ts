@@ -35295,6 +35295,7 @@ const data3_2: Protocol[] = [
     twitter: "illumineXwallet",
     audit_links: ["https://dedaub.com/audits/illuminex/illuminex-jan-19-2024/"],
     listedAt: 1710199785,
+    deadUrl: true,
   },
  /* {
     id: "4276",

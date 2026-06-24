@@ -9,16 +9,29 @@ ENV CUSTOM_GIT_BRANCH_DEPLOYMENT=${CUSTOM_GIT_BRANCH_DEPLOYMENT}
 # Set the working directory in the container to /app
 WORKDIR /app
 
-# Clone your repo
-RUN git clone https://github.com/DefiLlama/defillama-server /app/repo
+# Deploy key as a build arg, base64-encoded to a single line (server injects
+# build args as literal `ARG` lines, so a raw multi-line PEM breaks parsing).
+# Produce it with: base64 -w0 deploy_key
+# Leave empty to clone the public repo over HTTPS.
+ARG DEPLOY_KEY=""
 
-
-# Check if CUSTOM_GIT_BRANCH_DEPLOYMENT is set and checkout that branch if it exists
-RUN if [ -n "$CUSTOM_GIT_BRANCH_DEPLOYMENT" ]; then \
-  cd /app/repo && \
-  echo "Checking out branch: $CUSTOM_GIT_BRANCH_DEPLOYMENT" && \
-  git checkout $CUSTOM_GIT_BRANCH_DEPLOYMENT; \
-  fi
+# Clone the repo. If DEPLOY_KEY is set, install it and clone the private repo over
+# SSH (the key is kept so runtime pulls keep working); otherwise clone over HTTPS.
+# If CUSTOM_GIT_BRANCH_DEPLOYMENT is set, clone that branch instead of the default.
+RUN if [ -n "$DEPLOY_KEY" ]; then \
+        mkdir -p ~/.ssh && chmod 700 ~/.ssh; \
+        echo "$DEPLOY_KEY" | base64 -d > ~/.ssh/id_rsa; \
+        chmod 600 ~/.ssh/id_rsa; \
+        ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null; \
+        REPO_URL="git@github.com:DefiLlama/defillama-server.git"; \
+    else \
+        REPO_URL="https://github.com/DefiLlama/defillama-server"; \
+    fi; \
+    if [ -n "$CUSTOM_GIT_BRANCH_DEPLOYMENT" ]; then \
+        git clone -b "$CUSTOM_GIT_BRANCH_DEPLOYMENT" "$REPO_URL" /app/repo; \
+    else \
+        git clone "$REPO_URL" /app/repo; \
+    fi
 
 
 # Change to the directory of your repo

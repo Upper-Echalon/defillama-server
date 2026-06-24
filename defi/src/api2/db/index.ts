@@ -144,13 +144,6 @@ async function initializeTVLCacheDB({
         evict: 1000, // how often to run eviction checks
       }
 
-    if (ENV.isCoolifyTask) {
-      if (ENV.internalHost) {
-        dbOptions.host = ENV.internalHost
-        delete dbOptions.port
-      }
-    }
-
     sequelize = new Sequelize(dbOptions as any);
     initializeTables(sequelize)
     // await sequelize.sync() // needed only for table creation/update

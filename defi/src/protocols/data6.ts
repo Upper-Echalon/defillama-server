@@ -7382,6 +7382,9 @@ const data6: Protocol[] = [
     audit_links: ["https://github.com/Velkonix/velkonix-contracts/tree/main/audits"],
     github: ["Velkonix"],
     listedAt: 1782186651,
+    dimensions: {
+      fees: "velkonix",
+    }
   },
   {
     id: "8057",
@@ -7514,7 +7517,11 @@ const data6: Protocol[] = [
     module: "intrinsic/index.js",
     twitter: "Intrinsicfi",
     github: ["Intrinsic-network"],
-    listedAt: 1782275545
+    listedAt: 1782275545,
+    dimensions: {
+      fees: "intrinsic",
+      dexs: "intrinsic",
+    }
   },
   {
     id: "8063",

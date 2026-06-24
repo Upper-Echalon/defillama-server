@@ -6176,6 +6176,7 @@ export const chainCoingeckoIds = {
     url: "https://inri.life",
     chainId: 3777,
   },
+  /*
   "Arc": {
     geckoId: null,
     symbol: null,
@@ -6185,6 +6186,7 @@ export const chainCoingeckoIds = {
     url: "https://www.arc.io/",
     chainId: 5042,
   },
+  */
   "Pearl": {
     geckoId: "pearl-2",
     symbol: "PRL",

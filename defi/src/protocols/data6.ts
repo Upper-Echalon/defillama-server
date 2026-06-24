@@ -7518,7 +7518,7 @@ const data6: Protocol[] = [
     address: null,
     symbol: "-",
     url: "https://tori.finance/",
-    description: `Tori is a synthetic dollar protocol where trUSD is backed by delta-neutral trading positions and can be staked into strUSD to earn yield from those market-neutral strategies.`,
+    description: `Tori Finance is a synthetic dollar protocol where trUSD is backed by delta-neutral trading positions and can be staked into strUSD to earn yield from those market-neutral strategies.`,
     chain: "Ethereum",
     logo: `${protocolIconsUrl}/tori-finance`,
     audits: "2",

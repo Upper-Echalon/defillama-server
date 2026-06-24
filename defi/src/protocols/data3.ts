@@ -27133,7 +27133,8 @@ const data3_1: Protocol[] = [
     treasury: "d8x.js",
     listedAt: 1702688019,
     dimensions: {
-      derivatives: "d8x"
+      derivatives: "d8x",
+      fees: "d8x"
     }
   },
   {

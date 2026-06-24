@@ -21161,6 +21161,7 @@ const data4: Protocol[] = [
     twitter: "sparklexai",
     github: ["sparklexai"],
     listedAt: 1753367597,
+    deadFrom: "2026-06-11",
   },
   {
     id: "6471",

@@ -7535,5 +7535,24 @@ const data6: Protocol[] = [
     audit_links: ["https://docs.tori.finance/security/audits"],
     listedAt: 1782275555
   },
+  {
+    id: "8064",
+    name: "PumpBox",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://pumpbox.io
+    description: `Pump Box is a decentralized on-chain mystery box (Gacha) platform that allows users to open mystery boxes and instantly receive randomized digital and physical assets. The platform supports a wide range of assets, including NFTs, RWAs (Real World Assets) such as TCG cards, sports star cards, and more. Built with full on-chain transparency and provably fair randomness, Pump Box delivers a frictionless, 24/7 collecting experience for global users.`,
+    chain: "Base",
+    logo: `${protocolIconsUrl}/pumpbox`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "NFT Marketplace",
+    chains: ["Base"],
+    module: "pumpbox/index.js",
+    twitter: "pump_box",
+    github: ["pumpinglabs"],
+    listedAt: 1782325327
+  },
 ];
 export default data6;

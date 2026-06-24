@@ -7473,7 +7473,7 @@ const data6: Protocol[] = [
     listedAt: 1782256237
   },
   {
-    id: "6872",
+    id: "8061",
     name: "Gate Swap Aggregator",
     address: null,
     symbol: "-",

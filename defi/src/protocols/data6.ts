@@ -7612,5 +7612,67 @@ const data6: Protocol[] = [
       fees: "crovia",
     }
   },
+  {
+    id: "8067",
+    name: "HookOS",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://hookos.fun
+    description:
+      "Markets are now software. Launch tokens with programmable hooks — MEV protection, creator earnings.",
+    chain: "Base",
+    logo: `${protocolIconsUrl}/hookos`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Launchpad",
+    chains: ["Base","MegaETH","Hyperliquid L1","Ethereum","Binance"],
+    module: "dummy.js",
+    twitter: "hookosfun",
+    dimensions: {
+      dexs: "hookos",
+      fees: "hookos",
+    }
+  },
+  {
+    id: "8068",
+    name: "T3tris Finance",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://t3tris.finance/
+    description:
+      "T3tris is an ERC-4626 vault protocol with silo-based strategies.",
+    chain: "Arbitrum",
+    logo: `${protocolIconsUrl}/t3tris-finance`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Arbitrum"],
+    module: "t3tris-finance/index.js",
+    twitter: "0xT3tris",
+    github: ["t3tris-finance"],
+    listedAt: 1782356237,
+  },
+  {
+    id: "8069",
+    name: "Finances Without Borders",
+    address: null,
+    symbol: "-",
+    url: " ", // pending to add url https://finwb.xyz/
+    description:
+      "Finances Without Borders is a multi-chain fixed-yield deposit protocol. Users deposit supported assets for fixed terms, while FWB contracts track active user principal on-chain.",
+    chain: "Ethereum",
+    logo: `${protocolIconsUrl}/finances-without-borders`,
+    audits: "0",
+    gecko_id: null,
+    cmcId: null,
+    category: "Yield",
+    chains: ["Ethereum", "Polygon", "Arbitrum", "Base", "Binance"],
+    module: "finwb/index.js",
+    twitter: "fwb030101",
+    github: ["fwb030101"],
+    listedAt: 1782356541,
+  },
 ];
 export default data6;
